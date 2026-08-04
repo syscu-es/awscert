@@ -2,593 +2,1231 @@
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.1",
-    "text": "Una aplicación de comercio electrónico debe entregar cada evento de \"pedido creado\" de forma simultánea a tres microservicios independientes: facturación, inventario y notificaciones. Cada microservicio procesa los mensajes a su propio ritmo y debe poder reintentar de manera aislada sin afectar a los demás. ¿Qué diseño implementa el patrón de fanout con el menor acoplamiento?",
-    "options": [
-      "Publicar el evento en un tema de Amazon SNS y suscribir una cola de Amazon SQS independiente para cada microservicio.",
-      "Escribir el evento en una única cola de Amazon SQS y permitir que los tres microservicios consulten la misma cola.",
-      "Invocar de forma síncrona los tres microservicios desde el servicio de pedidos mediante llamadas HTTP a Amazon API Gateway.",
-      "Almacenar el evento en una tabla de Amazon DynamoDB y hacer que cada microservicio ejecute una operación Scan periódica."
+    "text": {
+      "es": "Una aplicación de comercio electrónico debe entregar cada evento de \"pedido creado\" de forma simultánea a tres microservicios independientes: facturación, inventario y notificaciones. Cada microservicio procesa los mensajes a su propio ritmo y debe poder reintentar de manera aislada sin afectar a los demás. ¿Qué diseño implementa el patrón de fanout con el menor acoplamiento?",
+      "en": "An e-commerce application must deliver every \"order created\" event simultaneously to three independent microservices: billing, inventory, and notifications. Each microservice processes messages at its own pace and must be able to retry in isolation without affecting the others. Which design implements the fanout pattern with the loosest coupling?"
+    },
+    "options": {
+      "es": [
+        "Publicar el evento en un tema de Amazon SNS y suscribir una cola de Amazon SQS independiente para cada microservicio.",
+        "Escribir el evento en una única cola de Amazon SQS y permitir que los tres microservicios consulten la misma cola.",
+        "Invocar de forma síncrona los tres microservicios desde el servicio de pedidos mediante llamadas HTTP a Amazon API Gateway.",
+        "Almacenar el evento en una tabla de Amazon DynamoDB y hacer que cada microservicio ejecute una operación Scan periódica."
+      ],
+      "en": [
+        "Publish the event to an Amazon SNS topic and subscribe a separate Amazon SQS queue for each microservice.",
+        "Write the event to a single Amazon SQS queue and let all three microservices poll the same queue.",
+        "Synchronously invoke the three microservices from the order service through HTTP calls to Amazon API Gateway.",
+        "Store the event in an Amazon DynamoDB table and have each microservice run a periodic Scan operation."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "El patrón de fanout se implementa con un tema de SNS que replica cada mensaje a varias colas de SQS, de modo que cada consumidor tiene su propio búfer, su propio ritmo de procesamiento y sus propios reintentos. Una sola cola de SQS entregaría cada mensaje a un único consumidor.",
+    "explanation": {
+      "es": "El patrón de fanout se implementa con un tema de SNS que replica cada mensaje a varias colas de SQS, de modo que cada consumidor tiene su propio búfer, su propio ritmo de procesamiento y sus propios reintentos. Una sola cola de SQS entregaría cada mensaje a un único consumidor.",
+      "en": "The fanout pattern is implemented with an SNS topic that replicates each message to multiple SQS queues, so each consumer has its own buffer, its own processing pace, and its own retries. A single SQS queue would deliver each message to only one consumer."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.1",
-    "text": "Un servicio escrito en Python invoca una API de un proveedor de pagos externo que ocasionalmente responde con códigos HTTP 429 y 503. Durante los picos de tráfico, los reintentos simultáneos de todas las instancias saturan al proveedor y agravan la falla. ¿Qué implementación de código hace la integración más resiliente?",
-    "options": [
-      "Aplicar reintentos con retroceso exponencial y jitter, y un disyuntor (circuit breaker) que deje de invocar al proveedor tras un umbral de fallas consecutivas.",
-      "Reintentar inmediatamente hasta diez veces en un bucle cerrado para maximizar la probabilidad de éxito.",
-      "Aumentar el tiempo de espera del cliente HTTP a 5 minutos para que las respuestas lentas nunca fallen.",
-      "Capturar la excepción, registrarla en el log y devolver HTTP 200 al cliente para no propagar el error."
+    "text": {
+      "es": "Un servicio escrito en Python invoca una API de un proveedor de pagos externo que ocasionalmente responde con códigos HTTP 429 y 503. Durante los picos de tráfico, los reintentos simultáneos de todas las instancias saturan al proveedor y agravan la falla. ¿Qué implementación de código hace la integración más resiliente?",
+      "en": "A service written in Python calls an external payment provider API that occasionally responds with HTTP 429 and 503 codes. During traffic spikes, simultaneous retries from all instances overwhelm the provider and make the failure worse. Which code implementation makes the integration more resilient?"
+    },
+    "options": {
+      "es": [
+        "Aplicar reintentos con retroceso exponencial y jitter, y un disyuntor (circuit breaker) que deje de invocar al proveedor tras un umbral de fallas consecutivas.",
+        "Reintentar inmediatamente hasta diez veces en un bucle cerrado para maximizar la probabilidad de éxito.",
+        "Aumentar el tiempo de espera del cliente HTTP a 5 minutos para que las respuestas lentas nunca fallen.",
+        "Capturar la excepción, registrarla en el log y devolver HTTP 200 al cliente para no propagar el error."
+      ],
+      "en": [
+        "Apply retries with exponential backoff and jitter, plus a circuit breaker that stops calling the provider after a threshold of consecutive failures.",
+        "Retry immediately up to ten times in a tight loop to maximize the probability of success.",
+        "Increase the HTTP client timeout to 5 minutes so that slow responses never fail.",
+        "Catch the exception, write it to the log, and return HTTP 200 to the client so the error is not propagated."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "El retroceso exponencial con jitter dispersa los reintentos en el tiempo y evita el efecto de manada, mientras que el disyuntor corta rápidamente las llamadas cuando la dependencia está degradada. Reintentar de inmediato o ampliar los tiempos de espera solo amplifica la saturación.",
+    "explanation": {
+      "es": "El retroceso exponencial con jitter dispersa los reintentos en el tiempo y evita el efecto de manada, mientras que el disyuntor corta rápidamente las llamadas cuando la dependencia está degradada. Reintentar de inmediato o ampliar los tiempos de espera solo amplifica la saturación.",
+      "en": "Exponential backoff with jitter spreads retries over time and avoids the thundering herd effect, while the circuit breaker quickly cuts off calls when the dependency is degraded. Retrying immediately or extending timeouts only amplifies the overload."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.1",
-    "text": "Un equipo expone una API REST en Amazon API Gateway integrada con AWS Lambda. Necesita rechazar las solicitudes cuyo cuerpo JSON no cumpla el contrato antes de invocar la función, y además devolver HTTP 201 en lugar del 200 que produce la integración cuando se crea un recurso. ¿Cuáles DOS configuraciones de API Gateway cumplen estos requisitos?",
-    "options": [
-      "Definir un modelo con JSON Schema y habilitar el validador de solicitudes en el método.",
-      "Configurar una respuesta de integración con un patrón de selección que asigne el código de estado 201 al método.",
-      "Agregar un plan de uso con una clave de API para validar la estructura del cuerpo de la solicitud.",
-      "Habilitar el almacenamiento en caché de la etapa para que API Gateway descarte los cuerpos JSON inválidos.",
-      "Activar el registro de acceso de la etapa en Amazon CloudWatch Logs para bloquear las solicitudes mal formadas."
+    "text": {
+      "es": "Un equipo expone una API REST en Amazon API Gateway integrada con AWS Lambda. Necesita rechazar las solicitudes cuyo cuerpo JSON no cumpla el contrato antes de invocar la función, y además devolver HTTP 201 en lugar del 200 que produce la integración cuando se crea un recurso. ¿Cuáles DOS configuraciones de API Gateway cumplen estos requisitos?",
+      "en": "A team exposes a REST API in Amazon API Gateway integrated with AWS Lambda. It must reject requests whose JSON body does not meet the contract before invoking the function, and it must also return HTTP 201 instead of the 200 produced by the integration when a resource is created. Which TWO API Gateway configurations meet these requirements?"
+    },
+    "options": {
+      "es": [
+        "Definir un modelo con JSON Schema y habilitar el validador de solicitudes en el método.",
+        "Configurar una respuesta de integración con un patrón de selección que asigne el código de estado 201 al método.",
+        "Agregar un plan de uso con una clave de API para validar la estructura del cuerpo de la solicitud.",
+        "Habilitar el almacenamiento en caché de la etapa para que API Gateway descarte los cuerpos JSON inválidos.",
+        "Activar el registro de acceso de la etapa en Amazon CloudWatch Logs para bloquear las solicitudes mal formadas."
+      ],
+      "en": [
+        "Define a model with JSON Schema and enable the request validator on the method.",
+        "Configure an integration response with a selection pattern that maps status code 201 to the method.",
+        "Add a usage plan with an API key to validate the structure of the request body.",
+        "Enable stage caching so that API Gateway discards invalid JSON bodies.",
+        "Turn on stage access logging to Amazon CloudWatch Logs to block malformed requests."
+      ]
+    },
+    "correct": [
+      0,
+      1
     ],
-    "correct": [0, 1],
     "type": "multiple",
-    "explanation": "La validación de solicitudes en API Gateway se aplica con un modelo de JSON Schema asociado a un validador de solicitudes, y el código de estado se sobrescribe mediante la respuesta de integración del método. Los planes de uso, la caché y los registros de acceso no validan ni transforman códigos de estado.",
+    "explanation": {
+      "es": "La validación de solicitudes en API Gateway se aplica con un modelo de JSON Schema asociado a un validador de solicitudes, y el código de estado se sobrescribe mediante la respuesta de integración del método. Los planes de uso, la caché y los registros de acceso no validan ni transforman códigos de estado.",
+      "en": "Request validation in API Gateway is enforced with a JSON Schema model attached to a request validator, and the status code is overridden through the method's integration response. Usage plans, caching, and access logs neither validate requests nor transform status codes."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.2",
-    "text": "Una función de AWS Lambda está configurada en subredes privadas de una VPC para consultar una base de datos Amazon RDS. Después del cambio, la función empieza a agotar el tiempo de espera al llamar a Amazon S3, aunque su rol de ejecución tiene los permisos correctos. ¿Cuál es la solución más eficiente en costos para restaurar el acceso a S3?",
-    "options": [
-      "Crear un punto de enlace de VPC de tipo gateway para Amazon S3 y asociarlo a las tablas de rutas de las subredes privadas.",
-      "Mover la función fuera de la VPC y conectarla a RDS mediante una dirección IP pública.",
-      "Asociar una dirección IP elástica directamente a la interfaz de red elástica de la función Lambda.",
-      "Aumentar el tiempo de espera de la función a 15 minutos y la memoria asignada a 3.008 MB."
+    "text": {
+      "es": "Una función de AWS Lambda está configurada en subredes privadas de una VPC para consultar una base de datos Amazon RDS. Después del cambio, la función empieza a agotar el tiempo de espera al llamar a Amazon S3, aunque su rol de ejecución tiene los permisos correctos. ¿Cuál es la solución más eficiente en costos para restaurar el acceso a S3?",
+      "en": "An AWS Lambda function is configured in private subnets of a VPC to query an Amazon RDS database. After the change, the function starts timing out when calling Amazon S3, even though its execution role has the correct permissions. What is the most cost-effective solution to restore access to S3?"
+    },
+    "options": {
+      "es": [
+        "Crear un punto de enlace de VPC de tipo gateway para Amazon S3 y asociarlo a las tablas de rutas de las subredes privadas.",
+        "Mover la función fuera de la VPC y conectarla a RDS mediante una dirección IP pública.",
+        "Asociar una dirección IP elástica directamente a la interfaz de red elástica de la función Lambda.",
+        "Aumentar el tiempo de espera de la función a 15 minutos y la memoria asignada a 3.008 MB."
+      ],
+      "en": [
+        "Create a gateway VPC endpoint for Amazon S3 and associate it with the route tables of the private subnets.",
+        "Move the function outside the VPC and connect it to RDS through a public IP address.",
+        "Associate an Elastic IP address directly with the Lambda function's elastic network interface.",
+        "Increase the function timeout to 15 minutes and the allocated memory to 3,008 MB."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "Una función en subredes privadas no tiene salida a internet, por lo que necesita un punto de enlace de VPC de tipo gateway para S3 (sin costo por hora ni por datos) o una NAT gateway. Las Lambdas no admiten IP elásticas y ampliar el tiempo de espera no resuelve la falta de ruta.",
+    "explanation": {
+      "es": "Una función en subredes privadas no tiene salida a internet, por lo que necesita un punto de enlace de VPC de tipo gateway para S3 (sin costo por hora ni por datos) o una NAT gateway. Las Lambdas no admiten IP elásticas y ampliar el tiempo de espera no resuelve la falta de ruta.",
+      "en": "A function in private subnets has no internet egress, so it needs a gateway VPC endpoint for S3 (with no hourly or data charges) or a NAT gateway. Lambda functions do not support Elastic IPs, and increasing the timeout does not fix the missing route."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.2",
-    "text": "Una función de Lambda se invoca de forma asíncrona desde Amazon EventBridge. El equipo necesita conservar, para cada invocación que falla tras agotar los reintentos, tanto la carga original del evento como el detalle del error y el número de reintentos, y enviar esa información a una cola de Amazon SQS. ¿Qué configuración cumple el requisito con el menor esfuerzo de desarrollo?",
-    "options": [
-      "Configurar un destino en caso de falla (on-failure destination) de Lambda que apunte a la cola de SQS.",
-      "Configurar una cola de mensajes fallidos (DLQ) de Lambda que apunte a la cola de SQS.",
-      "Envolver el controlador en un bloque try/except y publicar manualmente el error en la cola de SQS.",
-      "Habilitar el rastreo activo con AWS X-Ray y crear una suscripción del grupo de registros hacia SQS."
+    "text": {
+      "es": "Una función de Lambda se invoca de forma asíncrona desde Amazon EventBridge. El equipo necesita conservar, para cada invocación que falla tras agotar los reintentos, tanto la carga original del evento como el detalle del error y el número de reintentos, y enviar esa información a una cola de Amazon SQS. ¿Qué configuración cumple el requisito con el menor esfuerzo de desarrollo?",
+      "en": "A Lambda function is invoked asynchronously from Amazon EventBridge. For each invocation that fails after exhausting its retries, the team needs to preserve both the original event payload and the error details plus the retry count, and send that information to an Amazon SQS queue. Which configuration meets the requirement with the least development effort?"
+    },
+    "options": {
+      "es": [
+        "Configurar un destino en caso de falla (on-failure destination) de Lambda que apunte a la cola de SQS.",
+        "Configurar una cola de mensajes fallidos (DLQ) de Lambda que apunte a la cola de SQS.",
+        "Envolver el controlador en un bloque try/except y publicar manualmente el error en la cola de SQS.",
+        "Habilitar el rastreo activo con AWS X-Ray y crear una suscripción del grupo de registros hacia SQS."
+      ],
+      "en": [
+        "Configure a Lambda on-failure destination that points to the SQS queue.",
+        "Configure a Lambda dead-letter queue (DLQ) that points to the SQS queue.",
+        "Wrap the handler in a try/except block and manually publish the error to the SQS queue.",
+        "Enable active tracing with AWS X-Ray and create a log group subscription to SQS."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "Los destinos de Lambda en caso de falla envían un registro enriquecido que incluye la carga de la solicitud, la respuesta del error y el contexto de la invocación. Una DLQ solo entrega la carga original del evento, sin el detalle del error.",
+    "explanation": {
+      "es": "Los destinos de Lambda en caso de falla envían un registro enriquecido que incluye la carga de la solicitud, la respuesta del error y el contexto de la invocación. Una DLQ solo entrega la carga original del evento, sin el detalle del error.",
+      "en": "Lambda on-failure destinations send an enriched record that includes the request payload, the error response, and the invocation context. A DLQ delivers only the original event payload, without the error details."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.2",
-    "text": "Una API de baja latencia respaldada por Lambda muestra picos de latencia en el percentil 99 causados por inicios en frío durante la apertura del horario comercial. El tráfico base es predecible. ¿Qué configuración reduce de forma más directa la latencia de los inicios en frío?",
-    "options": [
-      "Habilitar la simultaneidad aprovisionada en el alias de producción de la función.",
-      "Establecer la simultaneidad reservada de la función en el valor máximo de la cuenta.",
-      "Reducir el tiempo de espera de la función para que las ejecuciones terminen más rápido.",
-      "Habilitar el rastreo activo de AWS X-Ray en la función."
+    "text": {
+      "es": "Una API de baja latencia respaldada por Lambda muestra picos de latencia en el percentil 99 causados por inicios en frío durante la apertura del horario comercial. El tráfico base es predecible. ¿Qué configuración reduce de forma más directa la latencia de los inicios en frío?",
+      "en": "A low-latency API backed by Lambda shows p99 latency spikes caused by cold starts at the start of business hours. Baseline traffic is predictable. Which configuration most directly reduces cold start latency?"
+    },
+    "options": {
+      "es": [
+        "Habilitar la simultaneidad aprovisionada en el alias de producción de la función.",
+        "Establecer la simultaneidad reservada de la función en el valor máximo de la cuenta.",
+        "Reducir el tiempo de espera de la función para que las ejecuciones terminen más rápido.",
+        "Habilitar el rastreo activo de AWS X-Ray en la función."
+      ],
+      "en": [
+        "Enable provisioned concurrency on the function's production alias.",
+        "Set the function's reserved concurrency to the account's maximum value.",
+        "Reduce the function timeout so that executions finish faster.",
+        "Enable AWS X-Ray active tracing on the function."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "La simultaneidad aprovisionada mantiene entornos de ejecución inicializados y listos para responder, lo que elimina el inicio en frío. La simultaneidad reservada solo limita o garantiza la cantidad de ejecuciones concurrentes, sin precalentar entornos.",
+    "explanation": {
+      "es": "La simultaneidad aprovisionada mantiene entornos de ejecución inicializados y listos para responder, lo que elimina el inicio en frío. La simultaneidad reservada solo limita o garantiza la cantidad de ejecuciones concurrentes, sin precalentar entornos.",
+      "en": "Provisioned concurrency keeps execution environments initialized and ready to respond, which eliminates the cold start. Reserved concurrency only limits or guarantees the number of concurrent executions; it does not pre-warm environments."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.3",
-    "text": "Una tabla de Amazon DynamoDB registra telemetría de dispositivos IoT. El desarrollador eligió la fecha del día como clave de partición y observa que las solicitudes se limitan (throttling) aunque la capacidad aprovisionada total está muy por debajo del límite. ¿Cuál es la causa y la corrección adecuada?",
-    "options": [
-      "La clave de partición tiene cardinalidad baja y concentra el tráfico en una partición; debe usarse el identificador del dispositivo como clave de partición y la marca de tiempo como clave de ordenamiento.",
-      "La tabla necesita un índice secundario global adicional para distribuir la capacidad de escritura entre particiones.",
-      "La tabla debe cambiar a lecturas fuertemente consistentes para que DynamoDB reequilibre las particiones automáticamente.",
-      "El tamaño de los elementos supera 400 KB, por lo que hay que habilitar la compresión del lado del cliente."
+    "text": {
+      "es": "Una tabla de Amazon DynamoDB registra telemetría de dispositivos IoT. El desarrollador eligió la fecha del día como clave de partición y observa que las solicitudes se limitan (throttling) aunque la capacidad aprovisionada total está muy por debajo del límite. ¿Cuál es la causa y la corrección adecuada?",
+      "en": "An Amazon DynamoDB table records IoT device telemetry. The developer chose the current date as the partition key and observes that requests are being throttled even though total provisioned capacity is well below the limit. What is the cause and the appropriate fix?"
+    },
+    "options": {
+      "es": [
+        "La clave de partición tiene cardinalidad baja y concentra el tráfico en una partición; debe usarse el identificador del dispositivo como clave de partición y la marca de tiempo como clave de ordenamiento.",
+        "La tabla necesita un índice secundario global adicional para distribuir la capacidad de escritura entre particiones.",
+        "La tabla debe cambiar a lecturas fuertemente consistentes para que DynamoDB reequilibre las particiones automáticamente.",
+        "El tamaño de los elementos supera 400 KB, por lo que hay que habilitar la compresión del lado del cliente."
+      ],
+      "en": [
+        "The partition key has low cardinality and concentrates traffic on a single partition; the device identifier should be used as the partition key and the timestamp as the sort key.",
+        "The table needs an additional global secondary index to distribute write capacity across partitions.",
+        "The table should switch to strongly consistent reads so that DynamoDB automatically rebalances the partitions.",
+        "Item size exceeds 400 KB, so client-side compression must be enabled."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "Una clave de partición de baja cardinalidad como la fecha crea una partición caliente que se limita aunque quede capacidad libre en la tabla. Una clave de alta cardinalidad, como el identificador del dispositivo, reparte el tráfico entre todas las particiones.",
+    "explanation": {
+      "es": "Una clave de partición de baja cardinalidad como la fecha crea una partición caliente que se limita aunque quede capacidad libre en la tabla. Una clave de alta cardinalidad, como el identificador del dispositivo, reparte el tráfico entre todas las particiones.",
+      "en": "A low-cardinality partition key such as the date creates a hot partition that gets throttled even while the table still has free capacity. A high-cardinality key, such as the device identifier, spreads traffic across all partitions."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.3",
-    "text": "Una aplicación consulta una tabla de DynamoDB cuya clave de partición es customerId y cuya clave de ordenamiento es orderId. Ahora necesita recuperar los pedidos de un cliente ordenados por orderDate y con lecturas fuertemente consistentes. ¿Qué opción cumple el requisito?",
-    "options": [
-      "Crear un índice secundario local (LSI) con orderDate como clave de ordenamiento y consultarlo con lecturas fuertemente consistentes.",
-      "Crear un índice secundario global (GSI) con orderDate como clave de ordenamiento y consultarlo con lecturas fuertemente consistentes.",
-      "Ejecutar una operación Scan con un filtro por customerId y ordenar los resultados en la aplicación.",
-      "Habilitar Amazon DynamoDB Accelerator (DAX) y consultar la tabla base por orderDate."
+    "text": {
+      "es": "Una aplicación consulta una tabla de DynamoDB cuya clave de partición es customerId y cuya clave de ordenamiento es orderId. Ahora necesita recuperar los pedidos de un cliente ordenados por orderDate y con lecturas fuertemente consistentes. ¿Qué opción cumple el requisito?",
+      "en": "An application queries a DynamoDB table whose partition key is customerId and whose sort key is orderId. It now needs to retrieve a customer's orders sorted by orderDate and with strongly consistent reads. Which option meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Crear un índice secundario local (LSI) con orderDate como clave de ordenamiento y consultarlo con lecturas fuertemente consistentes.",
+        "Crear un índice secundario global (GSI) con orderDate como clave de ordenamiento y consultarlo con lecturas fuertemente consistentes.",
+        "Ejecutar una operación Scan con un filtro por customerId y ordenar los resultados en la aplicación.",
+        "Habilitar Amazon DynamoDB Accelerator (DAX) y consultar la tabla base por orderDate."
+      ],
+      "en": [
+        "Create a local secondary index (LSI) with orderDate as the sort key and query it with strongly consistent reads.",
+        "Create a global secondary index (GSI) with orderDate as the sort key and query it with strongly consistent reads.",
+        "Run a Scan operation with a filter on customerId and sort the results in the application.",
+        "Enable Amazon DynamoDB Accelerator (DAX) and query the base table by orderDate."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "Los índices secundarios locales comparten la clave de partición de la tabla y son los únicos índices que admiten lecturas fuertemente consistentes. Los GSI solo ofrecen consistencia eventual y DAX sirve para almacenamiento en caché, no para nuevos patrones de ordenamiento.",
+    "explanation": {
+      "es": "Los índices secundarios locales comparten la clave de partición de la tabla y son los únicos índices que admiten lecturas fuertemente consistentes. Los GSI solo ofrecen consistencia eventual y DAX sirve para almacenamiento en caché, no para nuevos patrones de ordenamiento.",
+      "en": "Local secondary indexes share the table's partition key and are the only indexes that support strongly consistent reads. GSIs offer only eventual consistency, and DAX is for caching, not for new sort patterns."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.3",
-    "text": "Un catálogo de productos almacenado en DynamoDB recibe millones de lecturas repetidas por segundo de los mismos elementos populares, con latencias de un solo dígito de milisegundo que resultan insuficientes. Además, el equipo necesita eliminar automáticamente las sesiones de carrito después de 30 días. ¿Cuáles DOS acciones cumplen estos requisitos?",
-    "options": [
-      "Colocar un clúster de Amazon DynamoDB Accelerator (DAX) delante de la tabla para obtener lecturas en microsegundos.",
-      "Definir un atributo de tiempo de vida (TTL) en los elementos del carrito y habilitar TTL en la tabla.",
-      "Migrar el catálogo a Amazon OpenSearch Service para servir las lecturas por clave primaria.",
-      "Programar una función de Lambda diaria que ejecute un Scan y elimine los elementos de carrito vencidos.",
-      "Cambiar la tabla al modo de capacidad aprovisionada con escalado automático para reducir la latencia de lectura."
+    "text": {
+      "es": "Un catálogo de productos almacenado en DynamoDB recibe millones de lecturas repetidas por segundo de los mismos elementos populares, con latencias de un solo dígito de milisegundo que resultan insuficientes. Además, el equipo necesita eliminar automáticamente las sesiones de carrito después de 30 días. ¿Cuáles DOS acciones cumplen estos requisitos?",
+      "en": "A product catalog stored in DynamoDB receives millions of repeated reads per second for the same popular items, and single-digit millisecond latency is not fast enough. In addition, the team needs to automatically delete cart sessions after 30 days. Which TWO actions meet these requirements?"
+    },
+    "options": {
+      "es": [
+        "Colocar un clúster de Amazon DynamoDB Accelerator (DAX) delante de la tabla para obtener lecturas en microsegundos.",
+        "Definir un atributo de tiempo de vida (TTL) en los elementos del carrito y habilitar TTL en la tabla.",
+        "Migrar el catálogo a Amazon OpenSearch Service para servir las lecturas por clave primaria.",
+        "Programar una función de Lambda diaria que ejecute un Scan y elimine los elementos de carrito vencidos.",
+        "Cambiar la tabla al modo de capacidad aprovisionada con escalado automático para reducir la latencia de lectura."
+      ],
+      "en": [
+        "Put an Amazon DynamoDB Accelerator (DAX) cluster in front of the table to get microsecond reads.",
+        "Define a time to live (TTL) attribute on the cart items and enable TTL on the table.",
+        "Migrate the catalog to Amazon OpenSearch Service to serve reads by primary key.",
+        "Schedule a daily Lambda function that runs a Scan and deletes expired cart items.",
+        "Switch the table to provisioned capacity mode with auto scaling to reduce read latency."
+      ]
+    },
+    "correct": [
+      0,
+      1
     ],
-    "correct": [0, 1],
     "type": "multiple",
-    "explanation": "DAX es una caché en memoria compatible con la API de DynamoDB que reduce las lecturas a microsegundos, y el TTL nativo elimina los elementos vencidos sin consumir capacidad de escritura. Un Scan diario es costoso e innecesario y el modo de capacidad no cambia la latencia por elemento.",
+    "explanation": {
+      "es": "DAX es una caché en memoria compatible con la API de DynamoDB que reduce las lecturas a microsegundos, y el TTL nativo elimina los elementos vencidos sin consumir capacidad de escritura. Un Scan diario es costoso e innecesario y el modo de capacidad no cambia la latencia por elemento.",
+      "en": "DAX is an in-memory cache that is API-compatible with DynamoDB and brings reads down to microseconds, and native TTL removes expired items without consuming write capacity. A daily Scan is expensive and unnecessary, and the capacity mode does not change per-item latency."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.1",
-    "text": "Una aplicación móvil permite a los usuarios iniciar sesión con Google y luego cargar fotos directamente a un bucket de Amazon S3 desde el dispositivo, sin pasar por un servidor intermedio. Cada usuario solo debe poder escribir en su propio prefijo. ¿Qué solución cumple el requisito?",
-    "options": [
-      "Usar un grupo de identidades de Amazon Cognito para intercambiar el token del proveedor por credenciales temporales de IAM con una política que use variables de política por identidad.",
-      "Usar un grupo de usuarios de Amazon Cognito y enviar el token de identidad (ID token) directamente a la API de Amazon S3.",
-      "Incrustar en la aplicación móvil las claves de acceso de un usuario de IAM con permisos sobre el bucket.",
-      "Crear una clave de API en Amazon API Gateway por cada usuario y usarla para firmar las solicitudes a Amazon S3."
+    "text": {
+      "es": "Una aplicación móvil permite a los usuarios iniciar sesión con Google y luego cargar fotos directamente a un bucket de Amazon S3 desde el dispositivo, sin pasar por un servidor intermedio. Cada usuario solo debe poder escribir en su propio prefijo. ¿Qué solución cumple el requisito?",
+      "en": "A mobile application lets users sign in with Google and then upload photos directly to an Amazon S3 bucket from the device, without going through an intermediate server. Each user must only be able to write to their own prefix. Which solution meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Usar un grupo de identidades de Amazon Cognito para intercambiar el token del proveedor por credenciales temporales de IAM con una política que use variables de política por identidad.",
+        "Usar un grupo de usuarios de Amazon Cognito y enviar el token de identidad (ID token) directamente a la API de Amazon S3.",
+        "Incrustar en la aplicación móvil las claves de acceso de un usuario de IAM con permisos sobre el bucket.",
+        "Crear una clave de API en Amazon API Gateway por cada usuario y usarla para firmar las solicitudes a Amazon S3."
+      ],
+      "en": [
+        "Use an Amazon Cognito identity pool to exchange the provider token for temporary IAM credentials with a policy that uses per-identity policy variables.",
+        "Use an Amazon Cognito user pool and send the ID token directly to the Amazon S3 API.",
+        "Embed the access keys of an IAM user with permissions on the bucket in the mobile application.",
+        "Create an Amazon API Gateway API key for each user and use it to sign the requests to Amazon S3."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "Los grupos de identidades de Cognito canjean tokens de proveedores federados por credenciales temporales de AWS, y la política del rol puede restringir el prefijo con variables como ${cognito-identity.amazonaws.com:sub}. S3 no acepta tokens de identidad de Cognito y nunca deben incrustarse claves de acceso en un cliente.",
+    "explanation": {
+      "es": "Los grupos de identidades de Cognito canjean tokens de proveedores federados por credenciales temporales de AWS, y la política del rol puede restringir el prefijo con variables como ${cognito-identity.amazonaws.com:sub}. S3 no acepta tokens de identidad de Cognito y nunca deben incrustarse claves de acceso en un cliente.",
+      "en": "Cognito identity pools exchange federated provider tokens for temporary AWS credentials, and the role's policy can restrict the prefix with variables such as ${cognito-identity.amazonaws.com:sub}. S3 does not accept Cognito ID tokens, and access keys must never be embedded in a client."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.1",
-    "text": "Una función de Lambda de la cuenta de desarrollo debe escribir objetos en un bucket de Amazon S3 que pertenece a la cuenta de auditoría. La organización exige que no se creen usuarios de IAM ni credenciales de larga duración. ¿Cuál es el enfoque recomendado?",
-    "options": [
-      "Crear un rol de IAM en la cuenta de auditoría cuya política de confianza permita al rol de ejecución de la Lambda ejecutar sts:AssumeRole, y llamar a AssumeRole desde el código antes de escribir en S3.",
-      "Generar claves de acceso para un usuario de IAM de la cuenta de auditoría y guardarlas como variables de entorno cifradas de la función.",
-      "Habilitar el acceso público de escritura en el bucket de la cuenta de auditoría y restringirlo por rango de direcciones IP.",
-      "Agregar la cuenta de desarrollo como cuenta propietaria adicional del bucket en la configuración de propiedad de objetos."
+    "text": {
+      "es": "Una función de Lambda de la cuenta de desarrollo debe escribir objetos en un bucket de Amazon S3 que pertenece a la cuenta de auditoría. La organización exige que no se creen usuarios de IAM ni credenciales de larga duración. ¿Cuál es el enfoque recomendado?",
+      "en": "A Lambda function in the development account must write objects to an Amazon S3 bucket that belongs to the audit account. The organization requires that no IAM users or long-lived credentials be created. What is the recommended approach?"
+    },
+    "options": {
+      "es": [
+        "Crear un rol de IAM en la cuenta de auditoría cuya política de confianza permita al rol de ejecución de la Lambda ejecutar sts:AssumeRole, y llamar a AssumeRole desde el código antes de escribir en S3.",
+        "Generar claves de acceso para un usuario de IAM de la cuenta de auditoría y guardarlas como variables de entorno cifradas de la función.",
+        "Habilitar el acceso público de escritura en el bucket de la cuenta de auditoría y restringirlo por rango de direcciones IP.",
+        "Agregar la cuenta de desarrollo como cuenta propietaria adicional del bucket en la configuración de propiedad de objetos."
+      ],
+      "en": [
+        "Create an IAM role in the audit account whose trust policy allows the Lambda execution role to call sts:AssumeRole, and call AssumeRole from the code before writing to S3.",
+        "Generate access keys for an IAM user in the audit account and store them as encrypted environment variables of the function.",
+        "Enable public write access on the audit account's bucket and restrict it by IP address range.",
+        "Add the development account as an additional owner account of the bucket in the object ownership settings."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "El acceso entre cuentas sin credenciales estáticas se implementa asumiendo un rol de IAM de la cuenta destino mediante AWS STS, lo que entrega credenciales temporales. Las claves de acceso almacenadas son credenciales de larga duración y el acceso público es inaceptable.",
+    "explanation": {
+      "es": "El acceso entre cuentas sin credenciales estáticas se implementa asumiendo un rol de IAM de la cuenta destino mediante AWS STS, lo que entrega credenciales temporales. Las claves de acceso almacenadas son credenciales de larga duración y el acceso público es inaceptable.",
+      "en": "Cross-account access without static credentials is implemented by assuming an IAM role in the target account through AWS STS, which issues temporary credentials. Stored access keys are long-lived credentials, and public access is unacceptable."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.1",
-    "text": "Una API REST de Amazon API Gateway debe aceptar solamente solicitudes que incluyan un token web JSON (JWT) válido emitido por un grupo de usuarios de Amazon Cognito, y validar la firma y la expiración del token sin escribir código adicional. ¿Qué configuración cumple el requisito?",
-    "options": [
-      "Configurar un autorizador de grupo de usuarios de Amazon Cognito en el método y exigir el token en el encabezado Authorization.",
-      "Habilitar la autorización de IAM en el método y firmar las solicitudes con Signature Version 4.",
-      "Asociar un plan de uso con claves de API obligatorias para cada cliente de la API.",
-      "Escribir un autorizador de Lambda que decodifique el token y consulte la tabla de usuarios en DynamoDB."
+    "text": {
+      "es": "Una API REST de Amazon API Gateway debe aceptar solamente solicitudes que incluyan un token web JSON (JWT) válido emitido por un grupo de usuarios de Amazon Cognito, y validar la firma y la expiración del token sin escribir código adicional. ¿Qué configuración cumple el requisito?",
+      "en": "An Amazon API Gateway REST API must accept only requests that include a valid JSON Web Token (JWT) issued by an Amazon Cognito user pool, and validate the token's signature and expiration without writing additional code. Which configuration meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Configurar un autorizador de grupo de usuarios de Amazon Cognito en el método y exigir el token en el encabezado Authorization.",
+        "Habilitar la autorización de IAM en el método y firmar las solicitudes con Signature Version 4.",
+        "Asociar un plan de uso con claves de API obligatorias para cada cliente de la API.",
+        "Escribir un autorizador de Lambda que decodifique el token y consulte la tabla de usuarios en DynamoDB."
+      ],
+      "en": [
+        "Configure an Amazon Cognito user pool authorizer on the method and require the token in the Authorization header.",
+        "Enable IAM authorization on the method and sign the requests with Signature Version 4.",
+        "Attach a usage plan with API keys required for every API client.",
+        "Write a Lambda authorizer that decodes the token and queries the users table in DynamoDB."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "El autorizador de grupos de usuarios de Cognito valida automáticamente la firma, el emisor y la expiración del JWT enviado en el encabezado Authorization, sin código propio. Un autorizador de Lambda lograría lo mismo, pero exige desarrollo y mantenimiento adicionales.",
+    "explanation": {
+      "es": "El autorizador de grupos de usuarios de Cognito valida automáticamente la firma, el emisor y la expiración del JWT enviado en el encabezado Authorization, sin código propio. Un autorizador de Lambda lograría lo mismo, pero exige desarrollo y mantenimiento adicionales.",
+      "en": "The Cognito user pool authorizer automatically validates the signature, issuer, and expiration of the JWT sent in the Authorization header, with no custom code. A Lambda authorizer could achieve the same result, but it requires additional development and maintenance."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.2",
-    "text": "Una normativa interna exige que los objetos cargados en Amazon S3 se cifren en reposo, que el equipo de seguridad controle la política de la llave de cifrado y que cada operación de descifrado quede registrada de forma auditable. ¿Qué opción de cifrado cumple todos los requisitos?",
-    "options": [
-      "Cifrado del lado del servidor con una llave administrada por el cliente en AWS KMS (SSE-KMS), con las llamadas registradas en AWS CloudTrail.",
-      "Cifrado del lado del servidor con llaves administradas por Amazon S3 (SSE-S3).",
-      "Cifrado del lado del servidor con llaves proporcionadas por el cliente (SSE-C) enviadas en cada solicitud.",
-      "Habilitar HTTPS obligatorio en la política del bucket mediante la condición aws:SecureTransport."
+    "text": {
+      "es": "Una normativa interna exige que los objetos cargados en Amazon S3 se cifren en reposo, que el equipo de seguridad controle la política de la llave de cifrado y que cada operación de descifrado quede registrada de forma auditable. ¿Qué opción de cifrado cumple todos los requisitos?",
+      "en": "An internal policy requires that objects uploaded to Amazon S3 be encrypted at rest, that the security team control the encryption key policy, and that every decryption operation be auditably logged. Which encryption option meets all the requirements?"
+    },
+    "options": {
+      "es": [
+        "Cifrado del lado del servidor con una llave administrada por el cliente en AWS KMS (SSE-KMS), con las llamadas registradas en AWS CloudTrail.",
+        "Cifrado del lado del servidor con llaves administradas por Amazon S3 (SSE-S3).",
+        "Cifrado del lado del servidor con llaves proporcionadas por el cliente (SSE-C) enviadas en cada solicitud.",
+        "Habilitar HTTPS obligatorio en la política del bucket mediante la condición aws:SecureTransport."
+      ],
+      "en": [
+        "Server-side encryption with a customer managed key in AWS KMS (SSE-KMS), with the calls logged in AWS CloudTrail.",
+        "Server-side encryption with Amazon S3 managed keys (SSE-S3).",
+        "Server-side encryption with customer-provided keys (SSE-C) sent with every request.",
+        "Enforce HTTPS in the bucket policy through the aws:SecureTransport condition."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "SSE-KMS con una llave administrada por el cliente permite definir la política de la llave y registra cada operación de cifrado y descifrado en CloudTrail. SSE-S3 no expone una política de llave controlable y aws:SecureTransport solo protege los datos en tránsito.",
+    "explanation": {
+      "es": "SSE-KMS con una llave administrada por el cliente permite definir la política de la llave y registra cada operación de cifrado y descifrado en CloudTrail. SSE-S3 no expone una política de llave controlable y aws:SecureTransport solo protege los datos en tránsito.",
+      "en": "SSE-KMS with a customer managed key lets you define the key policy and logs every encryption and decryption operation in CloudTrail. SSE-S3 does not expose a controllable key policy, and aws:SecureTransport only protects data in transit."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.2",
-    "text": "Un desarrollador revisa la rotación de llaves de AWS KMS antes de una auditoría. ¿Cuáles DOS afirmaciones sobre la rotación automática de una llave administrada por el cliente en KMS son correctas?",
-    "options": [
-      "El ARN y el ID de la llave no cambian, por lo que las aplicaciones no requieren modificaciones.",
-      "AWS KMS conserva el material criptográfico anterior para poder descifrar los datos cifrados antes de la rotación.",
-      "Es necesario volver a cifrar todos los objetos existentes inmediatamente después de cada rotación.",
-      "La rotación automática también está disponible para las llaves con material importado desde un almacén externo.",
-      "Al habilitar la rotación automática se crea un nuevo ARN de llave que debe actualizarse en cada aplicación."
+    "text": {
+      "es": "Un desarrollador revisa la rotación de llaves de AWS KMS antes de una auditoría. ¿Cuáles DOS afirmaciones sobre la rotación automática de una llave administrada por el cliente en KMS son correctas?",
+      "en": "A developer is reviewing AWS KMS key rotation ahead of an audit. Which TWO statements about automatic rotation of a customer managed key in KMS are correct?"
+    },
+    "options": {
+      "es": [
+        "El ARN y el ID de la llave no cambian, por lo que las aplicaciones no requieren modificaciones.",
+        "AWS KMS conserva el material criptográfico anterior para poder descifrar los datos cifrados antes de la rotación.",
+        "Es necesario volver a cifrar todos los objetos existentes inmediatamente después de cada rotación.",
+        "La rotación automática también está disponible para las llaves con material importado desde un almacén externo.",
+        "Al habilitar la rotación automática se crea un nuevo ARN de llave que debe actualizarse en cada aplicación."
+      ],
+      "en": [
+        "The key ARN and key ID do not change, so applications require no modifications.",
+        "AWS KMS retains the previous key material so it can decrypt data encrypted before the rotation.",
+        "All existing objects must be re-encrypted immediately after each rotation.",
+        "Automatic rotation is also available for keys with material imported from an external store.",
+        "Enabling automatic rotation creates a new key ARN that must be updated in every application."
+      ]
+    },
+    "correct": [
+      0,
+      1
     ],
-    "correct": [0, 1],
     "type": "multiple",
-    "explanation": "La rotación automática de KMS genera nuevo material criptográfico manteniendo el mismo ID y ARN de la llave, y conserva el material anterior para descifrar datos previos, por lo que no hace falta volver a cifrar nada. Las llaves con material importado o en almacenes externos no admiten rotación automática.",
+    "explanation": {
+      "es": "La rotación automática de KMS genera nuevo material criptográfico manteniendo el mismo ID y ARN de la llave, y conserva el material anterior para descifrar datos previos, por lo que no hace falta volver a cifrar nada. Las llaves con material importado o en almacenes externos no admiten rotación automática.",
+      "en": "KMS automatic rotation generates new key material while keeping the same key ID and ARN, and it retains the previous material to decrypt older data, so nothing needs to be re-encrypted. Keys with imported material or in external key stores do not support automatic rotation."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.2",
-    "text": "Un requisito de cumplimiento establece que los datos deben quedar cifrados antes de salir de la aplicación y que AWS nunca debe tener acceso al texto sin cifrar ni a la llave de datos en claro. ¿Qué enfoque cumple el requisito?",
-    "options": [
-      "Implementar cifrado del lado del cliente con el AWS Encryption SDK, generando la llave de datos con KMS y cifrando el contenido en la aplicación antes de cargarlo.",
-      "Cargar los objetos con SSE-KMS y una llave administrada por el cliente con rotación anual habilitada.",
-      "Cargar los objetos por HTTPS y habilitar el cifrado predeterminado del bucket con SSE-S3.",
-      "Almacenar los objetos en un volumen de Amazon EBS cifrado y sincronizarlos con Amazon S3."
+    "text": {
+      "es": "Un requisito de cumplimiento establece que los datos deben quedar cifrados antes de salir de la aplicación y que AWS nunca debe tener acceso al texto sin cifrar ni a la llave de datos en claro. ¿Qué enfoque cumple el requisito?",
+      "en": "A compliance requirement states that data must be encrypted before it leaves the application and that AWS must never have access to the plaintext or to the plaintext data key. Which approach meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Implementar cifrado del lado del cliente con el AWS Encryption SDK, generando la llave de datos con KMS y cifrando el contenido en la aplicación antes de cargarlo.",
+        "Cargar los objetos con SSE-KMS y una llave administrada por el cliente con rotación anual habilitada.",
+        "Cargar los objetos por HTTPS y habilitar el cifrado predeterminado del bucket con SSE-S3.",
+        "Almacenar los objetos en un volumen de Amazon EBS cifrado y sincronizarlos con Amazon S3."
+      ],
+      "en": [
+        "Implement client-side encryption with the AWS Encryption SDK, generating the data key with KMS and encrypting the content in the application before uploading it.",
+        "Upload the objects with SSE-KMS and a customer managed key with annual rotation enabled.",
+        "Upload the objects over HTTPS and enable default bucket encryption with SSE-S3.",
+        "Store the objects on an encrypted Amazon EBS volume and sync them to Amazon S3."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "Solo el cifrado del lado del cliente, por ejemplo con el AWS Encryption SDK, garantiza que el texto sin cifrar nunca salga de la aplicación. Todas las variantes de cifrado del lado del servidor implican que el servicio de AWS recibe el contenido sin cifrar y lo cifra por el usuario.",
+    "explanation": {
+      "es": "Solo el cifrado del lado del cliente, por ejemplo con el AWS Encryption SDK, garantiza que el texto sin cifrar nunca salga de la aplicación. Todas las variantes de cifrado del lado del servidor implican que el servicio de AWS recibe el contenido sin cifrar y lo cifra por el usuario.",
+      "en": "Only client-side encryption, for example with the AWS Encryption SDK, guarantees that plaintext never leaves the application. Every server-side encryption variant means the AWS service receives the content unencrypted and encrypts it on the user's behalf."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.3",
-    "text": "Una función de Lambda se conecta a una base de datos Amazon RDS usando una contraseña que hoy está en una variable de entorno en texto plano. La política de seguridad exige rotación automática cada 30 días y que el valor no aparezca en la configuración de la función. ¿Qué solución cumple el requisito con la menor sobrecarga operativa?",
-    "options": [
-      "Almacenar las credenciales en AWS Secrets Manager con rotación administrada y recuperarlas en tiempo de ejecución desde el código de la función.",
-      "Mantener la contraseña en una variable de entorno y cifrarla con una llave de KMS mediante los ayudantes de cifrado de Lambda.",
-      "Guardar la contraseña en un parámetro de tipo String en AWS Systems Manager Parameter Store y leerla al iniciar la función.",
-      "Guardar la contraseña en un objeto de Amazon S3 cifrado con SSE-KMS y descargarla en cada invocación."
+    "text": {
+      "es": "Una función de Lambda se conecta a una base de datos Amazon RDS usando una contraseña que hoy está en una variable de entorno en texto plano. La política de seguridad exige rotación automática cada 30 días y que el valor no aparezca en la configuración de la función. ¿Qué solución cumple el requisito con la menor sobrecarga operativa?",
+      "en": "A Lambda function connects to an Amazon RDS database using a password that is currently stored in a plaintext environment variable. The security policy requires automatic rotation every 30 days and that the value not appear in the function's configuration. Which solution meets the requirement with the least operational overhead?"
+    },
+    "options": {
+      "es": [
+        "Almacenar las credenciales en AWS Secrets Manager con rotación administrada y recuperarlas en tiempo de ejecución desde el código de la función.",
+        "Mantener la contraseña en una variable de entorno y cifrarla con una llave de KMS mediante los ayudantes de cifrado de Lambda.",
+        "Guardar la contraseña en un parámetro de tipo String en AWS Systems Manager Parameter Store y leerla al iniciar la función.",
+        "Guardar la contraseña en un objeto de Amazon S3 cifrado con SSE-KMS y descargarla en cada invocación."
+      ],
+      "en": [
+        "Store the credentials in AWS Secrets Manager with managed rotation and retrieve them at runtime from the function code.",
+        "Keep the password in an environment variable and encrypt it with a KMS key using the Lambda encryption helpers.",
+        "Store the password in a String parameter in AWS Systems Manager Parameter Store and read it when the function starts.",
+        "Store the password in an Amazon S3 object encrypted with SSE-KMS and download it on every invocation."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "AWS Secrets Manager ofrece rotación automática integrada con Amazon RDS y almacena el secreto fuera de la configuración de la función. Parameter Store de tipo String no cifra el valor y ninguna de las otras opciones aporta rotación administrada.",
+    "explanation": {
+      "es": "AWS Secrets Manager ofrece rotación automática integrada con Amazon RDS y almacena el secreto fuera de la configuración de la función. Parameter Store de tipo String no cifra el valor y ninguna de las otras opciones aporta rotación administrada.",
+      "en": "AWS Secrets Manager provides built-in automatic rotation integrated with Amazon RDS and stores the secret outside the function's configuration. A String type parameter in Parameter Store does not encrypt the value, and none of the other options provide managed rotation."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.3",
-    "text": "Una auditoría detecta que los registros de una aplicación en CloudWatch Logs contienen números de tarjeta y direcciones de correo de los clientes. El equipo debe evitar que esos datos queden visibles, tanto en los registros nuevos como para los operadores que consultan los grupos de registros. ¿Cuáles DOS acciones abordan el problema?",
-    "options": [
-      "Implementar registro estructurado con enmascaramiento de campos sensibles en el código antes de emitir cada entrada.",
-      "Aplicar una política de protección de datos de CloudWatch Logs que detecte y enmascare identificadores de datos sensibles en el grupo de registros.",
-      "Cifrar el grupo de registros con una llave administrada por el cliente de AWS KMS.",
-      "Reducir la retención del grupo de registros a un día para que los datos sensibles expiren pronto.",
-      "Habilitar el rastreo activo de AWS X-Ray en la función para separar los datos sensibles de los registros."
+    "text": {
+      "es": "Una auditoría detecta que los registros de una aplicación en CloudWatch Logs contienen números de tarjeta y direcciones de correo de los clientes. El equipo debe evitar que esos datos queden visibles, tanto en los registros nuevos como para los operadores que consultan los grupos de registros. ¿Cuáles DOS acciones abordan el problema?",
+      "en": "An audit finds that an application's logs in CloudWatch Logs contain customer card numbers and email addresses. The team must prevent that data from being visible, both in new log entries and to operators who query the log groups. Which TWO actions address the problem?"
+    },
+    "options": {
+      "es": [
+        "Implementar registro estructurado con enmascaramiento de campos sensibles en el código antes de emitir cada entrada.",
+        "Aplicar una política de protección de datos de CloudWatch Logs que detecte y enmascare identificadores de datos sensibles en el grupo de registros.",
+        "Cifrar el grupo de registros con una llave administrada por el cliente de AWS KMS.",
+        "Reducir la retención del grupo de registros a un día para que los datos sensibles expiren pronto.",
+        "Habilitar el rastreo activo de AWS X-Ray en la función para separar los datos sensibles de los registros."
+      ],
+      "en": [
+        "Implement structured logging with masking of sensitive fields in the code before each entry is emitted.",
+        "Apply a CloudWatch Logs data protection policy that detects and masks sensitive data identifiers in the log group.",
+        "Encrypt the log group with an AWS KMS customer managed key.",
+        "Reduce the log group retention to one day so that sensitive data expires quickly.",
+        "Enable AWS X-Ray active tracing on the function to separate sensitive data from the logs."
+      ]
+    },
+    "correct": [
+      0,
+      1
     ],
-    "correct": [0, 1],
     "type": "multiple",
-    "explanation": "El enmascaramiento en el código evita que el dato sensible se emita, y las políticas de protección de datos de CloudWatch Logs enmascaran automáticamente los identificadores detectados en la consulta y visualización de los registros. Cifrar el grupo de registros o reducir la retención no impide que los usuarios autorizados vean el dato en claro.",
+    "explanation": {
+      "es": "El enmascaramiento en el código evita que el dato sensible se emita, y las políticas de protección de datos de CloudWatch Logs enmascaran automáticamente los identificadores detectados en la consulta y visualización de los registros. Cifrar el grupo de registros o reducir la retención no impide que los usuarios autorizados vean el dato en claro.",
+      "en": "Masking in the code prevents the sensitive data from being emitted at all, and CloudWatch Logs data protection policies automatically mask detected identifiers when logs are queried and viewed. Encrypting the log group or reducing retention does not prevent authorized users from seeing the data in plaintext."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.3",
-    "text": "Una aplicación SaaS multiinquilino guarda los datos de todos los inquilinos en una sola tabla de DynamoDB, usando tenantId como clave de partición. Cada inquilino se autentica con un grupo de identidades de Amazon Cognito y debe poder leer únicamente sus propios elementos. ¿Qué mecanismo aplica el aislamiento a nivel de datos?",
-    "options": [
-      "Una política de IAM en el rol del inquilino con la clave de condición dynamodb:LeadingKeys que restringe el acceso a su tenantId.",
-      "Un filtro de expresión (FilterExpression) por tenantId en cada operación Scan de la aplicación.",
-      "Un índice secundario global por tenantId con acceso limitado mediante una política de recursos.",
-      "Cifrado del lado del cliente de cada elemento con una llave de KMS distinta por inquilino."
+    "text": {
+      "es": "Una aplicación SaaS multiinquilino guarda los datos de todos los inquilinos en una sola tabla de DynamoDB, usando tenantId como clave de partición. Cada inquilino se autentica con un grupo de identidades de Amazon Cognito y debe poder leer únicamente sus propios elementos. ¿Qué mecanismo aplica el aislamiento a nivel de datos?",
+      "en": "A multi-tenant SaaS application stores all tenants' data in a single DynamoDB table, using tenantId as the partition key. Each tenant authenticates with an Amazon Cognito identity pool and must be able to read only its own items. Which mechanism enforces data-level isolation?"
+    },
+    "options": {
+      "es": [
+        "Una política de IAM en el rol del inquilino con la clave de condición dynamodb:LeadingKeys que restringe el acceso a su tenantId.",
+        "Un filtro de expresión (FilterExpression) por tenantId en cada operación Scan de la aplicación.",
+        "Un índice secundario global por tenantId con acceso limitado mediante una política de recursos.",
+        "Cifrado del lado del cliente de cada elemento con una llave de KMS distinta por inquilino."
+      ],
+      "en": [
+        "An IAM policy on the tenant's role with the dynamodb:LeadingKeys condition key that restricts access to its own tenantId.",
+        "A FilterExpression on tenantId in every Scan operation the application performs.",
+        "A global secondary index on tenantId with access limited through a resource policy.",
+        "Client-side encryption of each item with a different KMS key per tenant."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "La clave de condición dynamodb:LeadingKeys restringe las operaciones al valor de clave de partición del inquilino, aplicando el aislamiento en IAM y no solo en la lógica de la aplicación. Un FilterExpression se evalúa después de leer los datos y puede omitirse por error en el código.",
+    "explanation": {
+      "es": "La clave de condición dynamodb:LeadingKeys restringe las operaciones al valor de clave de partición del inquilino, aplicando el aislamiento en IAM y no solo en la lógica de la aplicación. Un FilterExpression se evalúa después de leer los datos y puede omitirse por error en el código.",
+      "en": "The dynamodb:LeadingKeys condition key restricts operations to the tenant's partition key value, enforcing isolation in IAM rather than only in application logic. A FilterExpression is evaluated after the data is read and can be omitted by mistake in the code."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.1",
-    "text": "Un equipo debe cambiar límites de tasa y activar funcionalidades por entorno sin volver a desplegar la aplicación, y quiere que una configuración inválida no llegue a producción y que el despliegue se revierta si aumentan los errores. ¿Cuáles DOS acciones con AWS AppConfig cumplen estos requisitos?",
-    "options": [
-      "Asociar validadores de JSON Schema o de AWS Lambda al perfil de configuración.",
-      "Definir una estrategia de implementación de AppConfig y asociar una alarma de Amazon CloudWatch para la reversión automática.",
-      "Almacenar los valores como variables de entorno de la función de Lambda y volver a desplegar en cada cambio.",
-      "Publicar la configuración como un paquete en AWS CodeArtifact y versionarla con etiquetas semánticas.",
-      "Incluir un archivo de configuración por entorno dentro de la imagen de contenedor y reconstruir la imagen en cada ajuste."
+    "text": {
+      "es": "Un equipo debe cambiar límites de tasa y activar funcionalidades por entorno sin volver a desplegar la aplicación, y quiere que una configuración inválida no llegue a producción y que el despliegue se revierta si aumentan los errores. ¿Cuáles DOS acciones con AWS AppConfig cumplen estos requisitos?",
+      "en": "A team must change rate limits and turn features on or off per environment without redeploying the application, and it wants an invalid configuration never to reach production and the deployment to roll back if errors increase. Which TWO actions with AWS AppConfig meet these requirements?"
+    },
+    "options": {
+      "es": [
+        "Asociar validadores de JSON Schema o de AWS Lambda al perfil de configuración.",
+        "Definir una estrategia de implementación de AppConfig y asociar una alarma de Amazon CloudWatch para la reversión automática.",
+        "Almacenar los valores como variables de entorno de la función de Lambda y volver a desplegar en cada cambio.",
+        "Publicar la configuración como un paquete en AWS CodeArtifact y versionarla con etiquetas semánticas.",
+        "Incluir un archivo de configuración por entorno dentro de la imagen de contenedor y reconstruir la imagen en cada ajuste."
+      ],
+      "en": [
+        "Attach JSON Schema or AWS Lambda validators to the configuration profile.",
+        "Define an AppConfig deployment strategy and associate an Amazon CloudWatch alarm for automatic rollback.",
+        "Store the values as Lambda function environment variables and redeploy on every change.",
+        "Publish the configuration as a package in AWS CodeArtifact and version it with semantic tags.",
+        "Include one configuration file per environment inside the container image and rebuild the image on every adjustment."
+      ]
+    },
+    "correct": [
+      0,
+      1
     ],
-    "correct": [0, 1],
     "type": "multiple",
-    "explanation": "Los validadores de AppConfig rechazan configuraciones mal formadas o inválidas antes de implementarlas, y las estrategias de implementación con alarmas de CloudWatch permiten un despliegue gradual con reversión automática. Las otras opciones requieren volver a desplegar la aplicación en cada cambio.",
+    "explanation": {
+      "es": "Los validadores de AppConfig rechazan configuraciones mal formadas o inválidas antes de implementarlas, y las estrategias de implementación con alarmas de CloudWatch permiten un despliegue gradual con reversión automática. Las otras opciones requieren volver a desplegar la aplicación en cada cambio.",
+      "en": "AppConfig validators reject malformed or invalid configurations before they are deployed, and deployment strategies with CloudWatch alarms enable a gradual rollout with automatic rollback. The other options require redeploying the application on every change."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.1",
-    "text": "Varias aplicaciones de una organización comparten bibliotecas internas de Python y npm. El equipo necesita un repositorio privado administrado que también sirva como proxy de los repositorios públicos y que controle el acceso mediante IAM. ¿Qué servicio se debe usar?",
-    "options": [
-      "AWS CodeArtifact",
-      "Amazon Elastic Container Registry (Amazon ECR)",
-      "AWS CodeBuild con una caché en Amazon S3",
-      "AWS Systems Manager Parameter Store"
+    "text": {
+      "es": "Varias aplicaciones de una organización comparten bibliotecas internas de Python y npm. El equipo necesita un repositorio privado administrado que también sirva como proxy de los repositorios públicos y que controle el acceso mediante IAM. ¿Qué servicio se debe usar?",
+      "en": "Several applications in an organization share internal Python and npm libraries. The team needs a managed private repository that also proxies public repositories and controls access through IAM. Which service should be used?"
+    },
+    "options": {
+      "es": [
+        "AWS CodeArtifact",
+        "Amazon Elastic Container Registry (Amazon ECR)",
+        "AWS CodeBuild con una caché en Amazon S3",
+        "AWS Systems Manager Parameter Store"
+      ],
+      "en": [
+        "AWS CodeArtifact",
+        "Amazon Elastic Container Registry (Amazon ECR)",
+        "AWS CodeBuild with a cache in Amazon S3",
+        "AWS Systems Manager Parameter Store"
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "AWS CodeArtifact es un repositorio de artefactos administrado para paquetes npm, pip, Maven y otros, con almacenamiento en caché de repositorios públicos ascendentes y control de acceso por IAM. Amazon ECR está diseñado para imágenes de contenedor.",
+    "explanation": {
+      "es": "AWS CodeArtifact es un repositorio de artefactos administrado para paquetes npm, pip, Maven y otros, con almacenamiento en caché de repositorios públicos ascendentes y control de acceso por IAM. Amazon ECR está diseñado para imágenes de contenedor.",
+      "en": "AWS CodeArtifact is a managed artifact repository for npm, pip, Maven, and other packages, with caching of upstream public repositories and IAM-based access control. Amazon ECR is designed for container images."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.1",
-    "text": "Una función de Lambda depende de una biblioteca de aprendizaje automático que, junto con el código, supera los 400 MB sin comprimir. ¿Cuál es la opción de empaquetado válida para desplegar esta función?",
-    "options": [
-      "Empaquetar la función como imagen de contenedor en Amazon ECR, que admite hasta 10 GB.",
-      "Dividir las dependencias en cinco capas de Lambda para superar el límite de tamaño total.",
-      "Cargar el archivo .zip de 400 MB en Amazon S3 y desplegarlo desde ahí, ya que S3 elimina el límite de tamaño.",
-      "Aumentar la memoria de la función a 10.240 MB para ampliar el tamaño permitido del paquete de despliegue."
+    "text": {
+      "es": "Una función de Lambda depende de una biblioteca de aprendizaje automático que, junto con el código, supera los 400 MB sin comprimir. ¿Cuál es la opción de empaquetado válida para desplegar esta función?",
+      "en": "A Lambda function depends on a machine learning library that, together with the code, exceeds 400 MB uncompressed. Which packaging option is valid for deploying this function?"
+    },
+    "options": {
+      "es": [
+        "Empaquetar la función como imagen de contenedor en Amazon ECR, que admite hasta 10 GB.",
+        "Dividir las dependencias en cinco capas de Lambda para superar el límite de tamaño total.",
+        "Cargar el archivo .zip de 400 MB en Amazon S3 y desplegarlo desde ahí, ya que S3 elimina el límite de tamaño.",
+        "Aumentar la memoria de la función a 10.240 MB para ampliar el tamaño permitido del paquete de despliegue."
+      ],
+      "en": [
+        "Package the function as a container image in Amazon ECR, which supports up to 10 GB.",
+        "Split the dependencies across five Lambda layers to get past the total size limit.",
+        "Upload the 400 MB .zip file to Amazon S3 and deploy from there, since S3 removes the size limit.",
+        "Increase the function memory to 10,240 MB to raise the allowed deployment package size."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "El límite de 250 MB sin comprimir aplica al paquete .zip, incluidas las capas, mientras que las imágenes de contenedor de Lambda admiten hasta 10 GB. La memoria asignada no influye en el tamaño del paquete de despliegue.",
+    "explanation": {
+      "es": "El límite de 250 MB sin comprimir aplica al paquete .zip, incluidas las capas, mientras que las imágenes de contenedor de Lambda admiten hasta 10 GB. La memoria asignada no influye en el tamaño del paquete de despliegue.",
+      "en": "The 250 MB uncompressed limit applies to the .zip package, including layers, whereas Lambda container images support up to 10 GB. Allocated memory has no effect on the deployment package size."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.2",
-    "text": "Un desarrollador construye una API sin servidor con AWS SAM y quiere ejecutar y depurar los endpoints en su estación de trabajo, invocando la función con solicitudes HTTP reales antes de desplegar en AWS. ¿Qué comando debe usar?",
-    "options": [
-      "sam local start-api",
-      "sam deploy --guided",
-      "sam validate --lint",
-      "sam logs --stack-name mi-stack --tail"
+    "text": {
+      "es": "Un desarrollador construye una API sin servidor con AWS SAM y quiere ejecutar y depurar los endpoints en su estación de trabajo, invocando la función con solicitudes HTTP reales antes de desplegar en AWS. ¿Qué comando debe usar?",
+      "en": "A developer is building a serverless API with AWS SAM and wants to run and debug the endpoints on their workstation, invoking the function with real HTTP requests before deploying to AWS. Which command should they use?"
+    },
+    "options": {
+      "es": [
+        "sam local start-api",
+        "sam deploy --guided",
+        "sam validate --lint",
+        "sam logs --stack-name mi-stack --tail"
+      ],
+      "en": [
+        "sam local start-api",
+        "sam deploy --guided",
+        "sam validate --lint",
+        "sam logs --stack-name mi-stack --tail"
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "sam local start-api levanta un emulador local de API Gateway que invoca las funciones en contenedores locales, lo que permite probar y depurar con solicitudes HTTP. sam validate solo revisa la sintaxis de la plantilla y sam logs consulta registros de un stack ya desplegado.",
+    "explanation": {
+      "es": "sam local start-api levanta un emulador local de API Gateway que invoca las funciones en contenedores locales, lo que permite probar y depurar con solicitudes HTTP. sam validate solo revisa la sintaxis de la plantilla y sam logs consulta registros de un stack ya desplegado.",
+      "en": "sam local start-api starts a local API Gateway emulator that invokes the functions in local containers, allowing testing and debugging with HTTP requests. sam validate only checks the template syntax, and sam logs queries the logs of an already deployed stack."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.2",
-    "text": "Un equipo necesita que la misma API REST de Amazon API Gateway apunte a una tabla de DynamoDB de desarrollo cuando se invoca el endpoint de pruebas y a la tabla de producción cuando se invoca el endpoint productivo, sin mantener dos APIs distintas. ¿Cuál es el enfoque adecuado?",
-    "options": [
-      "Crear etapas separadas en la misma API y usar variables de etapa para resolver el destino de la integración en cada entorno.",
-      "Crear una API distinta por entorno y asociar un dominio personalizado a cada una.",
-      "Usar planes de uso con claves de API diferentes por entorno para enrutar hacia cada tabla.",
-      "Habilitar la caché de la etapa y variar la clave de caché según el entorno de origen."
+    "text": {
+      "es": "Un equipo necesita que la misma API REST de Amazon API Gateway apunte a una tabla de DynamoDB de desarrollo cuando se invoca el endpoint de pruebas y a la tabla de producción cuando se invoca el endpoint productivo, sin mantener dos APIs distintas. ¿Cuál es el enfoque adecuado?",
+      "en": "A team needs the same Amazon API Gateway REST API to point to a development DynamoDB table when the test endpoint is called and to the production table when the production endpoint is called, without maintaining two separate APIs. What is the appropriate approach?"
+    },
+    "options": {
+      "es": [
+        "Crear etapas separadas en la misma API y usar variables de etapa para resolver el destino de la integración en cada entorno.",
+        "Crear una API distinta por entorno y asociar un dominio personalizado a cada una.",
+        "Usar planes de uso con claves de API diferentes por entorno para enrutar hacia cada tabla.",
+        "Habilitar la caché de la etapa y variar la clave de caché según el entorno de origen."
+      ],
+      "en": [
+        "Create separate stages in the same API and use stage variables to resolve the integration target in each environment.",
+        "Create a separate API per environment and associate a custom domain with each one.",
+        "Use usage plans with different API keys per environment to route to each table.",
+        "Enable stage caching and vary the cache key based on the originating environment."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "Las etapas de API Gateway junto con las variables de etapa permiten que una misma definición de API apunte a recursos backend distintos según el entorno. Los planes de uso controlan cuotas y limitación de tasa, no el enrutamiento a recursos.",
+    "explanation": {
+      "es": "Las etapas de API Gateway junto con las variables de etapa permiten que una misma definición de API apunte a recursos backend distintos según el entorno. Los planes de uso controlan cuotas y limitación de tasa, no el enrutamiento a recursos.",
+      "en": "API Gateway stages together with stage variables let a single API definition point to different backend resources depending on the environment. Usage plans control quotas and throttling, not routing to resources."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.2",
-    "text": "Los desarrolladores frontend necesitan avanzar contra una nueva API REST cuyo backend aún no está implementado, y requieren respuestas JSON de ejemplo con códigos de estado realistas sin desplegar ninguna función de cómputo. ¿Qué configuración de Amazon API Gateway satisface la necesidad?",
-    "options": [
-      "Configurar una integración de tipo mock en el método, con una plantilla de asignación de respuesta que devuelva la carga de ejemplo.",
-      "Configurar una integración HTTP_PROXY hacia un servidor externo de pruebas administrado por el equipo frontend.",
-      "Habilitar CORS en el recurso y desplegar la etapa sin ninguna integración configurada.",
-      "Crear un autorizador de Lambda que devuelva la carga de ejemplo cuando la solicitud sea válida."
+    "text": {
+      "es": "Los desarrolladores frontend necesitan avanzar contra una nueva API REST cuyo backend aún no está implementado, y requieren respuestas JSON de ejemplo con códigos de estado realistas sin desplegar ninguna función de cómputo. ¿Qué configuración de Amazon API Gateway satisface la necesidad?",
+      "en": "Frontend developers need to make progress against a new REST API whose backend is not yet implemented, and they need sample JSON responses with realistic status codes without deploying any compute function. Which Amazon API Gateway configuration meets the need?"
+    },
+    "options": {
+      "es": [
+        "Configurar una integración de tipo mock en el método, con una plantilla de asignación de respuesta que devuelva la carga de ejemplo.",
+        "Configurar una integración HTTP_PROXY hacia un servidor externo de pruebas administrado por el equipo frontend.",
+        "Habilitar CORS en el recurso y desplegar la etapa sin ninguna integración configurada.",
+        "Crear un autorizador de Lambda que devuelva la carga de ejemplo cuando la solicitud sea válida."
+      ],
+      "en": [
+        "Configure a mock integration on the method, with a response mapping template that returns the sample payload.",
+        "Configure an HTTP_PROXY integration to an external test server managed by the frontend team.",
+        "Enable CORS on the resource and deploy the stage without any integration configured.",
+        "Create a Lambda authorizer that returns the sample payload when the request is valid."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "Las integraciones mock de API Gateway devuelven respuestas generadas por plantillas de asignación sin invocar ningún backend, ideales para desbloquear el desarrollo frontend. Un autorizador de Lambda solo decide sobre la autorización y no reemplaza la respuesta del método.",
+    "explanation": {
+      "es": "Las integraciones mock de API Gateway devuelven respuestas generadas por plantillas de asignación sin invocar ningún backend, ideales para desbloquear el desarrollo frontend. Un autorizador de Lambda solo decide sobre la autorización y no reemplaza la respuesta del método.",
+      "en": "API Gateway mock integrations return responses generated by mapping templates without invoking any backend, which is ideal for unblocking frontend development. A Lambda authorizer only decides on authorization and does not replace the method response."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.3",
-    "text": "Un canal de integración continua debe ejecutar pruebas de integración contra una versión inmutable y aprobada del código de una función de Lambda, mientras la versión $LATEST sigue recibiendo cambios de los desarrolladores. ¿Qué mecanismo cumple el requisito?",
-    "options": [
-      "Publicar una versión de la función y apuntar un alias, por ejemplo test, a esa versión para que las pruebas la invoquen.",
-      "Ejecutar las pruebas contra $LATEST y bloquear los envíos al repositorio mientras se ejecuta el conjunto de pruebas.",
-      "Crear una copia de la función con un nombre distinto y sincronizar el código manualmente antes de cada ejecución.",
-      "Habilitar la simultaneidad aprovisionada en $LATEST para congelar el código durante las pruebas."
+    "text": {
+      "es": "Un canal de integración continua debe ejecutar pruebas de integración contra una versión inmutable y aprobada del código de una función de Lambda, mientras la versión $LATEST sigue recibiendo cambios de los desarrolladores. ¿Qué mecanismo cumple el requisito?",
+      "en": "A continuous integration pipeline must run integration tests against an immutable, approved version of a Lambda function's code, while the $LATEST version keeps receiving changes from developers. Which mechanism meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Publicar una versión de la función y apuntar un alias, por ejemplo test, a esa versión para que las pruebas la invoquen.",
+        "Ejecutar las pruebas contra $LATEST y bloquear los envíos al repositorio mientras se ejecuta el conjunto de pruebas.",
+        "Crear una copia de la función con un nombre distinto y sincronizar el código manualmente antes de cada ejecución.",
+        "Habilitar la simultaneidad aprovisionada en $LATEST para congelar el código durante las pruebas."
+      ],
+      "en": [
+        "Publish a version of the function and point an alias, for example test, to that version so the tests invoke it.",
+        "Run the tests against $LATEST and block pushes to the repository while the test suite runs.",
+        "Create a copy of the function with a different name and manually sync the code before each run.",
+        "Enable provisioned concurrency on $LATEST to freeze the code during the tests."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "Las versiones publicadas de Lambda son inmutables y los alias permiten dirigir el tráfico de pruebas a una versión aprobada específica sin depender de $LATEST. La simultaneidad aprovisionada no puede aplicarse a $LATEST ni congela el código.",
+    "explanation": {
+      "es": "Las versiones publicadas de Lambda son inmutables y los alias permiten dirigir el tráfico de pruebas a una versión aprobada específica sin depender de $LATEST. La simultaneidad aprovisionada no puede aplicarse a $LATEST ni congela el código.",
+      "en": "Published Lambda versions are immutable, and aliases let you direct test traffic to a specific approved version without depending on $LATEST. Provisioned concurrency cannot be applied to $LATEST, and it does not freeze the code."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.3",
-    "text": "Un desarrollador necesita un payload JSON de ejemplo con la estructura de proxy de Amazon API Gateway para automatizar pruebas de invocación de una función de Lambda desde el canal de despliegue. ¿Cuál es la forma más rápida de obtener ese evento de prueba?",
-    "options": [
-      "Ejecutar sam local generate-event apigateway aws-proxy y guardar la salida como archivo de evento.",
-      "Copiar manualmente el cuerpo de una solicitud desde los registros de acceso de la etapa de API Gateway.",
-      "Ejecutar aws lambda get-function y extraer el evento de ejemplo de la configuración devuelta.",
-      "Habilitar el rastreo de AWS X-Ray y exportar el segmento de una invocación previa como evento."
+    "text": {
+      "es": "Un desarrollador necesita un payload JSON de ejemplo con la estructura de proxy de Amazon API Gateway para automatizar pruebas de invocación de una función de Lambda desde el canal de despliegue. ¿Cuál es la forma más rápida de obtener ese evento de prueba?",
+      "en": "A developer needs a sample JSON payload with the Amazon API Gateway proxy structure in order to automate invocation tests of a Lambda function from the deployment pipeline. What is the fastest way to obtain that test event?"
+    },
+    "options": {
+      "es": [
+        "Ejecutar sam local generate-event apigateway aws-proxy y guardar la salida como archivo de evento.",
+        "Copiar manualmente el cuerpo de una solicitud desde los registros de acceso de la etapa de API Gateway.",
+        "Ejecutar aws lambda get-function y extraer el evento de ejemplo de la configuración devuelta.",
+        "Habilitar el rastreo de AWS X-Ray y exportar el segmento de una invocación previa como evento."
+      ],
+      "en": [
+        "Run sam local generate-event apigateway aws-proxy and save the output as an event file.",
+        "Manually copy a request body from the API Gateway stage access logs.",
+        "Run aws lambda get-function and extract the sample event from the returned configuration.",
+        "Enable AWS X-Ray tracing and export the segment of a previous invocation as an event."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "AWS SAM CLI incluye sam local generate-event, que produce eventos de prueba con el esquema oficial de numerosos orígenes, entre ellos la integración de proxy de API Gateway. Los registros y los segmentos de X-Ray no tienen el formato del evento de invocación.",
+    "explanation": {
+      "es": "AWS SAM CLI incluye sam local generate-event, que produce eventos de prueba con el esquema oficial de numerosos orígenes, entre ellos la integración de proxy de API Gateway. Los registros y los segmentos de X-Ray no tienen el formato del evento de invocación.",
+      "en": "The AWS SAM CLI includes sam local generate-event, which produces test events with the official schema for many sources, including the API Gateway proxy integration. Logs and X-Ray segments do not have the invocation event format."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.3",
-    "text": "Un equipo mantiene una plantilla de AWS SAM y necesita desplegar la misma infraestructura en los entornos dev, staging y prod, variando el tamaño de la instancia de base de datos y el nombre de la tabla en cada uno. ¿Cuál es el enfoque recomendado con infraestructura como código?",
-    "options": [
-      "Parametrizar la plantilla y desplegar un stack por entorno, con anulaciones de parámetros definidas por entorno en samconfig.toml.",
-      "Mantener tres copias de la plantilla, una por entorno, y editar los valores directamente en cada copia.",
-      "Desplegar un único stack y modificar manualmente los recursos en la consola de cada entorno después del despliegue.",
-      "Usar la misma plantilla sin parámetros y diferenciar los entornos con etiquetas de recursos de AWS."
+    "text": {
+      "es": "Un equipo mantiene una plantilla de AWS SAM y necesita desplegar la misma infraestructura en los entornos dev, staging y prod, variando el tamaño de la instancia de base de datos y el nombre de la tabla en cada uno. ¿Cuál es el enfoque recomendado con infraestructura como código?",
+      "en": "A team maintains an AWS SAM template and needs to deploy the same infrastructure to the dev, staging, and prod environments, varying the database instance size and the table name in each one. What is the recommended infrastructure as code approach?"
+    },
+    "options": {
+      "es": [
+        "Parametrizar la plantilla y desplegar un stack por entorno, con anulaciones de parámetros definidas por entorno en samconfig.toml.",
+        "Mantener tres copias de la plantilla, una por entorno, y editar los valores directamente en cada copia.",
+        "Desplegar un único stack y modificar manualmente los recursos en la consola de cada entorno después del despliegue.",
+        "Usar la misma plantilla sin parámetros y diferenciar los entornos con etiquetas de recursos de AWS."
+      ],
+      "en": [
+        "Parameterize the template and deploy one stack per environment, with per-environment parameter overrides defined in samconfig.toml.",
+        "Maintain three copies of the template, one per environment, and edit the values directly in each copy.",
+        "Deploy a single stack and manually modify the resources in each environment's console after deployment.",
+        "Use the same template without parameters and differentiate the environments with AWS resource tags."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "Una plantilla parametrizada con stacks separados y anulaciones de parámetros por entorno mantiene una sola fuente de verdad y evita la divergencia entre entornos. Duplicar plantillas o editar recursos a mano produce desfases de configuración.",
+    "explanation": {
+      "es": "Una plantilla parametrizada con stacks separados y anulaciones de parámetros por entorno mantiene una sola fuente de verdad y evita la divergencia entre entornos. Duplicar plantillas o editar recursos a mano produce desfases de configuración.",
+      "en": "A parameterized template with separate stacks and per-environment parameter overrides keeps a single source of truth and prevents drift between environments. Duplicating templates or editing resources by hand leads to configuration drift."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.4",
-    "text": "Una función de Lambda de producción se despliega con AWS SAM y AWS CodeDeploy. El equipo quiere enviar el 10% del tráfico a la nueva versión durante 10 minutos y revertir automáticamente si la métrica de errores supera un umbral. ¿Qué configuración cumple el requisito?",
-    "options": [
-      "Definir en el recurso AWS::Serverless::Function una propiedad DeploymentPreference con el tipo Canary10Percent10Minutes y alarmas de CloudWatch asociadas.",
-      "Definir una propiedad DeploymentPreference con el tipo AllAtOnce y una alarma de CloudWatch asociada.",
-      "Configurar un despliegue continuo (rolling) en el grupo de Auto Scaling que aloja la función.",
-      "Publicar la nueva versión y actualizar la variable de etapa de API Gateway para dividir el tráfico manualmente."
+    "text": {
+      "es": "Una función de Lambda de producción se despliega con AWS SAM y AWS CodeDeploy. El equipo quiere enviar el 10% del tráfico a la nueva versión durante 10 minutos y revertir automáticamente si la métrica de errores supera un umbral. ¿Qué configuración cumple el requisito?",
+      "en": "A production Lambda function is deployed with AWS SAM and AWS CodeDeploy. The team wants to send 10% of the traffic to the new version for 10 minutes and roll back automatically if the error metric exceeds a threshold. Which configuration meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Definir en el recurso AWS::Serverless::Function una propiedad DeploymentPreference con el tipo Canary10Percent10Minutes y alarmas de CloudWatch asociadas.",
+        "Definir una propiedad DeploymentPreference con el tipo AllAtOnce y una alarma de CloudWatch asociada.",
+        "Configurar un despliegue continuo (rolling) en el grupo de Auto Scaling que aloja la función.",
+        "Publicar la nueva versión y actualizar la variable de etapa de API Gateway para dividir el tráfico manualmente."
+      ],
+      "en": [
+        "Define a DeploymentPreference property on the AWS::Serverless::Function resource with the Canary10Percent10Minutes type and associated CloudWatch alarms.",
+        "Define a DeploymentPreference property with the AllAtOnce type and an associated CloudWatch alarm.",
+        "Configure a rolling deployment on the Auto Scaling group that hosts the function.",
+        "Publish the new version and update the API Gateway stage variable to split the traffic manually."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "El tipo de despliegue Canary10Percent10Minutes de CodeDeploy desplaza el 10% del tráfico al alias durante 10 minutos y las alarmas configuradas activan la reversión automática. AllAtOnce cambia todo el tráfico de inmediato y Lambda no usa grupos de Auto Scaling.",
+    "explanation": {
+      "es": "El tipo de despliegue Canary10Percent10Minutes de CodeDeploy desplaza el 10% del tráfico al alias durante 10 minutos y las alarmas configuradas activan la reversión automática. AllAtOnce cambia todo el tráfico de inmediato y Lambda no usa grupos de Auto Scaling.",
+      "en": "The CodeDeploy Canary10Percent10Minutes deployment type shifts 10% of the traffic to the alias for 10 minutes, and the configured alarms trigger automatic rollback. AllAtOnce shifts all traffic immediately, and Lambda does not use Auto Scaling groups."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.4",
-    "text": "Una aplicación en Amazon ECS con AWS Fargate debe adoptar despliegues azul/verde gestionados por AWS CodeDeploy, con validación del nuevo conjunto de tareas antes de recibir tráfico productivo. ¿Cuáles DOS elementos son necesarios?",
-    "options": [
-      "Un balanceador de carga de aplicaciones con dos grupos de destino, uno para producción y otro de prueba.",
-      "El controlador de despliegue del servicio de ECS configurado con el tipo CODE_DEPLOY.",
-      "Un grupo de Auto Scaling de Amazon EC2 asociado al servicio de ECS.",
-      "Un alias de AWS Lambda que apunte a la definición de tarea del nuevo conjunto de tareas.",
-      "Un entorno de AWS Elastic Beanstalk configurado para intercambio de URL de CNAME."
+    "text": {
+      "es": "Una aplicación en Amazon ECS con AWS Fargate debe adoptar despliegues azul/verde gestionados por AWS CodeDeploy, con validación del nuevo conjunto de tareas antes de recibir tráfico productivo. ¿Cuáles DOS elementos son necesarios?",
+      "en": "An application on Amazon ECS with AWS Fargate must adopt blue/green deployments managed by AWS CodeDeploy, with validation of the new task set before it receives production traffic. Which TWO elements are required?"
+    },
+    "options": {
+      "es": [
+        "Un balanceador de carga de aplicaciones con dos grupos de destino, uno para producción y otro de prueba.",
+        "El controlador de despliegue del servicio de ECS configurado con el tipo CODE_DEPLOY.",
+        "Un grupo de Auto Scaling de Amazon EC2 asociado al servicio de ECS.",
+        "Un alias de AWS Lambda que apunte a la definición de tarea del nuevo conjunto de tareas.",
+        "Un entorno de AWS Elastic Beanstalk configurado para intercambio de URL de CNAME."
+      ],
+      "en": [
+        "An Application Load Balancer with two target groups, one for production and one for testing.",
+        "The ECS service deployment controller configured with the CODE_DEPLOY type.",
+        "An Amazon EC2 Auto Scaling group associated with the ECS service.",
+        "An AWS Lambda alias that points to the task definition of the new task set.",
+        "An AWS Elastic Beanstalk environment configured for CNAME URL swapping."
+      ]
+    },
+    "correct": [
+      0,
+      1
     ],
-    "correct": [0, 1],
     "type": "multiple",
-    "explanation": "El despliegue azul/verde de ECS con CodeDeploy requiere un balanceador de carga con dos grupos de destino, para poder validar el conjunto de tareas de reemplazo por un listener de prueba, y que el servicio declare el controlador de despliegue CODE_DEPLOY. Los alias de Lambda y Elastic Beanstalk corresponden a otros modelos de cómputo.",
+    "explanation": {
+      "es": "El despliegue azul/verde de ECS con CodeDeploy requiere un balanceador de carga con dos grupos de destino, para poder validar el conjunto de tareas de reemplazo por un listener de prueba, y que el servicio declare el controlador de despliegue CODE_DEPLOY. Los alias de Lambda y Elastic Beanstalk corresponden a otros modelos de cómputo.",
+      "en": "ECS blue/green deployment with CodeDeploy requires a load balancer with two target groups, so the replacement task set can be validated through a test listener, and the service must declare the CODE_DEPLOY deployment controller. Lambda aliases and Elastic Beanstalk belong to other compute models."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.4",
-    "text": "Una API REST de Amazon API Gateway tiene las etapas dev y prod integradas con la misma función de Lambda, pero cada etapa debe invocar un alias distinto de la función sin duplicar la definición de la integración. ¿Qué configuración lo permite?",
-    "options": [
-      "Usar una variable de etapa en el URI de la integración de Lambda y definir su valor con el nombre del alias en cada etapa.",
-      "Crear dos recursos distintos en la API, uno por alias, y publicar ambos en las dos etapas.",
-      "Habilitar la caché de la etapa y usar el nombre del alias como parte de la clave de caché.",
-      "Definir un plan de uso por etapa que asocie cada clave de API con un alias de la función."
+    "text": {
+      "es": "Una API REST de Amazon API Gateway tiene las etapas dev y prod integradas con la misma función de Lambda, pero cada etapa debe invocar un alias distinto de la función sin duplicar la definición de la integración. ¿Qué configuración lo permite?",
+      "en": "An Amazon API Gateway REST API has dev and prod stages integrated with the same Lambda function, but each stage must invoke a different alias of the function without duplicating the integration definition. Which configuration allows this?"
+    },
+    "options": {
+      "es": [
+        "Usar una variable de etapa en el URI de la integración de Lambda y definir su valor con el nombre del alias en cada etapa.",
+        "Crear dos recursos distintos en la API, uno por alias, y publicar ambos en las dos etapas.",
+        "Habilitar la caché de la etapa y usar el nombre del alias como parte de la clave de caché.",
+        "Definir un plan de uso por etapa que asocie cada clave de API con un alias de la función."
+      ],
+      "en": [
+        "Use a stage variable in the Lambda integration URI and set its value to the alias name in each stage.",
+        "Create two separate resources in the API, one per alias, and deploy both to the two stages.",
+        "Enable stage caching and use the alias name as part of the cache key.",
+        "Define a usage plan per stage that associates each API key with a function alias."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "Las variables de etapa pueden insertarse en el URI de la integración, por ejemplo con el patrón función:${stageVariables.alias}, para que cada etapa invoque un alias distinto de la misma función. La caché y los planes de uso no influyen en el destino de la integración.",
+    "explanation": {
+      "es": "Las variables de etapa pueden insertarse en el URI de la integración, por ejemplo con el patrón función:${stageVariables.alias}, para que cada etapa invoque un alias distinto de la misma función. La caché y los planes de uso no influyen en el destino de la integración.",
+      "en": "Stage variables can be inserted into the integration URI, for example with the pattern function:${stageVariables.alias}, so that each stage invokes a different alias of the same function. Caching and usage plans have no effect on the integration target."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.1",
-    "text": "Después de un incidente, un desarrollador debe identificar en los registros de CloudWatch de varias funciones de Lambda las entradas de nivel ERROR de la última hora y agruparlas por tipo de excepción para encontrar la causa raíz. ¿Cuál es el enfoque más eficiente?",
-    "options": [
-      "Ejecutar una consulta de CloudWatch Logs Insights sobre los grupos de registros, filtrando por el nivel de error y agregando con stats count() by el campo de excepción.",
-      "Descargar los flujos de registro con la AWS CLI y procesarlos localmente con expresiones regulares.",
-      "Crear un filtro de métrica en cada grupo de registros y revisar el gráfico de la métrica resultante.",
-      "Consultar AWS CloudTrail para localizar las invocaciones de Lambda que devolvieron errores de aplicación."
+    "text": {
+      "es": "Después de un incidente, un desarrollador debe identificar en los registros de CloudWatch de varias funciones de Lambda las entradas de nivel ERROR de la última hora y agruparlas por tipo de excepción para encontrar la causa raíz. ¿Cuál es el enfoque más eficiente?",
+      "en": "After an incident, a developer must identify the ERROR level entries from the last hour in the CloudWatch logs of several Lambda functions and group them by exception type to find the root cause. What is the most efficient approach?"
+    },
+    "options": {
+      "es": [
+        "Ejecutar una consulta de CloudWatch Logs Insights sobre los grupos de registros, filtrando por el nivel de error y agregando con stats count() by el campo de excepción.",
+        "Descargar los flujos de registro con la AWS CLI y procesarlos localmente con expresiones regulares.",
+        "Crear un filtro de métrica en cada grupo de registros y revisar el gráfico de la métrica resultante.",
+        "Consultar AWS CloudTrail para localizar las invocaciones de Lambda que devolvieron errores de aplicación."
+      ],
+      "en": [
+        "Run a CloudWatch Logs Insights query across the log groups, filtering by error level and aggregating with stats count() by the exception field.",
+        "Download the log streams with the AWS CLI and process them locally with regular expressions.",
+        "Create a metric filter on each log group and review the resulting metric graph.",
+        "Query AWS CloudTrail to locate the Lambda invocations that returned application errors."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "CloudWatch Logs Insights consulta varios grupos de registros a la vez y permite filtrar y agregar con comandos como stats count() by, lo que acelera el análisis de causa raíz. CloudTrail registra llamadas a la API de AWS, no las excepciones internas de la aplicación.",
+    "explanation": {
+      "es": "CloudWatch Logs Insights consulta varios grupos de registros a la vez y permite filtrar y agregar con comandos como stats count() by, lo que acelera el análisis de causa raíz. CloudTrail registra llamadas a la API de AWS, no las excepciones internas de la aplicación.",
+      "en": "CloudWatch Logs Insights queries multiple log groups at once and allows filtering and aggregation with commands such as stats count() by, which speeds up root cause analysis. CloudTrail records AWS API calls, not the application's internal exceptions."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.1",
-    "text": "Una API compuesta por varios microservicios presenta latencias intermitentes de varios segundos. El equipo necesita determinar en qué llamada descendente concreta (DynamoDB, un servicio interno o una API de terceros) se consume el tiempo en las solicitudes lentas. ¿Qué herramienta ofrece esa visibilidad?",
-    "options": [
-      "El mapa de servicios y el análisis de segmentos de AWS X-Ray para las solicitudes rastreadas.",
-      "Las métricas estándar de Amazon CloudWatch para la latencia de API Gateway y Lambda.",
-      "El historial de eventos de AWS CloudTrail filtrado por el nombre del servicio.",
-      "Los informes de acceso de AWS IAM para los roles de los microservicios."
+    "text": {
+      "es": "Una API compuesta por varios microservicios presenta latencias intermitentes de varios segundos. El equipo necesita determinar en qué llamada descendente concreta (DynamoDB, un servicio interno o una API de terceros) se consume el tiempo en las solicitudes lentas. ¿Qué herramienta ofrece esa visibilidad?",
+      "en": "An API made up of several microservices shows intermittent latencies of several seconds. The team needs to determine which specific downstream call (DynamoDB, an internal service, or a third-party API) is consuming the time in the slow requests. Which tool provides that visibility?"
+    },
+    "options": {
+      "es": [
+        "El mapa de servicios y el análisis de segmentos de AWS X-Ray para las solicitudes rastreadas.",
+        "Las métricas estándar de Amazon CloudWatch para la latencia de API Gateway y Lambda.",
+        "El historial de eventos de AWS CloudTrail filtrado por el nombre del servicio.",
+        "Los informes de acceso de AWS IAM para los roles de los microservicios."
+      ],
+      "en": [
+        "The AWS X-Ray service map and segment analysis for the traced requests.",
+        "Standard Amazon CloudWatch metrics for API Gateway and Lambda latency.",
+        "AWS CloudTrail event history filtered by service name.",
+        "AWS IAM access reports for the microservices' roles."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "AWS X-Ray descompone cada solicitud en segmentos y subsegmentos y el mapa de servicios muestra la latencia por dependencia, lo que aísla la llamada descendente responsable. Las métricas de CloudWatch dan latencias agregadas, sin desglose por dependencia dentro de una solicitud.",
+    "explanation": {
+      "es": "AWS X-Ray descompone cada solicitud en segmentos y subsegmentos y el mapa de servicios muestra la latencia por dependencia, lo que aísla la llamada descendente responsable. Las métricas de CloudWatch dan latencias agregadas, sin desglose por dependencia dentro de una solicitud.",
+      "en": "AWS X-Ray breaks each request down into segments and subsegments, and the service map shows latency per dependency, which isolates the downstream call responsible. CloudWatch metrics provide aggregate latencies, with no breakdown by dependency within a request."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.1",
-    "text": "Una función de Lambda de alto volumen debe publicar métricas personalizadas de negocio con dimensiones detalladas y, al mismo tiempo, conservar el contexto de cada evento en los registros, sin añadir latencia por llamadas sincrónicas a la API de CloudWatch. ¿Qué enfoque cumple el requisito?",
-    "options": [
-      "Escribir en stdout los registros con el formato de métricas incorporadas (EMF) de CloudWatch para que se extraigan métricas automáticamente.",
-      "Invocar PutMetricData de CloudWatch al final de cada invocación de la función.",
-      "Crear un filtro de métrica en el grupo de registros por cada combinación de dimensiones requerida.",
-      "Emitir cada métrica como un evento a Amazon EventBridge y transformarla con una función adicional."
+    "text": {
+      "es": "Una función de Lambda de alto volumen debe publicar métricas personalizadas de negocio con dimensiones detalladas y, al mismo tiempo, conservar el contexto de cada evento en los registros, sin añadir latencia por llamadas sincrónicas a la API de CloudWatch. ¿Qué enfoque cumple el requisito?",
+      "en": "A high-volume Lambda function must publish custom business metrics with detailed dimensions while also preserving each event's context in the logs, without adding latency from synchronous calls to the CloudWatch API. Which approach meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Escribir en stdout los registros con el formato de métricas incorporadas (EMF) de CloudWatch para que se extraigan métricas automáticamente.",
+        "Invocar PutMetricData de CloudWatch al final de cada invocación de la función.",
+        "Crear un filtro de métrica en el grupo de registros por cada combinación de dimensiones requerida.",
+        "Emitir cada métrica como un evento a Amazon EventBridge y transformarla con una función adicional."
+      ],
+      "en": [
+        "Write logs to stdout using the CloudWatch embedded metric format (EMF) so that metrics are extracted automatically.",
+        "Call CloudWatch PutMetricData at the end of each function invocation.",
+        "Create a metric filter on the log group for each required combination of dimensions.",
+        "Emit each metric as an event to Amazon EventBridge and transform it with an additional function."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "El formato de métricas incorporadas (EMF) permite emitir métricas y su contexto en una sola entrada de registro; CloudWatch extrae las métricas de forma asíncrona, sin llamadas a la API en la ruta crítica. PutMetricData añade latencia y consume cuota de la API en cada invocación.",
+    "explanation": {
+      "es": "El formato de métricas incorporadas (EMF) permite emitir métricas y su contexto en una sola entrada de registro; CloudWatch extrae las métricas de forma asíncrona, sin llamadas a la API en la ruta crítica. PutMetricData añade latencia y consume cuota de la API en cada invocación.",
+      "en": "The embedded metric format (EMF) lets you emit metrics and their context in a single log entry; CloudWatch extracts the metrics asynchronously, with no API calls on the critical path. PutMetricData adds latency and consumes API quota on every invocation."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.2",
-    "text": "Un desarrollador instrumenta con AWS X-Ray una aplicación y necesita poder filtrar los rastreos por el identificador de cliente para investigar las quejas de clientes específicos. ¿Cómo debe registrar ese dato en el segmento?",
-    "options": [
-      "Como una anotación, porque las anotaciones se indexan y se pueden usar en expresiones de filtro de rastreos.",
-      "Como metadatos, porque los metadatos se indexan y admiten estructuras de datos arbitrarias.",
-      "Como una entrada de registro estructurado en CloudWatch Logs vinculada al identificador de rastreo.",
-      "Como una dimensión de una métrica personalizada de Amazon CloudWatch."
+    "text": {
+      "es": "Un desarrollador instrumenta con AWS X-Ray una aplicación y necesita poder filtrar los rastreos por el identificador de cliente para investigar las quejas de clientes específicos. ¿Cómo debe registrar ese dato en el segmento?",
+      "en": "A developer instruments an application with AWS X-Ray and needs to be able to filter traces by customer identifier in order to investigate complaints from specific customers. How should that data be recorded in the segment?"
+    },
+    "options": {
+      "es": [
+        "Como una anotación, porque las anotaciones se indexan y se pueden usar en expresiones de filtro de rastreos.",
+        "Como metadatos, porque los metadatos se indexan y admiten estructuras de datos arbitrarias.",
+        "Como una entrada de registro estructurado en CloudWatch Logs vinculada al identificador de rastreo.",
+        "Como una dimensión de una métrica personalizada de Amazon CloudWatch."
+      ],
+      "en": [
+        "As an annotation, because annotations are indexed and can be used in trace filter expressions.",
+        "As metadata, because metadata is indexed and supports arbitrary data structures.",
+        "As a structured log entry in CloudWatch Logs linked to the trace identifier.",
+        "As a dimension of a custom Amazon CloudWatch metric."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "En X-Ray las anotaciones son pares clave-valor indexados que pueden usarse en expresiones de filtro de rastreos, mientras que los metadatos se almacenan pero no se indexan ni permiten filtrar. Las métricas y los registros no habilitan la búsqueda de rastreos.",
+    "explanation": {
+      "es": "En X-Ray las anotaciones son pares clave-valor indexados que pueden usarse en expresiones de filtro de rastreos, mientras que los metadatos se almacenan pero no se indexan ni permiten filtrar. Las métricas y los registros no habilitan la búsqueda de rastreos.",
+      "en": "In X-Ray, annotations are indexed key-value pairs that can be used in trace filter expressions, whereas metadata is stored but is neither indexed nor filterable. Metrics and logs do not enable trace search."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.2",
-    "text": "Una función de Lambda invoca Amazon DynamoDB y una API HTTP de un tercero. El equipo necesita rastreos de extremo a extremo que incluyan subsegmentos con la latencia de cada llamada descendente. ¿Cuáles DOS acciones son necesarias?",
-    "options": [
-      "Habilitar el rastreo activo de AWS X-Ray en la configuración de la función.",
-      "Instrumentar los clientes del SDK de AWS y del cliente HTTP con el SDK de X-Ray o ADOT dentro del código.",
-      "Habilitar los eventos de datos de AWS CloudTrail para la tabla de DynamoDB.",
-      "Publicar métricas personalizadas con el formato de métricas incorporadas (EMF) en cada llamada descendente.",
-      "Habilitar la supervisión detallada de un minuto en las métricas de CloudWatch de la función."
+    "text": {
+      "es": "Una función de Lambda invoca Amazon DynamoDB y una API HTTP de un tercero. El equipo necesita rastreos de extremo a extremo que incluyan subsegmentos con la latencia de cada llamada descendente. ¿Cuáles DOS acciones son necesarias?",
+      "en": "A Lambda function calls Amazon DynamoDB and a third-party HTTP API. The team needs end-to-end traces that include subsegments with the latency of each downstream call. Which TWO actions are required?"
+    },
+    "options": {
+      "es": [
+        "Habilitar el rastreo activo de AWS X-Ray en la configuración de la función.",
+        "Instrumentar los clientes del SDK de AWS y del cliente HTTP con el SDK de X-Ray o ADOT dentro del código.",
+        "Habilitar los eventos de datos de AWS CloudTrail para la tabla de DynamoDB.",
+        "Publicar métricas personalizadas con el formato de métricas incorporadas (EMF) en cada llamada descendente.",
+        "Habilitar la supervisión detallada de un minuto en las métricas de CloudWatch de la función."
+      ],
+      "en": [
+        "Enable AWS X-Ray active tracing in the function configuration.",
+        "Instrument the AWS SDK and HTTP clients with the X-Ray SDK or ADOT inside the code.",
+        "Enable AWS CloudTrail data events for the DynamoDB table.",
+        "Publish custom metrics using the embedded metric format (EMF) on each downstream call.",
+        "Enable one-minute detailed monitoring on the function's CloudWatch metrics."
+      ]
+    },
+    "correct": [
+      0,
+      1
     ],
-    "correct": [0, 1],
     "type": "multiple",
-    "explanation": "El rastreo activo hace que Lambda genere el segmento de la invocación y propague el encabezado de rastreo, pero los subsegmentos por dependencia solo aparecen si los clientes del SDK y HTTP están instrumentados en el código. CloudTrail, EMF y la supervisión detallada no producen subsegmentos de rastreo.",
+    "explanation": {
+      "es": "El rastreo activo hace que Lambda genere el segmento de la invocación y propague el encabezado de rastreo, pero los subsegmentos por dependencia solo aparecen si los clientes del SDK y HTTP están instrumentados en el código. CloudTrail, EMF y la supervisión detallada no producen subsegmentos de rastreo.",
+      "en": "Active tracing makes Lambda generate the invocation segment and propagate the trace header, but per-dependency subsegments appear only if the SDK and HTTP clients are instrumented in the code. CloudTrail, EMF, and detailed monitoring do not produce trace subsegments."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.2",
-    "text": "Una aplicación sin servidor debe avisar al equipo de guardia por correo electrónico cuando las ejecuciones simultáneas de Lambda se acerquen a la cuota de la cuenta, antes de que se produzca limitación de tasa. ¿Qué implementación cumple el requisito?",
-    "options": [
-      "Crear una alarma de Amazon CloudWatch sobre la métrica ConcurrentExecutions con un umbral por debajo de la cuota y notificar a un tema de Amazon SNS con suscripción de correo electrónico.",
-      "Crear una regla de Amazon EventBridge que se active con cada invocación de la función y publique en un tema de Amazon SNS.",
-      "Habilitar el rastreo activo de AWS X-Ray y configurar un grupo de muestreo que envíe correos al superar el umbral.",
-      "Configurar una cola de mensajes fallidos en la función para que los eventos limitados se envíen por correo electrónico."
+    "text": {
+      "es": "Una aplicación sin servidor debe avisar al equipo de guardia por correo electrónico cuando las ejecuciones simultáneas de Lambda se acerquen a la cuota de la cuenta, antes de que se produzca limitación de tasa. ¿Qué implementación cumple el requisito?",
+      "en": "A serverless application must alert the on-call team by email when Lambda concurrent executions approach the account quota, before throttling occurs. Which implementation meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Crear una alarma de Amazon CloudWatch sobre la métrica ConcurrentExecutions con un umbral por debajo de la cuota y notificar a un tema de Amazon SNS con suscripción de correo electrónico.",
+        "Crear una regla de Amazon EventBridge que se active con cada invocación de la función y publique en un tema de Amazon SNS.",
+        "Habilitar el rastreo activo de AWS X-Ray y configurar un grupo de muestreo que envíe correos al superar el umbral.",
+        "Configurar una cola de mensajes fallidos en la función para que los eventos limitados se envíen por correo electrónico."
+      ],
+      "en": [
+        "Create an Amazon CloudWatch alarm on the ConcurrentExecutions metric with a threshold below the quota and notify an Amazon SNS topic with an email subscription.",
+        "Create an Amazon EventBridge rule that triggers on every invocation of the function and publishes to an Amazon SNS topic.",
+        "Enable AWS X-Ray active tracing and configure a sampling group that sends emails when the threshold is exceeded.",
+        "Configure a dead-letter queue on the function so that throttled events are sent by email."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "Una alarma de CloudWatch sobre ConcurrentExecutions con un umbral preventivo y una acción hacia un tema de SNS notifica antes de que comience la limitación de tasa. Las reglas por invocación generarían un volumen de notificaciones inviable y una DLQ solo almacena eventos ya fallidos.",
+    "explanation": {
+      "es": "Una alarma de CloudWatch sobre ConcurrentExecutions con un umbral preventivo y una acción hacia un tema de SNS notifica antes de que comience la limitación de tasa. Las reglas por invocación generarían un volumen de notificaciones inviable y una DLQ solo almacena eventos ya fallidos.",
+      "en": "A CloudWatch alarm on ConcurrentExecutions with a preventive threshold and an action to an SNS topic notifies before throttling begins. Per-invocation rules would generate an unworkable volume of notifications, and a DLQ only stores events that have already failed."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.3",
-    "text": "Una función de Lambda que procesa imágenes está configurada con 256 MB de memoria y tarda 9 segundos por invocación, con un costo mensual elevado. Al probarla con 1.024 MB, la duración baja a 1,8 segundos. ¿Qué explica el resultado y cómo debe decidirse la configuración final?",
-    "options": [
-      "Lambda asigna la potencia de CPU de forma proporcional a la memoria, por lo que más memoria puede reducir la duración y el costo total; conviene comparar configuraciones con AWS Lambda Power Tuning.",
-      "El costo de Lambda depende únicamente de la memoria asignada, por lo que la configuración de 256 MB siempre será la más económica.",
-      "La mejora proviene de la caché del entorno de ejecución y desaparecerá cuando se reinicie el entorno, así que debe mantenerse 256 MB.",
-      "La duración bajó porque más memoria activa la simultaneidad aprovisionada de forma automática y elimina los inicios en frío."
+    "text": {
+      "es": "Una función de Lambda que procesa imágenes está configurada con 256 MB de memoria y tarda 9 segundos por invocación, con un costo mensual elevado. Al probarla con 1.024 MB, la duración baja a 1,8 segundos. ¿Qué explica el resultado y cómo debe decidirse la configuración final?",
+      "en": "A Lambda function that processes images is configured with 256 MB of memory and takes 9 seconds per invocation, with a high monthly cost. When tested with 1,024 MB, the duration drops to 1.8 seconds. What explains the result, and how should the final configuration be decided?"
+    },
+    "options": {
+      "es": [
+        "Lambda asigna la potencia de CPU de forma proporcional a la memoria, por lo que más memoria puede reducir la duración y el costo total; conviene comparar configuraciones con AWS Lambda Power Tuning.",
+        "El costo de Lambda depende únicamente de la memoria asignada, por lo que la configuración de 256 MB siempre será la más económica.",
+        "La mejora proviene de la caché del entorno de ejecución y desaparecerá cuando se reinicie el entorno, así que debe mantenerse 256 MB.",
+        "La duración bajó porque más memoria activa la simultaneidad aprovisionada de forma automática y elimina los inicios en frío."
+      ],
+      "en": [
+        "Lambda allocates CPU power proportionally to memory, so more memory can reduce both duration and total cost; configurations should be compared with AWS Lambda Power Tuning.",
+        "Lambda cost depends solely on allocated memory, so the 256 MB configuration will always be the cheapest.",
+        "The improvement comes from the execution environment cache and will disappear when the environment is recycled, so 256 MB should be kept.",
+        "The duration dropped because more memory automatically activates provisioned concurrency and eliminates cold starts."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "En Lambda la CPU escala con la memoria asignada, así que una función limitada por CPU puede costar menos con más memoria porque se factura por GB-segundo y la duración cae más de lo que sube el precio por unidad de tiempo. AWS Lambda Power Tuning permite encontrar el punto óptimo de costo y rendimiento.",
+    "explanation": {
+      "es": "En Lambda la CPU escala con la memoria asignada, así que una función limitada por CPU puede costar menos con más memoria porque se factura por GB-segundo y la duración cae más de lo que sube el precio por unidad de tiempo. AWS Lambda Power Tuning permite encontrar el punto óptimo de costo y rendimiento.",
+      "en": "In Lambda, CPU scales with allocated memory, so a CPU-bound function can cost less with more memory because billing is per GB-second and the duration drops more than the price per unit of time rises. AWS Lambda Power Tuning helps find the optimal cost and performance point."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.3",
-    "text": "Un tema de Amazon SNS publica eventos de pedidos con un atributo de mensaje eventType. Una función de Lambda suscrita solo necesita los eventos ORDER_CANCELLED, pero hoy se invoca con todos los mensajes y descarta el 95% en el código. ¿Cómo se debe optimizar?",
-    "options": [
-      "Aplicar una política de filtro de suscripción en SNS para que solo se entreguen los mensajes cuyo atributo eventType sea ORDER_CANCELLED.",
-      "Crear un tema de SNS adicional por tipo de evento y publicar en todos ellos desde el productor.",
-      "Insertar una cola de Amazon SQS con un filtro de mensajes entre el tema y la función de Lambda.",
-      "Reducir la simultaneidad reservada de la función para limitar la cantidad de mensajes que procesa."
+    "text": {
+      "es": "Un tema de Amazon SNS publica eventos de pedidos con un atributo de mensaje eventType. Una función de Lambda suscrita solo necesita los eventos ORDER_CANCELLED, pero hoy se invoca con todos los mensajes y descarta el 95% en el código. ¿Cómo se debe optimizar?",
+      "en": "An Amazon SNS topic publishes order events with an eventType message attribute. A subscribed Lambda function only needs the ORDER_CANCELLED events, but today it is invoked with every message and discards 95% of them in code. How should this be optimized?"
+    },
+    "options": {
+      "es": [
+        "Aplicar una política de filtro de suscripción en SNS para que solo se entreguen los mensajes cuyo atributo eventType sea ORDER_CANCELLED.",
+        "Crear un tema de SNS adicional por tipo de evento y publicar en todos ellos desde el productor.",
+        "Insertar una cola de Amazon SQS con un filtro de mensajes entre el tema y la función de Lambda.",
+        "Reducir la simultaneidad reservada de la función para limitar la cantidad de mensajes que procesa."
+      ],
+      "en": [
+        "Apply an SNS subscription filter policy so that only messages whose eventType attribute is ORDER_CANCELLED are delivered.",
+        "Create an additional SNS topic per event type and publish to all of them from the producer.",
+        "Insert an Amazon SQS queue with a message filter between the topic and the Lambda function.",
+        "Reduce the function's reserved concurrency to limit the number of messages it processes."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "Las políticas de filtro de suscripción de SNS evalúan los atributos del mensaje en el servicio y solo entregan los que coinciden, lo que elimina invocaciones y costos innecesarios. SQS no ofrece filtrado de mensajes del lado del servicio y reducir la simultaneidad solo provocaría limitación de tasa.",
+    "explanation": {
+      "es": "Las políticas de filtro de suscripción de SNS evalúan los atributos del mensaje en el servicio y solo entregan los que coinciden, lo que elimina invocaciones y costos innecesarios. SQS no ofrece filtrado de mensajes del lado del servicio y reducir la simultaneidad solo provocaría limitación de tasa.",
+      "en": "SNS subscription filter policies evaluate message attributes in the service and deliver only matching messages, which eliminates unnecessary invocations and cost. SQS does not offer server-side message filtering, and reducing concurrency would only cause throttling."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.3",
-    "text": "Una distribución de Amazon CloudFront sirve una API que devuelve contenido distinto según el encabezado Accept-Language de la solicitud. Actualmente todos los usuarios reciben la misma respuesta almacenada en caché en el idioma incorrecto. ¿Qué cambio corrige el comportamiento manteniendo el almacenamiento en caché?",
-    "options": [
-      "Incluir el encabezado Accept-Language en la clave de caché mediante la política de caché de la distribución.",
-      "Configurar la política de solicitudes de origen para reenviar todos los encabezados al origen sin modificar la clave de caché.",
-      "Establecer el TTL mínimo, predeterminado y máximo en cero para que cada solicitud llegue al origen.",
-      "Agregar una función de CloudFront que elimine el encabezado Accept-Language de las solicitudes del visor."
+    "text": {
+      "es": "Una distribución de Amazon CloudFront sirve una API que devuelve contenido distinto según el encabezado Accept-Language de la solicitud. Actualmente todos los usuarios reciben la misma respuesta almacenada en caché en el idioma incorrecto. ¿Qué cambio corrige el comportamiento manteniendo el almacenamiento en caché?",
+      "en": "An Amazon CloudFront distribution serves an API that returns different content based on the request's Accept-Language header. Currently all users receive the same cached response in the wrong language. Which change fixes the behavior while keeping caching in place?"
+    },
+    "options": {
+      "es": [
+        "Incluir el encabezado Accept-Language en la clave de caché mediante la política de caché de la distribución.",
+        "Configurar la política de solicitudes de origen para reenviar todos los encabezados al origen sin modificar la clave de caché.",
+        "Establecer el TTL mínimo, predeterminado y máximo en cero para que cada solicitud llegue al origen.",
+        "Agregar una función de CloudFront que elimine el encabezado Accept-Language de las solicitudes del visor."
+      ],
+      "en": [
+        "Include the Accept-Language header in the cache key through the distribution's cache policy.",
+        "Configure the origin request policy to forward all headers to the origin without modifying the cache key.",
+        "Set the minimum, default, and maximum TTL to zero so that every request reaches the origin.",
+        "Add a CloudFront Function that removes the Accept-Language header from viewer requests."
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "Para servir variantes distintas de un mismo objeto hay que incluir el encabezado en la clave de caché a través de la política de caché, de modo que CloudFront guarde una entrada por idioma. Reenviar encabezados al origen sin incluirlos en la clave de caché no diferencia las respuestas almacenadas, y deshabilitar la caché elimina el beneficio de rendimiento.",
+    "explanation": {
+      "es": "Para servir variantes distintas de un mismo objeto hay que incluir el encabezado en la clave de caché a través de la política de caché, de modo que CloudFront guarde una entrada por idioma. Reenviar encabezados al origen sin incluirlos en la clave de caché no diferencia las respuestas almacenadas, y deshabilitar la caché elimina el beneficio de rendimiento.",
+      "en": "To serve different variants of the same object, the header must be included in the cache key through the cache policy, so that CloudFront stores one entry per language. Forwarding headers to the origin without including them in the cache key does not differentiate the cached responses, and disabling caching removes the performance benefit."
+    },
     "source": "llm"
   }
 ]

@@ -2,678 +2,1231 @@
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.1",
-    "text": "Un equipo de operaciones necesita crear una alarma que se active cuando el uso de memoria de un grupo de instancias Amazon EC2 con Amazon Linux 2023 supere el 85 % durante 10 minutos. Al revisar la consola de Amazon CloudWatch, el equipo no encuentra ninguna metrica de memoria para esas instancias. ¿Cual es la accion correcta para poder crear la alarma?",
-    "options": [
-      "Instalar y configurar el agente de CloudWatch en las instancias para publicar la metrica mem_used_percent como metrica personalizada.",
-      "Habilitar la supervision detallada (detailed monitoring) en las instancias para obtener metricas de memoria cada minuto.",
-      "Adjuntar un rol de IAM con la politica CloudWatchReadOnlyAccess a las instancias para que expongan sus metricas de memoria.",
-      "Activar AWS Compute Optimizer en la cuenta para que publique las metricas de memoria en el namespace AWS/EC2."
-    ],
+    "text": {
+      "es": "Un equipo de operaciones necesita crear una alarma que se active cuando el uso de memoria de un grupo de instancias Amazon EC2 con Amazon Linux 2023 supere el 85 % durante 10 minutos. Al revisar la consola de Amazon CloudWatch, el equipo no encuentra ninguna metrica de memoria para esas instancias. ¿Cual es la accion correcta para poder crear la alarma?",
+      "en": "An operations team needs to create an alarm that triggers when memory usage on a group of Amazon EC2 instances running Amazon Linux 2023 exceeds 85% for 10 minutes. When reviewing the Amazon CloudWatch console, the team cannot find any memory metric for those instances. What is the correct action to be able to create the alarm?"
+    },
+    "options": {
+      "es": [
+        "Instalar y configurar el agente de CloudWatch en las instancias para publicar la metrica mem_used_percent como metrica personalizada.",
+        "Habilitar la supervision detallada (detailed monitoring) en las instancias para obtener metricas de memoria cada minuto.",
+        "Adjuntar un rol de IAM con la politica CloudWatchReadOnlyAccess a las instancias para que expongan sus metricas de memoria.",
+        "Activar AWS Compute Optimizer en la cuenta para que publique las metricas de memoria en el namespace AWS/EC2."
+      ],
+      "en": [
+        "Install and configure the CloudWatch agent on the instances to publish the mem_used_percent metric as a custom metric.",
+        "Enable detailed monitoring on the instances to obtain memory metrics every minute.",
+        "Attach an IAM role with the CloudWatchReadOnlyAccess policy to the instances so that they expose their memory metrics.",
+        "Enable AWS Compute Optimizer in the account so that it publishes memory metrics to the AWS/EC2 namespace."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "El hipervisor de EC2 no expone metricas de memoria del sistema operativo invitado, por lo que se requiere el agente de CloudWatch para recolectarlas y publicarlas como metricas personalizadas. La supervision detallada solo aumenta la frecuencia de las metricas ya existentes.",
+    "explanation": {
+      "es": "El hipervisor de EC2 no expone metricas de memoria del sistema operativo invitado, por lo que se requiere el agente de CloudWatch para recolectarlas y publicarlas como metricas personalizadas. La supervision detallada solo aumenta la frecuencia de las metricas ya existentes.",
+      "en": "The EC2 hypervisor does not expose guest operating system memory metrics, so the CloudWatch agent is required to collect them and publish them as custom metrics. Detailed monitoring only increases the frequency of metrics that already exist."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.1",
-    "text": "Una aplicacion escribe sus registros en un grupo de logs de Amazon CloudWatch Logs. El equipo de CloudOps necesita recibir una notificacion cuando aparezcan mas de 5 lineas que contengan la cadena \"ERROR\" en un periodo de 5 minutos, y debe evitar que la alarma quede en estado INSUFFICIENT_DATA cuando no haya errores. ¿Cuales DOS acciones cumplen el requisito? (Seleccione DOS).",
-    "options": [
-      "Crear un filtro de metricas en el grupo de logs con el patron \"ERROR\" que publique una metrica personalizada con valor 1 por coincidencia.",
-      "Crear una alarma de CloudWatch sobre la metrica personalizada con umbral mayor que 5, estadistica Sum, y configurar los datos faltantes como notBreaching.",
-      "Crear un filtro de suscripcion en el grupo de logs que envie los eventos a Amazon Data Firehose y crear la alarma sobre la metrica de entrega.",
-      "Programar una consulta guardada de CloudWatch Logs Insights y configurar la alarma directamente sobre los resultados de la consulta.",
-      "Habilitar la retencion indefinida en el grupo de logs para que CloudWatch genere automaticamente la metrica de conteo de errores."
-    ],
+    "text": {
+      "es": "Una aplicacion escribe sus registros en un grupo de logs de Amazon CloudWatch Logs. El equipo de CloudOps necesita recibir una notificacion cuando aparezcan mas de 5 lineas que contengan la cadena \"ERROR\" en un periodo de 5 minutos, y debe evitar que la alarma quede en estado INSUFFICIENT_DATA cuando no haya errores. ¿Cuales DOS acciones cumplen el requisito? (Seleccione DOS).",
+      "en": "An application writes its logs to an Amazon CloudWatch Logs log group. The CloudOps team needs to be notified when more than 5 lines containing the string \"ERROR\" appear within a 5-minute period, and must prevent the alarm from remaining in the INSUFFICIENT_DATA state when there are no errors. Which TWO actions meet the requirement? (Select TWO.)"
+    },
+    "options": {
+      "es": [
+        "Crear un filtro de metricas en el grupo de logs con el patron \"ERROR\" que publique una metrica personalizada con valor 1 por coincidencia.",
+        "Crear una alarma de CloudWatch sobre la metrica personalizada con umbral mayor que 5, estadistica Sum, y configurar los datos faltantes como notBreaching.",
+        "Crear un filtro de suscripcion en el grupo de logs que envie los eventos a Amazon Data Firehose y crear la alarma sobre la metrica de entrega.",
+        "Programar una consulta guardada de CloudWatch Logs Insights y configurar la alarma directamente sobre los resultados de la consulta.",
+        "Habilitar la retencion indefinida en el grupo de logs para que CloudWatch genere automaticamente la metrica de conteo de errores."
+      ],
+      "en": [
+        "Create a metric filter on the log group with the \"ERROR\" pattern that publishes a custom metric with a value of 1 per match.",
+        "Create a CloudWatch alarm on the custom metric with a threshold of greater than 5 and the Sum statistic, and configure missing data as notBreaching.",
+        "Create a subscription filter on the log group that sends the events to Amazon Data Firehose and create the alarm on the delivery metric.",
+        "Schedule a saved CloudWatch Logs Insights query and configure the alarm directly on the query results.",
+        "Enable indefinite retention on the log group so that CloudWatch automatically generates the error count metric."
+      ]
+    },
     "correct": [
       0,
       1
     ],
     "type": "multiple",
-    "explanation": "Un filtro de metricas convierte las coincidencias del patron en una metrica personalizada, y la alarma se crea sobre esa metrica usando la estadistica Sum. Tratar los datos faltantes como notBreaching evita el estado INSUFFICIENT_DATA en los periodos sin errores.",
+    "explanation": {
+      "es": "Un filtro de metricas convierte las coincidencias del patron en una metrica personalizada, y la alarma se crea sobre esa metrica usando la estadistica Sum. Tratar los datos faltantes como notBreaching evita el estado INSUFFICIENT_DATA en los periodos sin errores.",
+      "en": "A metric filter turns pattern matches into a custom metric, and the alarm is created on that metric using the Sum statistic. Treating missing data as notBreaching avoids the INSUFFICIENT_DATA state during periods with no errors."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.1",
-    "text": "Un ingeniero de CloudOps recibe demasiadas notificaciones de Amazon SNS porque las alarmas de CPU, latencia y errores HTTP 5xx de una aplicacion se activan por separado durante los picos de trafico. Solo desea recibir una notificacion cuando la latencia elevada coincida con errores 5xx elevados. ¿Que solucion cumple el requisito con el menor esfuerzo operativo?",
-    "options": [
-      "Crear una alarma compuesta cuya regla sea ALARM(alarma-latencia) AND ALARM(alarma-5xx) y asociar la accion de SNS unicamente a la alarma compuesta.",
-      "Aumentar el numero de periodos de evaluacion y el umbral de cada alarma individual hasta que dejen de activarse simultaneamente.",
-      "Crear una regla de Amazon EventBridge que filtre los eventos de cambio de estado de ambas alarmas y los envie a AWS Lambda para correlacionarlos.",
-      "Reemplazar las alarmas por un panel de CloudWatch compartido y revisar manualmente las metricas durante los picos de trafico."
-    ],
+    "text": {
+      "es": "Un ingeniero de CloudOps recibe demasiadas notificaciones de Amazon SNS porque las alarmas de CPU, latencia y errores HTTP 5xx de una aplicacion se activan por separado durante los picos de trafico. Solo desea recibir una notificacion cuando la latencia elevada coincida con errores 5xx elevados. ¿Que solucion cumple el requisito con el menor esfuerzo operativo?",
+      "en": "A CloudOps engineer receives too many Amazon SNS notifications because an application's CPU, latency, and HTTP 5xx error alarms trigger separately during traffic spikes. The engineer only wants to be notified when high latency coincides with elevated 5xx errors. Which solution meets the requirement with the least operational effort?"
+    },
+    "options": {
+      "es": [
+        "Crear una alarma compuesta cuya regla sea ALARM(alarma-latencia) AND ALARM(alarma-5xx) y asociar la accion de SNS unicamente a la alarma compuesta.",
+        "Aumentar el numero de periodos de evaluacion y el umbral de cada alarma individual hasta que dejen de activarse simultaneamente.",
+        "Crear una regla de Amazon EventBridge que filtre los eventos de cambio de estado de ambas alarmas y los envie a AWS Lambda para correlacionarlos.",
+        "Reemplazar las alarmas por un panel de CloudWatch compartido y revisar manualmente las metricas durante los picos de trafico."
+      ],
+      "en": [
+        "Create a composite alarm whose rule is ALARM(latency-alarm) AND ALARM(5xx-alarm) and associate the SNS action only with the composite alarm.",
+        "Increase the number of evaluation periods and the threshold of each individual alarm until they no longer trigger simultaneously.",
+        "Create an Amazon EventBridge rule that filters the state change events of both alarms and sends them to AWS Lambda to correlate them.",
+        "Replace the alarms with a shared CloudWatch dashboard and manually review the metrics during traffic spikes."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Las alarmas compuestas permiten combinar el estado de varias alarmas con expresiones booleanas y notificar solo cuando se cumple la condicion combinada, lo que reduce el ruido sin desarrollar logica personalizada.",
+    "explanation": {
+      "es": "Las alarmas compuestas permiten combinar el estado de varias alarmas con expresiones booleanas y notificar solo cuando se cumple la condicion combinada, lo que reduce el ruido sin desarrollar logica personalizada.",
+      "en": "Composite alarms make it possible to combine the state of several alarms with Boolean expressions and notify only when the combined condition is met, which reduces noise without developing custom logic."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.2",
-    "text": "Una aplicacion en instancias Amazon EC2 falla cuando un servicio del sistema operativo se detiene. Existe una alarma de CloudWatch basada en una metrica personalizada que detecta la falla. La empresa quiere que el servicio se reinicie automaticamente sin intervencion humana y sin administrar servidores adicionales. ¿Que solucion cumple el requisito?",
-    "options": [
-      "Configurar una regla de Amazon EventBridge que capture el cambio de estado de la alarma a ALARM y ejecute un runbook de AWS Systems Manager Automation que reinicie el servicio.",
-      "Configurar la accion de recuperacion de EC2 (EC2 recover) en la alarma de CloudWatch para que reinicie el servicio afectado.",
-      "Crear un grupo de Auto Scaling con capacidad fija y una comprobacion de estado ELB para que termine y reemplace la instancia cada vez que el servicio falle.",
-      "Habilitar la supervision detallada en la instancia y crear un panel de CloudWatch que notifique al equipo de guardia mediante Amazon SNS."
-    ],
+    "text": {
+      "es": "Una aplicacion en instancias Amazon EC2 falla cuando un servicio del sistema operativo se detiene. Existe una alarma de CloudWatch basada en una metrica personalizada que detecta la falla. La empresa quiere que el servicio se reinicie automaticamente sin intervencion humana y sin administrar servidores adicionales. ¿Que solucion cumple el requisito?",
+      "en": "An application on Amazon EC2 instances fails when an operating system service stops. A CloudWatch alarm based on a custom metric detects the failure. The company wants the service to restart automatically without human intervention and without managing additional servers. Which solution meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Configurar una regla de Amazon EventBridge que capture el cambio de estado de la alarma a ALARM y ejecute un runbook de AWS Systems Manager Automation que reinicie el servicio.",
+        "Configurar la accion de recuperacion de EC2 (EC2 recover) en la alarma de CloudWatch para que reinicie el servicio afectado.",
+        "Crear un grupo de Auto Scaling con capacidad fija y una comprobacion de estado ELB para que termine y reemplace la instancia cada vez que el servicio falle.",
+        "Habilitar la supervision detallada en la instancia y crear un panel de CloudWatch que notifique al equipo de guardia mediante Amazon SNS."
+      ],
+      "en": [
+        "Configure an Amazon EventBridge rule that captures the alarm state change to ALARM and runs an AWS Systems Manager Automation runbook that restarts the service.",
+        "Configure the EC2 recover action on the CloudWatch alarm so that it restarts the affected service.",
+        "Create an Auto Scaling group with fixed capacity and an ELB health check so that it terminates and replaces the instance whenever the service fails.",
+        "Enable detailed monitoring on the instance and create a CloudWatch dashboard that notifies the on-call team through Amazon SNS."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "EventBridge puede capturar el evento de cambio de estado de la alarma e invocar un runbook de Systems Manager Automation que ejecute la remediacion en la instancia. La accion de recuperacion de EC2 actua sobre la instancia completa, no sobre un servicio del sistema operativo.",
+    "explanation": {
+      "es": "EventBridge puede capturar el evento de cambio de estado de la alarma e invocar un runbook de Systems Manager Automation que ejecute la remediacion en la instancia. La accion de recuperacion de EC2 actua sobre la instancia completa, no sobre un servicio del sistema operativo.",
+      "en": "EventBridge can capture the alarm state change event and invoke a Systems Manager Automation runbook that performs the remediation on the instance. The EC2 recover action acts on the entire instance, not on an operating system service."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.2",
-    "text": "Despues de desplegar una nueva regla en un bus de eventos personalizado de Amazon EventBridge, el equipo observa que la funcion de AWS Lambda de destino no se esta ejecutando, aunque los eventos si llegan al bus. ¿Que combinacion de acciones ayuda a identificar la causa raiz con mayor rapidez?",
-    "options": [
-      "Revisar la metrica FailedInvocations de la regla y configurar una cola de mensajes fallidos (DLQ) en el destino para inspeccionar los eventos no entregados.",
-      "Revisar la metrica ThrottledRules y aumentar el limite de concurrencia reservada de la funcion de Lambda.",
-      "Habilitar el archivado de eventos (event archive) en el bus y reproducir los eventos hacia el bus predeterminado.",
-      "Revisar los registros de AWS CloudTrail para confirmar que la API PutEvents devolvio codigo 200 desde el productor."
-    ],
+    "text": {
+      "es": "Despues de desplegar una nueva regla en un bus de eventos personalizado de Amazon EventBridge, el equipo observa que la funcion de AWS Lambda de destino no se esta ejecutando, aunque los eventos si llegan al bus. ¿Que combinacion de acciones ayuda a identificar la causa raiz con mayor rapidez?",
+      "en": "After deploying a new rule on a custom Amazon EventBridge event bus, the team observes that the target AWS Lambda function is not running, even though the events do reach the bus. Which combination of actions helps identify the root cause most quickly?"
+    },
+    "options": {
+      "es": [
+        "Revisar la metrica FailedInvocations de la regla y configurar una cola de mensajes fallidos (DLQ) en el destino para inspeccionar los eventos no entregados.",
+        "Revisar la metrica ThrottledRules y aumentar el limite de concurrencia reservada de la funcion de Lambda.",
+        "Habilitar el archivado de eventos (event archive) en el bus y reproducir los eventos hacia el bus predeterminado.",
+        "Revisar los registros de AWS CloudTrail para confirmar que la API PutEvents devolvio codigo 200 desde el productor."
+      ],
+      "en": [
+        "Review the rule's FailedInvocations metric and configure a dead-letter queue (DLQ) on the target to inspect the undelivered events.",
+        "Review the ThrottledRules metric and increase the Lambda function's reserved concurrency limit.",
+        "Enable event archiving on the bus and replay the events to the default bus.",
+        "Review the AWS CloudTrail logs to confirm that the PutEvents API returned a 200 code from the producer."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "La metrica FailedInvocations indica que la regla coincidio pero la invocacion del destino fallo, generalmente por permisos, y la DLQ conserva esos eventos para su inspeccion. Un 200 en PutEvents solo confirma la ingesta al bus, no la entrega al destino.",
+    "explanation": {
+      "es": "La metrica FailedInvocations indica que la regla coincidio pero la invocacion del destino fallo, generalmente por permisos, y la DLQ conserva esos eventos para su inspeccion. Un 200 en PutEvents solo confirma la ingesta al bus, no la entrega al destino.",
+      "en": "The FailedInvocations metric indicates that the rule matched but the target invocation failed, generally because of permissions, and the DLQ retains those events for inspection. A 200 on PutEvents only confirms ingestion into the bus, not delivery to the target."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.2",
-    "text": "Una regla de Amazon EventBridge envia eventos de cambio de estado de instancias EC2 a una cola de Amazon SQS. El equipo que consume la cola necesita recibir unicamente el ID de la instancia y el nuevo estado en un formato JSON plano, sin el resto del sobre del evento. ¿Cual es la forma mas eficiente de lograrlo?",
-    "options": [
-      "Configurar un transformador de entrada (input transformer) en el destino de la regla para extraer y reformatear los campos requeridos.",
-      "Ampliar el patron de eventos de la regla para incluir solo los campos detail.instance-id y detail.state.",
-      "Agregar una funcion de AWS Lambda entre EventBridge y SQS que reciba el evento completo y publique la version reducida.",
-      "Habilitar el enriquecimiento de eventos con Amazon EventBridge Pipes y una API de destino HTTP que devuelva el JSON reducido."
-    ],
+    "text": {
+      "es": "Una regla de Amazon EventBridge envia eventos de cambio de estado de instancias EC2 a una cola de Amazon SQS. El equipo que consume la cola necesita recibir unicamente el ID de la instancia y el nuevo estado en un formato JSON plano, sin el resto del sobre del evento. ¿Cual es la forma mas eficiente de lograrlo?",
+      "en": "An Amazon EventBridge rule sends EC2 instance state change events to an Amazon SQS queue. The team that consumes the queue needs to receive only the instance ID and the new state in a flat JSON format, without the rest of the event envelope. What is the most efficient way to achieve this?"
+    },
+    "options": {
+      "es": [
+        "Configurar un transformador de entrada (input transformer) en el destino de la regla para extraer y reformatear los campos requeridos.",
+        "Ampliar el patron de eventos de la regla para incluir solo los campos detail.instance-id y detail.state.",
+        "Agregar una funcion de AWS Lambda entre EventBridge y SQS que reciba el evento completo y publique la version reducida.",
+        "Habilitar el enriquecimiento de eventos con Amazon EventBridge Pipes y una API de destino HTTP que devuelva el JSON reducido."
+      ],
+      "en": [
+        "Configure an input transformer on the rule's target to extract and reformat the required fields.",
+        "Extend the rule's event pattern to include only the detail.instance-id and detail.state fields.",
+        "Add an AWS Lambda function between EventBridge and SQS that receives the full event and publishes the reduced version.",
+        "Enable event enrichment with Amazon EventBridge Pipes and an HTTP API destination that returns the reduced JSON."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "El transformador de entrada de EventBridge permite seleccionar campos del evento y construir la carga util que recibe el destino, sin codigo adicional. El patron de eventos solo filtra que eventos coinciden, no modifica la carga entregada.",
+    "explanation": {
+      "es": "El transformador de entrada de EventBridge permite seleccionar campos del evento y construir la carga util que recibe el destino, sin codigo adicional. El patron de eventos solo filtra que eventos coinciden, no modifica la carga entregada.",
+      "en": "The EventBridge input transformer makes it possible to select fields from the event and build the payload that the target receives, with no additional code. The event pattern only filters which events match; it does not modify the delivered payload."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.3",
-    "text": "Una base de datos autoadministrada en una instancia EC2 usa un volumen gp2 de 200 GiB. Durante las horas pico, las metricas de CloudWatch muestran VolumeQueueLength sostenido por encima de 20 y BurstBalance descendiendo hasta 0 %. La empresa quiere mejorar el rendimiento y reducir el costo del almacenamiento. ¿Que accion cumple mejor estos requisitos?",
-    "options": [
-      "Modificar el volumen al tipo gp3 y aprovisionar de forma independiente las IOPS y el rendimiento necesarios.",
-      "Aumentar el tamano del volumen gp2 a 1.000 GiB para elevar la linea base de IOPS y eliminar el uso de creditos de rafaga.",
-      "Migrar el volumen al tipo st1 optimizado para rendimiento secuencial y habilitar EBS Multi-Attach.",
-      "Habilitar la optimizacion para EBS en la instancia y adjuntar un volumen sc1 adicional para los archivos de datos."
-    ],
+    "text": {
+      "es": "Una base de datos autoadministrada en una instancia EC2 usa un volumen gp2 de 200 GiB. Durante las horas pico, las metricas de CloudWatch muestran VolumeQueueLength sostenido por encima de 20 y BurstBalance descendiendo hasta 0 %. La empresa quiere mejorar el rendimiento y reducir el costo del almacenamiento. ¿Que accion cumple mejor estos requisitos?",
+      "en": "A self-managed database on an EC2 instance uses a 200 GiB gp2 volume. During peak hours, CloudWatch metrics show VolumeQueueLength sustained above 20 and BurstBalance dropping to 0%. The company wants to improve performance and reduce storage cost. Which action best meets these requirements?"
+    },
+    "options": {
+      "es": [
+        "Modificar el volumen al tipo gp3 y aprovisionar de forma independiente las IOPS y el rendimiento necesarios.",
+        "Aumentar el tamano del volumen gp2 a 1.000 GiB para elevar la linea base de IOPS y eliminar el uso de creditos de rafaga.",
+        "Migrar el volumen al tipo st1 optimizado para rendimiento secuencial y habilitar EBS Multi-Attach.",
+        "Habilitar la optimizacion para EBS en la instancia y adjuntar un volumen sc1 adicional para los archivos de datos."
+      ],
+      "en": [
+        "Modify the volume to the gp3 type and independently provision the required IOPS and throughput.",
+        "Increase the size of the gp2 volume to 1,000 GiB to raise the baseline IOPS and eliminate the use of burst credits.",
+        "Migrate the volume to the st1 type, optimized for sequential throughput, and enable EBS Multi-Attach.",
+        "Enable EBS optimization on the instance and attach an additional sc1 volume for the data files."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "gp3 desacopla las IOPS y el rendimiento del tamano del volumen, elimina el modelo de creditos de rafaga de gp2 y suele tener un costo por GiB menor. Aumentar el tamano de gp2 resuelve el rendimiento pero incrementa el costo innecesariamente.",
+    "explanation": {
+      "es": "gp3 desacopla las IOPS y el rendimiento del tamano del volumen, elimina el modelo de creditos de rafaga de gp2 y suele tener un costo por GiB menor. Aumentar el tamano de gp2 resuelve el rendimiento pero incrementa el costo innecesariamente.",
+      "en": "gp3 decouples IOPS and throughput from volume size, eliminates the gp2 burst credit model, and generally has a lower cost per GiB. Increasing the gp2 size solves the performance issue but increases cost unnecessarily."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.3",
-    "text": "Una empresa debe cargar diariamente archivos de video de 20 GB hacia un bucket de Amazon S3 en la Region us-east-1 desde oficinas en Asia y Sudamerica. Las cargas actuales son lentas y fallan con frecuencia por interrupciones de red. ¿Cuales DOS acciones mejoran el rendimiento y la confiabilidad de las cargas? (Seleccione DOS).",
-    "options": [
-      "Habilitar S3 Transfer Acceleration en el bucket y usar el punto de enlace acelerado desde las oficinas remotas.",
-      "Usar cargas multiparte (multipart upload) para dividir cada archivo y reintentar unicamente las partes que fallen.",
-      "Configurar una politica de S3 Lifecycle que mueva los objetos a S3 Glacier Flexible Retrieval al momento de la carga.",
-      "Habilitar la replicacion entre Regiones (CRR) desde us-east-1 hacia las Regiones de las oficinas remotas.",
-      "Activar el versionado del bucket para que S3 reanude automaticamente las cargas interrumpidas."
-    ],
+    "text": {
+      "es": "Una empresa debe cargar diariamente archivos de video de 20 GB hacia un bucket de Amazon S3 en la Region us-east-1 desde oficinas en Asia y Sudamerica. Las cargas actuales son lentas y fallan con frecuencia por interrupciones de red. ¿Cuales DOS acciones mejoran el rendimiento y la confiabilidad de las cargas? (Seleccione DOS).",
+      "en": "A company must upload 20 GB video files daily to an Amazon S3 bucket in the us-east-1 Region from offices in Asia and South America. The current uploads are slow and frequently fail because of network interruptions. Which TWO actions improve upload performance and reliability? (Select TWO.)"
+    },
+    "options": {
+      "es": [
+        "Habilitar S3 Transfer Acceleration en el bucket y usar el punto de enlace acelerado desde las oficinas remotas.",
+        "Usar cargas multiparte (multipart upload) para dividir cada archivo y reintentar unicamente las partes que fallen.",
+        "Configurar una politica de S3 Lifecycle que mueva los objetos a S3 Glacier Flexible Retrieval al momento de la carga.",
+        "Habilitar la replicacion entre Regiones (CRR) desde us-east-1 hacia las Regiones de las oficinas remotas.",
+        "Activar el versionado del bucket para que S3 reanude automaticamente las cargas interrumpidas."
+      ],
+      "en": [
+        "Enable S3 Transfer Acceleration on the bucket and use the accelerated endpoint from the remote offices.",
+        "Use multipart upload to split each file and retry only the parts that fail.",
+        "Configure an S3 Lifecycle policy that moves the objects to S3 Glacier Flexible Retrieval at upload time.",
+        "Enable Cross-Region Replication (CRR) from us-east-1 to the Regions of the remote offices.",
+        "Turn on bucket versioning so that S3 automatically resumes interrupted uploads."
+      ]
+    },
     "correct": [
       0,
       1
     ],
     "type": "multiple",
-    "explanation": "Transfer Acceleration aprovecha las ubicaciones de borde de Amazon CloudFront para acelerar las cargas de larga distancia, y las cargas multiparte permiten paralelizar y reintentar solo las partes fallidas. El versionado y las politicas de ciclo de vida no afectan la velocidad de carga.",
+    "explanation": {
+      "es": "Transfer Acceleration aprovecha las ubicaciones de borde de Amazon CloudFront para acelerar las cargas de larga distancia, y las cargas multiparte permiten paralelizar y reintentar solo las partes fallidas. El versionado y las politicas de ciclo de vida no afectan la velocidad de carga.",
+      "en": "Transfer Acceleration takes advantage of Amazon CloudFront edge locations to speed up long-distance uploads, and multipart uploads make it possible to parallelize transfers and retry only the failed parts. Versioning and lifecycle policies do not affect upload speed."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.3",
-    "text": "Una aplicacion sin servidor basada en AWS Lambda se conecta a una base de datos Amazon RDS para PostgreSQL. Ante picos de trafico, Amazon RDS Performance Insights muestra una espera elevada por establecimiento de conexiones y la aplicacion recibe errores de \"too many connections\". ¿Que solucion resuelve el problema con el menor cambio en la aplicacion?",
-    "options": [
-      "Configurar Amazon RDS Proxy delante de la instancia de base de datos y apuntar las funciones de Lambda al punto de enlace del proxy.",
-      "Agregar replicas de lectura y distribuir todas las consultas de la aplicacion entre ellas mediante Amazon Route 53.",
-      "Escalar la instancia de base de datos a una clase mayor y aumentar el parametro max_connections al maximo permitido.",
-      "Colocar una cola de Amazon SQS delante de la funcion de Lambda y reducir la concurrencia reservada a 1."
-    ],
+    "text": {
+      "es": "Una aplicacion sin servidor basada en AWS Lambda se conecta a una base de datos Amazon RDS para PostgreSQL. Ante picos de trafico, Amazon RDS Performance Insights muestra una espera elevada por establecimiento de conexiones y la aplicacion recibe errores de \"too many connections\". ¿Que solucion resuelve el problema con el menor cambio en la aplicacion?",
+      "en": "A serverless application based on AWS Lambda connects to an Amazon RDS for PostgreSQL database. During traffic spikes, Amazon RDS Performance Insights shows high wait time on connection establishment and the application receives \"too many connections\" errors. Which solution resolves the problem with the least change to the application?"
+    },
+    "options": {
+      "es": [
+        "Configurar Amazon RDS Proxy delante de la instancia de base de datos y apuntar las funciones de Lambda al punto de enlace del proxy.",
+        "Agregar replicas de lectura y distribuir todas las consultas de la aplicacion entre ellas mediante Amazon Route 53.",
+        "Escalar la instancia de base de datos a una clase mayor y aumentar el parametro max_connections al maximo permitido.",
+        "Colocar una cola de Amazon SQS delante de la funcion de Lambda y reducir la concurrencia reservada a 1."
+      ],
+      "en": [
+        "Configure Amazon RDS Proxy in front of the database instance and point the Lambda functions to the proxy endpoint.",
+        "Add read replicas and distribute all of the application's queries among them using Amazon Route 53.",
+        "Scale the database instance to a larger class and increase the max_connections parameter to the maximum allowed.",
+        "Place an Amazon SQS queue in front of the Lambda function and reduce the reserved concurrency to 1."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "RDS Proxy agrupa y reutiliza las conexiones a la base de datos, lo que absorbe los picos de concurrencia tipicos de Lambda sin modificar la logica de la aplicacion. Escalar la instancia o anadir replicas no elimina el agotamiento de conexiones.",
+    "explanation": {
+      "es": "RDS Proxy agrupa y reutiliza las conexiones a la base de datos, lo que absorbe los picos de concurrencia tipicos de Lambda sin modificar la logica de la aplicacion. Escalar la instancia o anadir replicas no elimina el agotamiento de conexiones.",
+      "en": "RDS Proxy pools and reuses database connections, which absorbs the concurrency spikes typical of Lambda without modifying the application logic. Scaling the instance or adding replicas does not eliminate connection exhaustion."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.1",
-    "text": "Una aplicacion web se ejecuta en un grupo de Auto Scaling detras de un Application Load Balancer. El equipo quiere mantener una carga constante de aproximadamente 1.000 solicitudes por instancia y que el grupo reaccione automaticamente a los cambios de trafico sin definir umbrales manuales. ¿Que configuracion de escalado cumple el requisito?",
-    "options": [
-      "Una politica de escalado de seguimiento de objetivo (target tracking) basada en la metrica ALBRequestCountPerTarget con valor objetivo de 1.000.",
-      "Una politica de escalado por pasos (step scaling) basada en la metrica CPUUtilization con tres pasos de ajuste.",
-      "Una accion de escalado programada que anada instancias en las horas historicas de mayor trafico.",
-      "Una politica de escalado simple basada en la metrica RequestCount del balanceador con un periodo de espera de 300 segundos."
-    ],
+    "text": {
+      "es": "Una aplicacion web se ejecuta en un grupo de Auto Scaling detras de un Application Load Balancer. El equipo quiere mantener una carga constante de aproximadamente 1.000 solicitudes por instancia y que el grupo reaccione automaticamente a los cambios de trafico sin definir umbrales manuales. ¿Que configuracion de escalado cumple el requisito?",
+      "en": "A web application runs in an Auto Scaling group behind an Application Load Balancer. The team wants to maintain a constant load of approximately 1,000 requests per instance and have the group react automatically to traffic changes without defining manual thresholds. Which scaling configuration meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Una politica de escalado de seguimiento de objetivo (target tracking) basada en la metrica ALBRequestCountPerTarget con valor objetivo de 1.000.",
+        "Una politica de escalado por pasos (step scaling) basada en la metrica CPUUtilization con tres pasos de ajuste.",
+        "Una accion de escalado programada que anada instancias en las horas historicas de mayor trafico.",
+        "Una politica de escalado simple basada en la metrica RequestCount del balanceador con un periodo de espera de 300 segundos."
+      ],
+      "en": [
+        "A target tracking scaling policy based on the ALBRequestCountPerTarget metric with a target value of 1,000.",
+        "A step scaling policy based on the CPUUtilization metric with three adjustment steps.",
+        "A scheduled scaling action that adds instances during the historical peak traffic hours.",
+        "A simple scaling policy based on the load balancer's RequestCount metric with a 300-second cooldown period."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "El seguimiento de objetivo con ALBRequestCountPerTarget ajusta la capacidad para mantener las solicitudes por destino cerca del valor objetivo, sin que el equipo defina umbrales ni pasos. RequestCount es un total agregado y no se normaliza por instancia.",
+    "explanation": {
+      "es": "El seguimiento de objetivo con ALBRequestCountPerTarget ajusta la capacidad para mantener las solicitudes por destino cerca del valor objetivo, sin que el equipo defina umbrales ni pasos. RequestCount es un total agregado y no se normaliza por instancia.",
+      "en": "Target tracking with ALBRequestCountPerTarget adjusts capacity to keep requests per target close to the target value, without the team defining thresholds or steps. RequestCount is an aggregate total and is not normalized per instance."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.1",
-    "text": "Un clúster de Amazon Aurora PostgreSQL presenta una carga de lectura muy variable durante el dia. La instancia de escritura se mantiene estable, pero las consultas de informes saturan la unica replica de lectura en horarios impredecibles. ¿Que solucion escala la capacidad de lectura automaticamente?",
-    "options": [
-      "Configurar Aurora Auto Scaling para las replicas de lectura con una politica basada en la utilizacion promedio de CPU y dirigir los informes al punto de enlace de lector.",
-      "Habilitar Multi-AZ en el clúster para que la instancia en espera atienda el trafico de lectura durante los picos.",
-      "Migrar el clúster a Amazon RDS para PostgreSQL y activar el escalado de almacenamiento automatico.",
-      "Crear una tabla de Amazon DynamoDB con capacidad bajo demanda y replicar en ella las consultas de informes."
-    ],
+    "text": {
+      "es": "Un clúster de Amazon Aurora PostgreSQL presenta una carga de lectura muy variable durante el dia. La instancia de escritura se mantiene estable, pero las consultas de informes saturan la unica replica de lectura en horarios impredecibles. ¿Que solucion escala la capacidad de lectura automaticamente?",
+      "en": "An Amazon Aurora PostgreSQL cluster experiences highly variable read load throughout the day. The writer instance remains stable, but reporting queries saturate the single read replica at unpredictable times. Which solution scales read capacity automatically?"
+    },
+    "options": {
+      "es": [
+        "Configurar Aurora Auto Scaling para las replicas de lectura con una politica basada en la utilizacion promedio de CPU y dirigir los informes al punto de enlace de lector.",
+        "Habilitar Multi-AZ en el clúster para que la instancia en espera atienda el trafico de lectura durante los picos.",
+        "Migrar el clúster a Amazon RDS para PostgreSQL y activar el escalado de almacenamiento automatico.",
+        "Crear una tabla de Amazon DynamoDB con capacidad bajo demanda y replicar en ella las consultas de informes."
+      ],
+      "en": [
+        "Configure Aurora Auto Scaling for the read replicas with a policy based on average CPU utilization and direct the reports to the reader endpoint.",
+        "Enable Multi-AZ on the cluster so that the standby instance serves read traffic during peaks.",
+        "Migrate the cluster to Amazon RDS for PostgreSQL and enable automatic storage scaling.",
+        "Create an Amazon DynamoDB table with on-demand capacity and replicate the reporting queries to it."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Aurora Auto Scaling agrega o elimina replicas de lectura segun metricas de carga, y el punto de enlace de lector distribuye las conexiones entre las replicas disponibles. La instancia en espera de un despliegue Multi-AZ tradicional no atiende trafico de lectura.",
+    "explanation": {
+      "es": "Aurora Auto Scaling agrega o elimina replicas de lectura segun metricas de carga, y el punto de enlace de lector distribuye las conexiones entre las replicas disponibles. La instancia en espera de un despliegue Multi-AZ tradicional no atiende trafico de lectura.",
+      "en": "Aurora Auto Scaling adds or removes read replicas based on load metrics, and the reader endpoint distributes connections among the available replicas. The standby instance in a traditional Multi-AZ deployment does not serve read traffic."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.1",
-    "text": "Una aplicacion de comercio electronico consulta repetidamente la misma informacion de catalogo en Amazon RDS, lo que genera una utilizacion de CPU sostenida del 90 % en la base de datos. El contenido del catalogo cambia pocas veces al dia. ¿Que solucion reduce la carga de la base de datos con el menor cambio de arquitectura?",
-    "options": [
-      "Implementar un clúster de Amazon ElastiCache y consultar la cache antes de la base de datos mediante un patron cache-aside.",
-      "Habilitar Amazon DynamoDB Accelerator (DAX) delante de la instancia de RDS para almacenar en cache las consultas del catalogo.",
-      "Crear una distribucion de Amazon CloudFront con la instancia de RDS como origen personalizado.",
-      "Aumentar el tamano de la instancia de RDS y habilitar el almacenamiento aprovisionado de IOPS."
-    ],
+    "text": {
+      "es": "Una aplicacion de comercio electronico consulta repetidamente la misma informacion de catalogo en Amazon RDS, lo que genera una utilizacion de CPU sostenida del 90 % en la base de datos. El contenido del catalogo cambia pocas veces al dia. ¿Que solucion reduce la carga de la base de datos con el menor cambio de arquitectura?",
+      "en": "An e-commerce application repeatedly queries the same catalog information in Amazon RDS, which produces sustained 90% CPU utilization on the database. The catalog content changes only a few times a day. Which solution reduces the database load with the smallest architecture change?"
+    },
+    "options": {
+      "es": [
+        "Implementar un clúster de Amazon ElastiCache y consultar la cache antes de la base de datos mediante un patron cache-aside.",
+        "Habilitar Amazon DynamoDB Accelerator (DAX) delante de la instancia de RDS para almacenar en cache las consultas del catalogo.",
+        "Crear una distribucion de Amazon CloudFront con la instancia de RDS como origen personalizado.",
+        "Aumentar el tamano de la instancia de RDS y habilitar el almacenamiento aprovisionado de IOPS."
+      ],
+      "en": [
+        "Deploy an Amazon ElastiCache cluster and query the cache before the database using a cache-aside pattern.",
+        "Enable Amazon DynamoDB Accelerator (DAX) in front of the RDS instance to cache the catalog queries.",
+        "Create an Amazon CloudFront distribution with the RDS instance as a custom origin.",
+        "Increase the size of the RDS instance and enable Provisioned IOPS storage."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "ElastiCache almacena en memoria los resultados de consultas frecuentes y descarga trabajo repetitivo de la base de datos. DAX funciona exclusivamente con DynamoDB y CloudFront no puede usar RDS como origen.",
+    "explanation": {
+      "es": "ElastiCache almacena en memoria los resultados de consultas frecuentes y descarga trabajo repetitivo de la base de datos. DAX funciona exclusivamente con DynamoDB y CloudFront no puede usar RDS como origen.",
+      "en": "ElastiCache stores the results of frequent queries in memory and offloads repetitive work from the database. DAX works exclusively with DynamoDB, and CloudFront cannot use RDS as an origin."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.2",
-    "text": "Un ingeniero registra nuevas instancias EC2 en un grupo de destino de un Application Load Balancer. Todas las instancias quedan en estado unhealthy con el motivo \"Request timed out\", aunque la aplicacion responde correctamente cuando se prueba desde la propia instancia con curl en el puerto 8080. ¿Cual es la causa mas probable?",
-    "options": [
-      "El grupo de seguridad de las instancias no permite trafico entrante en el puerto 8080 desde el grupo de seguridad del balanceador de carga.",
-      "La ruta de la comprobacion de estado devuelve un codigo HTTP 302 en lugar de 200.",
-      "El balanceador de carga no tiene habilitado el balanceo entre zonas de disponibilidad (cross-zone load balancing).",
-      "Las instancias se registraron en el grupo de destino usando el tipo de destino instance en lugar de ip."
-    ],
+    "text": {
+      "es": "Un ingeniero registra nuevas instancias EC2 en un grupo de destino de un Application Load Balancer. Todas las instancias quedan en estado unhealthy con el motivo \"Request timed out\", aunque la aplicacion responde correctamente cuando se prueba desde la propia instancia con curl en el puerto 8080. ¿Cual es la causa mas probable?",
+      "en": "An engineer registers new EC2 instances in an Application Load Balancer target group. All of the instances remain in the unhealthy state with the reason \"Request timed out\", even though the application responds correctly when tested from the instance itself with curl on port 8080. What is the most likely cause?"
+    },
+    "options": {
+      "es": [
+        "El grupo de seguridad de las instancias no permite trafico entrante en el puerto 8080 desde el grupo de seguridad del balanceador de carga.",
+        "La ruta de la comprobacion de estado devuelve un codigo HTTP 302 en lugar de 200.",
+        "El balanceador de carga no tiene habilitado el balanceo entre zonas de disponibilidad (cross-zone load balancing).",
+        "Las instancias se registraron en el grupo de destino usando el tipo de destino instance en lugar de ip."
+      ],
+      "en": [
+        "The instances' security group does not allow inbound traffic on port 8080 from the load balancer's security group.",
+        "The health check path returns an HTTP 302 code instead of 200.",
+        "The load balancer does not have cross-zone load balancing enabled.",
+        "The instances were registered in the target group using the instance target type instead of ip."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Un tiempo de espera agotado indica que el sondeo del balanceador nunca llega a la instancia, lo que suele deberse a que el grupo de seguridad no autoriza el puerto de la comprobacion de estado desde el grupo de seguridad del ALB. Un codigo 302 se reportaria como respuesta HTTP inesperada, no como timeout.",
+    "explanation": {
+      "es": "Un tiempo de espera agotado indica que el sondeo del balanceador nunca llega a la instancia, lo que suele deberse a que el grupo de seguridad no autoriza el puerto de la comprobacion de estado desde el grupo de seguridad del ALB. Un codigo 302 se reportaria como respuesta HTTP inesperada, no como timeout.",
+      "en": "A timeout indicates that the load balancer's probe never reaches the instance, which is usually because the security group does not authorize the health check port from the ALB security group. A 302 code would be reported as an unexpected HTTP response, not as a timeout."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.2",
-    "text": "Una empresa ejecuta su sitio web en dos Regiones de AWS. La Region primaria atiende todo el trafico y la secundaria mantiene una copia lista para recibirlo. El equipo necesita que Amazon Route 53 redirija automaticamente a los usuarios a la Region secundaria cuando la primaria deje de responder. ¿Que configuracion cumple el requisito?",
-    "options": [
-      "Crear registros con politica de enrutamiento de conmutacion por error (failover), asociar una comprobacion de estado de Route 53 al registro primario y marcar el secundario como secondary.",
-      "Crear registros con politica de enrutamiento ponderado, asignando peso 255 al primario y peso 1 al secundario.",
-      "Crear registros con politica de enrutamiento por latencia en ambas Regiones y habilitar el registro de consultas DNS (query logging).",
-      "Crear registros con politica de enrutamiento multivalor (multivalue answer) con hasta ocho direcciones IP saludables por respuesta."
-    ],
+    "text": {
+      "es": "Una empresa ejecuta su sitio web en dos Regiones de AWS. La Region primaria atiende todo el trafico y la secundaria mantiene una copia lista para recibirlo. El equipo necesita que Amazon Route 53 redirija automaticamente a los usuarios a la Region secundaria cuando la primaria deje de responder. ¿Que configuracion cumple el requisito?",
+      "en": "A company runs its website in two AWS Regions. The primary Region serves all traffic and the secondary keeps a copy ready to receive it. The team needs Amazon Route 53 to automatically redirect users to the secondary Region when the primary stops responding. Which configuration meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Crear registros con politica de enrutamiento de conmutacion por error (failover), asociar una comprobacion de estado de Route 53 al registro primario y marcar el secundario como secondary.",
+        "Crear registros con politica de enrutamiento ponderado, asignando peso 255 al primario y peso 1 al secundario.",
+        "Crear registros con politica de enrutamiento por latencia en ambas Regiones y habilitar el registro de consultas DNS (query logging).",
+        "Crear registros con politica de enrutamiento multivalor (multivalue answer) con hasta ocho direcciones IP saludables por respuesta."
+      ],
+      "en": [
+        "Create records with the failover routing policy, associate a Route 53 health check with the primary record, and mark the secondary record as secondary.",
+        "Create records with the weighted routing policy, assigning a weight of 255 to the primary and a weight of 1 to the secondary.",
+        "Create records with the latency-based routing policy in both Regions and enable DNS query logging.",
+        "Create records with the multivalue answer routing policy with up to eight healthy IP addresses per response."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "El enrutamiento de conmutacion por error con una comprobacion de estado asociada al registro primario responde con el secundario solo cuando el primario se considera no saludable, que es el comportamiento activo/pasivo requerido. El enrutamiento ponderado siempre envia una fraccion del trafico al secundario.",
+    "explanation": {
+      "es": "El enrutamiento de conmutacion por error con una comprobacion de estado asociada al registro primario responde con el secundario solo cuando el primario se considera no saludable, que es el comportamiento activo/pasivo requerido. El enrutamiento ponderado siempre envia una fraccion del trafico al secundario.",
+      "en": "Failover routing with a health check associated with the primary record responds with the secondary only when the primary is considered unhealthy, which is the required active/passive behavior. Weighted routing always sends a fraction of the traffic to the secondary."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.2",
-    "text": "Una instancia de Amazon RDS para MySQL con despliegue Multi-AZ realiza una conmutacion por error durante un evento de mantenimiento. Despues del evento, la aplicacion sigue mostrando errores de conexion durante varios minutos. ¿Que explica mejor este comportamiento?",
-    "options": [
-      "La aplicacion almacena en cache la resolucion DNS del punto de enlace y sigue intentando conectarse a la direccion IP de la instancia anterior.",
-      "La conmutacion por error de Multi-AZ requiere que el administrador promueva manualmente la replica en espera antes de aceptar conexiones.",
-      "La instancia en espera se creo en la misma zona de disponibilidad, por lo que la conmutacion por error no se completo.",
-      "El grupo de seguridad de la base de datos debe actualizarse con la nueva direccion IP privada despues de cada conmutacion por error."
-    ],
+    "text": {
+      "es": "Una instancia de Amazon RDS para MySQL con despliegue Multi-AZ realiza una conmutacion por error durante un evento de mantenimiento. Despues del evento, la aplicacion sigue mostrando errores de conexion durante varios minutos. ¿Que explica mejor este comportamiento?",
+      "en": "An Amazon RDS for MySQL instance with a Multi-AZ deployment performs a failover during a maintenance event. After the event, the application continues to show connection errors for several minutes. What best explains this behavior?"
+    },
+    "options": {
+      "es": [
+        "La aplicacion almacena en cache la resolucion DNS del punto de enlace y sigue intentando conectarse a la direccion IP de la instancia anterior.",
+        "La conmutacion por error de Multi-AZ requiere que el administrador promueva manualmente la replica en espera antes de aceptar conexiones.",
+        "La instancia en espera se creo en la misma zona de disponibilidad, por lo que la conmutacion por error no se completo.",
+        "El grupo de seguridad de la base de datos debe actualizarse con la nueva direccion IP privada despues de cada conmutacion por error."
+      ],
+      "en": [
+        "The application caches the DNS resolution of the endpoint and keeps trying to connect to the IP address of the previous instance.",
+        "Multi-AZ failover requires the administrator to manually promote the standby replica before it accepts connections.",
+        "The standby instance was created in the same Availability Zone, so the failover did not complete.",
+        "The database security group must be updated with the new private IP address after each failover."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "En un despliegue Multi-AZ, RDS actualiza el registro DNS del punto de enlace para apuntar a la nueva instancia primaria, por lo que un TTL de DNS almacenado en cache por el cliente o la JVM prolonga los errores de conexion. La promocion es automatica y no requiere cambios en el grupo de seguridad.",
+    "explanation": {
+      "es": "En un despliegue Multi-AZ, RDS actualiza el registro DNS del punto de enlace para apuntar a la nueva instancia primaria, por lo que un TTL de DNS almacenado en cache por el cliente o la JVM prolonga los errores de conexion. La promocion es automatica y no requiere cambios en el grupo de seguridad.",
+      "en": "In a Multi-AZ deployment, RDS updates the endpoint's DNS record to point to the new primary instance, so a DNS TTL cached by the client or the JVM prolongs the connection errors. The promotion is automatic and does not require security group changes."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.3",
-    "text": "Una empresa debe respaldar diariamente instancias EC2, volumenes EBS, tablas de Amazon DynamoDB e instancias de Amazon RDS de varias cuentas, conservar los respaldos 90 dias y mantener una copia en una segunda Region para cumplimiento. ¿Que solucion cumple estos requisitos con el menor esfuerzo operativo?",
-    "options": [
-      "Crear un plan de respaldo en AWS Backup con reglas de retencion de 90 dias y copia entre Regiones, y asignar los recursos por etiquetas mediante el respaldo entre cuentas de AWS Organizations.",
-      "Programar reglas de Amazon EventBridge que invoquen funciones de AWS Lambda para crear instantaneas de cada tipo de recurso y copiarlas a la segunda Region.",
-      "Habilitar Amazon Data Lifecycle Manager para volumenes EBS y configurar respaldos automaticos nativos por separado en cada servicio restante.",
-      "Crear un runbook de AWS Systems Manager Automation por cada tipo de recurso y ejecutarlo con State Manager una vez al dia."
-    ],
+    "text": {
+      "es": "Una empresa debe respaldar diariamente instancias EC2, volumenes EBS, tablas de Amazon DynamoDB e instancias de Amazon RDS de varias cuentas, conservar los respaldos 90 dias y mantener una copia en una segunda Region para cumplimiento. ¿Que solucion cumple estos requisitos con el menor esfuerzo operativo?",
+      "en": "A company must back up EC2 instances, EBS volumes, Amazon DynamoDB tables, and Amazon RDS instances from several accounts daily, retain the backups for 90 days, and keep a copy in a second Region for compliance. Which solution meets these requirements with the least operational effort?"
+    },
+    "options": {
+      "es": [
+        "Crear un plan de respaldo en AWS Backup con reglas de retencion de 90 dias y copia entre Regiones, y asignar los recursos por etiquetas mediante el respaldo entre cuentas de AWS Organizations.",
+        "Programar reglas de Amazon EventBridge que invoquen funciones de AWS Lambda para crear instantaneas de cada tipo de recurso y copiarlas a la segunda Region.",
+        "Habilitar Amazon Data Lifecycle Manager para volumenes EBS y configurar respaldos automaticos nativos por separado en cada servicio restante.",
+        "Crear un runbook de AWS Systems Manager Automation por cada tipo de recurso y ejecutarlo con State Manager una vez al dia."
+      ],
+      "en": [
+        "Create a backup plan in AWS Backup with 90-day retention rules and cross-Region copy, and assign the resources by tags using AWS Organizations cross-account backup.",
+        "Schedule Amazon EventBridge rules that invoke AWS Lambda functions to create snapshots of each resource type and copy them to the second Region.",
+        "Enable Amazon Data Lifecycle Manager for EBS volumes and configure native automated backups separately in each remaining service.",
+        "Create an AWS Systems Manager Automation runbook for each resource type and run it with State Manager once a day."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "AWS Backup centraliza politicas de respaldo, retencion y copia entre Regiones y cuentas para multiples servicios mediante planes y asignacion por etiquetas. Las alternativas requieren desarrollar y mantener automatizacion propia por cada servicio.",
+    "explanation": {
+      "es": "AWS Backup centraliza politicas de respaldo, retencion y copia entre Regiones y cuentas para multiples servicios mediante planes y asignacion por etiquetas. Las alternativas requieren desarrollar y mantener automatizacion propia por cada servicio.",
+      "en": "AWS Backup centralizes backup, retention, and cross-Region and cross-account copy policies for multiple services through plans and tag-based assignment. The alternatives require developing and maintaining custom automation for each service."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.3",
-    "text": "Un desarrollador ejecuto por error una sentencia DELETE masiva en una base de datos Amazon RDS para PostgreSQL hace 40 minutos. La instancia tiene respaldos automatizados habilitados con un periodo de retencion de 7 dias. El equipo necesita recuperar los datos al estado previo al error minimizando la perdida de informacion. ¿Que accion debe realizar el equipo?",
-    "options": [
-      "Realizar una restauracion a un momento especifico (point-in-time restore) con la marca de tiempo previa al DELETE, que crea una nueva instancia, y luego actualizar el punto de enlace de la aplicacion.",
-      "Restaurar la instantanea automatizada mas reciente sobre la instancia existente para sobrescribir los datos eliminados.",
-      "Promover una replica de lectura existente a instancia independiente, ya que las replicas no aplican las sentencias DELETE.",
-      "Habilitar AWS Backup en la instancia y usar la funcion de recuperacion continua para revertir la transaccion en la misma instancia."
-    ],
+    "text": {
+      "es": "Un desarrollador ejecuto por error una sentencia DELETE masiva en una base de datos Amazon RDS para PostgreSQL hace 40 minutos. La instancia tiene respaldos automatizados habilitados con un periodo de retencion de 7 dias. El equipo necesita recuperar los datos al estado previo al error minimizando la perdida de informacion. ¿Que accion debe realizar el equipo?",
+      "en": "A developer mistakenly ran a mass DELETE statement on an Amazon RDS for PostgreSQL database 40 minutes ago. The instance has automated backups enabled with a 7-day retention period. The team needs to recover the data to the state before the error while minimizing data loss. What action should the team take?"
+    },
+    "options": {
+      "es": [
+        "Realizar una restauracion a un momento especifico (point-in-time restore) con la marca de tiempo previa al DELETE, que crea una nueva instancia, y luego actualizar el punto de enlace de la aplicacion.",
+        "Restaurar la instantanea automatizada mas reciente sobre la instancia existente para sobrescribir los datos eliminados.",
+        "Promover una replica de lectura existente a instancia independiente, ya que las replicas no aplican las sentencias DELETE.",
+        "Habilitar AWS Backup en la instancia y usar la funcion de recuperacion continua para revertir la transaccion en la misma instancia."
+      ],
+      "en": [
+        "Perform a point-in-time restore with the timestamp prior to the DELETE, which creates a new instance, and then update the application's endpoint.",
+        "Restore the most recent automated snapshot over the existing instance to overwrite the deleted data.",
+        "Promote an existing read replica to a standalone instance, because replicas do not apply DELETE statements.",
+        "Enable AWS Backup on the instance and use the continuous recovery feature to roll back the transaction on the same instance."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Los respaldos automatizados de RDS permiten restaurar a cualquier segundo dentro del periodo de retencion, y la restauracion siempre genera una instancia nueva cuyo punto de enlace debe configurarse en la aplicacion. Las replicas de lectura reciben todas las sentencias DML, incluidas las eliminaciones.",
+    "explanation": {
+      "es": "Los respaldos automatizados de RDS permiten restaurar a cualquier segundo dentro del periodo de retencion, y la restauracion siempre genera una instancia nueva cuyo punto de enlace debe configurarse en la aplicacion. Las replicas de lectura reciben todas las sentencias DML, incluidas las eliminaciones.",
+      "en": "RDS automated backups make it possible to restore to any second within the retention period, and the restore always creates a new instance whose endpoint must be configured in the application. Read replicas receive all DML statements, including deletions."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.3",
-    "text": "Un bucket de Amazon S3 almacena documentos financieros. La empresa exige proteger los objetos contra eliminaciones o sobrescrituras accidentales y evitar que la eliminacion permanente de versiones pueda realizarse sin una segunda credencial. ¿Cuales DOS acciones cumplen estos requisitos? (Seleccione DOS).",
-    "options": [
-      "Habilitar el versionado del bucket para conservar todas las versiones de cada objeto.",
-      "Habilitar la eliminacion con MFA (MFA Delete) en el bucket para exigir un codigo de autenticacion multifactor al eliminar versiones de forma permanente.",
-      "Habilitar el bloqueo de acceso publico (Block Public Access) en el bucket y en la cuenta.",
-      "Configurar una politica de S3 Lifecycle que caduque las versiones no actuales despues de 30 dias.",
-      "Habilitar el cifrado predeterminado con SSE-KMS y una clave administrada por el cliente."
-    ],
+    "text": {
+      "es": "Un bucket de Amazon S3 almacena documentos financieros. La empresa exige proteger los objetos contra eliminaciones o sobrescrituras accidentales y evitar que la eliminacion permanente de versiones pueda realizarse sin una segunda credencial. ¿Cuales DOS acciones cumplen estos requisitos? (Seleccione DOS).",
+      "en": "An Amazon S3 bucket stores financial documents. The company requires that the objects be protected against accidental deletion or overwriting, and that permanently deleting versions cannot be done without a second credential. Which TWO actions meet these requirements? (Select TWO.)"
+    },
+    "options": {
+      "es": [
+        "Habilitar el versionado del bucket para conservar todas las versiones de cada objeto.",
+        "Habilitar la eliminacion con MFA (MFA Delete) en el bucket para exigir un codigo de autenticacion multifactor al eliminar versiones de forma permanente.",
+        "Habilitar el bloqueo de acceso publico (Block Public Access) en el bucket y en la cuenta.",
+        "Configurar una politica de S3 Lifecycle que caduque las versiones no actuales despues de 30 dias.",
+        "Habilitar el cifrado predeterminado con SSE-KMS y una clave administrada por el cliente."
+      ],
+      "en": [
+        "Enable bucket versioning to keep all versions of each object.",
+        "Enable MFA Delete on the bucket to require a multi-factor authentication code when permanently deleting versions.",
+        "Enable Block Public Access on the bucket and on the account.",
+        "Configure an S3 Lifecycle policy that expires noncurrent versions after 30 days.",
+        "Enable default encryption with SSE-KMS and a customer managed key."
+      ]
+    },
     "correct": [
       0,
       1
     ],
     "type": "multiple",
-    "explanation": "El versionado conserva las versiones anteriores ante sobrescrituras y eliminaciones, y MFA Delete exige un codigo MFA del propietario de la cuenta raiz para eliminar versiones de forma permanente o suspender el versionado. El bloqueo de acceso publico y el cifrado protegen frente a otros riesgos, no contra la eliminacion accidental.",
+    "explanation": {
+      "es": "El versionado conserva las versiones anteriores ante sobrescrituras y eliminaciones, y MFA Delete exige un codigo MFA del propietario de la cuenta raiz para eliminar versiones de forma permanente o suspender el versionado. El bloqueo de acceso publico y el cifrado protegen frente a otros riesgos, no contra la eliminacion accidental.",
+      "en": "Versioning preserves previous versions in the event of overwrites and deletions, and MFA Delete requires an MFA code from the root account owner to permanently delete versions or suspend versioning. Block Public Access and encryption protect against other risks, not against accidental deletion."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.1",
-    "text": "Una organizacion con 40 cuentas administradas por AWS Organizations necesita desplegar la misma plantilla de linea base de seguridad en tres Regiones de todas las cuentas, y aplicar automaticamente la plantilla a las cuentas nuevas que se incorporen. ¿Que solucion cumple el requisito?",
-    "options": [
-      "Usar conjuntos de pilas (StackSets) de AWS CloudFormation con permisos administrados por el servicio y destinos basados en unidades organizativas, con el despliegue automatico habilitado.",
-      "Compartir la plantilla mediante AWS Resource Access Manager y pedir a cada equipo que cree la pila en sus Regiones.",
-      "Publicar la plantilla como un producto de AWS Service Catalog y compartir la cartera con la organizacion.",
-      "Crear una pila de CloudFormation en la cuenta de administracion con recursos personalizados que asuman roles en cada cuenta miembro."
-    ],
+    "text": {
+      "es": "Una organizacion con 40 cuentas administradas por AWS Organizations necesita desplegar la misma plantilla de linea base de seguridad en tres Regiones de todas las cuentas, y aplicar automaticamente la plantilla a las cuentas nuevas que se incorporen. ¿Que solucion cumple el requisito?",
+      "en": "An organization with 40 accounts managed by AWS Organizations needs to deploy the same security baseline template in three Regions across all accounts, and automatically apply the template to new accounts that join. Which solution meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Usar conjuntos de pilas (StackSets) de AWS CloudFormation con permisos administrados por el servicio y destinos basados en unidades organizativas, con el despliegue automatico habilitado.",
+        "Compartir la plantilla mediante AWS Resource Access Manager y pedir a cada equipo que cree la pila en sus Regiones.",
+        "Publicar la plantilla como un producto de AWS Service Catalog y compartir la cartera con la organizacion.",
+        "Crear una pila de CloudFormation en la cuenta de administracion con recursos personalizados que asuman roles en cada cuenta miembro."
+      ],
+      "en": [
+        "Use AWS CloudFormation StackSets with service-managed permissions and organizational unit targets, with automatic deployment enabled.",
+        "Share the template through AWS Resource Access Manager and ask each team to create the stack in their Regions.",
+        "Publish the template as an AWS Service Catalog product and share the portfolio with the organization.",
+        "Create a CloudFormation stack in the management account with custom resources that assume roles in each member account."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Los StackSets con permisos administrados por el servicio despliegan pilas en multiples cuentas y Regiones apuntando a unidades organizativas, y el despliegue automatico incorpora las cuentas nuevas sin intervencion. AWS RAM comparte recursos, no plantillas de CloudFormation.",
+    "explanation": {
+      "es": "Los StackSets con permisos administrados por el servicio despliegan pilas en multiples cuentas y Regiones apuntando a unidades organizativas, y el despliegue automatico incorpora las cuentas nuevas sin intervencion. AWS RAM comparte recursos, no plantillas de CloudFormation.",
+      "en": "StackSets with service-managed permissions deploy stacks across multiple accounts and Regions by targeting organizational units, and automatic deployment onboards new accounts without intervention. AWS RAM shares resources, not CloudFormation templates."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.1",
-    "text": "Una pila de AWS CloudFormation que crea un grupo de Auto Scaling con capacidad deseada de 30 instancias falla y revierte con el error \"There are not enough free addresses in subnet\". La plantilla usa dos subredes privadas con mascara /28 cada una. ¿Que accion resuelve el problema?",
-    "options": [
-      "Actualizar la plantilla para usar subredes con un bloque CIDR mas amplio, por ejemplo /24, que ofrezca suficientes direcciones IP disponibles.",
-      "Habilitar la proteccion contra reversion (rollback protection) en la pila y volver a ejecutar la actualizacion.",
-      "Solicitar un aumento de cuota de servicio para el numero de instancias por grupo de Auto Scaling.",
-      "Asociar un bloque CIDR IPv6 a la VPC y habilitar una puerta de enlace de internet de solo salida en las subredes."
-    ],
+    "text": {
+      "es": "Una pila de AWS CloudFormation que crea un grupo de Auto Scaling con capacidad deseada de 30 instancias falla y revierte con el error \"There are not enough free addresses in subnet\". La plantilla usa dos subredes privadas con mascara /28 cada una. ¿Que accion resuelve el problema?",
+      "en": "An AWS CloudFormation stack that creates an Auto Scaling group with a desired capacity of 30 instances fails and rolls back with the error \"There are not enough free addresses in subnet\". The template uses two private subnets with a /28 mask each. Which action resolves the problem?"
+    },
+    "options": {
+      "es": [
+        "Actualizar la plantilla para usar subredes con un bloque CIDR mas amplio, por ejemplo /24, que ofrezca suficientes direcciones IP disponibles.",
+        "Habilitar la proteccion contra reversion (rollback protection) en la pila y volver a ejecutar la actualizacion.",
+        "Solicitar un aumento de cuota de servicio para el numero de instancias por grupo de Auto Scaling.",
+        "Asociar un bloque CIDR IPv6 a la VPC y habilitar una puerta de enlace de internet de solo salida en las subredes."
+      ],
+      "en": [
+        "Update the template to use subnets with a larger CIDR block, for example /24, that provides enough available IP addresses.",
+        "Enable rollback protection on the stack and run the update again.",
+        "Request a service quota increase for the number of instances per Auto Scaling group.",
+        "Associate an IPv6 CIDR block with the VPC and enable an egress-only internet gateway on the subnets."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Una subred /28 solo ofrece 11 direcciones IP utilizables porque AWS reserva cinco, por lo que no alcanza para 30 instancias; se requiere un bloque CIDR mayor. El error es de agotamiento de direcciones, no de cuotas de servicio.",
+    "explanation": {
+      "es": "Una subred /28 solo ofrece 11 direcciones IP utilizables porque AWS reserva cinco, por lo que no alcanza para 30 instancias; se requiere un bloque CIDR mayor. El error es de agotamiento de direcciones, no de cuotas de servicio.",
+      "en": "A /28 subnet provides only 11 usable IP addresses because AWS reserves five, so it is not enough for 30 instances; a larger CIDR block is required. The error is address exhaustion, not service quotas."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.1",
-    "text": "Un equipo crea AMIs personalizadas con EC2 Image Builder en una cuenta de compilacion. Las AMIs se cifran con una clave administrada por el cliente de AWS KMS. Otra cuenta de la organizacion debe poder lanzar instancias a partir de esas AMIs. ¿Cuales DOS acciones son necesarias? (Seleccione DOS).",
-    "options": [
-      "Modificar los permisos de lanzamiento de la AMI para agregar el ID de la cuenta de destino.",
-      "Actualizar la politica de la clave de KMS para permitir a la cuenta de destino las acciones kms:Decrypt y kms:CreateGrant sobre la clave usada por las instantaneas.",
-      "Compartir la AMI con la cuenta de destino mediante AWS Resource Access Manager y una asociacion de recursos.",
-      "Copiar la AMI a un bucket de Amazon S3 y otorgar a la cuenta de destino permisos s3:GetObject sobre el objeto.",
-      "Hacer publica la instantanea de EBS subyacente para que la cuenta de destino pueda registrarla como AMI."
-    ],
+    "text": {
+      "es": "Un equipo crea AMIs personalizadas con EC2 Image Builder en una cuenta de compilacion. Las AMIs se cifran con una clave administrada por el cliente de AWS KMS. Otra cuenta de la organizacion debe poder lanzar instancias a partir de esas AMIs. ¿Cuales DOS acciones son necesarias? (Seleccione DOS).",
+      "en": "A team builds custom AMIs with EC2 Image Builder in a build account. The AMIs are encrypted with an AWS KMS customer managed key. Another account in the organization must be able to launch instances from those AMIs. Which TWO actions are required? (Select TWO.)"
+    },
+    "options": {
+      "es": [
+        "Modificar los permisos de lanzamiento de la AMI para agregar el ID de la cuenta de destino.",
+        "Actualizar la politica de la clave de KMS para permitir a la cuenta de destino las acciones kms:Decrypt y kms:CreateGrant sobre la clave usada por las instantaneas.",
+        "Compartir la AMI con la cuenta de destino mediante AWS Resource Access Manager y una asociacion de recursos.",
+        "Copiar la AMI a un bucket de Amazon S3 y otorgar a la cuenta de destino permisos s3:GetObject sobre el objeto.",
+        "Hacer publica la instantanea de EBS subyacente para que la cuenta de destino pueda registrarla como AMI."
+      ],
+      "en": [
+        "Modify the AMI launch permissions to add the target account ID.",
+        "Update the KMS key policy to allow the target account the kms:Decrypt and kms:CreateGrant actions on the key used by the snapshots.",
+        "Share the AMI with the target account through AWS Resource Access Manager and a resource association.",
+        "Copy the AMI to an Amazon S3 bucket and grant the target account s3:GetObject permissions on the object.",
+        "Make the underlying EBS snapshot public so that the target account can register it as an AMI."
+      ]
+    },
     "correct": [
       0,
       1
     ],
     "type": "multiple",
-    "explanation": "Compartir una AMI cifrada requiere agregar la cuenta a los permisos de lanzamiento y, ademas, autorizar en la politica de la clave de KMS el descifrado y la creacion de concesiones para esa cuenta. AWS RAM no admite AMIs y hacer publica una instantanea cifrada no esta permitido.",
+    "explanation": {
+      "es": "Compartir una AMI cifrada requiere agregar la cuenta a los permisos de lanzamiento y, ademas, autorizar en la politica de la clave de KMS el descifrado y la creacion de concesiones para esa cuenta. AWS RAM no admite AMIs y hacer publica una instantanea cifrada no esta permitido.",
+      "en": "Sharing an encrypted AMI requires adding the account to the launch permissions and also authorizing decryption and grant creation for that account in the KMS key policy. AWS RAM does not support AMIs, and making an encrypted snapshot public is not allowed."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.2",
-    "text": "Una empresa debe aplicar parches del sistema operativo a cientos de instancias EC2 etiquetadas como Environment=Production, dentro de una ventana de mantenimiento semanal, y luego generar un informe de cumplimiento de parches. ¿Que solucion cumple el requisito con el menor esfuerzo operativo?",
-    "options": [
-      "Configurar AWS Systems Manager Patch Manager con una linea base de parches, un grupo de destinos definido por etiquetas y una ventana de mantenimiento, y revisar los informes de cumplimiento de parches.",
-      "Crear una regla programada de Amazon EventBridge que invoque una funcion de AWS Lambda que ejecute comandos de actualizacion mediante SSH en cada instancia.",
-      "Crear una AMI actualizada cada semana con EC2 Image Builder y reemplazar todas las instancias mediante una actualizacion de instancias del grupo de Auto Scaling.",
-      "Habilitar AWS Config con reglas administradas de cumplimiento de parches y remediacion automatica mediante Systems Manager Run Command."
-    ],
+    "text": {
+      "es": "Una empresa debe aplicar parches del sistema operativo a cientos de instancias EC2 etiquetadas como Environment=Production, dentro de una ventana de mantenimiento semanal, y luego generar un informe de cumplimiento de parches. ¿Que solucion cumple el requisito con el menor esfuerzo operativo?",
+      "en": "A company must apply operating system patches to hundreds of EC2 instances tagged Environment=Production within a weekly maintenance window, and then generate a patch compliance report. Which solution meets the requirement with the least operational effort?"
+    },
+    "options": {
+      "es": [
+        "Configurar AWS Systems Manager Patch Manager con una linea base de parches, un grupo de destinos definido por etiquetas y una ventana de mantenimiento, y revisar los informes de cumplimiento de parches.",
+        "Crear una regla programada de Amazon EventBridge que invoque una funcion de AWS Lambda que ejecute comandos de actualizacion mediante SSH en cada instancia.",
+        "Crear una AMI actualizada cada semana con EC2 Image Builder y reemplazar todas las instancias mediante una actualizacion de instancias del grupo de Auto Scaling.",
+        "Habilitar AWS Config con reglas administradas de cumplimiento de parches y remediacion automatica mediante Systems Manager Run Command."
+      ],
+      "en": [
+        "Configure AWS Systems Manager Patch Manager with a patch baseline, a tag-defined target group, and a maintenance window, and review the patch compliance reports.",
+        "Create a scheduled Amazon EventBridge rule that invokes an AWS Lambda function that runs update commands over SSH on each instance.",
+        "Create an updated AMI every week with EC2 Image Builder and replace all instances through an Auto Scaling group instance refresh.",
+        "Enable AWS Config with managed patch compliance rules and automatic remediation through Systems Manager Run Command."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Patch Manager combina lineas base de parches, seleccion de destinos por etiquetas, ventanas de mantenimiento e informes de cumplimiento de forma nativa. Las demas opciones requieren desarrollo adicional o resuelven solo parte del requisito.",
+    "explanation": {
+      "es": "Patch Manager combina lineas base de parches, seleccion de destinos por etiquetas, ventanas de mantenimiento e informes de cumplimiento de forma nativa. Las demas opciones requieren desarrollo adicional o resuelven solo parte del requisito.",
+      "en": "Patch Manager natively combines patch baselines, tag-based target selection, maintenance windows, and compliance reporting. The other options require additional development or address only part of the requirement."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.2",
-    "text": "Cada vez que se cargan imagenes en un bucket de Amazon S3, la empresa necesita generar miniaturas de forma automatica y garantizar que ninguna carga se pierda si el procesamiento falla temporalmente. ¿Que arquitectura basada en eventos cumple mejor el requisito?",
-    "options": [
-      "Configurar notificaciones de eventos de S3 hacia una cola de Amazon SQS, consumir la cola con una funcion de AWS Lambda y asociar una cola de mensajes fallidos.",
-      "Configurar notificaciones de eventos de S3 que invoquen directamente la funcion de AWS Lambda de procesamiento sin reintentos adicionales.",
-      "Programar una regla de Amazon EventBridge cada cinco minutos que enumere el bucket e invoque la funcion de procesamiento para los objetos nuevos.",
-      "Habilitar la replicacion de S3 hacia un segundo bucket y ejecutar el procesamiento con AWS Systems Manager Run Command en una instancia EC2."
-    ],
+    "text": {
+      "es": "Cada vez que se cargan imagenes en un bucket de Amazon S3, la empresa necesita generar miniaturas de forma automatica y garantizar que ninguna carga se pierda si el procesamiento falla temporalmente. ¿Que arquitectura basada en eventos cumple mejor el requisito?",
+      "en": "Whenever images are uploaded to an Amazon S3 bucket, the company needs to generate thumbnails automatically and ensure that no upload is lost if processing temporarily fails. Which event-driven architecture best meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Configurar notificaciones de eventos de S3 hacia una cola de Amazon SQS, consumir la cola con una funcion de AWS Lambda y asociar una cola de mensajes fallidos.",
+        "Configurar notificaciones de eventos de S3 que invoquen directamente la funcion de AWS Lambda de procesamiento sin reintentos adicionales.",
+        "Programar una regla de Amazon EventBridge cada cinco minutos que enumere el bucket e invoque la funcion de procesamiento para los objetos nuevos.",
+        "Habilitar la replicacion de S3 hacia un segundo bucket y ejecutar el procesamiento con AWS Systems Manager Run Command en una instancia EC2."
+      ],
+      "en": [
+        "Configure S3 event notifications to an Amazon SQS queue, consume the queue with an AWS Lambda function, and associate a dead-letter queue.",
+        "Configure S3 event notifications that directly invoke the processing AWS Lambda function with no additional retries.",
+        "Schedule an Amazon EventBridge rule every five minutes that lists the bucket and invokes the processing function for the new objects.",
+        "Enable S3 replication to a second bucket and run the processing with AWS Systems Manager Run Command on an EC2 instance."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Enviar las notificaciones de eventos de S3 a una cola de SQS desacopla la ingesta del procesamiento, permite reintentos y conserva los mensajes problematicos en una DLQ. La invocacion directa de Lambda ofrece menos garantias ante fallas sostenidas y el sondeo programado agrega latencia y costo.",
+    "explanation": {
+      "es": "Enviar las notificaciones de eventos de S3 a una cola de SQS desacopla la ingesta del procesamiento, permite reintentos y conserva los mensajes problematicos en una DLQ. La invocacion directa de Lambda ofrece menos garantias ante fallas sostenidas y el sondeo programado agrega latencia y costo.",
+      "en": "Sending the S3 event notifications to an SQS queue decouples ingestion from processing, allows retries, and keeps problematic messages in a DLQ. Direct Lambda invocation offers fewer guarantees during sustained failures, and scheduled polling adds latency and cost."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.2",
-    "text": "Un ingeniero de CloudOps detecta que en algunas instancias EC2 el agente de CloudWatch queda detenido o con una configuracion desactualizada despues de que los equipos aplican cambios manuales. Se requiere que la configuracion deseada se reaplique automaticamente cada 30 minutos en todas las instancias etiquetadas. ¿Que solucion cumple el requisito?",
-    "options": [
-      "Crear una asociacion de AWS Systems Manager State Manager con el documento de configuracion del agente, destinos por etiqueta y una programacion de 30 minutos.",
-      "Ejecutar Systems Manager Run Command manualmente cada vez que una alarma de CloudWatch detecte la ausencia de metricas.",
-      "Agregar los comandos de instalacion del agente a los datos de usuario (user data) de las instancias y reiniciarlas cada 30 minutos.",
-      "Crear una regla de AWS Config con remediacion automatica que termine las instancias cuyo agente no este en ejecucion."
-    ],
+    "text": {
+      "es": "Un ingeniero de CloudOps detecta que en algunas instancias EC2 el agente de CloudWatch queda detenido o con una configuracion desactualizada despues de que los equipos aplican cambios manuales. Se requiere que la configuracion deseada se reaplique automaticamente cada 30 minutos en todas las instancias etiquetadas. ¿Que solucion cumple el requisito?",
+      "en": "A CloudOps engineer notices that on some EC2 instances the CloudWatch agent ends up stopped or with an outdated configuration after teams apply manual changes. The desired configuration must be reapplied automatically every 30 minutes on all tagged instances. Which solution meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Crear una asociacion de AWS Systems Manager State Manager con el documento de configuracion del agente, destinos por etiqueta y una programacion de 30 minutos.",
+        "Ejecutar Systems Manager Run Command manualmente cada vez que una alarma de CloudWatch detecte la ausencia de metricas.",
+        "Agregar los comandos de instalacion del agente a los datos de usuario (user data) de las instancias y reiniciarlas cada 30 minutos.",
+        "Crear una regla de AWS Config con remediacion automatica que termine las instancias cuyo agente no este en ejecucion."
+      ],
+      "en": [
+        "Create an AWS Systems Manager State Manager association with the agent configuration document, tag-based targets, and a 30-minute schedule.",
+        "Run Systems Manager Run Command manually every time a CloudWatch alarm detects the absence of metrics.",
+        "Add the agent installation commands to the instances' user data and restart them every 30 minutes.",
+        "Create an AWS Config rule with automatic remediation that terminates the instances whose agent is not running."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "State Manager aplica y reaplica de forma programada un estado deseado sobre destinos seleccionados por etiquetas, lo que corrige la desviacion de configuracion sin intervencion. Run Command es puntual y los datos de usuario solo se ejecutan al inicio de la instancia.",
+    "explanation": {
+      "es": "State Manager aplica y reaplica de forma programada un estado deseado sobre destinos seleccionados por etiquetas, lo que corrige la desviacion de configuracion sin intervencion. Run Command es puntual y los datos de usuario solo se ejecutan al inicio de la instancia.",
+      "en": "State Manager applies and reapplies a desired state on a schedule to targets selected by tags, which corrects configuration drift without intervention. Run Command is a one-time operation and user data runs only at instance startup."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.1",
-    "text": "Por requisitos regulatorios, una empresa debe impedir que cualquier principal de las cuentas de produccion cree recursos fuera de las Regiones sa-east-1 y us-east-1, incluidos los administradores de esas cuentas. ¿Que solucion cumple el requisito?",
-    "options": [
-      "Adjuntar una politica de control de servicios (SCP) con una condicion aws:RequestedRegion que deniegue las acciones fuera de las Regiones permitidas a la unidad organizativa de produccion.",
-      "Adjuntar una politica administrada por el cliente con la misma condicion de Region a todos los roles y usuarios de IAM de las cuentas de produccion.",
-      "Configurar un limite de permisos (permissions boundary) de IAM en la cuenta de administracion de AWS Organizations.",
-      "Crear una regla de AWS Config que detecte recursos en Regiones no aprobadas y los elimine mediante remediacion automatica."
-    ],
+    "text": {
+      "es": "Por requisitos regulatorios, una empresa debe impedir que cualquier principal de las cuentas de produccion cree recursos fuera de las Regiones sa-east-1 y us-east-1, incluidos los administradores de esas cuentas. ¿Que solucion cumple el requisito?",
+      "en": "Because of regulatory requirements, a company must prevent any principal in the production accounts from creating resources outside the sa-east-1 and us-east-1 Regions, including the administrators of those accounts. Which solution meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Adjuntar una politica de control de servicios (SCP) con una condicion aws:RequestedRegion que deniegue las acciones fuera de las Regiones permitidas a la unidad organizativa de produccion.",
+        "Adjuntar una politica administrada por el cliente con la misma condicion de Region a todos los roles y usuarios de IAM de las cuentas de produccion.",
+        "Configurar un limite de permisos (permissions boundary) de IAM en la cuenta de administracion de AWS Organizations.",
+        "Crear una regla de AWS Config que detecte recursos en Regiones no aprobadas y los elimine mediante remediacion automatica."
+      ],
+      "en": [
+        "Attach a service control policy (SCP) with an aws:RequestedRegion condition that denies actions outside the allowed Regions to the production organizational unit.",
+        "Attach a customer managed policy with the same Region condition to all IAM roles and users in the production accounts.",
+        "Configure an IAM permissions boundary in the AWS Organizations management account.",
+        "Create an AWS Config rule that detects resources in unapproved Regions and deletes them through automatic remediation."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Las SCP establecen el limite maximo de permisos de todas las identidades de las cuentas afectadas, incluidos los administradores, y aws:RequestedRegion permite restringir las Regiones utilizables. Las politicas de IAM por identidad pueden omitirse en nuevos principales y AWS Config actua de forma reactiva.",
+    "explanation": {
+      "es": "Las SCP establecen el limite maximo de permisos de todas las identidades de las cuentas afectadas, incluidos los administradores, y aws:RequestedRegion permite restringir las Regiones utilizables. Las politicas de IAM por identidad pueden omitirse en nuevos principales y AWS Config actua de forma reactiva.",
+      "en": "SCPs set the maximum permission boundary for all identities in the affected accounts, including administrators, and aws:RequestedRegion makes it possible to restrict the usable Regions. Per-identity IAM policies can be omitted on new principals, and AWS Config acts reactively."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.1",
-    "text": "Un desarrollador informa que recibe un error AccessDenied al invocar s3:PutObject en un bucket, pese a tener adjunta una politica que lo permite. El ingeniero de CloudOps necesita determinar que politica esta produciendo la denegacion antes de realizar cambios. ¿Que herramienta debe usar?",
-    "options": [
-      "El simulador de politicas de IAM, para evaluar la accion y el recurso con las politicas de identidad, de recurso, SCP y limites de permisos aplicables.",
-      "IAM Access Analyzer, para generar un hallazgo que identifique la politica que deniega la accion.",
-      "AWS Trusted Advisor, para revisar la comprobacion de permisos de buckets de Amazon S3.",
-      "Amazon Inspector, para analizar la configuracion de permisos del rol utilizado por el desarrollador."
-    ],
+    "text": {
+      "es": "Un desarrollador informa que recibe un error AccessDenied al invocar s3:PutObject en un bucket, pese a tener adjunta una politica que lo permite. El ingeniero de CloudOps necesita determinar que politica esta produciendo la denegacion antes de realizar cambios. ¿Que herramienta debe usar?",
+      "en": "A developer reports receiving an AccessDenied error when calling s3:PutObject on a bucket, despite having an attached policy that allows it. The CloudOps engineer needs to determine which policy is producing the denial before making any changes. Which tool should be used?"
+    },
+    "options": {
+      "es": [
+        "El simulador de politicas de IAM, para evaluar la accion y el recurso con las politicas de identidad, de recurso, SCP y limites de permisos aplicables.",
+        "IAM Access Analyzer, para generar un hallazgo que identifique la politica que deniega la accion.",
+        "AWS Trusted Advisor, para revisar la comprobacion de permisos de buckets de Amazon S3.",
+        "Amazon Inspector, para analizar la configuracion de permisos del rol utilizado por el desarrollador."
+      ],
+      "en": [
+        "The IAM policy simulator, to evaluate the action and resource against the applicable identity policies, resource policies, SCPs, and permissions boundaries.",
+        "IAM Access Analyzer, to generate a finding that identifies the policy that denies the action.",
+        "AWS Trusted Advisor, to review the Amazon S3 bucket permissions check.",
+        "Amazon Inspector, to analyze the permissions configuration of the role used by the developer."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "El simulador de politicas de IAM evalua una solicitud especifica contra las politicas aplicables y muestra cual otorga o deniega el permiso, sin ejecutar la accion real. IAM Access Analyzer identifica accesos externos, no la causa de una denegacion.",
+    "explanation": {
+      "es": "El simulador de politicas de IAM evalua una solicitud especifica contra las politicas aplicables y muestra cual otorga o deniega el permiso, sin ejecutar la accion real. IAM Access Analyzer identifica accesos externos, no la causa de una denegacion.",
+      "en": "The IAM policy simulator evaluates a specific request against the applicable policies and shows which one grants or denies the permission, without performing the actual action. IAM Access Analyzer identifies external access, not the cause of a denial."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.1",
-    "text": "Una empresa necesita evaluar de forma continua si sus recursos cumplen un conjunto de controles de seguridad estandar en todas las cuentas y corregir automaticamente las desviaciones detectadas, como grupos de seguridad que permitan SSH desde 0.0.0.0/0. ¿Cuales DOS acciones cumplen el requisito? (Seleccione DOS).",
-    "options": [
-      "Implementar un paquete de conformidad (conformance pack) de AWS Config en las cuentas para evaluar de forma continua las reglas del estandar.",
-      "Configurar acciones de remediacion automatica en las reglas de AWS Config utilizando documentos de AWS Systems Manager Automation.",
-      "Habilitar Amazon GuardDuty en todas las cuentas para que evalue el cumplimiento de las reglas de configuracion.",
-      "Revisar semanalmente las comprobaciones de seguridad de AWS Trusted Advisor y corregir los hallazgos de forma manual.",
-      "Adjuntar una politica de control de servicios que deniegue la accion ec2:AuthorizeSecurityGroupIngress en todas las cuentas."
-    ],
+    "text": {
+      "es": "Una empresa necesita evaluar de forma continua si sus recursos cumplen un conjunto de controles de seguridad estandar en todas las cuentas y corregir automaticamente las desviaciones detectadas, como grupos de seguridad que permitan SSH desde 0.0.0.0/0. ¿Cuales DOS acciones cumplen el requisito? (Seleccione DOS).",
+      "en": "A company needs to continuously evaluate whether its resources comply with a set of standard security controls across all accounts and automatically remediate detected deviations, such as security groups that allow SSH from 0.0.0.0/0. Which TWO actions meet the requirement? (Select TWO.)"
+    },
+    "options": {
+      "es": [
+        "Implementar un paquete de conformidad (conformance pack) de AWS Config en las cuentas para evaluar de forma continua las reglas del estandar.",
+        "Configurar acciones de remediacion automatica en las reglas de AWS Config utilizando documentos de AWS Systems Manager Automation.",
+        "Habilitar Amazon GuardDuty en todas las cuentas para que evalue el cumplimiento de las reglas de configuracion.",
+        "Revisar semanalmente las comprobaciones de seguridad de AWS Trusted Advisor y corregir los hallazgos de forma manual.",
+        "Adjuntar una politica de control de servicios que deniegue la accion ec2:AuthorizeSecurityGroupIngress en todas las cuentas."
+      ],
+      "en": [
+        "Deploy an AWS Config conformance pack in the accounts to continuously evaluate the standard's rules.",
+        "Configure automatic remediation actions on the AWS Config rules using AWS Systems Manager Automation documents.",
+        "Enable Amazon GuardDuty in all accounts so that it evaluates compliance with the configuration rules.",
+        "Review the AWS Trusted Advisor security checks weekly and correct the findings manually.",
+        "Attach a service control policy that denies the ec2:AuthorizeSecurityGroupIngress action in all accounts."
+      ]
+    },
     "correct": [
       0,
       1
     ],
     "type": "multiple",
-    "explanation": "Los paquetes de conformidad de AWS Config agrupan reglas de cumplimiento y permiten implementarlas de forma consistente, y las acciones de remediacion basadas en runbooks de Systems Manager corrigen las desviaciones automaticamente. GuardDuty detecta amenazas, no conformidad de configuracion.",
+    "explanation": {
+      "es": "Los paquetes de conformidad de AWS Config agrupan reglas de cumplimiento y permiten implementarlas de forma consistente, y las acciones de remediacion basadas en runbooks de Systems Manager corrigen las desviaciones automaticamente. GuardDuty detecta amenazas, no conformidad de configuracion.",
+      "en": "AWS Config conformance packs group compliance rules and make it possible to deploy them consistently, and remediation actions based on Systems Manager runbooks correct the deviations automatically. GuardDuty detects threats, not configuration compliance."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.2",
-    "text": "Una aplicacion que se ejecuta con un rol de IAM puede listar un bucket de Amazon S3, pero recibe AccessDenied al descargar objetos. Los objetos estan cifrados con SSE-KMS mediante una clave administrada por el cliente y la politica de identidad del rol permite s3:GetObject. ¿Cual es la causa mas probable?",
-    "options": [
-      "La politica de la clave de KMS o la politica del rol no otorgan el permiso kms:Decrypt sobre la clave utilizada para cifrar los objetos.",
-      "El bucket tiene habilitado el cifrado predeterminado, lo que requiere que el cliente envie el encabezado x-amz-server-side-encryption en las solicitudes GET.",
-      "La clave administrada por el cliente esta pendiente de eliminacion, por lo que S3 rechaza todas las operaciones de lectura y escritura.",
-      "Las claves de bucket de S3 (S3 Bucket Keys) estan deshabilitadas, lo que impide descifrar objetos cifrados con SSE-KMS."
-    ],
+    "text": {
+      "es": "Una aplicacion que se ejecuta con un rol de IAM puede listar un bucket de Amazon S3, pero recibe AccessDenied al descargar objetos. Los objetos estan cifrados con SSE-KMS mediante una clave administrada por el cliente y la politica de identidad del rol permite s3:GetObject. ¿Cual es la causa mas probable?",
+      "en": "An application running with an IAM role can list an Amazon S3 bucket but receives AccessDenied when downloading objects. The objects are encrypted with SSE-KMS using a customer managed key, and the role's identity policy allows s3:GetObject. What is the most likely cause?"
+    },
+    "options": {
+      "es": [
+        "La politica de la clave de KMS o la politica del rol no otorgan el permiso kms:Decrypt sobre la clave utilizada para cifrar los objetos.",
+        "El bucket tiene habilitado el cifrado predeterminado, lo que requiere que el cliente envie el encabezado x-amz-server-side-encryption en las solicitudes GET.",
+        "La clave administrada por el cliente esta pendiente de eliminacion, por lo que S3 rechaza todas las operaciones de lectura y escritura.",
+        "Las claves de bucket de S3 (S3 Bucket Keys) estan deshabilitadas, lo que impide descifrar objetos cifrados con SSE-KMS."
+      ],
+      "en": [
+        "The KMS key policy or the role's policy does not grant the kms:Decrypt permission on the key used to encrypt the objects.",
+        "The bucket has default encryption enabled, which requires the client to send the x-amz-server-side-encryption header on GET requests.",
+        "The customer managed key is pending deletion, so S3 rejects all read and write operations.",
+        "S3 Bucket Keys are disabled, which prevents decrypting objects encrypted with SSE-KMS."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Para leer objetos cifrados con SSE-KMS el principal necesita, ademas de s3:GetObject, el permiso kms:Decrypt otorgado tanto en la politica de la clave como en su politica de identidad. El encabezado de cifrado solo se usa en operaciones de escritura.",
+    "explanation": {
+      "es": "Para leer objetos cifrados con SSE-KMS el principal necesita, ademas de s3:GetObject, el permiso kms:Decrypt otorgado tanto en la politica de la clave como en su politica de identidad. El encabezado de cifrado solo se usa en operaciones de escritura.",
+      "en": "To read objects encrypted with SSE-KMS, the principal needs the kms:Decrypt permission in addition to s3:GetObject, granted both in the key policy and in its identity policy. The encryption header is used only in write operations."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.2",
-    "text": "Una empresa publica su sitio web mediante una distribucion de Amazon CloudFront con un Application Load Balancer como origen, y necesita HTTPS con un nombre de dominio propio tanto en CloudFront como en el ALB usando certificados de AWS Certificate Manager. ¿Que enfoque cumple el requisito?",
-    "options": [
-      "Solicitar el certificado del ALB con ACM en la Region del balanceador y solicitar u importar el certificado de CloudFront con ACM en la Region us-east-1.",
-      "Solicitar un unico certificado con ACM en la Region del balanceador y asociarlo tanto al ALB como a la distribucion de CloudFront.",
-      "Solicitar el certificado con ACM en us-east-1 y asociarlo al ALB, y usar el certificado predeterminado de CloudFront para el dominio propio.",
-      "Importar el certificado en AWS KMS como material de clave y referenciarlo desde CloudFront y el ALB."
-    ],
+    "text": {
+      "es": "Una empresa publica su sitio web mediante una distribucion de Amazon CloudFront con un Application Load Balancer como origen, y necesita HTTPS con un nombre de dominio propio tanto en CloudFront como en el ALB usando certificados de AWS Certificate Manager. ¿Que enfoque cumple el requisito?",
+      "en": "A company publishes its website through an Amazon CloudFront distribution with an Application Load Balancer as the origin, and needs HTTPS with its own domain name on both CloudFront and the ALB using AWS Certificate Manager certificates. Which approach meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Solicitar el certificado del ALB con ACM en la Region del balanceador y solicitar u importar el certificado de CloudFront con ACM en la Region us-east-1.",
+        "Solicitar un unico certificado con ACM en la Region del balanceador y asociarlo tanto al ALB como a la distribucion de CloudFront.",
+        "Solicitar el certificado con ACM en us-east-1 y asociarlo al ALB, y usar el certificado predeterminado de CloudFront para el dominio propio.",
+        "Importar el certificado en AWS KMS como material de clave y referenciarlo desde CloudFront y el ALB."
+      ],
+      "en": [
+        "Request the ALB certificate with ACM in the load balancer's Region and request or import the CloudFront certificate with ACM in the us-east-1 Region.",
+        "Request a single certificate with ACM in the load balancer's Region and associate it with both the ALB and the CloudFront distribution.",
+        "Request the certificate with ACM in us-east-1 and associate it with the ALB, and use the default CloudFront certificate for the custom domain.",
+        "Import the certificate into AWS KMS as key material and reference it from CloudFront and the ALB."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "CloudFront solo admite certificados de ACM emitidos o importados en us-east-1, mientras que un Application Load Balancer requiere el certificado en su propia Region. Por eso se necesita un certificado en cada ubicacion.",
+    "explanation": {
+      "es": "CloudFront solo admite certificados de ACM emitidos o importados en us-east-1, mientras que un Application Load Balancer requiere el certificado en su propia Region. Por eso se necesita un certificado en cada ubicacion.",
+      "en": "CloudFront supports only ACM certificates issued or imported in us-east-1, while an Application Load Balancer requires the certificate in its own Region. That is why a certificate is needed in each location."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.2",
-    "text": "Una organizacion con 25 cuentas y recursos en cuatro Regiones necesita una vista unica de los hallazgos de seguridad de Amazon GuardDuty, Amazon Inspector y AWS Config, y quiere que las cuentas nuevas se incorporen automaticamente. ¿Que solucion cumple el requisito?",
-    "options": [
-      "Designar una cuenta como administrador delegado de AWS Security Hub en AWS Organizations, habilitar el registro automatico de cuentas nuevas y configurar la agregacion entre Regiones.",
-      "Configurar reglas de Amazon EventBridge en cada cuenta y Region que envien los hallazgos a una cola de Amazon SQS centralizada para su consolidacion.",
-      "Habilitar Amazon Macie en la cuenta de administracion para clasificar y agregar los hallazgos de los demas servicios de seguridad.",
-      "Crear un panel de Amazon CloudWatch entre cuentas que muestre las metricas de hallazgos de cada servicio de seguridad."
-    ],
+    "text": {
+      "es": "Una organizacion con 25 cuentas y recursos en cuatro Regiones necesita una vista unica de los hallazgos de seguridad de Amazon GuardDuty, Amazon Inspector y AWS Config, y quiere que las cuentas nuevas se incorporen automaticamente. ¿Que solucion cumple el requisito?",
+      "en": "An organization with 25 accounts and resources in four Regions needs a single view of the security findings from Amazon GuardDuty, Amazon Inspector, and AWS Config, and wants new accounts to be onboarded automatically. Which solution meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Designar una cuenta como administrador delegado de AWS Security Hub en AWS Organizations, habilitar el registro automatico de cuentas nuevas y configurar la agregacion entre Regiones.",
+        "Configurar reglas de Amazon EventBridge en cada cuenta y Region que envien los hallazgos a una cola de Amazon SQS centralizada para su consolidacion.",
+        "Habilitar Amazon Macie en la cuenta de administracion para clasificar y agregar los hallazgos de los demas servicios de seguridad.",
+        "Crear un panel de Amazon CloudWatch entre cuentas que muestre las metricas de hallazgos de cada servicio de seguridad."
+      ],
+      "en": [
+        "Designate an account as the AWS Security Hub delegated administrator in AWS Organizations, enable automatic enrollment of new accounts, and configure cross-Region aggregation.",
+        "Configure Amazon EventBridge rules in each account and Region that send the findings to a centralized Amazon SQS queue for consolidation.",
+        "Enable Amazon Macie in the management account to classify and aggregate the findings from the other security services.",
+        "Create a cross-account Amazon CloudWatch dashboard that displays the finding metrics from each security service."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Security Hub con administrador delegado en Organizations agrega los hallazgos de servicios integrados, permite el registro automatico de cuentas nuevas y consolida varias Regiones en una Region de agregacion. Macie clasifica datos sensibles y no agrega hallazgos de otros servicios.",
+    "explanation": {
+      "es": "Security Hub con administrador delegado en Organizations agrega los hallazgos de servicios integrados, permite el registro automatico de cuentas nuevas y consolida varias Regiones en una Region de agregacion. Macie clasifica datos sensibles y no agrega hallazgos de otros servicios.",
+      "en": "Security Hub with a delegated administrator in Organizations aggregates findings from integrated services, supports automatic enrollment of new accounts, and consolidates several Regions into an aggregation Region. Macie classifies sensitive data and does not aggregate findings from other services."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 5,
     "taskStatementNumber": "5.1",
-    "text": "Instancias EC2 en subredes privadas descargan grandes volumenes de datos desde Amazon S3 a traves de puertas de enlace NAT, lo que genera costos elevados de procesamiento de datos NAT. La empresa quiere reducir el costo sin exponer las instancias a internet. ¿Que solucion cumple el requisito?",
-    "options": [
-      "Crear un punto de enlace de VPC de tipo gateway para Amazon S3 y agregar la ruta correspondiente a las tablas de rutas de las subredes privadas.",
-      "Crear un punto de enlace de VPC de tipo interfaz para Amazon S3 con AWS PrivateLink en cada subred privada y eliminar las puertas de enlace NAT.",
-      "Habilitar S3 Transfer Acceleration en el bucket para que el trafico evite las puertas de enlace NAT.",
-      "Reemplazar las puertas de enlace NAT por instancias NAT en subredes publicas y habilitar el reenvio de IP."
-    ],
+    "text": {
+      "es": "Instancias EC2 en subredes privadas descargan grandes volumenes de datos desde Amazon S3 a traves de puertas de enlace NAT, lo que genera costos elevados de procesamiento de datos NAT. La empresa quiere reducir el costo sin exponer las instancias a internet. ¿Que solucion cumple el requisito?",
+      "en": "EC2 instances in private subnets download large volumes of data from Amazon S3 through NAT gateways, which generates high NAT data processing costs. The company wants to reduce the cost without exposing the instances to the internet. Which solution meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Crear un punto de enlace de VPC de tipo gateway para Amazon S3 y agregar la ruta correspondiente a las tablas de rutas de las subredes privadas.",
+        "Crear un punto de enlace de VPC de tipo interfaz para Amazon S3 con AWS PrivateLink en cada subred privada y eliminar las puertas de enlace NAT.",
+        "Habilitar S3 Transfer Acceleration en el bucket para que el trafico evite las puertas de enlace NAT.",
+        "Reemplazar las puertas de enlace NAT por instancias NAT en subredes publicas y habilitar el reenvio de IP."
+      ],
+      "en": [
+        "Create a gateway VPC endpoint for Amazon S3 and add the corresponding route to the route tables of the private subnets.",
+        "Create an interface VPC endpoint for Amazon S3 with AWS PrivateLink in each private subnet and remove the NAT gateways.",
+        "Enable S3 Transfer Acceleration on the bucket so that the traffic bypasses the NAT gateways.",
+        "Replace the NAT gateways with NAT instances in public subnets and enable IP forwarding."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Un punto de enlace de gateway para S3 se agrega a las tablas de rutas sin costo por hora ni por datos procesados, y mantiene el trafico dentro de la red de AWS evitando la puerta de enlace NAT. Los puntos de enlace de interfaz si tienen costo por hora y por GB.",
+    "explanation": {
+      "es": "Un punto de enlace de gateway para S3 se agrega a las tablas de rutas sin costo por hora ni por datos procesados, y mantiene el trafico dentro de la red de AWS evitando la puerta de enlace NAT. Los puntos de enlace de interfaz si tienen costo por hora y por GB.",
+      "en": "A gateway endpoint for S3 is added to the route tables with no hourly or data processing charges, and it keeps the traffic within the AWS network, bypassing the NAT gateway. Interface endpoints do incur hourly and per-GB charges."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 5,
     "taskStatementNumber": "5.1",
-    "text": "Un ingeniero de CloudOps revisa la factura de red de una arquitectura de tres capas distribuida en tres zonas de disponibilidad y detecta cargos significativos por transferencia de datos entre zonas y por procesamiento de datos NAT. ¿Cuales DOS acciones reducen estos costos? (Seleccione DOS).",
-    "options": [
-      "Crear puntos de enlace de VPC de tipo gateway para Amazon S3 y Amazon DynamoDB para que el trafico hacia esos servicios no atraviese las puertas de enlace NAT.",
-      "Ubicar los componentes con mayor intercambio de datos en la misma zona de disponibilidad para evitar cargos de transferencia entre zonas.",
-      "Reemplazar el emparejamiento de VPC (VPC peering) existente por AWS Transit Gateway para consolidar el enrutamiento.",
-      "Habilitar S3 Transfer Acceleration en los buckets a los que acceden las instancias privadas.",
-      "Implementar una puerta de enlace NAT adicional en cada subred privada para distribuir mejor el trafico saliente."
-    ],
+    "text": {
+      "es": "Un ingeniero de CloudOps revisa la factura de red de una arquitectura de tres capas distribuida en tres zonas de disponibilidad y detecta cargos significativos por transferencia de datos entre zonas y por procesamiento de datos NAT. ¿Cuales DOS acciones reducen estos costos? (Seleccione DOS).",
+      "en": "A CloudOps engineer reviews the network bill for a three-tier architecture spread across three Availability Zones and finds significant charges for inter-AZ data transfer and for NAT data processing. Which TWO actions reduce these costs? (Select TWO.)"
+    },
+    "options": {
+      "es": [
+        "Crear puntos de enlace de VPC de tipo gateway para Amazon S3 y Amazon DynamoDB para que el trafico hacia esos servicios no atraviese las puertas de enlace NAT.",
+        "Ubicar los componentes con mayor intercambio de datos en la misma zona de disponibilidad para evitar cargos de transferencia entre zonas.",
+        "Reemplazar el emparejamiento de VPC (VPC peering) existente por AWS Transit Gateway para consolidar el enrutamiento.",
+        "Habilitar S3 Transfer Acceleration en los buckets a los que acceden las instancias privadas.",
+        "Implementar una puerta de enlace NAT adicional en cada subred privada para distribuir mejor el trafico saliente."
+      ],
+      "en": [
+        "Create gateway VPC endpoints for Amazon S3 and Amazon DynamoDB so that the traffic to those services does not go through the NAT gateways.",
+        "Place the components that exchange the most data in the same Availability Zone to avoid inter-AZ transfer charges.",
+        "Replace the existing VPC peering with AWS Transit Gateway to consolidate routing.",
+        "Enable S3 Transfer Acceleration on the buckets that the private instances access.",
+        "Deploy an additional NAT gateway in each private subnet to better distribute the outbound traffic."
+      ]
+    },
     "correct": [
       0,
       1
     ],
     "type": "multiple",
-    "explanation": "Los puntos de enlace de gateway eliminan el procesamiento de datos NAT para el trafico hacia S3 y DynamoDB, y mantener las comunicaciones intensivas dentro de una misma zona de disponibilidad evita los cargos de transferencia entre zonas. Transit Gateway, Transfer Acceleration y mas puertas de enlace NAT incrementan el costo.",
+    "explanation": {
+      "es": "Los puntos de enlace de gateway eliminan el procesamiento de datos NAT para el trafico hacia S3 y DynamoDB, y mantener las comunicaciones intensivas dentro de una misma zona de disponibilidad evita los cargos de transferencia entre zonas. Transit Gateway, Transfer Acceleration y mas puertas de enlace NAT incrementan el costo.",
+      "en": "Gateway endpoints eliminate NAT data processing for traffic to S3 and DynamoDB, and keeping intensive communication within the same Availability Zone avoids inter-AZ transfer charges. Transit Gateway, Transfer Acceleration, and additional NAT gateways increase cost."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 5,
     "taskStatementNumber": "5.1",
-    "text": "Un proveedor de software debe exponer una API interna alojada detras de un Network Load Balancer en su VPC hacia decenas de VPC de clientes. Varias VPC de clientes usan bloques CIDR que se superponen con la VPC del proveedor y ningun trafico debe salir a internet. ¿Que solucion cumple el requisito?",
-    "options": [
-      "Crear un servicio de punto de enlace de VPC con AWS PrivateLink asociado al Network Load Balancer y permitir que los clientes creen puntos de enlace de interfaz en sus VPC.",
-      "Establecer emparejamiento de VPC entre la VPC del proveedor y cada VPC de cliente, y ajustar las tablas de rutas de ambos lados.",
-      "Conectar todas las VPC a un AWS Transit Gateway compartido con AWS Resource Access Manager y propagar las rutas.",
-      "Publicar la API en un Application Load Balancer con acceso a internet y restringir el acceso mediante listas de control de acceso a la red."
-    ],
+    "text": {
+      "es": "Un proveedor de software debe exponer una API interna alojada detras de un Network Load Balancer en su VPC hacia decenas de VPC de clientes. Varias VPC de clientes usan bloques CIDR que se superponen con la VPC del proveedor y ningun trafico debe salir a internet. ¿Que solucion cumple el requisito?",
+      "en": "A software provider must expose an internal API hosted behind a Network Load Balancer in its VPC to dozens of customer VPCs. Several customer VPCs use CIDR blocks that overlap with the provider's VPC, and no traffic may go out to the internet. Which solution meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Crear un servicio de punto de enlace de VPC con AWS PrivateLink asociado al Network Load Balancer y permitir que los clientes creen puntos de enlace de interfaz en sus VPC.",
+        "Establecer emparejamiento de VPC entre la VPC del proveedor y cada VPC de cliente, y ajustar las tablas de rutas de ambos lados.",
+        "Conectar todas las VPC a un AWS Transit Gateway compartido con AWS Resource Access Manager y propagar las rutas.",
+        "Publicar la API en un Application Load Balancer con acceso a internet y restringir el acceso mediante listas de control de acceso a la red."
+      ],
+      "en": [
+        "Create a VPC endpoint service with AWS PrivateLink associated with the Network Load Balancer and allow customers to create interface endpoints in their VPCs.",
+        "Establish VPC peering between the provider's VPC and each customer VPC, and adjust the route tables on both sides.",
+        "Connect all of the VPCs to a shared AWS Transit Gateway with AWS Resource Access Manager and propagate the routes.",
+        "Publish the API on an internet-facing Application Load Balancer and restrict access with network access control lists."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "PrivateLink expone el servicio mediante puntos de enlace de interfaz en la VPC del consumidor, funciona con bloques CIDR superpuestos y escala a muchos consumidores sin trafico por internet. El emparejamiento de VPC y Transit Gateway requieren rangos de direcciones que no se superpongan.",
+    "explanation": {
+      "es": "PrivateLink expone el servicio mediante puntos de enlace de interfaz en la VPC del consumidor, funciona con bloques CIDR superpuestos y escala a muchos consumidores sin trafico por internet. El emparejamiento de VPC y Transit Gateway requieren rangos de direcciones que no se superpongan.",
+      "en": "PrivateLink exposes the service through interface endpoints in the consumer's VPC, works with overlapping CIDR blocks, and scales to many consumers with no internet traffic. VPC peering and Transit Gateway require non-overlapping address ranges."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 5,
     "taskStatementNumber": "5.2",
-    "text": "Una empresa aloja la misma aplicacion en Application Load Balancers en las Regiones us-east-1 y eu-west-1. Necesita que cada usuario sea dirigido al endpoint que le ofrezca el menor tiempo de respuesta de red, y que Amazon Route 53 deje de responder con una Region si su balanceador falla. ¿Que configuracion cumple el requisito?",
-    "options": [
-      "Crear registros de alias con politica de enrutamiento por latencia para cada Region y asociar comprobaciones de estado a cada registro.",
-      "Crear registros con politica de enrutamiento por geolocalizacion basada en el continente del usuario y habilitar el registro de consultas DNS.",
-      "Crear registros con politica de enrutamiento ponderado con pesos iguales y reducir el TTL a 60 segundos.",
-      "Crear registros con politica de enrutamiento de geoproximidad sin sesgo (bias) y habilitar la evaluacion del estado del destino."
-    ],
+    "text": {
+      "es": "Una empresa aloja la misma aplicacion en Application Load Balancers en las Regiones us-east-1 y eu-west-1. Necesita que cada usuario sea dirigido al endpoint que le ofrezca el menor tiempo de respuesta de red, y que Amazon Route 53 deje de responder con una Region si su balanceador falla. ¿Que configuracion cumple el requisito?",
+      "en": "A company hosts the same application on Application Load Balancers in the us-east-1 and eu-west-1 Regions. It needs each user to be directed to the endpoint that offers the lowest network response time, and Amazon Route 53 to stop responding with a Region if its load balancer fails. Which configuration meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Crear registros de alias con politica de enrutamiento por latencia para cada Region y asociar comprobaciones de estado a cada registro.",
+        "Crear registros con politica de enrutamiento por geolocalizacion basada en el continente del usuario y habilitar el registro de consultas DNS.",
+        "Crear registros con politica de enrutamiento ponderado con pesos iguales y reducir el TTL a 60 segundos.",
+        "Crear registros con politica de enrutamiento de geoproximidad sin sesgo (bias) y habilitar la evaluacion del estado del destino."
+      ],
+      "en": [
+        "Create alias records with the latency-based routing policy for each Region and associate health checks with each record.",
+        "Create records with the geolocation routing policy based on the user's continent and enable DNS query logging.",
+        "Create records with the weighted routing policy with equal weights and reduce the TTL to 60 seconds.",
+        "Create records with the geoproximity routing policy with no bias and enable evaluate target health."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "El enrutamiento por latencia selecciona la Region con menor latencia medida para el cliente y, al asociar comprobaciones de estado, Route 53 excluye los registros no saludables. La geolocalizacion enruta por ubicacion geografica, que no siempre coincide con la menor latencia.",
+    "explanation": {
+      "es": "El enrutamiento por latencia selecciona la Region con menor latencia medida para el cliente y, al asociar comprobaciones de estado, Route 53 excluye los registros no saludables. La geolocalizacion enruta por ubicacion geografica, que no siempre coincide con la menor latencia.",
+      "en": "Latency-based routing selects the Region with the lowest measured latency for the client and, by associating health checks, Route 53 excludes unhealthy records. Geolocation routes by geographic location, which does not always match the lowest latency."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 5,
     "taskStatementNumber": "5.2",
-    "text": "Un ingeniero debe apuntar el apex de la zona example.com a una distribucion de Amazon CloudFront en una zona hospedada de Amazon Route 53, sin costo por consultas y con resolucion automatica si cambian las direcciones IP de la distribucion. ¿Que registro debe crear?",
-    "options": [
-      "Un registro de alias de tipo A que apunte al nombre de dominio de la distribucion de CloudFront.",
-      "Un registro CNAME que apunte al nombre de dominio de la distribucion de CloudFront.",
-      "Un registro A con las direcciones IP obtenidas al resolver el nombre de la distribucion de CloudFront.",
-      "Un registro NS delegado a los servidores de nombres de la distribucion de CloudFront."
-    ],
+    "text": {
+      "es": "Un ingeniero debe apuntar el apex de la zona example.com a una distribucion de Amazon CloudFront en una zona hospedada de Amazon Route 53, sin costo por consultas y con resolucion automatica si cambian las direcciones IP de la distribucion. ¿Que registro debe crear?",
+      "en": "An engineer must point the zone apex example.com to an Amazon CloudFront distribution in an Amazon Route 53 hosted zone, with no charge per query and with automatic resolution if the distribution's IP addresses change. Which record should be created?"
+    },
+    "options": {
+      "es": [
+        "Un registro de alias de tipo A que apunte al nombre de dominio de la distribucion de CloudFront.",
+        "Un registro CNAME que apunte al nombre de dominio de la distribucion de CloudFront.",
+        "Un registro A con las direcciones IP obtenidas al resolver el nombre de la distribucion de CloudFront.",
+        "Un registro NS delegado a los servidores de nombres de la distribucion de CloudFront."
+      ],
+      "en": [
+        "An A alias record that points to the CloudFront distribution's domain name.",
+        "A CNAME record that points to the CloudFront distribution's domain name.",
+        "An A record with the IP addresses obtained by resolving the CloudFront distribution's name.",
+        "An NS record delegated to the CloudFront distribution's name servers."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "El DNS no permite registros CNAME en el apex de la zona, y los registros de alias de Route 53 apuntan a recursos de AWS como CloudFront sin costo por consultas y siguiendo automaticamente los cambios de direcciones IP.",
+    "explanation": {
+      "es": "El DNS no permite registros CNAME en el apex de la zona, y los registros de alias de Route 53 apuntan a recursos de AWS como CloudFront sin costo por consultas y siguiendo automaticamente los cambios de direcciones IP.",
+      "en": "DNS does not allow CNAME records at the zone apex, and Route 53 alias records point to AWS resources such as CloudFront with no charge per query and automatically follow IP address changes."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 5,
     "taskStatementNumber": "5.2",
-    "text": "Una empresa de videojuegos ejecuta un servidor de juego basado en UDP en instancias EC2 detras de Network Load Balancers en tres Regiones. Necesita direcciones IP estaticas de entrada, conmutacion rapida entre Regiones ante fallas y mejor rendimiento mediante la red global de AWS. ¿Que servicio cumple el requisito?",
-    "options": [
-      "AWS Global Accelerator con dos direcciones IP estaticas de anycast y grupos de endpoints en cada Region.",
-      "Amazon CloudFront con un comportamiento de cache que reenvie todos los encabezados al origen.",
-      "Amazon Route 53 con enrutamiento multivalor y comprobaciones de estado por endpoint.",
-      "Elastic IP addresses asociadas a cada instancia EC2 y publicadas en la zona hospedada."
-    ],
+    "text": {
+      "es": "Una empresa de videojuegos ejecuta un servidor de juego basado en UDP en instancias EC2 detras de Network Load Balancers en tres Regiones. Necesita direcciones IP estaticas de entrada, conmutacion rapida entre Regiones ante fallas y mejor rendimiento mediante la red global de AWS. ¿Que servicio cumple el requisito?",
+      "en": "A gaming company runs a UDP-based game server on EC2 instances behind Network Load Balancers in three Regions. It needs static entry IP addresses, fast failover between Regions, and better performance through the AWS global network. Which service meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "AWS Global Accelerator con dos direcciones IP estaticas de anycast y grupos de endpoints en cada Region.",
+        "Amazon CloudFront con un comportamiento de cache que reenvie todos los encabezados al origen.",
+        "Amazon Route 53 con enrutamiento multivalor y comprobaciones de estado por endpoint.",
+        "Elastic IP addresses asociadas a cada instancia EC2 y publicadas en la zona hospedada."
+      ],
+      "en": [
+        "AWS Global Accelerator with two static anycast IP addresses and endpoint groups in each Region.",
+        "Amazon CloudFront with a cache behavior that forwards all headers to the origin.",
+        "Amazon Route 53 with multivalue answer routing and per-endpoint health checks.",
+        "Elastic IP addresses associated with each EC2 instance and published in the hosted zone."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Global Accelerator proporciona direcciones IP estaticas de anycast, admite TCP y UDP y conmuta el trafico entre grupos de endpoints regionales en segundos usando la red troncal de AWS. CloudFront esta orientado a HTTP y HTTPS.",
+    "explanation": {
+      "es": "Global Accelerator proporciona direcciones IP estaticas de anycast, admite TCP y UDP y conmuta el trafico entre grupos de endpoints regionales en segundos usando la red troncal de AWS. CloudFront esta orientado a HTTP y HTTPS.",
+      "en": "Global Accelerator provides static anycast IP addresses, supports TCP and UDP, and shifts traffic between regional endpoint groups within seconds using the AWS backbone network. CloudFront is oriented to HTTP and HTTPS."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 5,
     "taskStatementNumber": "5.3",
-    "text": "Una instancia EC2 en una subred privada no puede conectarse a un servicio externo por HTTPS. Los registros de flujo de VPC de la interfaz muestran un registro ACCEPT para el trafico saliente al puerto 443 y un registro REJECT para el trafico de retorno hacia la instancia. ¿Cual es la causa mas probable?",
-    "options": [
-      "La lista de control de acceso a la red de la subred no permite el trafico entrante en el rango de puertos efimeros.",
-      "El grupo de seguridad de la instancia no tiene una regla de entrada que permita el puerto 443 desde el servicio externo.",
-      "La tabla de rutas de la subred no tiene una ruta hacia la puerta de enlace NAT para el destino 0.0.0.0/0.",
-      "La instancia carece de una direccion IP publica, por lo que el trafico de retorno no puede enrutarse."
-    ],
+    "text": {
+      "es": "Una instancia EC2 en una subred privada no puede conectarse a un servicio externo por HTTPS. Los registros de flujo de VPC de la interfaz muestran un registro ACCEPT para el trafico saliente al puerto 443 y un registro REJECT para el trafico de retorno hacia la instancia. ¿Cual es la causa mas probable?",
+      "en": "An EC2 instance in a private subnet cannot connect to an external service over HTTPS. The VPC flow logs for the interface show an ACCEPT record for the outbound traffic to port 443 and a REJECT record for the return traffic to the instance. What is the most likely cause?"
+    },
+    "options": {
+      "es": [
+        "La lista de control de acceso a la red de la subred no permite el trafico entrante en el rango de puertos efimeros.",
+        "El grupo de seguridad de la instancia no tiene una regla de entrada que permita el puerto 443 desde el servicio externo.",
+        "La tabla de rutas de la subred no tiene una ruta hacia la puerta de enlace NAT para el destino 0.0.0.0/0.",
+        "La instancia carece de una direccion IP publica, por lo que el trafico de retorno no puede enrutarse."
+      ],
+      "en": [
+        "The subnet's network access control list does not allow inbound traffic on the ephemeral port range.",
+        "The instance's security group does not have an inbound rule that allows port 443 from the external service.",
+        "The subnet's route table does not have a route to the NAT gateway for the 0.0.0.0/0 destination.",
+        "The instance lacks a public IP address, so the return traffic cannot be routed."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Las listas de control de acceso a la red no tienen estado, por lo que deben permitir explicitamente el trafico de retorno en los puertos efimeros, mientras que los grupos de seguridad si mantienen el estado y no requieren regla de entrada. Si faltara la ruta a la NAT no se registraria un ACCEPT saliente.",
+    "explanation": {
+      "es": "Las listas de control de acceso a la red no tienen estado, por lo que deben permitir explicitamente el trafico de retorno en los puertos efimeros, mientras que los grupos de seguridad si mantienen el estado y no requieren regla de entrada. Si faltara la ruta a la NAT no se registraria un ACCEPT saliente.",
+      "en": "Network access control lists are stateless, so they must explicitly allow return traffic on the ephemeral ports, whereas security groups are stateful and do not require an inbound rule. If the route to the NAT gateway were missing, no outbound ACCEPT would be recorded."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 5,
     "taskStatementNumber": "5.3",
-    "text": "Despues de publicar una nueva version de un archivo JavaScript en el bucket de origen, los usuarios siguen recibiendo la version anterior a traves de Amazon CloudFront durante varias horas. ¿Cuales DOS acciones resuelven el problema y evitan que vuelva a ocurrir? (Seleccione DOS).",
-    "options": [
-      "Crear una invalidacion en la distribucion para la ruta del archivo afectado.",
-      "Incluir un identificador de version en el nombre del objeto, por ejemplo app.v2.js, y referenciarlo desde el HTML en cada despliegue.",
-      "Deshabilitar la compresion automatica de objetos en el comportamiento de cache de la distribucion.",
-      "Habilitar Origin Shield en la distribucion para aumentar la tasa de aciertos de cache.",
-      "Cambiar la politica de protocolo del visor a Redirect HTTP to HTTPS en el comportamiento de cache."
-    ],
+    "text": {
+      "es": "Despues de publicar una nueva version de un archivo JavaScript en el bucket de origen, los usuarios siguen recibiendo la version anterior a traves de Amazon CloudFront durante varias horas. ¿Cuales DOS acciones resuelven el problema y evitan que vuelva a ocurrir? (Seleccione DOS).",
+      "en": "After publishing a new version of a JavaScript file to the origin bucket, users continue to receive the previous version through Amazon CloudFront for several hours. Which TWO actions resolve the problem and prevent it from happening again? (Select TWO.)"
+    },
+    "options": {
+      "es": [
+        "Crear una invalidacion en la distribucion para la ruta del archivo afectado.",
+        "Incluir un identificador de version en el nombre del objeto, por ejemplo app.v2.js, y referenciarlo desde el HTML en cada despliegue.",
+        "Deshabilitar la compresion automatica de objetos en el comportamiento de cache de la distribucion.",
+        "Habilitar Origin Shield en la distribucion para aumentar la tasa de aciertos de cache.",
+        "Cambiar la politica de protocolo del visor a Redirect HTTP to HTTPS en el comportamiento de cache."
+      ],
+      "en": [
+        "Create an invalidation on the distribution for the path of the affected file.",
+        "Include a version identifier in the object name, for example app.v2.js, and reference it from the HTML on each deployment.",
+        "Disable automatic object compression in the distribution's cache behavior.",
+        "Enable Origin Shield on the distribution to increase the cache hit ratio.",
+        "Change the viewer protocol policy to Redirect HTTP to HTTPS in the cache behavior."
+      ]
+    },
     "correct": [
       0,
       1
     ],
     "type": "multiple",
-    "explanation": "La invalidacion elimina de inmediato el objeto obsoleto de las ubicaciones de borde y el versionado del nombre del objeto hace que cada despliegue solicite una URL nueva, evitando futuros problemas de cache. Origin Shield y la compresion no afectan la frescura del contenido.",
+    "explanation": {
+      "es": "La invalidacion elimina de inmediato el objeto obsoleto de las ubicaciones de borde y el versionado del nombre del objeto hace que cada despliegue solicite una URL nueva, evitando futuros problemas de cache. Origin Shield y la compresion no afectan la frescura del contenido.",
+      "en": "The invalidation immediately removes the stale object from the edge locations, and versioning the object name makes each deployment request a new URL, preventing future caching problems. Origin Shield and compression do not affect content freshness."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 5,
     "taskStatementNumber": "5.3",
-    "text": "Instancias EC2 en una VPC conectada al centro de datos corporativo mediante AWS Site-to-Site VPN pueden alcanzar los servidores locales por direccion IP, pero no logran resolver los nombres de host del dominio interno corp.example.local. ¿Que solucion resuelve el problema?",
-    "options": [
-      "Crear un punto de enlace de salida (outbound endpoint) de Route 53 Resolver y una regla de reenvio para el dominio corp.example.local hacia los servidores DNS locales.",
-      "Crear una zona hospedada privada de Route 53 para corp.example.local y asociarla a la VPC.",
-      "Habilitar los atributos enableDnsSupport y enableDnsHostnames en la VPC y reiniciar las instancias.",
-      "Crear un punto de enlace de entrada (inbound endpoint) de Route 53 Resolver para que los servidores locales consulten al Resolver de la VPC."
-    ],
+    "text": {
+      "es": "Instancias EC2 en una VPC conectada al centro de datos corporativo mediante AWS Site-to-Site VPN pueden alcanzar los servidores locales por direccion IP, pero no logran resolver los nombres de host del dominio interno corp.example.local. ¿Que solucion resuelve el problema?",
+      "en": "EC2 instances in a VPC connected to the corporate data center through AWS Site-to-Site VPN can reach the on-premises servers by IP address, but cannot resolve the host names of the internal domain corp.example.local. Which solution resolves the problem?"
+    },
+    "options": {
+      "es": [
+        "Crear un punto de enlace de salida (outbound endpoint) de Route 53 Resolver y una regla de reenvio para el dominio corp.example.local hacia los servidores DNS locales.",
+        "Crear una zona hospedada privada de Route 53 para corp.example.local y asociarla a la VPC.",
+        "Habilitar los atributos enableDnsSupport y enableDnsHostnames en la VPC y reiniciar las instancias.",
+        "Crear un punto de enlace de entrada (inbound endpoint) de Route 53 Resolver para que los servidores locales consulten al Resolver de la VPC."
+      ],
+      "en": [
+        "Create a Route 53 Resolver outbound endpoint and a forwarding rule for the corp.example.local domain to the on-premises DNS servers.",
+        "Create a Route 53 private hosted zone for corp.example.local and associate it with the VPC.",
+        "Enable the enableDnsSupport and enableDnsHostnames attributes on the VPC and restart the instances.",
+        "Create a Route 53 Resolver inbound endpoint so that the on-premises servers can query the VPC Resolver."
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Un punto de enlace de salida de Route 53 Resolver con reglas de reenvio envia las consultas de dominios locales desde la VPC hacia los servidores DNS del centro de datos. El punto de enlace de entrada resuelve el caso inverso y una zona privada exigiria replicar manualmente todos los registros.",
+    "explanation": {
+      "es": "Un punto de enlace de salida de Route 53 Resolver con reglas de reenvio envia las consultas de dominios locales desde la VPC hacia los servidores DNS del centro de datos. El punto de enlace de entrada resuelve el caso inverso y una zona privada exigiria replicar manualmente todos los registros.",
+      "en": "A Route 53 Resolver outbound endpoint with forwarding rules sends queries for on-premises domains from the VPC to the data center's DNS servers. The inbound endpoint handles the reverse case, and a private hosted zone would require manually replicating all of the records."
+    },
     "source": "llm"
   }
 ]

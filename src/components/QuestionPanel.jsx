@@ -1,7 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Flag, BookMarked, Info } from 'lucide-react';
 import { ThemeContext } from '../context/ThemeContext';
-import { translations } from '../translations/es';
+import { useTranslations, useLanguage } from '../context/LanguageContext';
+import { localize } from '../utils/helpers';
 
 const QuestionPanel = ({
   currentQ,
@@ -24,6 +25,8 @@ const QuestionPanel = ({
 }) => {
   const [showNotesBox, setShowNotesBox] = useState(false);
   const { isDarkMode } = useContext(ThemeContext);
+  const translations = useTranslations();
+  const { language } = useLanguage();
 
   const [tempAns, setTempAns] = useState(userAns || []);
   const [tempExcluded, setTempExcluded] = useState([]);
@@ -62,17 +65,20 @@ const QuestionPanel = ({
   }, [showFeedback, quizConfig, handleAdvanceQuestion]);
 
 
-  const Feedback = ({ isUserCorrect, currentQ }) => (
-    <div className={`p-4 rounded-2xl mb-6 ${isUserCorrect ? isDarkMode ? 'bg-slate-700 border border-slate-600 text-emerald-400' : 'bg-emerald-50 border border-emerald-100 text-emerald-800' : isDarkMode ? 'bg-slate-700 border border-slate-600 text-red-400' : 'bg-red-50 border border-red-100 text-red-800'}`}>
-      <div className="flex items-start gap-3">
-        <div>
-          <p className="font-bold mb-1">{isUserCorrect ? translations.questionPanel.correct : translations.questionPanel.incorrect}</p>
-          <p className="text-sm opacity-90 mb-2">{translations.questionPanel.explanation}: {currentQ.correct.map(i => String.fromCharCode(65 + i)).join(', ')} - {currentQ.correct.map(i => currentQ.options[i]).join('; ')}</p>
-          <p className="text-sm opacity-90">{currentQ.explanation}</p>
+  const Feedback = ({ isUserCorrect, currentQ }) => {
+    const localizedOptions = localize(currentQ.options, language);
+    return (
+      <div className={`p-4 rounded-2xl mb-6 ${isUserCorrect ? isDarkMode ? 'bg-slate-700 border border-slate-600 text-emerald-400' : 'bg-emerald-50 border border-emerald-100 text-emerald-800' : isDarkMode ? 'bg-slate-700 border border-slate-600 text-red-400' : 'bg-red-50 border border-red-100 text-red-800'}`}>
+        <div className="flex items-start gap-3">
+          <div>
+            <p className="font-bold mb-1">{isUserCorrect ? translations.questionPanel.correct : translations.questionPanel.incorrect}</p>
+            <p className="text-sm opacity-90 mb-2">{translations.questionPanel.explanation}: {currentQ.correct.map(i => String.fromCharCode(65 + i)).join(', ')} - {currentQ.correct.map(i => localizedOptions[i]).join('; ')}</p>
+            <p className="text-sm opacity-90">{localize(currentQ.explanation, language)}</p>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   if (!currentQ) return null;
 
@@ -133,7 +139,7 @@ const QuestionPanel = ({
         </div>
 
         <h3 className={`text-2xl font-semibold leading-snug mb-8 ${isDarkMode ? 'text-white' : 'text-slate-800'}`}>
-          {currentQ.text}
+          {localize(currentQ.text, language)}
         </h3>
 
         {/* Notes box with animation */}
@@ -151,7 +157,7 @@ const QuestionPanel = ({
         )}
 
         <div className="space-y-4 mb-6">
-          {currentQ.options.map((opt, idx) => {
+          {localize(currentQ.options, language).map((opt, idx) => {
             const isSelected = showFeedback ? userAns.includes(idx) : tempAns.includes(idx);
             const isCorrect = currentQ.correct.includes(idx);
             let stateStyle = isDarkMode ? "glass border-slate-700 text-slate-200 hover:border-[#FF9900]/60" : "bg-white border-slate-200 text-slate-700 hover:border-orange-300";
@@ -236,7 +242,7 @@ const QuestionPanel = ({
 
         <div className="mt-4 mb-6">
           {currentQ.type === 'multiple' && tempAns.length > 2 && (
-            <div className="text-xs text-red-600 mb-2">Has seleccionado más de 2 opciones. Reduce tus opciones para continuar.</div>
+            <div className="text-xs text-red-600 mb-2">{translations.questionPanel.tooManySelected}</div>
           )}
           {quizConfig?.type !== 'full' && (
             <button

@@ -6,18 +6,13 @@ import {
 } from 'lucide-react';
 import Footer from './Footer';
 import Countdown from './Countdown';
+import LanguageToggle from './LanguageToggle';
 import { ThemeContext } from '../context/ThemeContext';
-import { translations } from '../translations/es';
+import { useTranslations } from '../context/LanguageContext';
 
 // AWS's own certification path: start Foundational, then pick an Associate role track,
 // go Professional once experienced, add Specialty certs to deepen a specific domain.
 const LEVEL_ORDER = ['foundational', 'associate', 'professional', 'specialty'];
-const LEVEL_LABELS = {
-  foundational: 'Fundamentos — empieza aqui',
-  associate: 'Associate — elige tu rol',
-  professional: 'Professional — experiencia avanzada',
-  specialty: 'Specialty — profundiza en un area',
-};
 // Accent per level (mirrors AWS's own palette) — used for card glow/hover on each group.
 const LEVEL_ACCENT = {
   foundational: { hex: '#FF9900', hoverBorder: 'hover:border-[#FF9900]/60', hoverShadow: 'hover:shadow-[0_0_36px_-10px_rgba(255,153,0,0.55)]' },
@@ -41,7 +36,7 @@ const CODE_ICON = {
   'SCS-C03': ShieldCheck, 'ANS-C01': Network,
 };
 
-function groupCertificationsByLevel(certifications) {
+function groupCertificationsByLevel(certifications, levelLabels) {
   const groups = new Map();
 
   for (const [code, cert] of Object.entries(certifications)) {
@@ -63,7 +58,7 @@ function groupCertificationsByLevel(certifications) {
 
   return LEVEL_ORDER.filter((level) => groups.has(level)).map((level) => ({
     level,
-    label: LEVEL_LABELS[level] || level,
+    label: levelLabels[level] || level,
     certs: groups.get(level),
   }));
 }
@@ -72,6 +67,7 @@ const Menu = ({ certifications: CERTIFICATIONS, startQuiz, lastPerformance, sele
   const [activeTab, setActiveTab] = useState('tests');
   const [isLoading, setIsLoading] = useState(false);
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+  const translations = useTranslations();
 
   useEffect(() => {
     setIsLoading(false);
@@ -96,25 +92,28 @@ const Menu = ({ certifications: CERTIFICATIONS, startQuiz, lastPerformance, sele
           <a href="https://www.syscu.es" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3">
             <img src={isDarkMode ? '/logo.png' : '/logo1.png'} alt="Syscu" className="h-8 w-auto" />
           </a>
-          <button
-            onClick={() => toggleTheme()}
-            className={`p-2 rounded-lg transition-colors ${isDarkMode ? 'glass text-slate-200 hover:border-[#00C9DB]/50' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
-            title={isDarkMode ? translations.header.switchToLight : translations.header.switchToDark}
-          >
-            {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-          </button>
+          <div className="flex items-center gap-3">
+            <LanguageToggle isDarkMode={isDarkMode} />
+            <button
+              onClick={() => toggleTheme()}
+              className={`p-2 rounded-lg transition-colors ${isDarkMode ? 'glass text-slate-200 hover:border-[#00C9DB]/50' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
+              title={isDarkMode ? translations.header.switchToLight : translations.header.switchToDark}
+            >
+              {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
 
         <div className="flex-1 p-6 md:p-12 font-sans">
           <header className="max-w-6xl mx-auto mb-12 text-center">
-            <p className="kicker justify-center mb-4">AWS Certification Path</p>
+            <p className="kicker justify-center mb-4">{translations.menu.certificationPath}</p>
             <h1 className="font-display gradient-text text-5xl md:text-6xl font-extrabold tracking-tight mb-4">
               {translations.menu.certificationSelectorTitle}
             </h1>
             <p className={`text-xl ${isDarkMode ? 'text-slate-400' : 'text-slate-600'} mb-8`}>{translations.menu.certificationSelectorSubtitle}</p>
           </header>
           <main className="max-w-3xl mx-auto space-y-10">
-            {groupCertificationsByLevel(CERTIFICATIONS).map(({ level, label, certs }, groupIdx) => {
+            {groupCertificationsByLevel(CERTIFICATIONS, translations.menu.levelLabels).map(({ level, label, certs }, groupIdx) => {
               const accent = LEVEL_ACCENT[level] || LEVEL_ACCENT.foundational;
               return (
                 <section key={level}>
@@ -141,7 +140,7 @@ const Menu = ({ certifications: CERTIFICATIONS, startQuiz, lastPerformance, sele
                             <div>
                               <h2 className={`font-display text-lg font-bold leading-snug ${isDarkMode ? 'text-white' : 'text-slate-800'}`}>{name}</h2>
                               <p className="text-xs font-mono uppercase tracking-wider mt-1" style={{ color: accent.hex }}>
-                                {code} • {domains?.length ?? 0} dominios
+                                {code} • {domains?.length ?? 0} {translations.menu.domainsCount}
                               </p>
                             </div>
                           </div>
@@ -221,6 +220,7 @@ const Menu = ({ certifications: CERTIFICATIONS, startQuiz, lastPerformance, sele
                 {translations.menu.about}
               </button>
               <div className="w-[1px] mx-2" />
+              <LanguageToggle isDarkMode={isDarkMode} className="!px-6 !py-3 !rounded-full" />
               <button
                 onClick={() => toggleTheme()}
                 className={`px-6 py-3 rounded-full font-bold transition-all ${
@@ -240,15 +240,15 @@ const Menu = ({ certifications: CERTIFICATIONS, startQuiz, lastPerformance, sele
           {activeTab === 'tests' && (
             <div className="space-y-8">
               <div>
-                <p className="kicker mb-3">Domain mastery</p>
+                <p className="kicker mb-3">{translations.menu.domainMasteryKicker}</p>
                 <h2 className={`font-display text-3xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{translations.menu.domainMasteryTests}</h2>
                 <p className={`mb-8 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>{translations.menu.domainDescription}</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                   {domainNumbers.map(domainId => {
                     const domainMeta = domainMetaByNumber.get(domainId);
                     const domainInfo = domainMeta
-                      ? { title: `Dominio ${domainMeta.number}: ${domainMeta.title}`, weight: `${domainMeta.weightPct}%` }
-                      : { title: `Dominio ${domainId}`, weight: 'N/A' };
+                      ? { title: `${translations.menu.domainWord} ${domainMeta.number}: ${domainMeta.title}`, weight: `${domainMeta.weightPct}%` }
+                      : { title: `${translations.menu.domainWord} ${domainId}`, weight: 'N/A' };
                     const pct = lastPerformance ? lastPerformance[domainId] : null;
                     const radius = 50;
                     const circumference = 2 * Math.PI * radius;

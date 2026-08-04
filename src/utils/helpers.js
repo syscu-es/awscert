@@ -1,3 +1,12 @@
+// Resolves a bilingual { es, en } field (or array-of-both, for options) to the
+// active language, falling back to 'es' for any not-yet-migrated content.
+export const localize = (field, language) => {
+  if (field && typeof field === 'object' && !Array.isArray(field)) {
+    return field[language] ?? field.es ?? Object.values(field)[0];
+  }
+  return field;
+};
+
 export const formatTime = (seconds) => {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);

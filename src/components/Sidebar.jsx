@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { ChevronLeft, ChevronRight, Info } from 'lucide-react';
 import { ThemeContext } from '../context/ThemeContext';
-import { translations } from '../translations/es';
+import { useTranslations } from '../context/LanguageContext';
 
 const Sidebar = ({
   currentQ,
@@ -21,6 +21,7 @@ const Sidebar = ({
   notes
 }) => {
   const { isDarkMode } = useContext(ThemeContext);
+  const translations = useTranslations();
 
   if (!currentQ) return null;
 
@@ -41,11 +42,11 @@ const Sidebar = ({
                           <button onClick={() => { setCurrentIndex(idx); setShowFeedback(false); }} className={`w-8 h-8 rounded-full flex items-center justify-center font-bold ${isDarkMode ? 'bg-slate-700 text-slate-200' : 'bg-slate-100'}`}>{idx+1}</button>
                           <div>
                             <div className="text-sm font-medium">{translations.questionPanel.question} {idx + 1}</div>
-                            <div className={`text-xs ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`}>{hasAnswer ? translations.sidebar.answered : 'Sin responder'}</div>
+                            <div className={`text-xs ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`}>{hasAnswer ? translations.sidebar.answered : translations.sidebar.unanswered}</div>
                           </div>
                         </div>
                         <div>
-                          {hasAnswer ? <span className="text-sm text-emerald-600 font-bold">{translations.sidebar.answered}</span> : <span className="text-sm text-red-600 font-bold">Abierta</span>}
+                          {hasAnswer ? <span className="text-sm text-emerald-600 font-bold">{translations.sidebar.answered}</span> : <span className="text-sm text-red-600 font-bold">{translations.sidebar.open}</span>}
                         </div>
                       </div>
                     );
@@ -120,7 +121,7 @@ const Sidebar = ({
         </>
       ) : (
         <div className="h-full flex flex-col justify-center">
-           <h3 className="kicker text-xs mb-6">Desglose de rendimiento</h3>
+           <h3 className="kicker text-xs mb-6">{translations.sidebar.performanceBreakdown}</h3>
            <div className="space-y-4">
               {[...new Set(questions.map(q => q.domain))].sort((a, b) => a - b).map(dom => {
                 const domQs = questions.filter(q => q.domain === dom);
@@ -134,7 +135,7 @@ const Sidebar = ({
                 return (
                   <div key={dom} className={`p-4 rounded-xl border shadow-sm ${isDarkMode ? 'glass border-slate-700' : 'bg-white border-slate-200'}`}>
                     <div className="flex justify-between items-end mb-2">
-                      <span className={`text-sm font-bold ${isDarkMode ? 'text-slate-200' : 'text-slate-700'}`}>Dominio {dom}</span>
+                      <span className={`text-sm font-bold ${isDarkMode ? 'text-slate-200' : 'text-slate-700'}`}>{translations.menu.domainWord} {dom}</span>
                       <span className={`text-xs font-bold ${isDarkMode ? 'text-slate-400' : 'text-slate-400'}`}>{pct}%</span>
                     </div>
                     <div className={`w-full h-2 rounded-full overflow-hidden ${isDarkMode ? 'bg-slate-700' : 'bg-slate-100'}`}>
@@ -149,10 +150,10 @@ const Sidebar = ({
            </div>
            <div className={`mt-12 p-6 rounded-2xl border ${isDarkMode ? 'glass border-[#146EB4]/30' : 'bg-blue-50 border-blue-100'}`}>
              <h4 className={`font-bold flex items-center gap-2 mb-2 italic ${isDarkMode ? 'text-[#4DD8E6]' : 'text-blue-800'}`}>
-               <Info className="w-4 h-4" /> Recomendación de AWS
+               <Info className="w-4 h-4" /> {translations.sidebar.awsRecommendation}
              </h4>
              <p className={`text-sm ${isDarkMode ? 'text-slate-300' : 'text-blue-700'}`}>
-               Para el examen real, AWS recomienda obtener consistentemente al menos 80% en exámenes de práctica antes de tomar el examen.
+               {translations.sidebar.awsRecommendationText}
              </p>
            </div>
         </div>

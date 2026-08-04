@@ -2,730 +2,1516 @@
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.1",
-    "text": "Una organización con más de 200 cuentas de AWS necesita centralizar los hallazgos de seguridad, los registros de AWS CloudTrail y los VPC Flow Logs de todas las cuentas y Regiones en un repositorio normalizado en formato Open Cybersecurity Schema Framework (OCSF) para ejecutar consultas SQL ad hoc. ¿Qué solución cumple con este requisito con el MENOR esfuerzo de desarrollo?",
-    "options": [
-      "Configurar un agregador de AWS Config en la cuenta de seguridad y consultar los datos de configuración con Amazon Athena",
-      "Habilitar Amazon Security Lake con un administrador delegado en la cuenta de seguridad y consultar el lago de datos con Amazon Athena",
-      "Activar la agregación entre Regiones de AWS Security Hub y exportar los hallazgos a Amazon S3 mediante Amazon EventBridge y AWS Lambda",
-      "Habilitar la observabilidad entre cuentas de Amazon CloudWatch y analizar los datos con CloudWatch Logs Insights"
+    "text": {
+      "es": "Una organización con más de 200 cuentas de AWS necesita centralizar los hallazgos de seguridad, los registros de AWS CloudTrail y los VPC Flow Logs de todas las cuentas y Regiones en un repositorio normalizado en formato Open Cybersecurity Schema Framework (OCSF) para ejecutar consultas SQL ad hoc. ¿Qué solución cumple con este requisito con el MENOR esfuerzo de desarrollo?",
+      "en": "An organization with more than 200 AWS accounts needs to centralize security findings, AWS CloudTrail logs, and VPC Flow Logs from all accounts and Regions into a normalized repository in Open Cybersecurity Schema Framework (OCSF) format so it can run ad hoc SQL queries. Which solution meets this requirement with the LEAST development effort?"
+    },
+    "options": {
+      "es": [
+        "Configurar un agregador de AWS Config en la cuenta de seguridad y consultar los datos de configuración con Amazon Athena",
+        "Habilitar Amazon Security Lake con un administrador delegado en la cuenta de seguridad y consultar el lago de datos con Amazon Athena",
+        "Activar la agregación entre Regiones de AWS Security Hub y exportar los hallazgos a Amazon S3 mediante Amazon EventBridge y AWS Lambda",
+        "Habilitar la observabilidad entre cuentas de Amazon CloudWatch y analizar los datos con CloudWatch Logs Insights"
+      ],
+      "en": [
+        "Configure an AWS Config aggregator in the security account and query the configuration data with Amazon Athena",
+        "Enable Amazon Security Lake with a delegated administrator in the security account and query the data lake with Amazon Athena",
+        "Turn on cross-Region aggregation in AWS Security Hub and export the findings to Amazon S3 by using Amazon EventBridge and AWS Lambda",
+        "Enable Amazon CloudWatch cross-account observability and analyze the data with CloudWatch Logs Insights"
+      ]
+    },
+    "correct": [
+      1
     ],
-    "correct": [1],
     "type": "single",
-    "explanation": "Amazon Security Lake recopila y normaliza automáticamente registros y hallazgos de múltiples cuentas y Regiones al formato OCSF en Amazon S3, lo que permite consultarlos con Athena sin construir canalizaciones propias.",
+    "explanation": {
+      "es": "Amazon Security Lake recopila y normaliza automáticamente registros y hallazgos de múltiples cuentas y Regiones al formato OCSF en Amazon S3, lo que permite consultarlos con Athena sin construir canalizaciones propias.",
+      "en": "Amazon Security Lake automatically collects and normalizes logs and findings from multiple accounts and Regions into OCSF format in Amazon S3, which allows them to be queried with Athena without building custom pipelines."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.1",
-    "text": "Un equipo de seguridad debe evaluar de forma continua si los recursos de todas las cuentas de la organización cumplen con el estándar interno (por ejemplo, buckets de Amazon S3 sin acceso público y volúmenes de Amazon EBS cifrados) y corregir automáticamente las desviaciones detectadas. ¿Cuál es la solución MÁS adecuada?",
-    "options": [
-      "Programar una asociación de AWS Systems Manager State Manager que ejecute un script de auditoría en cada instancia de Amazon EC2",
-      "Habilitar Amazon Macie en todas las cuentas para descubrir los recursos mal configurados y generar hallazgos",
-      "Implementar un paquete de conformidad de AWS Config en toda la organización con acciones de remediación automática asociadas a las reglas",
-      "Crear una función de AWS Lambda invocada de forma programada por Amazon EventBridge que recorra los recursos con las API de cada servicio"
+    "text": {
+      "es": "Un equipo de seguridad debe evaluar de forma continua si los recursos de todas las cuentas de la organización cumplen con el estándar interno (por ejemplo, buckets de Amazon S3 sin acceso público y volúmenes de Amazon EBS cifrados) y corregir automáticamente las desviaciones detectadas. ¿Cuál es la solución MÁS adecuada?",
+      "en": "A security team must continuously evaluate whether resources in all of the organization's accounts comply with the internal standard (for example, Amazon S3 buckets with no public access and encrypted Amazon EBS volumes) and automatically remediate any detected drift. Which solution is MOST appropriate?"
+    },
+    "options": {
+      "es": [
+        "Programar una asociación de AWS Systems Manager State Manager que ejecute un script de auditoría en cada instancia de Amazon EC2",
+        "Habilitar Amazon Macie en todas las cuentas para descubrir los recursos mal configurados y generar hallazgos",
+        "Implementar un paquete de conformidad de AWS Config en toda la organización con acciones de remediación automática asociadas a las reglas",
+        "Crear una función de AWS Lambda invocada de forma programada por Amazon EventBridge que recorra los recursos con las API de cada servicio"
+      ],
+      "en": [
+        "Schedule an AWS Systems Manager State Manager association that runs an audit script on every Amazon EC2 instance",
+        "Enable Amazon Macie in all accounts to discover misconfigured resources and generate findings",
+        "Deploy an AWS Config conformance pack across the entire organization with automatic remediation actions attached to the rules",
+        "Create an AWS Lambda function invoked on a schedule by Amazon EventBridge that iterates over resources by using each service's APIs"
+      ]
+    },
+    "correct": [
+      2
     ],
-    "correct": [2],
     "type": "single",
-    "explanation": "Los paquetes de conformidad de AWS Config se despliegan en toda la organización y evalúan continuamente los recursos, y sus reglas admiten acciones de remediación automática mediante documentos de Systems Manager Automation.",
+    "explanation": {
+      "es": "Los paquetes de conformidad de AWS Config se despliegan en toda la organización y evalúan continuamente los recursos, y sus reglas admiten acciones de remediación automática mediante documentos de Systems Manager Automation.",
+      "en": "AWS Config conformance packs are deployed across the entire organization and continuously evaluate resources, and their rules support automatic remediation actions through Systems Manager Automation documents."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.1",
-    "text": "Una empresa quiere detectar dos situaciones en su entorno de AWS: llamadas a la API anómalas que indiquen el uso de credenciales comprometidas, y la presencia de información de identificación personal (PII) sin clasificar en sus buckets de Amazon S3. ¿Qué DOS servicios debe habilitar la empresa?",
-    "options": [
-      "Amazon GuardDuty",
-      "Amazon Inspector",
-      "AWS Trusted Advisor",
-      "Amazon Macie",
-      "Amazon Detective"
+    "text": {
+      "es": "Una empresa quiere detectar dos situaciones en su entorno de AWS: llamadas a la API anómalas que indiquen el uso de credenciales comprometidas, y la presencia de información de identificación personal (PII) sin clasificar en sus buckets de Amazon S3. ¿Qué DOS servicios debe habilitar la empresa?",
+      "en": "A company wants to detect two situations in its AWS environment: anomalous API calls that indicate the use of compromised credentials, and the presence of unclassified personally identifiable information (PII) in its Amazon S3 buckets. Which TWO services should the company enable?"
+    },
+    "options": {
+      "es": [
+        "Amazon GuardDuty",
+        "Amazon Inspector",
+        "AWS Trusted Advisor",
+        "Amazon Macie",
+        "Amazon Detective"
+      ],
+      "en": [
+        "Amazon GuardDuty",
+        "Amazon Inspector",
+        "AWS Trusted Advisor",
+        "Amazon Macie",
+        "Amazon Detective"
+      ]
+    },
+    "correct": [
+      0,
+      3
     ],
-    "correct": [0, 3],
     "type": "multiple",
-    "explanation": "GuardDuty analiza los eventos de CloudTrail y otros orígenes para detectar comportamientos anómalos de credenciales, mientras que Macie descubre y clasifica datos sensibles como PII en Amazon S3.",
+    "explanation": {
+      "es": "GuardDuty analiza los eventos de CloudTrail y otros orígenes para detectar comportamientos anómalos de credenciales, mientras que Macie descubre y clasifica datos sensibles como PII en Amazon S3.",
+      "en": "GuardDuty analyzes CloudTrail events and other sources to detect anomalous credential behavior, while Macie discovers and classifies sensitive data such as PII in Amazon S3."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.2",
-    "text": "Una empresa debe garantizar que todos los eventos de administración de las cuentas de AWS Organizations se registren en un bucket central, que los administradores de las cuentas miembro no puedan detener ni modificar el registro, y que se pueda demostrar que los archivos de log no fueron alterados. ¿Qué solución cumple con estos requisitos?",
-    "options": [
-      "Crear un trail individual en cada cuenta miembro y aplicar una política de bucket restrictiva en el bucket central",
-      "Crear un trail de organización desde la cuenta de administración con la validación de integridad de archivos de log habilitada",
-      "Habilitar AWS CloudTrail Lake en cada cuenta miembro y compartir el almacén de datos de eventos con AWS Resource Access Manager",
-      "Configurar un flujo de entrega de Amazon Data Firehose en cada cuenta que escriba los eventos en el bucket central"
+    "text": {
+      "es": "Una empresa debe garantizar que todos los eventos de administración de las cuentas de AWS Organizations se registren en un bucket central, que los administradores de las cuentas miembro no puedan detener ni modificar el registro, y que se pueda demostrar que los archivos de log no fueron alterados. ¿Qué solución cumple con estos requisitos?",
+      "en": "A company must ensure that all management events from the accounts in AWS Organizations are recorded in a central bucket, that member account administrators cannot stop or modify the logging, and that it can prove the log files were not tampered with. Which solution meets these requirements?"
+    },
+    "options": {
+      "es": [
+        "Crear un trail individual en cada cuenta miembro y aplicar una política de bucket restrictiva en el bucket central",
+        "Crear un trail de organización desde la cuenta de administración con la validación de integridad de archivos de log habilitada",
+        "Habilitar AWS CloudTrail Lake en cada cuenta miembro y compartir el almacén de datos de eventos con AWS Resource Access Manager",
+        "Configurar un flujo de entrega de Amazon Data Firehose en cada cuenta que escriba los eventos en el bucket central"
+      ],
+      "en": [
+        "Create an individual trail in each member account and apply a restrictive bucket policy on the central bucket",
+        "Create an organization trail from the management account with log file integrity validation enabled",
+        "Enable AWS CloudTrail Lake in each member account and share the event data store with AWS Resource Access Manager",
+        "Configure an Amazon Data Firehose delivery stream in each account that writes the events to the central bucket"
+      ]
+    },
+    "correct": [
+      1
     ],
-    "correct": [1],
     "type": "single",
-    "explanation": "Un trail de organización solo puede administrarse desde la cuenta de administración o desde el administrador delegado, por lo que las cuentas miembro no pueden desactivarlo, y la validación de integridad de archivos genera archivos digest firmados que permiten detectar alteraciones.",
+    "explanation": {
+      "es": "Un trail de organización solo puede administrarse desde la cuenta de administración o desde el administrador delegado, por lo que las cuentas miembro no pueden desactivarlo, y la validación de integridad de archivos genera archivos digest firmados que permiten detectar alteraciones.",
+      "en": "An organization trail can be managed only from the management account or the delegated administrator, so member accounts cannot turn it off, and log file integrity validation produces signed digest files that make tampering detectable."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.2",
-    "text": "Tras un hallazgo de Amazon GuardDuty, los analistas necesitan determinar qué instancias de Amazon EC2 se comunicaron con una dirección IP maliciosa y qué nombres de dominio resolvieron esas instancias antes del incidente. ¿Qué DOS orígenes de registro deben estar habilitados?",
-    "options": [
-      "Registros de acceso de Elastic Load Balancing",
-      "VPC Flow Logs",
-      "Eventos de datos de AWS CloudTrail para Amazon S3",
-      "Registros estándar de Amazon CloudFront",
-      "Registros de consultas de Amazon Route 53 Resolver"
+    "text": {
+      "es": "Tras un hallazgo de Amazon GuardDuty, los analistas necesitan determinar qué instancias de Amazon EC2 se comunicaron con una dirección IP maliciosa y qué nombres de dominio resolvieron esas instancias antes del incidente. ¿Qué DOS orígenes de registro deben estar habilitados?",
+      "en": "Following an Amazon GuardDuty finding, analysts need to determine which Amazon EC2 instances communicated with a malicious IP address and which domain names those instances resolved before the incident. Which TWO log sources must be enabled?"
+    },
+    "options": {
+      "es": [
+        "Registros de acceso de Elastic Load Balancing",
+        "VPC Flow Logs",
+        "Eventos de datos de AWS CloudTrail para Amazon S3",
+        "Registros estándar de Amazon CloudFront",
+        "Registros de consultas de Amazon Route 53 Resolver"
+      ],
+      "en": [
+        "Elastic Load Balancing access logs",
+        "VPC Flow Logs",
+        "AWS CloudTrail data events for Amazon S3",
+        "Amazon CloudFront standard logs",
+        "Amazon Route 53 Resolver query logs"
+      ]
+    },
+    "correct": [
+      1,
+      4
     ],
-    "correct": [1, 4],
     "type": "multiple",
-    "explanation": "Los VPC Flow Logs registran los pares de direcciones IP y puertos del tráfico de red de las interfaces, y los registros de consultas de Route 53 Resolver muestran los dominios que resolvió cada recurso de la VPC.",
+    "explanation": {
+      "es": "Los VPC Flow Logs registran los pares de direcciones IP y puertos del tráfico de red de las interfaces, y los registros de consultas de Route 53 Resolver muestran los dominios que resolvió cada recurso de la VPC.",
+      "en": "VPC Flow Logs record the IP address and port pairs of network traffic on the interfaces, and Route 53 Resolver query logs show the domains that each VPC resource resolved."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.2",
-    "text": "Una empresa almacena varios terabytes de registros de seguridad comprimidos y particionados por fecha en Amazon S3. El equipo de seguridad realiza investigaciones ad hoc unas pocas veces por semana y quiere minimizar el costo y la sobrecarga operativa. ¿Qué enfoque de análisis se debe utilizar?",
-    "options": [
-      "Ingerir todos los registros en un dominio de Amazon OpenSearch Service y crear paneles de búsqueda",
-      "Copiar los registros a Amazon CloudWatch Logs y consultarlos con CloudWatch Logs Insights",
-      "Consultar los registros directamente en Amazon S3 con Amazon Athena mediante tablas particionadas del AWS Glue Data Catalog",
-      "Conectar Amazon Managed Grafana al bucket de Amazon S3 como origen de datos y crear consultas"
+    "text": {
+      "es": "Una empresa almacena varios terabytes de registros de seguridad comprimidos y particionados por fecha en Amazon S3. El equipo de seguridad realiza investigaciones ad hoc unas pocas veces por semana y quiere minimizar el costo y la sobrecarga operativa. ¿Qué enfoque de análisis se debe utilizar?",
+      "en": "A company stores several terabytes of compressed security logs, partitioned by date, in Amazon S3. The security team performs ad hoc investigations a few times per week and wants to minimize cost and operational overhead. Which analysis approach should be used?"
+    },
+    "options": {
+      "es": [
+        "Ingerir todos los registros en un dominio de Amazon OpenSearch Service y crear paneles de búsqueda",
+        "Copiar los registros a Amazon CloudWatch Logs y consultarlos con CloudWatch Logs Insights",
+        "Consultar los registros directamente en Amazon S3 con Amazon Athena mediante tablas particionadas del AWS Glue Data Catalog",
+        "Conectar Amazon Managed Grafana al bucket de Amazon S3 como origen de datos y crear consultas"
+      ],
+      "en": [
+        "Ingest all the logs into an Amazon OpenSearch Service domain and create search dashboards",
+        "Copy the logs to Amazon CloudWatch Logs and query them with CloudWatch Logs Insights",
+        "Query the logs directly in Amazon S3 with Amazon Athena by using partitioned AWS Glue Data Catalog tables",
+        "Connect Amazon Managed Grafana to the Amazon S3 bucket as a data source and create queries"
+      ]
+    },
+    "correct": [
+      2
     ],
-    "correct": [2],
     "type": "single",
-    "explanation": "Athena consulta los datos en su ubicación dentro de Amazon S3 y cobra por volumen escaneado, lo que resulta más económico que mantener un clúster o duplicar los datos cuando las consultas son esporádicas; las particiones reducen aún más el volumen escaneado.",
+    "explanation": {
+      "es": "Athena consulta los datos en su ubicación dentro de Amazon S3 y cobra por volumen escaneado, lo que resulta más económico que mantener un clúster o duplicar los datos cuando las consultas son esporádicas; las particiones reducen aún más el volumen escaneado.",
+      "en": "Athena queries the data in place in Amazon S3 and charges by the volume scanned, which is more economical than maintaining a cluster or duplicating the data when queries are infrequent; partitions further reduce the volume scanned."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.3",
-    "text": "Una función de AWS Lambda se ejecuta correctamente, pero no aparece ningún grupo de registros ni evento en Amazon CloudWatch Logs. La función no está asociada a una VPC. ¿Cuál es la causa MÁS probable?",
-    "options": [
-      "El rol de ejecución de la función no incluye los permisos logs:CreateLogGroup, logs:CreateLogStream y logs:PutLogEvents",
-      "Al grupo de registros de la función le falta una política de recursos que permita a Lambda escribir eventos",
-      "La retención del grupo de registros está configurada en cero días, por lo que los eventos se eliminan de inmediato",
-      "La función necesita un endpoint de VPC de interfaz para CloudWatch Logs"
+    "text": {
+      "es": "Una función de AWS Lambda se ejecuta correctamente, pero no aparece ningún grupo de registros ni evento en Amazon CloudWatch Logs. La función no está asociada a una VPC. ¿Cuál es la causa MÁS probable?",
+      "en": "An AWS Lambda function runs successfully, but no log group or event appears in Amazon CloudWatch Logs. The function is not attached to a VPC. What is the MOST likely cause?"
+    },
+    "options": {
+      "es": [
+        "El rol de ejecución de la función no incluye los permisos logs:CreateLogGroup, logs:CreateLogStream y logs:PutLogEvents",
+        "Al grupo de registros de la función le falta una política de recursos que permita a Lambda escribir eventos",
+        "La retención del grupo de registros está configurada en cero días, por lo que los eventos se eliminan de inmediato",
+        "La función necesita un endpoint de VPC de interfaz para CloudWatch Logs"
+      ],
+      "en": [
+        "The function's execution role does not include the logs:CreateLogGroup, logs:CreateLogStream, and logs:PutLogEvents permissions",
+        "The function's log group is missing a resource policy that allows Lambda to write events",
+        "The log group retention is set to zero days, so the events are deleted immediately",
+        "The function needs an interface VPC endpoint for CloudWatch Logs"
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "Lambda escribe sus registros usando los permisos del rol de ejecución; si faltan las acciones de CloudWatch Logs, la función se ejecuta pero no se crean el grupo de registros ni los eventos.",
+    "explanation": {
+      "es": "Lambda escribe sus registros usando los permisos del rol de ejecución; si faltan las acciones de CloudWatch Logs, la función se ejecuta pero no se crean el grupo de registros ni los eventos.",
+      "en": "Lambda writes its logs by using the execution role's permissions; if the CloudWatch Logs actions are missing, the function runs but neither the log group nor the events are created."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.3",
-    "text": "Instancias de Amazon EC2 en subredes privadas sin acceso a internet tienen el agente de CloudWatch instalado y un perfil de instancia con la política CloudWatchAgentServerPolicy, pero los registros de la aplicación no llegan a Amazon CloudWatch Logs. ¿Qué acción resuelve el problema?",
-    "options": [
-      "Habilitar la monitorización detallada en las instancias de Amazon EC2",
-      "Adjuntar el perfil de instancia directamente al grupo de registros de destino",
-      "Aumentar el periodo de retención del grupo de registros de destino",
-      "Crear endpoints de VPC de interfaz para CloudWatch Logs y para AWS Systems Manager en las subredes privadas"
+    "text": {
+      "es": "Instancias de Amazon EC2 en subredes privadas sin acceso a internet tienen el agente de CloudWatch instalado y un perfil de instancia con la política CloudWatchAgentServerPolicy, pero los registros de la aplicación no llegan a Amazon CloudWatch Logs. ¿Qué acción resuelve el problema?",
+      "en": "Amazon EC2 instances in private subnets with no internet access have the CloudWatch agent installed and an instance profile with the CloudWatchAgentServerPolicy, but application logs are not reaching Amazon CloudWatch Logs. Which action resolves the problem?"
+    },
+    "options": {
+      "es": [
+        "Habilitar la monitorización detallada en las instancias de Amazon EC2",
+        "Adjuntar el perfil de instancia directamente al grupo de registros de destino",
+        "Aumentar el periodo de retención del grupo de registros de destino",
+        "Crear endpoints de VPC de interfaz para CloudWatch Logs y para AWS Systems Manager en las subredes privadas"
+      ],
+      "en": [
+        "Enable detailed monitoring on the Amazon EC2 instances",
+        "Attach the instance profile directly to the destination log group",
+        "Increase the retention period of the destination log group",
+        "Create interface VPC endpoints for CloudWatch Logs and for AWS Systems Manager in the private subnets"
+      ]
+    },
+    "correct": [
+      3
     ],
-    "correct": [3],
     "type": "single",
-    "explanation": "El agente necesita alcanzar el endpoint público de CloudWatch Logs; sin gateway NAT, los endpoints de VPC de interfaz proporcionan esa conectividad privada, y los de Systems Manager permiten distribuir y validar la configuración del agente.",
+    "explanation": {
+      "es": "El agente necesita alcanzar el endpoint público de CloudWatch Logs; sin gateway NAT, los endpoints de VPC de interfaz proporcionan esa conectividad privada, y los de Systems Manager permiten distribuir y validar la configuración del agente.",
+      "en": "The agent needs to reach the public CloudWatch Logs endpoint; with no NAT gateway, interface VPC endpoints provide that private connectivity, and the Systems Manager endpoints allow the agent configuration to be distributed and validated."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.3",
-    "text": "Un equipo habilitó los registros de acceso y de ejecución en la etapa de una API REST de Amazon API Gateway, pero no se crea ningún grupo de registros en Amazon CloudWatch. ¿Qué debe verificar PRIMERO el ingeniero de seguridad?",
-    "options": [
-      "Que el rastreo de AWS X-Ray esté habilitado en la etapa de la API",
-      "Que exista un rol de IAM para CloudWatch configurado en los ajustes de la cuenta de API Gateway en esa Región",
-      "Que la política de recursos de la API permita la acción logs:PutLogEvents",
-      "Que el tipo de endpoint de la API sea regional en lugar de perimetral"
+    "text": {
+      "es": "Un equipo habilitó los registros de acceso y de ejecución en la etapa de una API REST de Amazon API Gateway, pero no se crea ningún grupo de registros en Amazon CloudWatch. ¿Qué debe verificar PRIMERO el ingeniero de seguridad?",
+      "en": "A team enabled access logging and execution logging on the stage of an Amazon API Gateway REST API, but no log group is created in Amazon CloudWatch. What should the security engineer check FIRST?"
+    },
+    "options": {
+      "es": [
+        "Que el rastreo de AWS X-Ray esté habilitado en la etapa de la API",
+        "Que exista un rol de IAM para CloudWatch configurado en los ajustes de la cuenta de API Gateway en esa Región",
+        "Que la política de recursos de la API permita la acción logs:PutLogEvents",
+        "Que el tipo de endpoint de la API sea regional en lugar de perimetral"
+      ],
+      "en": [
+        "That AWS X-Ray tracing is enabled on the API stage",
+        "That a CloudWatch IAM role is configured in the API Gateway account settings in that Region",
+        "That the API resource policy allows the logs:PutLogEvents action",
+        "That the API endpoint type is regional instead of edge-optimized"
+      ]
+    },
+    "correct": [
+      1
     ],
-    "correct": [1],
     "type": "single",
-    "explanation": "API Gateway requiere un rol de IAM configurado a nivel de cuenta y Región (cloudWatchRoleArn) para poder escribir en CloudWatch Logs; sin ese rol, la configuración de la etapa no produce registros.",
+    "explanation": {
+      "es": "API Gateway requiere un rol de IAM configurado a nivel de cuenta y Región (cloudWatchRoleArn) para poder escribir en CloudWatch Logs; sin ese rol, la configuración de la etapa no produce registros.",
+      "en": "API Gateway requires an IAM role configured at the account and Region level (cloudWatchRoleArn) in order to write to CloudWatch Logs; without that role, the stage configuration produces no logs."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.1",
-    "text": "Una organización quiere que cada hallazgo crítico de AWS Security Hub genere un elemento de trabajo rastreable, asignable a un analista y vinculado a un runbook que se pueda ejecutar desde la misma consola. ¿Qué solución cumple con este requisito?",
-    "options": [
-      "Enviar los hallazgos a un tema de Amazon SNS y documentar los runbooks en un wiki interno",
-      "Crear un panel de Amazon Managed Grafana con alertas asociadas a los hallazgos críticos",
-      "Integrar los hallazgos con AWS Systems Manager OpsCenter para crear OpsItems asociados a documentos de Systems Manager Automation",
-      "Exportar los hallazgos a Amazon Security Lake y consultarlos con Amazon Athena de forma programada"
+    "text": {
+      "es": "Una organización quiere que cada hallazgo crítico de AWS Security Hub genere un elemento de trabajo rastreable, asignable a un analista y vinculado a un runbook que se pueda ejecutar desde la misma consola. ¿Qué solución cumple con este requisito?",
+      "en": "An organization wants every critical AWS Security Hub finding to generate a trackable work item that can be assigned to an analyst and linked to a runbook that can be run from the same console. Which solution meets this requirement?"
+    },
+    "options": {
+      "es": [
+        "Enviar los hallazgos a un tema de Amazon SNS y documentar los runbooks en un wiki interno",
+        "Crear un panel de Amazon Managed Grafana con alertas asociadas a los hallazgos críticos",
+        "Integrar los hallazgos con AWS Systems Manager OpsCenter para crear OpsItems asociados a documentos de Systems Manager Automation",
+        "Exportar los hallazgos a Amazon Security Lake y consultarlos con Amazon Athena de forma programada"
+      ],
+      "en": [
+        "Send the findings to an Amazon SNS topic and document the runbooks in an internal wiki",
+        "Create an Amazon Managed Grafana dashboard with alerts tied to the critical findings",
+        "Integrate the findings with AWS Systems Manager OpsCenter to create OpsItems associated with Systems Manager Automation documents",
+        "Export the findings to Amazon Security Lake and query them with Amazon Athena on a schedule"
+      ]
+    },
+    "correct": [
+      2
     ],
-    "correct": [2],
     "type": "single",
-    "explanation": "OpsCenter convierte los hallazgos en OpsItems con estado, propietario y prioridad, y permite asociar documentos de Automation como runbooks ejecutables desde el propio elemento de trabajo.",
+    "explanation": {
+      "es": "OpsCenter convierte los hallazgos en OpsItems con estado, propietario y prioridad, y permite asociar documentos de Automation como runbooks ejecutables desde el propio elemento de trabajo.",
+      "en": "OpsCenter turns findings into OpsItems with status, owner, and priority, and it allows Automation documents to be associated as runbooks that can be run from the work item itself."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.1",
-    "text": "Un equipo de seguridad necesita validar que sus controles de detección y sus procedimientos de respuesta funcionan realmente cuando un componente se degrada, mediante experimentos controlados y repetibles en un entorno de preproducción. ¿Qué servicio debe utilizar?",
-    "options": [
-      "AWS Fault Injection Service",
-      "AWS Resilience Hub",
-      "AWS Well-Architected Tool",
-      "AWS Trusted Advisor"
+    "text": {
+      "es": "Un equipo de seguridad necesita validar que sus controles de detección y sus procedimientos de respuesta funcionan realmente cuando un componente se degrada, mediante experimentos controlados y repetibles en un entorno de preproducción. ¿Qué servicio debe utilizar?",
+      "en": "A security team needs to validate that its detective controls and response procedures actually work when a component degrades, by using controlled, repeatable experiments in a preproduction environment. Which service should the team use?"
+    },
+    "options": {
+      "es": [
+        "AWS Fault Injection Service",
+        "AWS Resilience Hub",
+        "AWS Well-Architected Tool",
+        "AWS Trusted Advisor"
+      ],
+      "en": [
+        "AWS Fault Injection Service",
+        "AWS Resilience Hub",
+        "AWS Well-Architected Tool",
+        "AWS Trusted Advisor"
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "AWS Fault Injection Service ejecuta experimentos de ingeniería del caos que inyectan fallos reales con condiciones de parada, lo que permite comprobar si las alarmas y los runbooks de respuesta se activan como se espera; los otros servicios solo evalúan o recomiendan.",
+    "explanation": {
+      "es": "AWS Fault Injection Service ejecuta experimentos de ingeniería del caos que inyectan fallos reales con condiciones de parada, lo que permite comprobar si las alarmas y los runbooks de respuesta se activan como se espera; los otros servicios solo evalúan o recomiendan.",
+      "en": "AWS Fault Injection Service runs chaos engineering experiments that inject real faults with stop conditions, which makes it possible to verify whether alarms and response runbooks trigger as expected; the other services only assess or make recommendations."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.1",
-    "text": "Antes de que ocurra un incidente, una empresa quiere garantizar que sus analistas puedan investigar recursos comprometidos en cualquier cuenta miembro sin ampliar el radio de impacto. ¿Qué DOS acciones de preparación debe implementar?",
-    "options": [
-      "Aprovisionar de antemano en cada cuenta miembro un rol de IAM de respuesta a incidentes con una política de confianza que permita su asunción desde la cuenta de seguridad",
-      "Almacenar las credenciales del usuario raíz de cada cuenta miembro en AWS Secrets Manager para que los analistas las usen durante un incidente",
-      "Mantener una cuenta de análisis forense dedicada con una VPC aislada que no tenga rutas hacia las cargas de trabajo de producción",
-      "Deshabilitar AWS CloudTrail durante la investigación para evitar la contaminación de la evidencia",
-      "Otorgar de forma permanente la política AdministratorAccess a los analistas en todas las cuentas de la organización"
+    "text": {
+      "es": "Antes de que ocurra un incidente, una empresa quiere garantizar que sus analistas puedan investigar recursos comprometidos en cualquier cuenta miembro sin ampliar el radio de impacto. ¿Qué DOS acciones de preparación debe implementar?",
+      "en": "Before an incident occurs, a company wants to ensure that its analysts can investigate compromised resources in any member account without expanding the blast radius. Which TWO preparation actions should the company implement?"
+    },
+    "options": {
+      "es": [
+        "Aprovisionar de antemano en cada cuenta miembro un rol de IAM de respuesta a incidentes con una política de confianza que permita su asunción desde la cuenta de seguridad",
+        "Almacenar las credenciales del usuario raíz de cada cuenta miembro en AWS Secrets Manager para que los analistas las usen durante un incidente",
+        "Mantener una cuenta de análisis forense dedicada con una VPC aislada que no tenga rutas hacia las cargas de trabajo de producción",
+        "Deshabilitar AWS CloudTrail durante la investigación para evitar la contaminación de la evidencia",
+        "Otorgar de forma permanente la política AdministratorAccess a los analistas en todas las cuentas de la organización"
+      ],
+      "en": [
+        "Preprovision an incident response IAM role in each member account with a trust policy that allows it to be assumed from the security account",
+        "Store each member account's root user credentials in AWS Secrets Manager so analysts can use them during an incident",
+        "Maintain a dedicated forensic analysis account with an isolated VPC that has no routes to production workloads",
+        "Disable AWS CloudTrail during the investigation to avoid contaminating the evidence",
+        "Permanently grant the AdministratorAccess policy to the analysts in all accounts in the organization"
+      ]
+    },
+    "correct": [
+      0,
+      2
     ],
-    "correct": [0, 2],
     "type": "multiple",
-    "explanation": "Preaprovisionar roles de respuesta con confianza entre cuentas garantiza acceso inmediato y auditable sin credenciales estáticas, y una cuenta forense aislada permite analizar artefactos sin exponer los entornos productivos.",
+    "explanation": {
+      "es": "Preaprovisionar roles de respuesta con confianza entre cuentas garantiza acceso inmediato y auditable sin credenciales estáticas, y una cuenta forense aislada permite analizar artefactos sin exponer los entornos productivos.",
+      "en": "Preprovisioning response roles with cross-account trust guarantees immediate, auditable access without static credentials, and an isolated forensic account allows artifacts to be analyzed without exposing production environments."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.2",
-    "text": "Amazon GuardDuty genera un hallazgo de acceso no autorizado relacionado con un rol de IAM. El equipo necesita comprender qué actividad realizó ese rol durante las últimas semanas, con qué recursos interactuó y si el comportamiento es inusual, sin construir consultas propias. ¿Qué servicio debe utilizar?",
-    "options": [
-      "Amazon Security Lake",
-      "AWS Config",
-      "IAM Access Analyzer",
-      "Amazon Detective"
+    "text": {
+      "es": "Amazon GuardDuty genera un hallazgo de acceso no autorizado relacionado con un rol de IAM. El equipo necesita comprender qué actividad realizó ese rol durante las últimas semanas, con qué recursos interactuó y si el comportamiento es inusual, sin construir consultas propias. ¿Qué servicio debe utilizar?",
+      "en": "Amazon GuardDuty generates an unauthorized access finding related to an IAM role. The team needs to understand what activity that role performed over the past few weeks, which resources it interacted with, and whether the behavior is unusual, without building custom queries. Which service should the team use?"
+    },
+    "options": {
+      "es": [
+        "Amazon Security Lake",
+        "AWS Config",
+        "IAM Access Analyzer",
+        "Amazon Detective"
+      ],
+      "en": [
+        "Amazon Security Lake",
+        "AWS Config",
+        "IAM Access Analyzer",
+        "Amazon Detective"
+      ]
+    },
+    "correct": [
+      3
     ],
-    "correct": [3],
     "type": "single",
-    "explanation": "Amazon Detective crea automáticamente un gráfico de comportamiento con los datos históricos de CloudTrail, VPC Flow Logs y GuardDuty, y presenta perfiles de entidad y líneas base que aceleran el análisis de causa raíz.",
+    "explanation": {
+      "es": "Amazon Detective crea automáticamente un gráfico de comportamiento con los datos históricos de CloudTrail, VPC Flow Logs y GuardDuty, y presenta perfiles de entidad y líneas base que aceleran el análisis de causa raíz.",
+      "en": "Amazon Detective automatically builds a behavior graph from historical CloudTrail, VPC Flow Logs, and GuardDuty data, and it presents entity profiles and baselines that accelerate root cause analysis."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.2",
-    "text": "Se confirma que una instancia de Amazon EC2 en producción está comprometida. El equipo debe contener la amenaza y preservar la evidencia, incluido el contenido de la memoria, para el análisis posterior. ¿Cuál es la secuencia MÁS adecuada?",
-    "options": [
-      "Terminar la instancia de inmediato y lanzar un reemplazo desde la AMI más reciente",
-      "Reemplazar el grupo de seguridad por uno sin reglas, desasociar la instancia del grupo de Auto Scaling y del balanceador de carga, capturar un volcado de memoria y crear instantáneas de los volúmenes de Amazon EBS",
-      "Detener la instancia para congelar su estado y luego crear instantáneas de los volúmenes de Amazon EBS",
-      "Eliminar el perfil de instancia y aplicar una ACL de red que bloquee todo el tráfico de la subred"
+    "text": {
+      "es": "Se confirma que una instancia de Amazon EC2 en producción está comprometida. El equipo debe contener la amenaza y preservar la evidencia, incluido el contenido de la memoria, para el análisis posterior. ¿Cuál es la secuencia MÁS adecuada?",
+      "en": "An Amazon EC2 instance in production is confirmed to be compromised. The team must contain the threat and preserve the evidence, including memory contents, for later analysis. Which sequence is MOST appropriate?"
+    },
+    "options": {
+      "es": [
+        "Terminar la instancia de inmediato y lanzar un reemplazo desde la AMI más reciente",
+        "Reemplazar el grupo de seguridad por uno sin reglas, desasociar la instancia del grupo de Auto Scaling y del balanceador de carga, capturar un volcado de memoria y crear instantáneas de los volúmenes de Amazon EBS",
+        "Detener la instancia para congelar su estado y luego crear instantáneas de los volúmenes de Amazon EBS",
+        "Eliminar el perfil de instancia y aplicar una ACL de red que bloquee todo el tráfico de la subred"
+      ],
+      "en": [
+        "Terminate the instance immediately and launch a replacement from the most recent AMI",
+        "Replace the security group with one that has no rules, detach the instance from the Auto Scaling group and the load balancer, capture a memory dump, and create snapshots of the Amazon EBS volumes",
+        "Stop the instance to freeze its state and then create snapshots of the Amazon EBS volumes",
+        "Delete the instance profile and apply a network ACL that blocks all traffic in the subnet"
+      ]
+    },
+    "correct": [
+      1
     ],
-    "correct": [1],
     "type": "single",
-    "explanation": "Aislar la instancia con un grupo de seguridad sin reglas la contiene sin apagarla, lo que permite capturar la memoria volátil antes de las instantáneas de disco; terminar o detener la instancia destruye la evidencia en memoria y una ACL de subred afectaría a recursos no involucrados.",
+    "explanation": {
+      "es": "Aislar la instancia con un grupo de seguridad sin reglas la contiene sin apagarla, lo que permite capturar la memoria volátil antes de las instantáneas de disco; terminar o detener la instancia destruye la evidencia en memoria y una ACL de subred afectaría a recursos no involucrados.",
+      "en": "Isolating the instance with a security group that has no rules contains it without shutting it down, which allows volatile memory to be captured before the disk snapshots; terminating or stopping the instance destroys the evidence in memory, and a subnet ACL would affect uninvolved resources."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.2",
-    "text": "Los artefactos forenses recopilados durante una investigación deben conservarse en Amazon S3 de forma que ningún principal, incluidos los administradores, pueda eliminarlos ni sobrescribirlos durante el periodo de retención legal. ¿Qué configuración cumple con el requisito?",
-    "options": [
-      "Habilitar el versionado del bucket y activar MFA Delete",
-      "Aplicar una política de bucket que deniegue s3:DeleteObject a todos los principales excepto al usuario raíz",
-      "Habilitar S3 Object Lock en modo de cumplimiento con un periodo de retención definido, en un bucket dedicado de la cuenta forense",
-      "Configurar una política de ciclo de vida que transicione los objetos a S3 Glacier Deep Archive"
+    "text": {
+      "es": "Los artefactos forenses recopilados durante una investigación deben conservarse en Amazon S3 de forma que ningún principal, incluidos los administradores, pueda eliminarlos ni sobrescribirlos durante el periodo de retención legal. ¿Qué configuración cumple con el requisito?",
+      "en": "The forensic artifacts collected during an investigation must be retained in Amazon S3 so that no principal, including administrators, can delete or overwrite them during the legal retention period. Which configuration meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Habilitar el versionado del bucket y activar MFA Delete",
+        "Aplicar una política de bucket que deniegue s3:DeleteObject a todos los principales excepto al usuario raíz",
+        "Habilitar S3 Object Lock en modo de cumplimiento con un periodo de retención definido, en un bucket dedicado de la cuenta forense",
+        "Configurar una política de ciclo de vida que transicione los objetos a S3 Glacier Deep Archive"
+      ],
+      "en": [
+        "Enable bucket versioning and turn on MFA Delete",
+        "Apply a bucket policy that denies s3:DeleteObject to all principals except the root user",
+        "Enable S3 Object Lock in compliance mode with a defined retention period, in a dedicated bucket in the forensic account",
+        "Configure a lifecycle policy that transitions the objects to S3 Glacier Deep Archive"
+      ]
+    },
+    "correct": [
+      2
     ],
-    "correct": [2],
     "type": "single",
-    "explanation": "S3 Object Lock en modo de cumplimiento impide que cualquier usuario, incluido el raíz de la cuenta, elimine o sobrescriba la versión del objeto hasta que expire la retención, lo que garantiza la cadena de custodia.",
+    "explanation": {
+      "es": "S3 Object Lock en modo de cumplimiento impide que cualquier usuario, incluido el raíz de la cuenta, elimine o sobrescriba la versión del objeto hasta que expire la retención, lo que garantiza la cadena de custodia.",
+      "en": "S3 Object Lock in compliance mode prevents any user, including the account root user, from deleting or overwriting the object version until the retention expires, which guarantees the chain of custody."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.1",
-    "text": "Una aplicación web detrás de Amazon CloudFront sufre un aumento repentino de solicitudes HTTP POST hacia /api/login procedentes de miles de direcciones IP distintas, lo que agota el backend de autenticación. ¿Qué control mitiga el ataque de forma MÁS eficaz?",
-    "options": [
-      "Habilitar AWS Shield Standard en la distribución de CloudFront",
-      "Agregar reglas de ACL de red que denieguen los rangos de direcciones IP de origen",
-      "Asociar a la distribución una web ACL de AWS WAF con una regla basada en tasa delimitada al URI /api/login y una acción de CAPTCHA",
-      "Activar la restricción geográfica de CloudFront para los países con más solicitudes"
+    "text": {
+      "es": "Una aplicación web detrás de Amazon CloudFront sufre un aumento repentino de solicitudes HTTP POST hacia /api/login procedentes de miles de direcciones IP distintas, lo que agota el backend de autenticación. ¿Qué control mitiga el ataque de forma MÁS eficaz?",
+      "en": "A web application behind Amazon CloudFront experiences a sudden surge of HTTP POST requests to /api/login from thousands of different IP addresses, which exhausts the authentication backend. Which control mitigates the attack MOST effectively?"
+    },
+    "options": {
+      "es": [
+        "Habilitar AWS Shield Standard en la distribución de CloudFront",
+        "Agregar reglas de ACL de red que denieguen los rangos de direcciones IP de origen",
+        "Asociar a la distribución una web ACL de AWS WAF con una regla basada en tasa delimitada al URI /api/login y una acción de CAPTCHA",
+        "Activar la restricción geográfica de CloudFront para los países con más solicitudes"
+      ],
+      "en": [
+        "Enable AWS Shield Standard on the CloudFront distribution",
+        "Add network ACL rules that deny the source IP address ranges",
+        "Associate an AWS WAF web ACL with the distribution, using a rate-based rule scoped to the /api/login URI with a CAPTCHA action",
+        "Turn on CloudFront geographic restriction for the countries with the most requests"
+      ]
+    },
+    "correct": [
+      2
     ],
-    "correct": [2],
     "type": "single",
-    "explanation": "Una regla basada en tasa de AWS WAF con criterio de delimitación por URI limita las solicitudes por origen solo en el endpoint atacado, y el CAPTCHA distingue a los clientes automatizados; Shield Standard protege en las capas 3 y 4 y las ACL de red no inspeccionan HTTP.",
+    "explanation": {
+      "es": "Una regla basada en tasa de AWS WAF con criterio de delimitación por URI limita las solicitudes por origen solo en el endpoint atacado, y el CAPTCHA distingue a los clientes automatizados; Shield Standard protege en las capas 3 y 4 y las ACL de red no inspeccionan HTTP.",
+      "en": "An AWS WAF rate-based rule with a URI scope-down statement limits requests per source only on the endpoint under attack, and the CAPTCHA distinguishes automated clients; Shield Standard protects at layers 3 and 4, and network ACLs do not inspect HTTP."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.1",
-    "text": "Una empresa sirve contenido estático desde un bucket de Amazon S3 mediante Amazon CloudFront. Debe garantizar que el bucket solo sea accesible a través de CloudFront y mitigar los riesgos del OWASP Top 10 en la capa perimetral. ¿Qué DOS acciones debe realizar?",
-    "options": [
-      "Configurar el control de acceso de origen (OAC) de CloudFront y una política de bucket que solo permita el acceso a esa distribución",
-      "Habilitar CORS en el bucket de Amazon S3 para restringir los orígenes permitidos",
-      "Asociar a la distribución una web ACL de AWS WAF con grupos de reglas administradas de AWS, como el conjunto de reglas básicas",
-      "Habilitar el alojamiento de sitio web estático en el bucket y otorgar acceso público de solo lectura",
-      "Configurar AWS Shield Advanced para inspeccionar las cargas útiles HTTP en busca de inyección de SQL"
+    "text": {
+      "es": "Una empresa sirve contenido estático desde un bucket de Amazon S3 mediante Amazon CloudFront. Debe garantizar que el bucket solo sea accesible a través de CloudFront y mitigar los riesgos del OWASP Top 10 en la capa perimetral. ¿Qué DOS acciones debe realizar?",
+      "en": "A company serves static content from an Amazon S3 bucket through Amazon CloudFront. It must ensure the bucket is accessible only through CloudFront and mitigate OWASP Top 10 risks at the edge layer. Which TWO actions should the company take?"
+    },
+    "options": {
+      "es": [
+        "Configurar el control de acceso de origen (OAC) de CloudFront y una política de bucket que solo permita el acceso a esa distribución",
+        "Habilitar CORS en el bucket de Amazon S3 para restringir los orígenes permitidos",
+        "Asociar a la distribución una web ACL de AWS WAF con grupos de reglas administradas de AWS, como el conjunto de reglas básicas",
+        "Habilitar el alojamiento de sitio web estático en el bucket y otorgar acceso público de solo lectura",
+        "Configurar AWS Shield Advanced para inspeccionar las cargas útiles HTTP en busca de inyección de SQL"
+      ],
+      "en": [
+        "Configure CloudFront origin access control (OAC) and a bucket policy that allows access only to that distribution",
+        "Enable CORS on the Amazon S3 bucket to restrict the allowed origins",
+        "Associate an AWS WAF web ACL with the distribution, using AWS managed rule groups such as the core rule set",
+        "Enable static website hosting on the bucket and grant public read-only access",
+        "Configure AWS Shield Advanced to inspect HTTP payloads for SQL injection"
+      ]
+    },
+    "correct": [
+      0,
+      2
     ],
-    "correct": [0, 2],
     "type": "multiple",
-    "explanation": "El control de acceso de origen firma las solicitudes de CloudFront hacia S3 y permite mantener el bucket privado, mientras que los grupos de reglas administradas de AWS WAF cubren categorías del OWASP Top 10 como inyección de SQL y cross-site scripting. CORS no es un control de autorización y Shield Advanced no inspecciona contenido HTTP por sí mismo.",
+    "explanation": {
+      "es": "El control de acceso de origen firma las solicitudes de CloudFront hacia S3 y permite mantener el bucket privado, mientras que los grupos de reglas administradas de AWS WAF cubren categorías del OWASP Top 10 como inyección de SQL y cross-site scripting. CORS no es un control de autorización y Shield Advanced no inspecciona contenido HTTP por sí mismo.",
+      "en": "Origin access control signs CloudFront requests to S3 and allows the bucket to remain private, while AWS WAF managed rule groups cover OWASP Top 10 categories such as SQL injection and cross-site scripting. CORS is not an authorization control, and Shield Advanced does not inspect HTTP content on its own."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.1",
-    "text": "Un sitio de comercio electrónico recibe tráfico automatizado que rota constantemente sus direcciones IP y falsifica el encabezado User-Agent para simular navegadores reales. El equipo necesita distinguir los bots de los usuarios legítimos sin bloquear a los clientes válidos. ¿Qué solución es la MÁS adecuada?",
-    "options": [
-      "Una regla basada en tasa de AWS WAF por dirección IP de origen",
-      "La restricción geográfica de Amazon CloudFront",
-      "AWS Shield Advanced con la protección automática de la capa de aplicación",
-      "El grupo de reglas administradas AWS WAF Bot Control con desafíos de token de aplicación y huella digital del cliente"
+    "text": {
+      "es": "Un sitio de comercio electrónico recibe tráfico automatizado que rota constantemente sus direcciones IP y falsifica el encabezado User-Agent para simular navegadores reales. El equipo necesita distinguir los bots de los usuarios legítimos sin bloquear a los clientes válidos. ¿Qué solución es la MÁS adecuada?",
+      "en": "An ecommerce site receives automated traffic that constantly rotates its IP addresses and spoofs the User-Agent header to imitate real browsers. The team needs to distinguish bots from legitimate users without blocking valid customers. Which solution is MOST appropriate?"
+    },
+    "options": {
+      "es": [
+        "Una regla basada en tasa de AWS WAF por dirección IP de origen",
+        "La restricción geográfica de Amazon CloudFront",
+        "AWS Shield Advanced con la protección automática de la capa de aplicación",
+        "El grupo de reglas administradas AWS WAF Bot Control con desafíos de token de aplicación y huella digital del cliente"
+      ],
+      "en": [
+        "An AWS WAF rate-based rule by source IP address",
+        "Amazon CloudFront geographic restriction",
+        "AWS Shield Advanced with automatic application layer protection",
+        "The AWS WAF Bot Control managed rule group with application token challenges and client fingerprinting"
+      ]
+    },
+    "correct": [
+      3
     ],
-    "correct": [3],
     "type": "single",
-    "explanation": "Bot Control clasifica el tráfico automatizado mediante señales de cliente, tokens de aplicación y huella digital, lo que sigue siendo eficaz cuando el atacante rota direcciones IP y falsifica el agente de usuario.",
+    "explanation": {
+      "es": "Bot Control clasifica el tráfico automatizado mediante señales de cliente, tokens de aplicación y huella digital, lo que sigue siendo eficaz cuando el atacante rota direcciones IP y falsifica el agente de usuario.",
+      "en": "Bot Control classifies automated traffic by using client signals, application tokens, and fingerprinting, which remains effective when the attacker rotates IP addresses and spoofs the user agent."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.2",
-    "text": "Una empresa necesita producir mensualmente AMIs de Amazon EC2 endurecidas conforme a un estándar CIS, con parches al día, pruebas automatizadas y distribución a varias cuentas y Regiones. ¿Qué solución cumple con el requisito con la MENOR sobrecarga operativa?",
-    "options": [
-      "Crear una canalización de EC2 Image Builder con componentes de refuerzo y de prueba, y configurar la distribución a las cuentas y Regiones de destino",
-      "Ejecutar scripts de user data en cada lanzamiento de instancia para aplicar el refuerzo y los parches",
-      "Usar AWS Systems Manager Patch Manager para parchear las instancias en ejecución y crear las AMIs manualmente",
-      "Habilitar Amazon Inspector para que corrija las vulnerabilidades detectadas en las AMIs existentes"
+    "text": {
+      "es": "Una empresa necesita producir mensualmente AMIs de Amazon EC2 endurecidas conforme a un estándar CIS, con parches al día, pruebas automatizadas y distribución a varias cuentas y Regiones. ¿Qué solución cumple con el requisito con la MENOR sobrecarga operativa?",
+      "en": "A company needs to produce hardened Amazon EC2 AMIs monthly in accordance with a CIS standard, with up-to-date patches, automated testing, and distribution to multiple accounts and Regions. Which solution meets the requirement with the LEAST operational overhead?"
+    },
+    "options": {
+      "es": [
+        "Crear una canalización de EC2 Image Builder con componentes de refuerzo y de prueba, y configurar la distribución a las cuentas y Regiones de destino",
+        "Ejecutar scripts de user data en cada lanzamiento de instancia para aplicar el refuerzo y los parches",
+        "Usar AWS Systems Manager Patch Manager para parchear las instancias en ejecución y crear las AMIs manualmente",
+        "Habilitar Amazon Inspector para que corrija las vulnerabilidades detectadas en las AMIs existentes"
+      ],
+      "en": [
+        "Create an EC2 Image Builder pipeline with hardening and test components, and configure distribution to the target accounts and Regions",
+        "Run user data scripts on each instance launch to apply the hardening and patches",
+        "Use AWS Systems Manager Patch Manager to patch running instances and create the AMIs manually",
+        "Enable Amazon Inspector so that it remediates the vulnerabilities detected in existing AMIs"
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "EC2 Image Builder automatiza la construcción, el refuerzo, la validación y la distribución de imágenes doradas mediante componentes reutilizables y una programación, sin necesidad de pasos manuales ni de scripts en tiempo de arranque.",
+    "explanation": {
+      "es": "EC2 Image Builder automatiza la construcción, el refuerzo, la validación y la distribución de imágenes doradas mediante componentes reutilizables y una programación, sin necesidad de pasos manuales ni de scripts en tiempo de arranque.",
+      "en": "EC2 Image Builder automates the build, hardening, validation, and distribution of golden images by using reusable components and a schedule, with no need for manual steps or boot-time scripts."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.2",
-    "text": "Una empresa ejecuta contenedores cuyas imágenes se almacenan en Amazon ECR y también funciones de AWS Lambda. Necesita detectar de forma continua las vulnerabilidades conocidas (CVE) en las dependencias de software de ambos tipos de carga de trabajo. ¿Qué servicio debe habilitar?",
-    "options": [
-      "Amazon GuardDuty con la monitorización de tiempo de ejecución",
-      "Amazon Macie",
-      "Amazon Inspector con el escaneo mejorado",
-      "Amazon CodeGuru Security"
+    "text": {
+      "es": "Una empresa ejecuta contenedores cuyas imágenes se almacenan en Amazon ECR y también funciones de AWS Lambda. Necesita detectar de forma continua las vulnerabilidades conocidas (CVE) en las dependencias de software de ambos tipos de carga de trabajo. ¿Qué servicio debe habilitar?",
+      "en": "A company runs containers whose images are stored in Amazon ECR and also runs AWS Lambda functions. It needs to continuously detect known vulnerabilities (CVEs) in the software dependencies of both workload types. Which service should the company enable?"
+    },
+    "options": {
+      "es": [
+        "Amazon GuardDuty con la monitorización de tiempo de ejecución",
+        "Amazon Macie",
+        "Amazon Inspector con el escaneo mejorado",
+        "Amazon CodeGuru Security"
+      ],
+      "en": [
+        "Amazon GuardDuty with Runtime Monitoring",
+        "Amazon Macie",
+        "Amazon Inspector with enhanced scanning",
+        "Amazon CodeGuru Security"
+      ]
+    },
+    "correct": [
+      2
     ],
-    "correct": [2],
     "type": "single",
-    "explanation": "Amazon Inspector escanea de forma continua imágenes de contenedor en Amazon ECR, funciones de Lambda e instancias de EC2 en busca de CVE conocidas; GuardDuty detecta comportamiento en tiempo de ejecución y CodeGuru Security analiza código fuente.",
+    "explanation": {
+      "es": "Amazon Inspector escanea de forma continua imágenes de contenedor en Amazon ECR, funciones de Lambda e instancias de EC2 en busca de CVE conocidas; GuardDuty detecta comportamiento en tiempo de ejecución y CodeGuru Security analiza código fuente.",
+      "en": "Amazon Inspector continuously scans container images in Amazon ECR, Lambda functions, and EC2 instances for known CVEs; GuardDuty detects runtime behavior, and CodeGuru Security analyzes source code."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.2",
-    "text": "Un requisito de auditoría exige que los administradores accedan a las instancias de Amazon EC2 sin puertos de entrada abiertos, sin claves SSH de larga duración y con la grabación completa del contenido de cada sesión almacenada de forma centralizada. ¿Qué solución cumple con estos requisitos?",
-    "options": [
-      "Desplegar un host bastión en una subred pública con acceso SSH restringido por grupo de seguridad",
-      "Usar AWS Systems Manager Session Manager con el registro de sesiones habilitado hacia Amazon S3 y Amazon CloudWatch Logs",
-      "Usar AWS Client VPN y conectarse por SSH con claves rotadas en AWS Secrets Manager",
-      "Habilitar EC2 Instance Connect y auditar los eventos de conexión en AWS CloudTrail"
+    "text": {
+      "es": "Un requisito de auditoría exige que los administradores accedan a las instancias de Amazon EC2 sin puertos de entrada abiertos, sin claves SSH de larga duración y con la grabación completa del contenido de cada sesión almacenada de forma centralizada. ¿Qué solución cumple con estos requisitos?",
+      "en": "An audit requirement mandates that administrators access Amazon EC2 instances with no open inbound ports, no long-lived SSH keys, and full recording of each session's content stored centrally. Which solution meets these requirements?"
+    },
+    "options": {
+      "es": [
+        "Desplegar un host bastión en una subred pública con acceso SSH restringido por grupo de seguridad",
+        "Usar AWS Systems Manager Session Manager con el registro de sesiones habilitado hacia Amazon S3 y Amazon CloudWatch Logs",
+        "Usar AWS Client VPN y conectarse por SSH con claves rotadas en AWS Secrets Manager",
+        "Habilitar EC2 Instance Connect y auditar los eventos de conexión en AWS CloudTrail"
+      ],
+      "en": [
+        "Deploy a bastion host in a public subnet with SSH access restricted by security group",
+        "Use AWS Systems Manager Session Manager with session logging enabled to Amazon S3 and Amazon CloudWatch Logs",
+        "Use AWS Client VPN and connect over SSH with keys rotated in AWS Secrets Manager",
+        "Enable EC2 Instance Connect and audit the connection events in AWS CloudTrail"
+      ]
+    },
+    "correct": [
+      1
     ],
-    "correct": [1],
     "type": "single",
-    "explanation": "Session Manager establece la sesión mediante el agente de SSM sin puertos de entrada ni claves SSH, y su registro de sesiones almacena la transcripción completa en S3 o CloudWatch Logs; EC2 Instance Connect registra el evento de conexión pero no el contenido de la sesión.",
+    "explanation": {
+      "es": "Session Manager establece la sesión mediante el agente de SSM sin puertos de entrada ni claves SSH, y su registro de sesiones almacena la transcripción completa en S3 o CloudWatch Logs; EC2 Instance Connect registra el evento de conexión pero no el contenido de la sesión.",
+      "en": "Session Manager establishes the session through the SSM Agent with no inbound ports or SSH keys, and its session logging stores the full transcript in S3 or CloudWatch Logs; EC2 Instance Connect logs the connection event but not the session content."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.3",
-    "text": "Una empresa tiene decenas de VPC conectadas mediante AWS Transit Gateway y necesita inspeccionar y filtrar tanto el tráfico este-oeste entre VPC como el tráfico norte-sur hacia internet, aplicando reglas con estado y firmas de prevención de intrusiones desde un punto central. ¿Qué diseño cumple con el requisito?",
-    "options": [
-      "Aplicar grupos de seguridad y ACL de red más estrictos en cada subred de cada VPC",
-      "Asociar una web ACL de AWS WAF al Transit Gateway para inspeccionar todo el tráfico",
-      "Habilitar los VPC Flow Logs en todas las VPC y analizarlos con Amazon Athena",
-      "Crear una VPC de inspección con endpoints de AWS Network Firewall y enrutar el tráfico entre VPC y hacia internet a través de ella mediante las tablas de rutas del Transit Gateway"
+    "text": {
+      "es": "Una empresa tiene decenas de VPC conectadas mediante AWS Transit Gateway y necesita inspeccionar y filtrar tanto el tráfico este-oeste entre VPC como el tráfico norte-sur hacia internet, aplicando reglas con estado y firmas de prevención de intrusiones desde un punto central. ¿Qué diseño cumple con el requisito?",
+      "en": "A company has dozens of VPCs connected through AWS Transit Gateway and needs to inspect and filter both east-west traffic between VPCs and north-south traffic to the internet, applying stateful rules and intrusion prevention signatures from a central point. Which design meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Aplicar grupos de seguridad y ACL de red más estrictos en cada subred de cada VPC",
+        "Asociar una web ACL de AWS WAF al Transit Gateway para inspeccionar todo el tráfico",
+        "Habilitar los VPC Flow Logs en todas las VPC y analizarlos con Amazon Athena",
+        "Crear una VPC de inspección con endpoints de AWS Network Firewall y enrutar el tráfico entre VPC y hacia internet a través de ella mediante las tablas de rutas del Transit Gateway"
+      ],
+      "en": [
+        "Apply stricter security groups and network ACLs on every subnet in every VPC",
+        "Associate an AWS WAF web ACL with the Transit Gateway to inspect all traffic",
+        "Enable VPC Flow Logs in all VPCs and analyze them with Amazon Athena",
+        "Create an inspection VPC with AWS Network Firewall endpoints and route traffic between VPCs and to the internet through it by using the Transit Gateway route tables"
+      ]
+    },
+    "correct": [
+      3
     ],
-    "correct": [3],
     "type": "single",
-    "explanation": "AWS Network Firewall en una VPC de inspección centralizada, con el enrutamiento del Transit Gateway apuntando a sus endpoints, permite aplicar inspección con estado y reglas de IPS a los flujos este-oeste y norte-sur; los grupos de seguridad y las ACL no ofrecen IPS y los flow logs solo observan.",
+    "explanation": {
+      "es": "AWS Network Firewall en una VPC de inspección centralizada, con el enrutamiento del Transit Gateway apuntando a sus endpoints, permite aplicar inspección con estado y reglas de IPS a los flujos este-oeste y norte-sur; los grupos de seguridad y las ACL no ofrecen IPS y los flow logs solo observan.",
+      "en": "AWS Network Firewall in a centralized inspection VPC, with Transit Gateway routing pointed at its endpoints, allows stateful inspection and IPS rules to be applied to east-west and north-south flows; security groups and ACLs do not provide IPS, and flow logs only observe."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.3",
-    "text": "Una empresa debe cifrar el tráfico de su conexión dedicada de AWS Direct Connect de 10 Gbps en la capa 2, con una sobrecarga mínima y sin los límites de rendimiento propios de los túneles IPsec. ¿Qué opción debe implementar?",
-    "options": [
-      "Habilitar MAC Security (MACsec) en la conexión dedicada de Direct Connect",
-      "Establecer una VPN de sitio a sitio de AWS sobre la interfaz virtual pública de Direct Connect",
-      "Habilitar el cifrado de tránsito de Nitro entre las instancias de ambos extremos",
-      "Configurar AWS Client VPN para todos los usuarios del centro de datos"
+    "text": {
+      "es": "Una empresa debe cifrar el tráfico de su conexión dedicada de AWS Direct Connect de 10 Gbps en la capa 2, con una sobrecarga mínima y sin los límites de rendimiento propios de los túneles IPsec. ¿Qué opción debe implementar?",
+      "en": "A company must encrypt the traffic on its 10 Gbps AWS Direct Connect dedicated connection at layer 2, with minimal overhead and without the throughput limits inherent to IPsec tunnels. Which option should the company implement?"
+    },
+    "options": {
+      "es": [
+        "Habilitar MAC Security (MACsec) en la conexión dedicada de Direct Connect",
+        "Establecer una VPN de sitio a sitio de AWS sobre la interfaz virtual pública de Direct Connect",
+        "Habilitar el cifrado de tránsito de Nitro entre las instancias de ambos extremos",
+        "Configurar AWS Client VPN para todos los usuarios del centro de datos"
+      ],
+      "en": [
+        "Enable MAC Security (MACsec) on the Direct Connect dedicated connection",
+        "Establish an AWS Site-to-Site VPN over the Direct Connect public virtual interface",
+        "Enable Nitro in-transit encryption between the instances at both ends",
+        "Configure AWS Client VPN for all data center users"
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "MACsec proporciona cifrado en la capa 2 sobre conexiones dedicadas de Direct Connect a velocidad de línea, mientras que una VPN de sitio a sitio cifra en la capa 3 y añade sobrecarga y límites de rendimiento por túnel.",
+    "explanation": {
+      "es": "MACsec proporciona cifrado en la capa 2 sobre conexiones dedicadas de Direct Connect a velocidad de línea, mientras que una VPN de sitio a sitio cifra en la capa 3 y añade sobrecarga y límites de rendimiento por túnel.",
+      "en": "MACsec provides layer 2 encryption over Direct Connect dedicated connections at line rate, whereas a Site-to-Site VPN encrypts at layer 3 and adds overhead and per-tunnel throughput limits."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.3",
-    "text": "Un ingeniero de seguridad debe demostrar, sin depender del tráfico observado, que ninguna ruta de red permite alcanzar las subredes de base de datos desde internet en varias VPC. ¿Qué DOS capacidades debe utilizar?",
-    "options": [
-      "VPC Flow Logs analizados con Amazon Athena",
-      "Network Access Analyzer con ámbitos de acceso a la red",
-      "IAM Access Analyzer con hallazgos de acceso externo",
-      "Los hallazgos de accesibilidad de red de Amazon Inspector",
-      "Los registros de consultas de Amazon Route 53 Resolver"
+    "text": {
+      "es": "Un ingeniero de seguridad debe demostrar, sin depender del tráfico observado, que ninguna ruta de red permite alcanzar las subredes de base de datos desde internet en varias VPC. ¿Qué DOS capacidades debe utilizar?",
+      "en": "A security engineer must prove, without relying on observed traffic, that no network path allows the database subnets to be reached from the internet across several VPCs. Which TWO capabilities should the engineer use?"
+    },
+    "options": {
+      "es": [
+        "VPC Flow Logs analizados con Amazon Athena",
+        "Network Access Analyzer con ámbitos de acceso a la red",
+        "IAM Access Analyzer con hallazgos de acceso externo",
+        "Los hallazgos de accesibilidad de red de Amazon Inspector",
+        "Los registros de consultas de Amazon Route 53 Resolver"
+      ],
+      "en": [
+        "VPC Flow Logs analyzed with Amazon Athena",
+        "Network Access Analyzer with network access scopes",
+        "IAM Access Analyzer with external access findings",
+        "Amazon Inspector network reachability findings",
+        "Amazon Route 53 Resolver query logs"
+      ]
+    },
+    "correct": [
+      1,
+      3
     ],
-    "correct": [1, 3],
     "type": "multiple",
-    "explanation": "Network Access Analyzer y los hallazgos de accesibilidad de red de Amazon Inspector realizan análisis estático de la configuración de rutas, grupos de seguridad y ACL para identificar caminos de acceso no deseados, sin necesidad de tráfico real; los registros solo muestran lo que ya ocurrió.",
+    "explanation": {
+      "es": "Network Access Analyzer y los hallazgos de accesibilidad de red de Amazon Inspector realizan análisis estático de la configuración de rutas, grupos de seguridad y ACL para identificar caminos de acceso no deseados, sin necesidad de tráfico real; los registros solo muestran lo que ya ocurrió.",
+      "en": "Network Access Analyzer and Amazon Inspector network reachability findings perform static analysis of route, security group, and ACL configuration to identify unintended access paths, with no need for real traffic; logs only show what has already happened."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.1",
-    "text": "Una empresa con 5.000 empleados usa un proveedor de identidad SAML 2.0 corporativo y necesita otorgar acceso a la consola de AWS en 80 cuentas, con aprovisionamiento y desaprovisionamiento automáticos de usuarios y grupos. ¿Qué solución es la MÁS adecuada?",
-    "options": [
-      "Crear usuarios de IAM en cada cuenta y sincronizarlos con un script programado",
-      "Configurar un grupo de usuarios de Amazon Cognito federado con el IdP y asignar roles de IAM",
-      "Configurar AWS IAM Identity Center con federación SAML hacia el IdP, aprovisionamiento automático mediante SCIM y conjuntos de permisos asignados a las cuentas",
-      "Crear un proveedor de identidad SAML de IAM y roles federados en cada una de las 80 cuentas"
+    "text": {
+      "es": "Una empresa con 5.000 empleados usa un proveedor de identidad SAML 2.0 corporativo y necesita otorgar acceso a la consola de AWS en 80 cuentas, con aprovisionamiento y desaprovisionamiento automáticos de usuarios y grupos. ¿Qué solución es la MÁS adecuada?",
+      "en": "A company with 5,000 employees uses a corporate SAML 2.0 identity provider and needs to grant AWS console access across 80 accounts, with automatic user and group provisioning and deprovisioning. Which solution is MOST appropriate?"
+    },
+    "options": {
+      "es": [
+        "Crear usuarios de IAM en cada cuenta y sincronizarlos con un script programado",
+        "Configurar un grupo de usuarios de Amazon Cognito federado con el IdP y asignar roles de IAM",
+        "Configurar AWS IAM Identity Center con federación SAML hacia el IdP, aprovisionamiento automático mediante SCIM y conjuntos de permisos asignados a las cuentas",
+        "Crear un proveedor de identidad SAML de IAM y roles federados en cada una de las 80 cuentas"
+      ],
+      "en": [
+        "Create IAM users in each account and synchronize them with a scheduled script",
+        "Configure an Amazon Cognito user pool federated with the IdP and assign IAM roles",
+        "Configure AWS IAM Identity Center with SAML federation to the IdP, automatic provisioning through SCIM, and permission sets assigned to the accounts",
+        "Create an IAM SAML identity provider and federated roles in each of the 80 accounts"
+      ]
+    },
+    "correct": [
+      2
     ],
-    "correct": [2],
     "type": "single",
-    "explanation": "IAM Identity Center centraliza la federación de la fuerza laboral, sincroniza usuarios y grupos con SCIM y aplica conjuntos de permisos en todas las cuentas de la organización, lo que evita duplicar proveedores de identidad y roles por cuenta. Cognito está orientado a identidades de clientes de aplicaciones.",
+    "explanation": {
+      "es": "IAM Identity Center centraliza la federación de la fuerza laboral, sincroniza usuarios y grupos con SCIM y aplica conjuntos de permisos en todas las cuentas de la organización, lo que evita duplicar proveedores de identidad y roles por cuenta. Cognito está orientado a identidades de clientes de aplicaciones.",
+      "en": "IAM Identity Center centralizes workforce federation, synchronizes users and groups with SCIM, and applies permission sets across all accounts in the organization, which avoids duplicating identity providers and per-account roles. Cognito is oriented toward customer identities for applications."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.1",
-    "text": "Una aplicación web debe permitir que usuarios sin identidad en AWS descarguen objetos específicos de un bucket privado de Amazon S3 durante 15 minutos, sin distribuir credenciales de AWS. ¿Qué mecanismo se debe utilizar?",
-    "options": [
-      "Hacer público el objeto y eliminarlo después de 15 minutos",
-      "Agregar a la política del bucket una condición aws:Referer que permita el dominio de la aplicación",
-      "Distribuir desde el frontend las credenciales de un usuario de IAM de solo lectura",
-      "Generar URL prefirmadas de Amazon S3 desde el backend, que asume un rol de IAM con permisos limitados y define una caducidad de 15 minutos"
+    "text": {
+      "es": "Una aplicación web debe permitir que usuarios sin identidad en AWS descarguen objetos específicos de un bucket privado de Amazon S3 durante 15 minutos, sin distribuir credenciales de AWS. ¿Qué mecanismo se debe utilizar?",
+      "en": "A web application must allow users who have no AWS identity to download specific objects from a private Amazon S3 bucket for 15 minutes, without distributing AWS credentials. Which mechanism should be used?"
+    },
+    "options": {
+      "es": [
+        "Hacer público el objeto y eliminarlo después de 15 minutos",
+        "Agregar a la política del bucket una condición aws:Referer que permita el dominio de la aplicación",
+        "Distribuir desde el frontend las credenciales de un usuario de IAM de solo lectura",
+        "Generar URL prefirmadas de Amazon S3 desde el backend, que asume un rol de IAM con permisos limitados y define una caducidad de 15 minutos"
+      ],
+      "en": [
+        "Make the object public and delete it after 15 minutes",
+        "Add an aws:Referer condition to the bucket policy that allows the application's domain",
+        "Distribute the credentials of a read-only IAM user from the frontend",
+        "Generate Amazon S3 presigned URLs from the backend, which assumes an IAM role with limited permissions and sets a 15-minute expiration"
+      ]
+    },
+    "correct": [
+      3
     ],
-    "correct": [3],
     "type": "single",
-    "explanation": "Una URL prefirmada delega temporalmente el permiso del firmante sobre un objeto concreto y caduca en el plazo indicado, sin exponer credenciales ni hacer público el objeto; la condición aws:Referer es fácil de falsificar.",
+    "explanation": {
+      "es": "Una URL prefirmada delega temporalmente el permiso del firmante sobre un objeto concreto y caduca en el plazo indicado, sin exponer credenciales ni hacer público el objeto; la condición aws:Referer es fácil de falsificar.",
+      "en": "A presigned URL temporarily delegates the signer's permission on a specific object and expires within the specified time, without exposing credentials or making the object public; the aws:Referer condition is easy to spoof."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.1",
-    "text": "Un usuario federado a través de AWS IAM Identity Center inicia sesión correctamente en el portal de acceso, pero no ve una de las cuentas de AWS a las que debería tener acceso. ¿Qué debe revisar el ingeniero de seguridad?",
-    "options": [
-      "Que el conjunto de permisos correspondiente esté asignado al grupo del usuario para esa cuenta de AWS",
-      "Que el usuario tenga un dispositivo de MFA registrado",
-      "Que la política de confianza del rol de IAM en la cuenta de destino incluya al usuario por su ARN",
-      "Que la cuenta de destino tenga habilitada la autenticación de AWS Directory Service"
+    "text": {
+      "es": "Un usuario federado a través de AWS IAM Identity Center inicia sesión correctamente en el portal de acceso, pero no ve una de las cuentas de AWS a las que debería tener acceso. ¿Qué debe revisar el ingeniero de seguridad?",
+      "en": "A user federated through AWS IAM Identity Center signs in to the access portal successfully but does not see one of the AWS accounts they should have access to. What should the security engineer review?"
+    },
+    "options": {
+      "es": [
+        "Que el conjunto de permisos correspondiente esté asignado al grupo del usuario para esa cuenta de AWS",
+        "Que el usuario tenga un dispositivo de MFA registrado",
+        "Que la política de confianza del rol de IAM en la cuenta de destino incluya al usuario por su ARN",
+        "Que la cuenta de destino tenga habilitada la autenticación de AWS Directory Service"
+      ],
+      "en": [
+        "That the corresponding permission set is assigned to the user's group for that AWS account",
+        "That the user has an MFA device registered",
+        "That the trust policy of the IAM role in the target account includes the user by ARN",
+        "That the target account has AWS Directory Service authentication enabled"
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "En IAM Identity Center la visibilidad de una cuenta en el portal depende de que exista una asignación de un conjunto de permisos al usuario o a su grupo para esa cuenta; los roles aprovisionados y sus políticas de confianza los administra el propio servicio.",
+    "explanation": {
+      "es": "En IAM Identity Center la visibilidad de una cuenta en el portal depende de que exista una asignación de un conjunto de permisos al usuario o a su grupo para esa cuenta; los roles aprovisionados y sus políticas de confianza los administra el propio servicio.",
+      "en": "In IAM Identity Center, whether an account is visible in the portal depends on there being an assignment of a permission set to the user or their group for that account; the provisioned roles and their trust policies are managed by the service itself."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.2",
-    "text": "Una empresa etiqueta cada recurso con la clave Project y quiere que los miembros de un proyecto solo puedan operar sobre los recursos de su propio proyecto, sin crear una política nueva cada vez que se agrega un proyecto. ¿Qué enfoque cumple con el requisito?",
-    "options": [
-      "Crear un rol de IAM por proyecto con políticas que enumeren los ARN de los recursos correspondientes",
-      "Usar control de acceso basado en atributos con una condición que compare aws:PrincipalTag/Project con aws:ResourceTag/Project",
-      "Aplicar un límite de permisos que deniegue todas las acciones sobre los recursos sin etiquetar",
-      "Aplicar una política de control de servicios que deniegue las acciones fuera del proyecto"
+    "text": {
+      "es": "Una empresa etiqueta cada recurso con la clave Project y quiere que los miembros de un proyecto solo puedan operar sobre los recursos de su propio proyecto, sin crear una política nueva cada vez que se agrega un proyecto. ¿Qué enfoque cumple con el requisito?",
+      "en": "A company tags every resource with the key Project and wants project members to be able to operate only on their own project's resources, without creating a new policy each time a project is added. Which approach meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Crear un rol de IAM por proyecto con políticas que enumeren los ARN de los recursos correspondientes",
+        "Usar control de acceso basado en atributos con una condición que compare aws:PrincipalTag/Project con aws:ResourceTag/Project",
+        "Aplicar un límite de permisos que deniegue todas las acciones sobre los recursos sin etiquetar",
+        "Aplicar una política de control de servicios que deniegue las acciones fuera del proyecto"
+      ],
+      "en": [
+        "Create one IAM role per project with policies that list the ARNs of the corresponding resources",
+        "Use attribute-based access control with a condition that compares aws:PrincipalTag/Project with aws:ResourceTag/Project",
+        "Apply a permissions boundary that denies all actions on untagged resources",
+        "Apply a service control policy that denies actions outside the project"
+      ]
+    },
+    "correct": [
+      1
     ],
-    "correct": [1],
     "type": "single",
-    "explanation": "El control de acceso basado en atributos usa una sola política que compara la etiqueta del principal con la del recurso, por lo que los proyectos nuevos se cubren automáticamente al etiquetar identidades y recursos.",
+    "explanation": {
+      "es": "El control de acceso basado en atributos usa una sola política que compara la etiqueta del principal con la del recurso, por lo que los proyectos nuevos se cubren automáticamente al etiquetar identidades y recursos.",
+      "en": "Attribute-based access control uses a single policy that compares the principal's tag with the resource's tag, so new projects are covered automatically as long as identities and resources are tagged."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.2",
-    "text": "Un ingeniero de seguridad debe identificar los roles y buckets de la organización que otorgan acceso a principales externos y, después, reducir los permisos de esos roles a lo que realmente utilizan. ¿Qué DOS acciones debe realizar?",
-    "options": [
-      "Habilitar IAM Access Analyzer a nivel de organización para revisar los hallazgos de acceso externo",
-      "Usar el simulador de políticas de IAM para enumerar los principales externos con acceso a cada recurso",
-      "Habilitar Amazon Macie para identificar las políticas de bucket demasiado permisivas",
-      "Generar políticas con IAM Access Analyzer a partir de la actividad registrada en AWS CloudTrail y aplicarlas a los roles",
-      "Activar AWS Trusted Advisor para que revoque automáticamente las políticas permisivas"
+    "text": {
+      "es": "Un ingeniero de seguridad debe identificar los roles y buckets de la organización que otorgan acceso a principales externos y, después, reducir los permisos de esos roles a lo que realmente utilizan. ¿Qué DOS acciones debe realizar?",
+      "en": "A security engineer must identify the roles and buckets in the organization that grant access to external principals and then reduce those roles' permissions to what they actually use. Which TWO actions should the engineer take?"
+    },
+    "options": {
+      "es": [
+        "Habilitar IAM Access Analyzer a nivel de organización para revisar los hallazgos de acceso externo",
+        "Usar el simulador de políticas de IAM para enumerar los principales externos con acceso a cada recurso",
+        "Habilitar Amazon Macie para identificar las políticas de bucket demasiado permisivas",
+        "Generar políticas con IAM Access Analyzer a partir de la actividad registrada en AWS CloudTrail y aplicarlas a los roles",
+        "Activar AWS Trusted Advisor para que revoque automáticamente las políticas permisivas"
+      ],
+      "en": [
+        "Enable IAM Access Analyzer at the organization level to review the external access findings",
+        "Use the IAM policy simulator to enumerate the external principals with access to each resource",
+        "Enable Amazon Macie to identify overly permissive bucket policies",
+        "Generate policies with IAM Access Analyzer from the activity recorded in AWS CloudTrail and apply them to the roles",
+        "Turn on AWS Trusted Advisor so that it automatically revokes permissive policies"
+      ]
+    },
+    "correct": [
+      0,
+      3
     ],
-    "correct": [0, 3],
     "type": "multiple",
-    "explanation": "IAM Access Analyzer con la organización como zona de confianza detecta el acceso concedido a principales externos, y su generación de políticas basada en CloudTrail produce políticas de mínimo privilegio ajustadas al uso real. El simulador solo evalúa políticas existentes y Trusted Advisor no modifica permisos.",
+    "explanation": {
+      "es": "IAM Access Analyzer con la organización como zona de confianza detecta el acceso concedido a principales externos, y su generación de políticas basada en CloudTrail produce políticas de mínimo privilegio ajustadas al uso real. El simulador solo evalúa políticas existentes y Trusted Advisor no modifica permisos.",
+      "en": "IAM Access Analyzer with the organization as the zone of trust detects access granted to external principals, and its CloudTrail-based policy generation produces least-privilege policies tailored to actual usage. The simulator only evaluates existing policies, and Trusted Advisor does not modify permissions."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.2",
-    "text": "Los equipos de desarrollo necesitan crear sus propios roles de IAM para las cargas de trabajo, pero la empresa debe impedir que esos roles reciban más permisos que un conjunto máximo aprobado. ¿Qué control cumple con el requisito?",
-    "options": [
-      "Aplicar una política de sesión cada vez que se asuman los roles creados por los desarrolladores",
-      "Aplicar una política de control de servicios que deniegue la acción iam:CreateRole en las cuentas de desarrollo",
-      "Otorgar a los desarrolladores el permiso iam:CreateRole con una condición iam:PermissionsBoundary que exija adjuntar un límite de permisos aprobado",
-      "Habilitar los eventos de datos de AWS CloudTrail para las acciones de IAM y revisarlos semanalmente"
+    "text": {
+      "es": "Los equipos de desarrollo necesitan crear sus propios roles de IAM para las cargas de trabajo, pero la empresa debe impedir que esos roles reciban más permisos que un conjunto máximo aprobado. ¿Qué control cumple con el requisito?",
+      "en": "Development teams need to create their own IAM roles for workloads, but the company must prevent those roles from receiving more permissions than an approved maximum set. Which control meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Aplicar una política de sesión cada vez que se asuman los roles creados por los desarrolladores",
+        "Aplicar una política de control de servicios que deniegue la acción iam:CreateRole en las cuentas de desarrollo",
+        "Otorgar a los desarrolladores el permiso iam:CreateRole con una condición iam:PermissionsBoundary que exija adjuntar un límite de permisos aprobado",
+        "Habilitar los eventos de datos de AWS CloudTrail para las acciones de IAM y revisarlos semanalmente"
+      ],
+      "en": [
+        "Apply a session policy every time the developer-created roles are assumed",
+        "Apply a service control policy that denies the iam:CreateRole action in the development accounts",
+        "Grant developers the iam:CreateRole permission with an iam:PermissionsBoundary condition that requires an approved permissions boundary to be attached",
+        "Enable AWS CloudTrail data events for IAM actions and review them weekly"
+      ]
+    },
+    "correct": [
+      2
     ],
-    "correct": [2],
     "type": "single",
-    "explanation": "La condición iam:PermissionsBoundary obliga a que todo rol creado por el desarrollador lleve el límite de permisos aprobado, que define el techo efectivo de privilegios; denegar iam:CreateRole eliminaría la capacidad requerida y la auditoría posterior es solo detectiva.",
+    "explanation": {
+      "es": "La condición iam:PermissionsBoundary obliga a que todo rol creado por el desarrollador lleve el límite de permisos aprobado, que define el techo efectivo de privilegios; denegar iam:CreateRole eliminaría la capacidad requerida y la auditoría posterior es solo detectiva.",
+      "en": "The iam:PermissionsBoundary condition forces every role a developer creates to carry the approved permissions boundary, which defines the effective privilege ceiling; denying iam:CreateRole would remove the required capability, and after-the-fact auditing is only detective."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 5,
     "taskStatementNumber": "5.1",
-    "text": "Una auditoría exige que un Application Load Balancer público solo acepte TLS 1.2 o superior y rechace los conjuntos de cifrado considerados débiles. ¿Qué acción cumple con el requisito?",
-    "options": [
-      "Renovar el certificado de AWS Certificate Manager con una clave RSA de 4096 bits",
-      "Agregar una regla del oyente que redirija el tráfico HTTP al puerto 443",
-      "Asociar una web ACL de AWS WAF que bloquee las solicitudes con versiones antiguas de TLS",
-      "Configurar en el oyente HTTPS una política de seguridad de ELB que solo incluya TLS 1.2 y TLS 1.3"
+    "text": {
+      "es": "Una auditoría exige que un Application Load Balancer público solo acepte TLS 1.2 o superior y rechace los conjuntos de cifrado considerados débiles. ¿Qué acción cumple con el requisito?",
+      "en": "An audit requires that a public Application Load Balancer accept only TLS 1.2 or higher and reject cipher suites considered weak. Which action meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Renovar el certificado de AWS Certificate Manager con una clave RSA de 4096 bits",
+        "Agregar una regla del oyente que redirija el tráfico HTTP al puerto 443",
+        "Asociar una web ACL de AWS WAF que bloquee las solicitudes con versiones antiguas de TLS",
+        "Configurar en el oyente HTTPS una política de seguridad de ELB que solo incluya TLS 1.2 y TLS 1.3"
+      ],
+      "en": [
+        "Renew the AWS Certificate Manager certificate with a 4096-bit RSA key",
+        "Add a listener rule that redirects HTTP traffic to port 443",
+        "Associate an AWS WAF web ACL that blocks requests with older TLS versions",
+        "Configure an ELB security policy on the HTTPS listener that includes only TLS 1.2 and TLS 1.3"
+      ]
+    },
+    "correct": [
+      3
     ],
-    "correct": [3],
     "type": "single",
-    "explanation": "La política de seguridad del oyente HTTPS determina las versiones de protocolo y los conjuntos de cifrado que negocia el balanceador, por lo que seleccionar una política restringida a TLS 1.2 y 1.3 rechaza las conexiones débiles durante el propio handshake.",
+    "explanation": {
+      "es": "La política de seguridad del oyente HTTPS determina las versiones de protocolo y los conjuntos de cifrado que negocia el balanceador, por lo que seleccionar una política restringida a TLS 1.2 y 1.3 rechaza las conexiones débiles durante el propio handshake.",
+      "en": "The HTTPS listener's security policy determines the protocol versions and cipher suites the load balancer negotiates, so selecting a policy restricted to TLS 1.2 and 1.3 rejects weak connections during the handshake itself."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 5,
     "taskStatementNumber": "5.1",
-    "text": "Una empresa consume una API de un proveedor SaaS alojada en otra cuenta de AWS. El tráfico no debe atravesar internet y también debe estar disponible para los servidores locales conectados por AWS Direct Connect. ¿Qué solución cumple con estos requisitos?",
-    "options": [
-      "Configurar el emparejamiento de VPC con la cuenta del proveedor y anunciar las rutas por Direct Connect",
-      "Crear un endpoint de VPC de interfaz con AWS PrivateLink hacia el servicio del proveedor y resolver su nombre desde la red local mediante Route 53 Resolver",
-      "Enrutar las solicitudes a través de una gateway NAT con una dirección IP elástica incluida en la lista de permitidos del proveedor",
-      "Crear un endpoint de gateway hacia el servicio del proveedor y agregar la ruta en la tabla de rutas"
+    "text": {
+      "es": "Una empresa consume una API de un proveedor SaaS alojada en otra cuenta de AWS. El tráfico no debe atravesar internet y también debe estar disponible para los servidores locales conectados por AWS Direct Connect. ¿Qué solución cumple con estos requisitos?",
+      "en": "A company consumes an API from a SaaS provider hosted in another AWS account. The traffic must not traverse the internet and must also be available to on-premises servers connected through AWS Direct Connect. Which solution meets these requirements?"
+    },
+    "options": {
+      "es": [
+        "Configurar el emparejamiento de VPC con la cuenta del proveedor y anunciar las rutas por Direct Connect",
+        "Crear un endpoint de VPC de interfaz con AWS PrivateLink hacia el servicio del proveedor y resolver su nombre desde la red local mediante Route 53 Resolver",
+        "Enrutar las solicitudes a través de una gateway NAT con una dirección IP elástica incluida en la lista de permitidos del proveedor",
+        "Crear un endpoint de gateway hacia el servicio del proveedor y agregar la ruta en la tabla de rutas"
+      ],
+      "en": [
+        "Configure VPC peering with the provider's account and advertise the routes over Direct Connect",
+        "Create an interface VPC endpoint with AWS PrivateLink to the provider's service and resolve its name from the on-premises network by using Route 53 Resolver",
+        "Route the requests through a NAT gateway with an Elastic IP address that is on the provider's allow list",
+        "Create a gateway endpoint to the provider's service and add the route to the route table"
+      ]
+    },
+    "correct": [
+      1
     ],
-    "correct": [1],
     "type": "single",
-    "explanation": "AWS PrivateLink expone el servicio del proveedor mediante un endpoint de interfaz con direcciones IP privadas de la VPC, accesible también desde la red local a través de Direct Connect y de los endpoints de entrada de Route 53 Resolver; los endpoints de gateway solo sirven para S3 y DynamoDB.",
+    "explanation": {
+      "es": "AWS PrivateLink expone el servicio del proveedor mediante un endpoint de interfaz con direcciones IP privadas de la VPC, accesible también desde la red local a través de Direct Connect y de los endpoints de entrada de Route 53 Resolver; los endpoints de gateway solo sirven para S3 y DynamoDB.",
+      "en": "AWS PrivateLink exposes the provider's service through an interface endpoint with private VPC IP addresses, which is also reachable from the on-premises network through Direct Connect and Route 53 Resolver inbound endpoints; gateway endpoints work only for S3 and DynamoDB."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 5,
     "taskStatementNumber": "5.1",
-    "text": "Un clúster de Amazon EMR procesa datos regulados y debe cifrar el tráfico entre los nodos del clúster, incluidos los datos de mezcla (shuffle) de Apache Spark. ¿Qué acción cumple con el requisito?",
-    "options": [
-      "Crear una configuración de seguridad de Amazon EMR que habilite el cifrado en tránsito con un proveedor de certificados TLS y asociarla al clúster",
-      "Habilitar el cifrado de los volúmenes de Amazon EBS de los nodos con una clave de AWS KMS",
-      "Restringir la comunicación entre nodos con grupos de seguridad que solo permitan los puertos de Spark",
-      "Habilitar el cifrado del lado del servidor con claves administradas por Amazon S3 en el bucket de datos"
+    "text": {
+      "es": "Un clúster de Amazon EMR procesa datos regulados y debe cifrar el tráfico entre los nodos del clúster, incluidos los datos de mezcla (shuffle) de Apache Spark. ¿Qué acción cumple con el requisito?",
+      "en": "An Amazon EMR cluster processes regulated data and must encrypt traffic between cluster nodes, including Apache Spark shuffle data. Which action meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Crear una configuración de seguridad de Amazon EMR que habilite el cifrado en tránsito con un proveedor de certificados TLS y asociarla al clúster",
+        "Habilitar el cifrado de los volúmenes de Amazon EBS de los nodos con una clave de AWS KMS",
+        "Restringir la comunicación entre nodos con grupos de seguridad que solo permitan los puertos de Spark",
+        "Habilitar el cifrado del lado del servidor con claves administradas por Amazon S3 en el bucket de datos"
+      ],
+      "en": [
+        "Create an Amazon EMR security configuration that enables in-transit encryption with a TLS certificate provider and associate it with the cluster",
+        "Enable encryption of the nodes' Amazon EBS volumes with an AWS KMS key",
+        "Restrict node-to-node communication with security groups that allow only the Spark ports",
+        "Enable server-side encryption with Amazon S3 managed keys on the data bucket"
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "El cifrado en tránsito de EMR se activa mediante una configuración de seguridad que suministra los certificados TLS usados por los servicios del clúster, lo que protege también el tráfico de mezcla; el cifrado de EBS y de S3 solo protege datos en reposo.",
+    "explanation": {
+      "es": "El cifrado en tránsito de EMR se activa mediante una configuración de seguridad que suministra los certificados TLS usados por los servicios del clúster, lo que protege también el tráfico de mezcla; el cifrado de EBS y de S3 solo protege datos en reposo.",
+      "en": "EMR in-transit encryption is turned on through a security configuration that supplies the TLS certificates used by the cluster services, which also protects shuffle traffic; EBS and S3 encryption protect data at rest only."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 5,
     "taskStatementNumber": "5.2",
-    "text": "Un requisito regulatorio obliga a que las claves criptográficas se generen y utilicen en módulos de hardware de un solo inquilino validados FIPS 140-2 de nivel 3, pero la empresa quiere seguir usando la integración nativa de cifrado de servicios como Amazon S3 y Amazon EBS. ¿Qué solución cumple con estos requisitos?",
-    "options": [
-      "Usar claves administradas por el cliente de AWS KMS con la rotación automática habilitada",
-      "Importar material de clave propio a AWS KMS y establecer una fecha de caducidad",
-      "Crear un clúster de AWS CloudHSM y configurarlo como almacén de claves personalizado de AWS KMS",
-      "Realizar cifrado del lado del cliente con el SDK de cifrado de AWS y claves almacenadas en AWS Secrets Manager"
+    "text": {
+      "es": "Un requisito regulatorio obliga a que las claves criptográficas se generen y utilicen en módulos de hardware de un solo inquilino validados FIPS 140-2 de nivel 3, pero la empresa quiere seguir usando la integración nativa de cifrado de servicios como Amazon S3 y Amazon EBS. ¿Qué solución cumple con estos requisitos?",
+      "en": "A regulatory requirement mandates that cryptographic keys be generated and used in single-tenant hardware modules validated to FIPS 140-2 Level 3, but the company wants to keep using the native encryption integration of services such as Amazon S3 and Amazon EBS. Which solution meets these requirements?"
+    },
+    "options": {
+      "es": [
+        "Usar claves administradas por el cliente de AWS KMS con la rotación automática habilitada",
+        "Importar material de clave propio a AWS KMS y establecer una fecha de caducidad",
+        "Crear un clúster de AWS CloudHSM y configurarlo como almacén de claves personalizado de AWS KMS",
+        "Realizar cifrado del lado del cliente con el SDK de cifrado de AWS y claves almacenadas en AWS Secrets Manager"
+      ],
+      "en": [
+        "Use AWS KMS customer managed keys with automatic rotation enabled",
+        "Import your own key material into AWS KMS and set an expiration date",
+        "Create an AWS CloudHSM cluster and configure it as an AWS KMS custom key store",
+        "Perform client-side encryption with the AWS Encryption SDK and keys stored in AWS Secrets Manager"
+      ]
+    },
+    "correct": [
+      2
     ],
-    "correct": [2],
     "type": "single",
-    "explanation": "Un almacén de claves personalizado respaldado por CloudHSM mantiene el material de clave en HSM de un solo inquilino validados FIPS 140-2 de nivel 3 y, al exponerse a través de AWS KMS, conserva la integración nativa de cifrado de los servicios de AWS.",
+    "explanation": {
+      "es": "Un almacén de claves personalizado respaldado por CloudHSM mantiene el material de clave en HSM de un solo inquilino validados FIPS 140-2 de nivel 3 y, al exponerse a través de AWS KMS, conserva la integración nativa de cifrado de los servicios de AWS.",
+      "en": "A custom key store backed by CloudHSM keeps the key material in single-tenant HSMs validated to FIPS 140-2 Level 3 and, because it is exposed through AWS KMS, preserves the native encryption integration of AWS services."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 5,
     "taskStatementNumber": "5.2",
-    "text": "Una empresa quiere proteger sus copias de seguridad frente a un ataque de ransomware en el que el atacante obtenga privilegios administrativos en la cuenta de producción. ¿Qué DOS medidas ofrecen la MEJOR protección?",
-    "options": [
-      "Habilitar el versionado en el bucket de copias de seguridad de la cuenta de producción",
-      "Cifrar las copias de seguridad con cifrado del lado del servidor con claves administradas por Amazon S3",
-      "Copiar las copias de seguridad a una bóveda de AWS Backup en una cuenta aislada y habilitar AWS Backup Vault Lock en modo de cumplimiento",
-      "Replicar las copias de seguridad a otro bucket de la misma cuenta y Región",
-      "Aplicar S3 Object Lock en modo de cumplimiento con un periodo de retención en el bucket de copias de seguridad"
+    "text": {
+      "es": "Una empresa quiere proteger sus copias de seguridad frente a un ataque de ransomware en el que el atacante obtenga privilegios administrativos en la cuenta de producción. ¿Qué DOS medidas ofrecen la MEJOR protección?",
+      "en": "A company wants to protect its backups against a ransomware attack in which the attacker gains administrative privileges in the production account. Which TWO measures provide the BEST protection?"
+    },
+    "options": {
+      "es": [
+        "Habilitar el versionado en el bucket de copias de seguridad de la cuenta de producción",
+        "Cifrar las copias de seguridad con cifrado del lado del servidor con claves administradas por Amazon S3",
+        "Copiar las copias de seguridad a una bóveda de AWS Backup en una cuenta aislada y habilitar AWS Backup Vault Lock en modo de cumplimiento",
+        "Replicar las copias de seguridad a otro bucket de la misma cuenta y Región",
+        "Aplicar S3 Object Lock en modo de cumplimiento con un periodo de retención en el bucket de copias de seguridad"
+      ],
+      "en": [
+        "Enable versioning on the backup bucket in the production account",
+        "Encrypt the backups with server-side encryption with Amazon S3 managed keys",
+        "Copy the backups to an AWS Backup vault in an isolated account and enable AWS Backup Vault Lock in compliance mode",
+        "Replicate the backups to another bucket in the same account and Region",
+        "Apply S3 Object Lock in compliance mode with a retention period on the backup bucket"
+      ]
+    },
+    "correct": [
+      2,
+      4
     ],
-    "correct": [2, 4],
     "type": "multiple",
-    "explanation": "Vault Lock en modo de cumplimiento en una cuenta separada y S3 Object Lock en modo de cumplimiento crean almacenamiento inmutable que ni un administrador ni el usuario raíz pueden eliminar antes del vencimiento; el versionado, el cifrado y la replicación dentro de la misma cuenta no impiden la destrucción por un principal con privilegios.",
+    "explanation": {
+      "es": "Vault Lock en modo de cumplimiento en una cuenta separada y S3 Object Lock en modo de cumplimiento crean almacenamiento inmutable que ni un administrador ni el usuario raíz pueden eliminar antes del vencimiento; el versionado, el cifrado y la replicación dentro de la misma cuenta no impiden la destrucción por un principal con privilegios.",
+      "en": "Vault Lock in compliance mode in a separate account and S3 Object Lock in compliance mode create immutable storage that neither an administrator nor the root user can delete before expiration; versioning, encryption, and replication within the same account do not prevent destruction by a privileged principal."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 5,
     "taskStatementNumber": "5.2",
-    "text": "Los registros de transacciones deben conservarse siete años, no pueden modificarse ni eliminarse durante ese periodo y se recuperan muy pocas veces, con una latencia de horas aceptable. ¿Qué diseño minimiza el costo cumpliendo los requisitos?",
-    "options": [
-      "Mantener los objetos en S3 Standard-Infrequent Access con el versionado y MFA Delete habilitados",
-      "Almacenar los objetos con S3 Object Lock en modo de cumplimiento por siete años y aplicar una regla de ciclo de vida que los transicione a S3 Glacier Deep Archive",
-      "Copiar los objetos a Amazon EFS con una política de ciclo de vida hacia la clase de acceso infrecuente",
-      "Guardar los objetos en S3 Standard y denegar s3:DeleteObject mediante una política de bucket"
+    "text": {
+      "es": "Los registros de transacciones deben conservarse siete años, no pueden modificarse ni eliminarse durante ese periodo y se recuperan muy pocas veces, con una latencia de horas aceptable. ¿Qué diseño minimiza el costo cumpliendo los requisitos?",
+      "en": "Transaction logs must be retained for seven years, cannot be modified or deleted during that period, and are retrieved very rarely, with a latency of hours being acceptable. Which design minimizes cost while meeting the requirements?"
+    },
+    "options": {
+      "es": [
+        "Mantener los objetos en S3 Standard-Infrequent Access con el versionado y MFA Delete habilitados",
+        "Almacenar los objetos con S3 Object Lock en modo de cumplimiento por siete años y aplicar una regla de ciclo de vida que los transicione a S3 Glacier Deep Archive",
+        "Copiar los objetos a Amazon EFS con una política de ciclo de vida hacia la clase de acceso infrecuente",
+        "Guardar los objetos en S3 Standard y denegar s3:DeleteObject mediante una política de bucket"
+      ],
+      "en": [
+        "Keep the objects in S3 Standard-Infrequent Access with versioning and MFA Delete enabled",
+        "Store the objects with S3 Object Lock in compliance mode for seven years and apply a lifecycle rule that transitions them to S3 Glacier Deep Archive",
+        "Copy the objects to Amazon EFS with a lifecycle policy to the infrequent access class",
+        "Keep the objects in S3 Standard and deny s3:DeleteObject through a bucket policy"
+      ]
+    },
+    "correct": [
+      1
     ],
-    "correct": [1],
     "type": "single",
-    "explanation": "S3 Object Lock en modo de cumplimiento garantiza la inmutabilidad WORM durante los siete años y es compatible con las transiciones de ciclo de vida a S3 Glacier Deep Archive, la clase de menor costo cuando se acepta una recuperación de horas.",
+    "explanation": {
+      "es": "S3 Object Lock en modo de cumplimiento garantiza la inmutabilidad WORM durante los siete años y es compatible con las transiciones de ciclo de vida a S3 Glacier Deep Archive, la clase de menor costo cuando se acepta una recuperación de horas.",
+      "en": "S3 Object Lock in compliance mode guarantees WORM immutability for the seven years and is compatible with lifecycle transitions to S3 Glacier Deep Archive, the lowest-cost class when a retrieval time of hours is acceptable."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 5,
     "taskStatementNumber": "5.3",
-    "text": "Las credenciales de la base de datos de una aplicación deben rotarse automáticamente cada 30 días, sin interrupciones del servicio y sin volver a desplegar la aplicación. ¿Qué solución cumple con el requisito?",
-    "options": [
-      "Almacenar las credenciales en AWS Secrets Manager con la rotación administrada habilitada y recuperarlas desde la aplicación en tiempo de ejecución",
-      "Almacenar las credenciales como un parámetro SecureString de AWS Systems Manager Parameter Store y rotarlas con una tarea programada",
-      "Cifrar las credenciales con AWS KMS y habilitar la rotación automática anual de la clave",
-      "Guardar las credenciales en un archivo de configuración cifrado en Amazon S3 con el versionado habilitado"
+    "text": {
+      "es": "Las credenciales de la base de datos de una aplicación deben rotarse automáticamente cada 30 días, sin interrupciones del servicio y sin volver a desplegar la aplicación. ¿Qué solución cumple con el requisito?",
+      "en": "An application's database credentials must be rotated automatically every 30 days, without service interruptions and without redeploying the application. Which solution meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Almacenar las credenciales en AWS Secrets Manager con la rotación administrada habilitada y recuperarlas desde la aplicación en tiempo de ejecución",
+        "Almacenar las credenciales como un parámetro SecureString de AWS Systems Manager Parameter Store y rotarlas con una tarea programada",
+        "Cifrar las credenciales con AWS KMS y habilitar la rotación automática anual de la clave",
+        "Guardar las credenciales en un archivo de configuración cifrado en Amazon S3 con el versionado habilitado"
+      ],
+      "en": [
+        "Store the credentials in AWS Secrets Manager with managed rotation enabled and retrieve them from the application at runtime",
+        "Store the credentials as an AWS Systems Manager Parameter Store SecureString parameter and rotate them with a scheduled task",
+        "Encrypt the credentials with AWS KMS and enable automatic annual rotation of the key",
+        "Save the credentials in an encrypted configuration file in Amazon S3 with versioning enabled"
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "Secrets Manager rota las credenciales de bases de datos compatibles mediante funciones de rotación administradas y actualiza el secreto en su lugar, por lo que la aplicación obtiene siempre la versión vigente sin cambios de código ni nuevos despliegues.",
+    "explanation": {
+      "es": "Secrets Manager rota las credenciales de bases de datos compatibles mediante funciones de rotación administradas y actualiza el secreto en su lugar, por lo que la aplicación obtiene siempre la versión vigente sin cambios de código ni nuevos despliegues.",
+      "en": "Secrets Manager rotates credentials for supported databases through managed rotation functions and updates the secret in place, so the application always retrieves the current version with no code changes or new deployments."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 5,
     "taskStatementNumber": "5.3",
-    "text": "Una empresa debe usar su propio material de clave criptográfica en AWS KMS por exigencia normativa. ¿Cuál de las siguientes afirmaciones sobre el material de clave importado es correcta?",
-    "options": [
-      "AWS KMS rota automáticamente el material de clave importado cada año, igual que el material generado por AWS",
-      "AWS KMS no admite la rotación automática del material importado, por lo que la organización debe importar material nuevo para rotarlo",
-      "El material de clave importado se puede exportar desde AWS KMS en cualquier momento para respaldarlo",
-      "Las claves con material importado no pueden usarse con el cifrado del lado del servidor de Amazon S3"
+    "text": {
+      "es": "Una empresa debe usar su propio material de clave criptográfica en AWS KMS por exigencia normativa. ¿Cuál de las siguientes afirmaciones sobre el material de clave importado es correcta?",
+      "en": "A company must use its own cryptographic key material in AWS KMS because of a regulatory requirement. Which of the following statements about imported key material is correct?"
+    },
+    "options": {
+      "es": [
+        "AWS KMS rota automáticamente el material de clave importado cada año, igual que el material generado por AWS",
+        "AWS KMS no admite la rotación automática del material importado, por lo que la organización debe importar material nuevo para rotarlo",
+        "El material de clave importado se puede exportar desde AWS KMS en cualquier momento para respaldarlo",
+        "Las claves con material importado no pueden usarse con el cifrado del lado del servidor de Amazon S3"
+      ],
+      "en": [
+        "AWS KMS automatically rotates imported key material every year, the same as material generated by AWS",
+        "AWS KMS does not support automatic rotation of imported material, so the organization must import new material in order to rotate it",
+        "Imported key material can be exported from AWS KMS at any time in order to back it up",
+        "Keys with imported material cannot be used with Amazon S3 server-side encryption"
+      ]
+    },
+    "correct": [
+      1
     ],
-    "correct": [1],
     "type": "single",
-    "explanation": "Con material de clave importado el cliente es responsable de conservar una copia original y de rotarlo importando material nuevo, ya que AWS KMS no aplica rotación automática al material importado ni permite exportarlo.",
+    "explanation": {
+      "es": "Con material de clave importado el cliente es responsable de conservar una copia original y de rotarlo importando material nuevo, ya que AWS KMS no aplica rotación automática al material importado ni permite exportarlo.",
+      "en": "With imported key material, the customer is responsible for retaining an original copy and for rotating it by importing new material, because AWS KMS does not apply automatic rotation to imported material and does not allow it to be exported."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 5,
     "taskStatementNumber": "5.3",
-    "text": "Una aplicación registra involuntariamente números de tarjeta de crédito y direcciones de correo electrónico en Amazon CloudWatch Logs. El equipo debe enmascarar esos datos para la mayoría de los usuarios sin modificar el código de la aplicación. ¿Qué solución cumple con el requisito?",
-    "options": [
-      "Habilitar Amazon Macie sobre el grupo de registros para clasificar y ocultar los datos sensibles",
-      "Crear un filtro de métrica que descarte los eventos de registro que contengan datos sensibles",
-      "Exportar los registros a Amazon S3 y ejecutar un trabajo de AWS Glue que los depure",
-      "Aplicar al grupo de registros una política de protección de datos de CloudWatch Logs con identificadores de datos administrados"
+    "text": {
+      "es": "Una aplicación registra involuntariamente números de tarjeta de crédito y direcciones de correo electrónico en Amazon CloudWatch Logs. El equipo debe enmascarar esos datos para la mayoría de los usuarios sin modificar el código de la aplicación. ¿Qué solución cumple con el requisito?",
+      "en": "An application unintentionally logs credit card numbers and email addresses to Amazon CloudWatch Logs. The team must mask that data for most users without modifying the application code. Which solution meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Habilitar Amazon Macie sobre el grupo de registros para clasificar y ocultar los datos sensibles",
+        "Crear un filtro de métrica que descarte los eventos de registro que contengan datos sensibles",
+        "Exportar los registros a Amazon S3 y ejecutar un trabajo de AWS Glue que los depure",
+        "Aplicar al grupo de registros una política de protección de datos de CloudWatch Logs con identificadores de datos administrados"
+      ],
+      "en": [
+        "Enable Amazon Macie on the log group to classify and hide the sensitive data",
+        "Create a metric filter that discards log events containing sensitive data",
+        "Export the logs to Amazon S3 and run an AWS Glue job that scrubs them",
+        "Apply a CloudWatch Logs data protection policy with managed data identifiers to the log group"
+      ]
+    },
+    "correct": [
+      3
     ],
-    "correct": [3],
     "type": "single",
-    "explanation": "Las políticas de protección de datos de CloudWatch Logs detectan patrones sensibles con identificadores administrados y enmascaran los valores en el momento de la ingesta, mostrándolos solo a los principales con el permiso de desenmascarado; Macie no analiza grupos de registros.",
+    "explanation": {
+      "es": "Las políticas de protección de datos de CloudWatch Logs detectan patrones sensibles con identificadores administrados y enmascaran los valores en el momento de la ingesta, mostrándolos solo a los principales con el permiso de desenmascarado; Macie no analiza grupos de registros.",
+      "en": "CloudWatch Logs data protection policies detect sensitive patterns with managed data identifiers and mask the values at ingestion time, revealing them only to principals with the unmask permission; Macie does not scan log groups."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 6,
     "taskStatementNumber": "6.1",
-    "text": "Una organización debe garantizar que ningún principal de las cuentas miembro, incluido el usuario raíz de esas cuentas, pueda deshabilitar AWS CloudTrail ni Amazon GuardDuty. ¿Qué control cumple con el requisito?",
-    "options": [
-      "Adjuntar una política de IAM de denegación a todos los roles de las cuentas miembro",
-      "Aplicar una política de control de servicios (SCP) que deniegue las acciones cloudtrail:StopLogging y guardduty:DeleteDetector a las unidades organizativas correspondientes",
-      "Aplicar un límite de permisos a todos los roles creados en las cuentas miembro",
-      "Habilitar la remediación automática de AWS Config para volver a activar los servicios cuando se desactiven"
+    "text": {
+      "es": "Una organización debe garantizar que ningún principal de las cuentas miembro, incluido el usuario raíz de esas cuentas, pueda deshabilitar AWS CloudTrail ni Amazon GuardDuty. ¿Qué control cumple con el requisito?",
+      "en": "An organization must ensure that no principal in the member accounts, including those accounts' root user, can disable AWS CloudTrail or Amazon GuardDuty. Which control meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Adjuntar una política de IAM de denegación a todos los roles de las cuentas miembro",
+        "Aplicar una política de control de servicios (SCP) que deniegue las acciones cloudtrail:StopLogging y guardduty:DeleteDetector a las unidades organizativas correspondientes",
+        "Aplicar un límite de permisos a todos los roles creados en las cuentas miembro",
+        "Habilitar la remediación automática de AWS Config para volver a activar los servicios cuando se desactiven"
+      ],
+      "en": [
+        "Attach a deny IAM policy to all roles in the member accounts",
+        "Apply a service control policy (SCP) that denies the cloudtrail:StopLogging and guardduty:DeleteDetector actions to the corresponding organizational units",
+        "Apply a permissions boundary to all roles created in the member accounts",
+        "Enable AWS Config automatic remediation to turn the services back on when they are disabled"
+      ]
+    },
+    "correct": [
+      1
     ],
-    "correct": [1],
     "type": "single",
-    "explanation": "Las políticas de control de servicios definen el máximo de permisos de una cuenta miembro y se aplican incluso a su usuario raíz, algo que las políticas de IAM y los límites de permisos no pueden lograr; la remediación de Config solo corrige después del hecho.",
+    "explanation": {
+      "es": "Las políticas de control de servicios definen el máximo de permisos de una cuenta miembro y se aplican incluso a su usuario raíz, algo que las políticas de IAM y los límites de permisos no pueden lograr; la remediación de Config solo corrige después del hecho.",
+      "en": "Service control policies define the maximum permissions of a member account and apply even to its root user, something IAM policies and permissions boundaries cannot achieve; Config remediation only corrects after the fact."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 6,
     "taskStatementNumber": "6.1",
-    "text": "Una empresa quiere impedir que cualquier identidad ajena a su organización de AWS pueda acceder a los objetos de sus buckets de Amazon S3, sin tener que editar la política de cada bucket. ¿Qué control debe utilizar?",
-    "options": [
-      "Una política de control de servicios con la condición aws:PrincipalOrgID",
-      "Una política de endpoint de VPC aplicada a los endpoints de gateway de Amazon S3",
-      "Una política de control de recursos (RCP) aplicada a la raíz de la organización con la condición aws:PrincipalOrgID",
-      "El bloqueo de acceso público de Amazon S3 habilitado en el nivel de la cuenta"
+    "text": {
+      "es": "Una empresa quiere impedir que cualquier identidad ajena a su organización de AWS pueda acceder a los objetos de sus buckets de Amazon S3, sin tener que editar la política de cada bucket. ¿Qué control debe utilizar?",
+      "en": "A company wants to prevent any identity outside its AWS organization from accessing the objects in its Amazon S3 buckets, without having to edit each bucket's policy. Which control should the company use?"
+    },
+    "options": {
+      "es": [
+        "Una política de control de servicios con la condición aws:PrincipalOrgID",
+        "Una política de endpoint de VPC aplicada a los endpoints de gateway de Amazon S3",
+        "Una política de control de recursos (RCP) aplicada a la raíz de la organización con la condición aws:PrincipalOrgID",
+        "El bloqueo de acceso público de Amazon S3 habilitado en el nivel de la cuenta"
+      ],
+      "en": [
+        "A service control policy with the aws:PrincipalOrgID condition",
+        "A VPC endpoint policy applied to the Amazon S3 gateway endpoints",
+        "A resource control policy (RCP) applied to the organization root with the aws:PrincipalOrgID condition",
+        "Amazon S3 Block Public Access enabled at the account level"
+      ]
+    },
+    "correct": [
+      2
     ],
-    "correct": [2],
     "type": "single",
-    "explanation": "Las políticas de control de recursos aplican un máximo de permisos a los recursos de la organización y sí afectan a principales externos, mientras que las SCP solo limitan a las identidades de la propia organización; el bloqueo de acceso público no cubre el acceso concedido a cuentas externas concretas.",
+    "explanation": {
+      "es": "Las políticas de control de recursos aplican un máximo de permisos a los recursos de la organización y sí afectan a principales externos, mientras que las SCP solo limitan a las identidades de la propia organización; el bloqueo de acceso público no cubre el acceso concedido a cuentas externas concretas.",
+      "en": "Resource control policies apply a maximum permission ceiling to the organization's resources and do affect external principals, whereas SCPs limit only the identities within the organization itself; Block Public Access does not cover access granted to specific external accounts."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 6,
     "taskStatementNumber": "6.1",
-    "text": "Una organización quiere reducir el riesgo asociado a las credenciales del usuario raíz de sus 150 cuentas miembro y, al mismo tiempo, mantener un procedimiento de acceso de emergencia. ¿Qué DOS acciones debe realizar?",
-    "options": [
-      "Crear claves de acceso para el usuario raíz de cada cuenta y almacenarlas en AWS Secrets Manager",
-      "Habilitar la gestión centralizada del acceso raíz en AWS Organizations y eliminar las credenciales de larga duración del usuario raíz de las cuentas miembro",
-      "Registrar MFA resistente al phishing para el usuario raíz de la cuenta de administración y documentar un procedimiento de acceso de emergencia con custodia compartida",
-      "Aplicar una política de control de servicios a la cuenta de administración para restringir a su usuario raíz",
-      "Usar el usuario raíz de cada cuenta para las tareas administrativas diarias y auditar los eventos en AWS CloudTrail"
+    "text": {
+      "es": "Una organización quiere reducir el riesgo asociado a las credenciales del usuario raíz de sus 150 cuentas miembro y, al mismo tiempo, mantener un procedimiento de acceso de emergencia. ¿Qué DOS acciones debe realizar?",
+      "en": "An organization wants to reduce the risk associated with the root user credentials of its 150 member accounts while still maintaining an emergency access procedure. Which TWO actions should the organization take?"
+    },
+    "options": {
+      "es": [
+        "Crear claves de acceso para el usuario raíz de cada cuenta y almacenarlas en AWS Secrets Manager",
+        "Habilitar la gestión centralizada del acceso raíz en AWS Organizations y eliminar las credenciales de larga duración del usuario raíz de las cuentas miembro",
+        "Registrar MFA resistente al phishing para el usuario raíz de la cuenta de administración y documentar un procedimiento de acceso de emergencia con custodia compartida",
+        "Aplicar una política de control de servicios a la cuenta de administración para restringir a su usuario raíz",
+        "Usar el usuario raíz de cada cuenta para las tareas administrativas diarias y auditar los eventos en AWS CloudTrail"
+      ],
+      "en": [
+        "Create access keys for each account's root user and store them in AWS Secrets Manager",
+        "Enable centralized root access management in AWS Organizations and remove the long-term root user credentials from the member accounts",
+        "Register phishing-resistant MFA for the management account's root user and document an emergency access procedure with split custody",
+        "Apply a service control policy to the management account to restrict its root user",
+        "Use each account's root user for daily administrative tasks and audit the events in AWS CloudTrail"
+      ]
+    },
+    "correct": [
+      1,
+      2
     ],
-    "correct": [1, 2],
     "type": "multiple",
-    "explanation": "La gestión centralizada del acceso raíz permite eliminar las credenciales raíz de larga duración de las cuentas miembro y ejecutar las tareas privilegiadas desde la cuenta de administración, que debe protegerse con MFA resistente al phishing y un procedimiento de emergencia documentado; las SCP no restringen al usuario raíz de la cuenta de administración.",
+    "explanation": {
+      "es": "La gestión centralizada del acceso raíz permite eliminar las credenciales raíz de larga duración de las cuentas miembro y ejecutar las tareas privilegiadas desde la cuenta de administración, que debe protegerse con MFA resistente al phishing y un procedimiento de emergencia documentado; las SCP no restringen al usuario raíz de la cuenta de administración.",
+      "en": "Centralized root access management makes it possible to remove long-term root credentials from member accounts and perform privileged tasks from the management account, which must be protected with phishing-resistant MFA and a documented emergency procedure; SCPs do not restrict the management account's root user."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 6,
     "taskStatementNumber": "6.2",
-    "text": "Un equipo central debe desplegar y mantener la misma configuración base de seguridad (reglas de AWS Config, roles de IAM y trails) en todas las cuentas de la organización y en tres Regiones, y aplicarla automáticamente a las cuentas nuevas. ¿Qué solución cumple con el requisito?",
-    "options": [
-      "Usar conjuntos de pilas de AWS CloudFormation con permisos administrados por el servicio, dirigidos a las unidades organizativas y con el despliegue automático habilitado",
-      "Compartir una plantilla de AWS CloudFormation mediante AWS Resource Access Manager para que cada cuenta la ejecute",
-      "Publicar un producto en AWS Service Catalog y pedir a cada equipo que lo aprovisione en su cuenta",
-      "Ejecutar una función de AWS Lambda que asuma un rol en cada cuenta y llame a las API de cada servicio"
+    "text": {
+      "es": "Un equipo central debe desplegar y mantener la misma configuración base de seguridad (reglas de AWS Config, roles de IAM y trails) en todas las cuentas de la organización y en tres Regiones, y aplicarla automáticamente a las cuentas nuevas. ¿Qué solución cumple con el requisito?",
+      "en": "A central team must deploy and maintain the same baseline security configuration (AWS Config rules, IAM roles, and trails) across all accounts in the organization and in three Regions, and apply it automatically to new accounts. Which solution meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Usar conjuntos de pilas de AWS CloudFormation con permisos administrados por el servicio, dirigidos a las unidades organizativas y con el despliegue automático habilitado",
+        "Compartir una plantilla de AWS CloudFormation mediante AWS Resource Access Manager para que cada cuenta la ejecute",
+        "Publicar un producto en AWS Service Catalog y pedir a cada equipo que lo aprovisione en su cuenta",
+        "Ejecutar una función de AWS Lambda que asuma un rol en cada cuenta y llame a las API de cada servicio"
+      ],
+      "en": [
+        "Use AWS CloudFormation StackSets with service-managed permissions, targeting the organizational units, with automatic deployment enabled",
+        "Share an AWS CloudFormation template through AWS Resource Access Manager so that each account runs it",
+        "Publish a product in AWS Service Catalog and ask each team to provision it in their account",
+        "Run an AWS Lambda function that assumes a role in each account and calls each service's APIs"
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "Los conjuntos de pilas con permisos administrados por el servicio se dirigen a unidades organizativas y, con el despliegue automático, incorporan las cuentas nuevas sin intervención manual, además de gestionar múltiples Regiones desde una sola definición.",
+    "explanation": {
+      "es": "Los conjuntos de pilas con permisos administrados por el servicio se dirigen a unidades organizativas y, con el despliegue automático, incorporan las cuentas nuevas sin intervención manual, además de gestionar múltiples Regiones desde una sola definición.",
+      "en": "StackSets with service-managed permissions target organizational units and, with automatic deployment, onboard new accounts without manual intervention, in addition to handling multiple Regions from a single definition."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 6,
     "taskStatementNumber": "6.2",
-    "text": "Una empresa quiere que su canalización de CI/CD rechace las plantillas de infraestructura como código que definan grupos de seguridad con 0.0.0.0/0 en el puerto 22 o buckets sin cifrado, evaluando reglas de política declarativas antes del despliegue. ¿Qué herramienta debe usar?",
-    "options": [
-      "cfn-lint para validar la sintaxis y los tipos de recurso de las plantillas",
-      "AWS Config con reglas administradas evaluadas después del despliegue",
-      "AWS Trusted Advisor con la comprobación de grupos de seguridad",
-      "AWS CloudFormation Guard con reglas de política evaluadas en la canalización"
+    "text": {
+      "es": "Una empresa quiere que su canalización de CI/CD rechace las plantillas de infraestructura como código que definan grupos de seguridad con 0.0.0.0/0 en el puerto 22 o buckets sin cifrado, evaluando reglas de política declarativas antes del despliegue. ¿Qué herramienta debe usar?",
+      "en": "A company wants its CI/CD pipeline to reject infrastructure as code templates that define security groups with 0.0.0.0/0 on port 22 or unencrypted buckets, by evaluating declarative policy rules before deployment. Which tool should the company use?"
+    },
+    "options": {
+      "es": [
+        "cfn-lint para validar la sintaxis y los tipos de recurso de las plantillas",
+        "AWS Config con reglas administradas evaluadas después del despliegue",
+        "AWS Trusted Advisor con la comprobación de grupos de seguridad",
+        "AWS CloudFormation Guard con reglas de política evaluadas en la canalización"
+      ],
+      "en": [
+        "cfn-lint to validate the templates' syntax and resource types",
+        "AWS Config with managed rules evaluated after deployment",
+        "AWS Trusted Advisor with the security groups check",
+        "AWS CloudFormation Guard with policy rules evaluated in the pipeline"
+      ]
+    },
+    "correct": [
+      3
     ],
-    "correct": [3],
     "type": "single",
-    "explanation": "CloudFormation Guard evalúa plantillas contra reglas de política declaradas como código y devuelve un código de error que detiene la canalización antes del despliegue; cfn-lint solo valida la corrección de la plantilla y Config y Trusted Advisor actúan cuando los recursos ya existen.",
+    "explanation": {
+      "es": "CloudFormation Guard evalúa plantillas contra reglas de política declaradas como código y devuelve un código de error que detiene la canalización antes del despliegue; cfn-lint solo valida la corrección de la plantilla y Config y Trusted Advisor actúan cuando los recursos ya existen.",
+      "en": "CloudFormation Guard evaluates templates against policy rules declared as code and returns an error code that stops the pipeline before deployment; cfn-lint only validates template correctness, and Config and Trusted Advisor act once the resources already exist."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 6,
     "taskStatementNumber": "6.2",
-    "text": "Una organización necesita aplicar de forma centralizada un conjunto común de reglas de AWS WAF y auditar los grupos de seguridad no conformes en todas las cuentas, con corrección automática de los recursos que se desvíen. ¿Qué servicio debe utilizar?",
-    "options": [
-      "AWS Control Tower con controles obligatorios",
-      "AWS Firewall Manager con políticas aplicadas desde una cuenta de administrador delegado",
-      "AWS Security Hub con estándares de seguridad habilitados",
-      "AWS Network Firewall desplegado de forma independiente en cada VPC"
+    "text": {
+      "es": "Una organización necesita aplicar de forma centralizada un conjunto común de reglas de AWS WAF y auditar los grupos de seguridad no conformes en todas las cuentas, con corrección automática de los recursos que se desvíen. ¿Qué servicio debe utilizar?",
+      "en": "An organization needs to centrally apply a common set of AWS WAF rules and audit noncompliant security groups across all accounts, with automatic remediation of resources that drift. Which service should the organization use?"
+    },
+    "options": {
+      "es": [
+        "AWS Control Tower con controles obligatorios",
+        "AWS Firewall Manager con políticas aplicadas desde una cuenta de administrador delegado",
+        "AWS Security Hub con estándares de seguridad habilitados",
+        "AWS Network Firewall desplegado de forma independiente en cada VPC"
+      ],
+      "en": [
+        "AWS Control Tower with mandatory controls",
+        "AWS Firewall Manager with policies applied from a delegated administrator account",
+        "AWS Security Hub with security standards enabled",
+        "AWS Network Firewall deployed independently in each VPC"
+      ]
+    },
+    "correct": [
+      1
     ],
-    "correct": [1],
     "type": "single",
-    "explanation": "AWS Firewall Manager aplica políticas centralizadas de AWS WAF, Shield Advanced, grupos de seguridad y Network Firewall en todas las cuentas de la organización y puede corregir automáticamente los recursos no conformes; Security Hub solo informa de los hallazgos.",
+    "explanation": {
+      "es": "AWS Firewall Manager aplica políticas centralizadas de AWS WAF, Shield Advanced, grupos de seguridad y Network Firewall en todas las cuentas de la organización y puede corregir automáticamente los recursos no conformes; Security Hub solo informa de los hallazgos.",
+      "en": "AWS Firewall Manager applies centralized AWS WAF, Shield Advanced, security group, and Network Firewall policies across all accounts in the organization and can automatically remediate noncompliant resources; Security Hub only reports findings."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 6,
     "taskStatementNumber": "6.3",
-    "text": "Un auditor externo solicita evidencia del cumplimiento de un marco regulatorio, tanto de los controles gestionados por AWS como de los controles implementados en el entorno del cliente. ¿Qué DOS servicios debe usar el equipo de seguridad?",
-    "options": [
-      "AWS Trusted Advisor para exportar las comprobaciones de la categoría de seguridad",
-      "AWS Audit Manager con un marco predefinido para recopilar evidencia de forma continua",
-      "AWS Well-Architected Tool para generar el informe de la lente de seguridad",
-      "AWS Artifact para descargar los informes de auditoría de AWS, como SOC 2 e ISO 27001",
-      "Amazon Detective para reconstruir la actividad de los usuarios auditados"
+    "text": {
+      "es": "Un auditor externo solicita evidencia del cumplimiento de un marco regulatorio, tanto de los controles gestionados por AWS como de los controles implementados en el entorno del cliente. ¿Qué DOS servicios debe usar el equipo de seguridad?",
+      "en": "An external auditor requests evidence of compliance with a regulatory framework, covering both the controls managed by AWS and the controls implemented in the customer's environment. Which TWO services should the security team use?"
+    },
+    "options": {
+      "es": [
+        "AWS Trusted Advisor para exportar las comprobaciones de la categoría de seguridad",
+        "AWS Audit Manager con un marco predefinido para recopilar evidencia de forma continua",
+        "AWS Well-Architected Tool para generar el informe de la lente de seguridad",
+        "AWS Artifact para descargar los informes de auditoría de AWS, como SOC 2 e ISO 27001",
+        "Amazon Detective para reconstruir la actividad de los usuarios auditados"
+      ],
+      "en": [
+        "AWS Trusted Advisor to export the security category checks",
+        "AWS Audit Manager with a prebuilt framework to collect evidence continuously",
+        "AWS Well-Architected Tool to generate the security lens report",
+        "AWS Artifact to download AWS audit reports such as SOC 2 and ISO 27001",
+        "Amazon Detective to reconstruct the activity of the audited users"
+      ]
+    },
+    "correct": [
+      1,
+      3
     ],
-    "correct": [1, 3],
     "type": "multiple",
-    "explanation": "Audit Manager recolecta y organiza automáticamente la evidencia de los controles del cliente asignándola a marcos regulatorios, y AWS Artifact entrega los informes de auditoría de terceros que acreditan los controles bajo responsabilidad de AWS.",
+    "explanation": {
+      "es": "Audit Manager recolecta y organiza automáticamente la evidencia de los controles del cliente asignándola a marcos regulatorios, y AWS Artifact entrega los informes de auditoría de terceros que acreditan los controles bajo responsabilidad de AWS.",
+      "en": "Audit Manager automatically collects and organizes evidence for customer controls, mapping it to regulatory frameworks, and AWS Artifact delivers the third-party audit reports that attest to the controls under AWS's responsibility."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 6,
     "taskStatementNumber": "6.3",
-    "text": "Cuando se detecta un grupo de seguridad que permite el acceso SSH sin restricciones, la empresa quiere que la regla se elimine automáticamente y que el equipo reciba una notificación, con el menor código personalizado posible. ¿Qué solución cumple con el requisito?",
-    "options": [
-      "Crear una acción personalizada en AWS Security Hub que los analistas ejecuten manualmente sobre el hallazgo",
-      "Programar una función de AWS Lambda que recorra todos los grupos de seguridad y elimine las reglas no conformes",
-      "Usar la regla administrada de AWS Config restricted-ssh con remediación automática mediante un documento de Systems Manager Automation y notificar con Amazon EventBridge y Amazon SNS",
-      "Habilitar Amazon Inspector para que corrija los hallazgos de accesibilidad de red"
+    "text": {
+      "es": "Cuando se detecta un grupo de seguridad que permite el acceso SSH sin restricciones, la empresa quiere que la regla se elimine automáticamente y que el equipo reciba una notificación, con el menor código personalizado posible. ¿Qué solución cumple con el requisito?",
+      "en": "When a security group that allows unrestricted SSH access is detected, the company wants the rule to be removed automatically and the team to be notified, with as little custom code as possible. Which solution meets the requirement?"
+    },
+    "options": {
+      "es": [
+        "Crear una acción personalizada en AWS Security Hub que los analistas ejecuten manualmente sobre el hallazgo",
+        "Programar una función de AWS Lambda que recorra todos los grupos de seguridad y elimine las reglas no conformes",
+        "Usar la regla administrada de AWS Config restricted-ssh con remediación automática mediante un documento de Systems Manager Automation y notificar con Amazon EventBridge y Amazon SNS",
+        "Habilitar Amazon Inspector para que corrija los hallazgos de accesibilidad de red"
+      ],
+      "en": [
+        "Create a custom action in AWS Security Hub that analysts run manually on the finding",
+        "Schedule an AWS Lambda function that iterates over all security groups and removes the noncompliant rules",
+        "Use the AWS Config managed rule restricted-ssh with automatic remediation through a Systems Manager Automation document and notify with Amazon EventBridge and Amazon SNS",
+        "Enable Amazon Inspector so that it remediates network reachability findings"
+      ]
+    },
+    "correct": [
+      2
     ],
-    "correct": [2],
     "type": "single",
-    "explanation": "La regla administrada restricted-ssh evalúa el cambio de configuración en cuanto ocurre y su remediación automática invoca un documento de Automation predefinido, mientras que EventBridge y SNS entregan la notificación sin desarrollar código propio.",
+    "explanation": {
+      "es": "La regla administrada restricted-ssh evalúa el cambio de configuración en cuanto ocurre y su remediación automática invoca un documento de Automation predefinido, mientras que EventBridge y SNS entregan la notificación sin desarrollar código propio.",
+      "en": "The restricted-ssh managed rule evaluates the configuration change as soon as it occurs and its automatic remediation invokes a predefined Automation document, while EventBridge and SNS deliver the notification without developing custom code."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 6,
     "taskStatementNumber": "6.3",
-    "text": "Un equipo quiere evaluar formalmente una carga de trabajo frente a las prácticas recomendadas del pilar de seguridad de AWS y obtener un plan de mejora priorizado con los riesgos identificados. ¿Qué herramienta debe utilizar?",
-    "options": [
-      "AWS Well-Architected Tool con la revisión del pilar de seguridad",
-      "AWS Security Hub con el estándar de prácticas recomendadas de seguridad fundamentales de AWS",
-      "AWS Audit Manager con un marco de cumplimiento predefinido",
-      "AWS Trusted Advisor con la categoría de tolerancia a errores"
+    "text": {
+      "es": "Un equipo quiere evaluar formalmente una carga de trabajo frente a las prácticas recomendadas del pilar de seguridad de AWS y obtener un plan de mejora priorizado con los riesgos identificados. ¿Qué herramienta debe utilizar?",
+      "en": "A team wants to formally assess a workload against the best practices of the AWS security pillar and obtain a prioritized improvement plan with the identified risks. Which tool should the team use?"
+    },
+    "options": {
+      "es": [
+        "AWS Well-Architected Tool con la revisión del pilar de seguridad",
+        "AWS Security Hub con el estándar de prácticas recomendadas de seguridad fundamentales de AWS",
+        "AWS Audit Manager con un marco de cumplimiento predefinido",
+        "AWS Trusted Advisor con la categoría de tolerancia a errores"
+      ],
+      "en": [
+        "AWS Well-Architected Tool with the security pillar review",
+        "AWS Security Hub with the AWS Foundational Security Best Practices standard",
+        "AWS Audit Manager with a prebuilt compliance framework",
+        "AWS Trusted Advisor with the fault tolerance category"
+      ]
+    },
+    "correct": [
+      0
     ],
-    "correct": [0],
     "type": "single",
-    "explanation": "AWS Well-Architected Tool guía una revisión estructurada de la arquitectura por pilares, identifica riesgos altos y medios y genera un plan de mejora priorizado; Security Hub y Trusted Advisor evalúan configuraciones de recursos, no el diseño de la carga de trabajo.",
+    "explanation": {
+      "es": "AWS Well-Architected Tool guía una revisión estructurada de la arquitectura por pilares, identifica riesgos altos y medios y genera un plan de mejora priorizado; Security Hub y Trusted Advisor evalúan configuraciones de recursos, no el diseño de la carga de trabajo.",
+      "en": "AWS Well-Architected Tool guides a structured review of the architecture by pillar, identifies high and medium risks, and generates a prioritized improvement plan; Security Hub and Trusted Advisor evaluate resource configurations, not workload design."
+    },
     "source": "llm"
   }
 ]

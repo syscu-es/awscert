@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ExternalLink } from 'lucide-react';
 import { ThemeContext } from '../context/ThemeContext';
+import { useTranslations } from '../context/LanguageContext';
 import cloudQuestHero from '../assets/cloudquest/hero.webp';
 
 const LAUNCH_TARGET = new Date('2026-08-11T13:00:00Z').getTime();
@@ -20,6 +21,7 @@ const pad = (n) => String(n).padStart(2, '0');
 
 const Countdown = () => {
   const { isDarkMode } = useContext(ThemeContext);
+  const translations = useTranslations();
   const [parts, setParts] = useState(() => getTimeParts(LAUNCH_TARGET));
 
   useEffect(() => {
@@ -28,10 +30,10 @@ const Countdown = () => {
   }, []);
 
   const units = [
-    { label: 'Días', value: parts.days },
-    { label: 'Horas', value: pad(parts.hours) },
-    { label: 'Min', value: pad(parts.minutes) },
-    { label: 'Seg', value: pad(parts.seconds) },
+    { label: translations.countdown.days, value: parts.days },
+    { label: translations.countdown.hours, value: pad(parts.hours) },
+    { label: translations.countdown.minutes, value: pad(parts.minutes) },
+    { label: translations.countdown.seconds, value: pad(parts.seconds) },
   ];
 
   return (
@@ -40,19 +42,17 @@ const Countdown = () => {
         <div className={`cq-cq-card ${isDarkMode ? 'cq-cq-card-dark' : ''}`}>
           <img
             src={cloudQuestHero}
-            alt="AWS Cloud Quest — nueva versión"
+            alt={translations.countdown.heading}
             className="cq-cq-hero"
             loading="lazy"
           />
           <div className="text-center px-6 pb-8 pt-6">
-            <p className="kicker justify-center mb-3">AWS Cloud Quest</p>
+            <p className="kicker justify-center mb-3">{translations.countdown.heading}</p>
             <h2 className={`font-display text-2xl md:text-3xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
-              La nueva versión de AWS Cloud Quest está por llegar
+              {translations.countdown.title}
             </h2>
             <p className={`max-w-2xl mx-auto mb-6 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-              AWS renueva Cloud Quest: ciudad 3D rediseñada, conversaciones con clientes impulsadas
-              por IA, torneos revisados y builds prácticos en un entorno AWS real. Tu progreso se mantiene.
-              Lanza el 11 de agosto de 2026 en AWS Skill Builder.
+              {translations.countdown.description}
             </p>
 
             <div className="cq-countdown mb-6">
@@ -71,7 +71,7 @@ const Countdown = () => {
               className="inline-flex items-center gap-2 bg-gradient-to-r from-[#FF9900] to-[#FF6B2C] hover:shadow-[0_0_30px_rgba(255,153,0,0.4)] text-[#14110A] px-5 py-3 rounded-lg transition-shadow text-sm font-bold"
             >
               <ExternalLink className="w-4 h-4" />
-              Ver AWS Cloud Quest en Skill Builder
+              {translations.countdown.cta}
             </a>
           </div>
         </div>

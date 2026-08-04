@@ -1,9 +1,10 @@
 import React from 'react';
 import { Github, ExternalLink, Heart } from 'lucide-react';
-import { translations } from '../translations/es';
+import { useTranslations } from '../context/LanguageContext';
 
 const Footer = ({ onTabChange }) => {
   const currentYear = new Date().getFullYear();
+  const translations = useTranslations();
 
   return (
     <footer className="relative bg-[#060B12] text-white py-12 px-6 md:px-12 border-t border-white/10">
@@ -12,13 +13,13 @@ const Footer = ({ onTabChange }) => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* About */}
           <div>
-            <h3 className="font-display font-bold text-lg mb-3">AWS Certification Practice Exams</h3>
-            <p className="text-slate-400 text-sm">Simulador gratuito de exámenes de práctica para las 12 certificaciones vigentes de AWS, sin registro.</p>
+            <h3 className="font-display font-bold text-lg mb-3">{translations.footerExtra.title}</h3>
+            <p className="text-slate-400 text-sm">{translations.footerExtra.description}</p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="kicker mb-3">Enlaces Rápidos</h3>
+            <h3 className="kicker mb-3">{translations.footer.quickLinks}</h3>
             <ul className="space-y-2 text-sm text-slate-400">
               <li><button onClick={() => onTabChange('tests')} className="hover:text-[#FF9900] transition-colors cursor-pointer">{translations.footer.practiceTests}</button></li>
               <li><button onClick={() => onTabChange('about')} className="hover:text-[#FF9900] transition-colors cursor-pointer">{translations.footer.about}</button></li>
@@ -27,7 +28,7 @@ const Footer = ({ onTabChange }) => {
 
           {/* Social */}
           <div>
-            <h3 className="kicker mb-3">Conectar</h3>
+            <h3 className="kicker mb-3">{translations.footer.connect}</h3>
             <div className="flex gap-4">
               <a
                 href="https://www.linkedin.com/company/syscu/"

@@ -58,7 +58,22 @@ export const translations = {
     },
     important: 'Importante',
     importantText: 'Esta herramienta está diseñada para propósitos de estudio. Asegúrate de estar familiarizado con la documentación oficial de AWS y las guías de examen antes de tomar el examen real.',
-    importantText2: 'AWS recomienda obtener consistentemente al menos 80% en exámenes de práctica antes de intentar el examen oficial de certificación.'
+    importantText2: 'AWS recomienda obtener consistentemente al menos 80% en exámenes de práctica antes de intentar el examen oficial de certificación.',
+    certificationPath: 'Ruta de Certificación AWS',
+    domainMasteryKicker: 'Dominio de la materia',
+    domainWord: 'Dominio',
+    domainsCount: 'dominios',
+    certificationNotFound: '¡Certificación no encontrada!',
+    noQuestionsForDomain: 'No hay preguntas disponibles para el Dominio',
+    errorStartingExam: 'Error al iniciar el examen: ',
+    levelLabels: {
+      foundational: 'Fundamentos — empieza aquí',
+      associate: 'Associate — elige tu rol',
+      professional: 'Professional — experiencia avanzada',
+      specialty: 'Specialty — profundiza en un área'
+    },
+    languageSwitchToEs: 'Cambiar a Español',
+    languageSwitchToEn: 'Switch to English'
   },
 
   // Question Panel
@@ -74,7 +89,8 @@ export const translations = {
     submit: 'Enviar',
     addNote: 'Agregar nota personal...',
     saveNote: 'Guardar Nota',
-    cancelNote: 'Cancelar'
+    cancelNote: 'Cancelar',
+    tooManySelected: 'Has seleccionado más de 2 opciones. Reduce tus opciones para continuar.'
   },
 
   // Sidebar
@@ -94,7 +110,12 @@ export const translations = {
     eliminateAnswer: 'Descartar opción',
     restoreAnswer: 'Reactivar opción',
     selectAnswer: 'Seleccionar respuesta',
-    changeAnswer: 'Cambiar respuesta'
+    changeAnswer: 'Cambiar respuesta',
+    unanswered: 'Sin responder',
+    open: 'Abierta',
+    performanceBreakdown: 'Desglose de rendimiento',
+    awsRecommendation: 'Recomendación de AWS',
+    awsRecommendationText: 'Para el examen real, AWS recomienda obtener consistentemente al menos 80% en exámenes de práctica antes de tomar el examen.'
   },
 
   // Result
@@ -105,7 +126,15 @@ export const translations = {
     points: 'Puntos (100-1000)',
     minimumToPass: 'Mínimo para aprobar',
     backToHome: 'Volver al Inicio',
-    retryTest: 'Reintentar Examen'
+    retryTest: 'Reintentar Examen',
+    shareOnLinkedIn: 'Compartir en LinkedIn',
+    shareDescription: 'Descarga una imagen de tu resultado para compartir en LinkedIn',
+    shareCardBrand: 'AWS Certification Prep',
+    shareCardFooter: '¡Prepárate para tu próximo examen de certificación gratuitamente!',
+    shareLinkedInTitle: '¡Logro obtenido! He conseguido {score} puntos en el examen de certificación AWS.',
+    shareLinkedInSummary: 'Me he preparado usando la herramienta gratuita de práctica de exámenes de AWS Certification Prep. ¡Comparto mi resultado y animo a otros a prepararse para sus certificaciones AWS!',
+    shareAlert: '¡Tu imagen de resultados se ha descargado!\n\nAhora puedes:\n1. Abrir LinkedIn en una nueva pestaña\n2. Crear una nueva publicación\n3. Pegar la imagen que se descargó\n4. Agregar el texto: "¡Acabo de obtener {score} puntos en el examen de certificación AWS! Me preparé usando la herramienta gratuita de práctica de exámenes de AWS Certification Prep. ¡Prepárate para tu próximo examen de certificación gratuitamente en https://awscert.syscu.es!"',
+    shareError: 'Hubo un error al generar la imagen. Por favor, inténtalo de nuevo.'
   },
 
   // Footer
@@ -115,7 +144,9 @@ export const translations = {
     practiceTests: 'Exámenes de Práctica',
     about: 'Acerca de',
     github: 'GitHub',
-    website: 'Sitio Web'
+    website: 'Sitio Web',
+    quickLinks: 'Enlaces Rápidos',
+    connect: 'Conectar'
   },
 
   // App
@@ -132,5 +163,24 @@ export const translations = {
     success: 'Éxito',
     warning: 'Advertencia',
     info: 'Información'
+  },
+
+  // Countdown (Cloud Quest launch teaser)
+  countdown: {
+    kicker: 'Próximo lanzamiento',
+    heading: 'AWS Cloud Quest',
+    title: 'La nueva versión de AWS Cloud Quest está por llegar',
+    description: 'AWS renueva Cloud Quest: ciudad 3D rediseñada, conversaciones con clientes impulsadas por IA, torneos revisados y builds prácticos en un entorno AWS real. Tu progreso se mantiene. Lanza el 11 de agosto de 2026 en AWS Skill Builder.',
+    cta: 'Ver AWS Cloud Quest en Skill Builder',
+    days: 'Días',
+    hours: 'Horas',
+    minutes: 'Min',
+    seconds: 'Seg'
+  },
+
+  // Footer
+  footerExtra: {
+    title: 'AWS Certification Practice Exams',
+    description: 'Simulador gratuito de exámenes de práctica para las 12 certificaciones vigentes de AWS, sin registro.'
   }
 };

@@ -2,837 +2,1519 @@
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.1",
-    "text": "Una compañía de videojuegos en línea expone servidores de partidas mediante UDP en dos Regiones de AWS. Los clientes del juego se distribuyen en cuatro continentes y la compañía necesita direcciones IP estáticas que puedan incrustarse en el ejecutable del juego, además de conmutación por error entre Regiones en menos de un minuto sin depender del almacenamiento en caché de DNS del cliente. ¿Qué solución cumple estos requisitos?",
-    "options": [
-      "Configurar AWS Global Accelerator con un grupo de endpoints en cada Región y Network Load Balancers como endpoints",
-      "Crear una distribución de Amazon CloudFront con conmutación por error de origen entre las dos Regiones",
-      "Crear registros de Amazon Route 53 con enrutamiento por latencia y verificaciones de estado que apunten a un Network Load Balancer en cada Región",
-      "Desplegar un Application Load Balancer con grupos de destino de tipo IP que apunten a instancias en ambas Regiones"
-    ],
+    "text": {
+      "es": "Una compañía de videojuegos en línea expone servidores de partidas mediante UDP en dos Regiones de AWS. Los clientes del juego se distribuyen en cuatro continentes y la compañía necesita direcciones IP estáticas que puedan incrustarse en el ejecutable del juego, además de conmutación por error entre Regiones en menos de un minuto sin depender del almacenamiento en caché de DNS del cliente. ¿Qué solución cumple estos requisitos?",
+      "en": "An online gaming company exposes game servers over UDP in two AWS Regions. Game clients are spread across four continents, and the company needs static IP addresses that can be embedded in the game executable, plus failover between Regions in under a minute without relying on client-side DNS caching. Which solution meets these requirements?"
+    },
+    "options": {
+      "es": [
+        "Configurar AWS Global Accelerator con un grupo de endpoints en cada Región y Network Load Balancers como endpoints",
+        "Crear una distribución de Amazon CloudFront con conmutación por error de origen entre las dos Regiones",
+        "Crear registros de Amazon Route 53 con enrutamiento por latencia y verificaciones de estado que apunten a un Network Load Balancer en cada Región",
+        "Desplegar un Application Load Balancer con grupos de destino de tipo IP que apunten a instancias en ambas Regiones"
+      ],
+      "en": [
+        "Configure AWS Global Accelerator with an endpoint group in each Region and Network Load Balancers as endpoints",
+        "Create an Amazon CloudFront distribution with origin failover between the two Regions",
+        "Create Amazon Route 53 records with latency-based routing and health checks that point to a Network Load Balancer in each Region",
+        "Deploy an Application Load Balancer with IP target groups that point to instances in both Regions"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "AWS Global Accelerator proporciona dos direcciones IP anycast estáticas, admite tráfico UDP y conmuta por error entre grupos de endpoints en cuestión de segundos sin depender del TTL de DNS. CloudFront y Route 53 dependen de DNS o solo admiten HTTP/HTTPS.",
+    "explanation": {
+      "es": "AWS Global Accelerator proporciona dos direcciones IP anycast estáticas, admite tráfico UDP y conmuta por error entre grupos de endpoints en cuestión de segundos sin depender del TTL de DNS. CloudFront y Route 53 dependen de DNS o solo admiten HTTP/HTTPS.",
+      "en": "AWS Global Accelerator provides two static anycast IP addresses, supports UDP traffic, and fails over between endpoint groups within seconds without depending on DNS TTL. CloudFront and Route 53 depend on DNS or support only HTTP/HTTPS."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.1",
-    "text": "Una plataforma SaaS global sirve contenido HTTPS dinámico y personalizado por usuario desde un Application Load Balancer en una sola Región. El equipo de redes necesita reducir el tiempo hasta el primer byte para los usuarios remotos y garantizar que los clientes no puedan omitir la capa de borde para llegar directamente al ALB. ¿Qué solución cumple estos requisitos?",
-    "options": [
-      "Crear una distribución de CloudFront con el ALB como origen, aplicar una política de caché que deshabilite el almacenamiento en caché y reenvíe solo los encabezados requeridos, y restringir el ALB con una ACL web de AWS WAF y la lista de prefijos administrada de CloudFront",
-      "Crear una distribución de CloudFront con un TTL mínimo de 86.400 segundos para todas las rutas y mantener el ALB accesible desde internet",
-      "Habilitar S3 Transfer Acceleration y servir el contenido dinámico desde un bucket de Amazon S3",
-      "Configurar Route 53 con enrutamiento por geolocalización hacia el ALB y habilitar sesiones persistentes en el balanceador"
-    ],
+    "text": {
+      "es": "Una plataforma SaaS global sirve contenido HTTPS dinámico y personalizado por usuario desde un Application Load Balancer en una sola Región. El equipo de redes necesita reducir el tiempo hasta el primer byte para los usuarios remotos y garantizar que los clientes no puedan omitir la capa de borde para llegar directamente al ALB. ¿Qué solución cumple estos requisitos?",
+      "en": "A global SaaS platform serves dynamic, per-user personalized HTTPS content from an Application Load Balancer in a single Region. The networking team needs to reduce time to first byte for remote users and ensure that clients cannot bypass the edge layer to reach the ALB directly. Which solution meets these requirements?"
+    },
+    "options": {
+      "es": [
+        "Crear una distribución de CloudFront con el ALB como origen, aplicar una política de caché que deshabilite el almacenamiento en caché y reenvíe solo los encabezados requeridos, y restringir el ALB con una ACL web de AWS WAF y la lista de prefijos administrada de CloudFront",
+        "Crear una distribución de CloudFront con un TTL mínimo de 86.400 segundos para todas las rutas y mantener el ALB accesible desde internet",
+        "Habilitar S3 Transfer Acceleration y servir el contenido dinámico desde un bucket de Amazon S3",
+        "Configurar Route 53 con enrutamiento por geolocalización hacia el ALB y habilitar sesiones persistentes en el balanceador"
+      ],
+      "en": [
+        "Create a CloudFront distribution with the ALB as the origin, apply a cache policy that disables caching and forwards only the required headers, and restrict the ALB with an AWS WAF web ACL and the CloudFront managed prefix list",
+        "Create a CloudFront distribution with a minimum TTL of 86,400 seconds for all paths and keep the ALB reachable from the internet",
+        "Enable S3 Transfer Acceleration and serve the dynamic content from an Amazon S3 bucket",
+        "Configure Route 53 with geolocation routing to the ALB and enable sticky sessions on the load balancer"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "CloudFront mejora el TTFB del contenido dinámico al terminar TLS en el borde y reutilizar conexiones persistentes sobre la red troncal de AWS, incluso sin almacenar en caché. La lista de prefijos administrada de CloudFront junto con AWS WAF impide el acceso directo al ALB.",
+    "explanation": {
+      "es": "CloudFront mejora el TTFB del contenido dinámico al terminar TLS en el borde y reutilizar conexiones persistentes sobre la red troncal de AWS, incluso sin almacenar en caché. La lista de prefijos administrada de CloudFront junto con AWS WAF impide el acceso directo al ALB.",
+      "en": "CloudFront improves TTFB for dynamic content by terminating TLS at the edge and reusing persistent connections over the AWS backbone, even without caching. The CloudFront managed prefix list together with AWS WAF prevents direct access to the ALB."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.1",
-    "text": "Una API REST de Amazon API Gateway está desplegada con un endpoint optimizado para el borde. La compañía necesita controlar el comportamiento de la caché por ruta, aplicar restricciones geográficas propias y asociar su propia ACL web de AWS WAF a la capa de borde. ¿Qué acción permite cumplir estos requisitos?",
-    "options": [
-      "Migrar la API a un endpoint regional y crear una distribución de CloudFront propia que use la API como origen",
-      "Mantener el endpoint optimizado para el borde y asociar la distribución de CloudFront administrada por AWS a la ACL web",
-      "Colocar AWS Global Accelerator delante del endpoint optimizado para el borde y configurar allí las restricciones geográficas",
-      "Crear un endpoint privado de API Gateway y exponerlo mediante un Network Load Balancer registrado en CloudFront"
-    ],
+    "text": {
+      "es": "Una API REST de Amazon API Gateway está desplegada con un endpoint optimizado para el borde. La compañía necesita controlar el comportamiento de la caché por ruta, aplicar restricciones geográficas propias y asociar su propia ACL web de AWS WAF a la capa de borde. ¿Qué acción permite cumplir estos requisitos?",
+      "en": "An Amazon API Gateway REST API is deployed with an edge-optimized endpoint. The company needs to control caching behavior per path, apply its own geographic restrictions, and associate its own AWS WAF web ACL with the edge layer. Which action makes it possible to meet these requirements?"
+    },
+    "options": {
+      "es": [
+        "Migrar la API a un endpoint regional y crear una distribución de CloudFront propia que use la API como origen",
+        "Mantener el endpoint optimizado para el borde y asociar la distribución de CloudFront administrada por AWS a la ACL web",
+        "Colocar AWS Global Accelerator delante del endpoint optimizado para el borde y configurar allí las restricciones geográficas",
+        "Crear un endpoint privado de API Gateway y exponerlo mediante un Network Load Balancer registrado en CloudFront"
+      ],
+      "en": [
+        "Migrate the API to a regional endpoint and create the company's own CloudFront distribution that uses the API as the origin",
+        "Keep the edge-optimized endpoint and associate the AWS-managed CloudFront distribution with the web ACL",
+        "Place AWS Global Accelerator in front of the edge-optimized endpoint and configure the geographic restrictions there",
+        "Create a private API Gateway endpoint and expose it through a Network Load Balancer registered with CloudFront"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "La distribución de CloudFront que respalda un endpoint optimizado para el borde es administrada por AWS y no puede modificarse ni asociarse a recursos propios. Con un endpoint regional la compañía crea y controla su propia distribución de CloudFront.",
+    "explanation": {
+      "es": "La distribución de CloudFront que respalda un endpoint optimizado para el borde es administrada por AWS y no puede modificarse ni asociarse a recursos propios. Con un endpoint regional la compañía crea y controla su propia distribución de CloudFront.",
+      "en": "The CloudFront distribution that backs an edge-optimized endpoint is managed by AWS and cannot be modified or associated with the customer's own resources. With a regional endpoint, the company creates and controls its own CloudFront distribution."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.2",
-    "text": "Los servidores del centro de datos local deben resolver los nombres de registros que existen únicamente en una zona hospedada privada de Amazon Route 53 asociada a una VPC. Ya existe conectividad mediante AWS Direct Connect. ¿Qué solución cumple este requisito con el menor esfuerzo operativo?",
-    "options": [
-      "Crear un endpoint de entrada de Route 53 Resolver en la VPC y configurar un reenvío condicional en los servidores DNS locales hacia las direcciones IP del endpoint",
-      "Crear un endpoint de salida de Route 53 Resolver en la VPC y una regla de reenvío para el dominio de la zona hospedada privada",
-      "Modificar el conjunto de opciones de DHCP de la VPC para que incluya las direcciones IP de los servidores DNS locales",
-      "Convertir la zona hospedada privada en una zona hospedada pública y restringir las consultas con una política de IAM"
-    ],
+    "text": {
+      "es": "Los servidores del centro de datos local deben resolver los nombres de registros que existen únicamente en una zona hospedada privada de Amazon Route 53 asociada a una VPC. Ya existe conectividad mediante AWS Direct Connect. ¿Qué solución cumple este requisito con el menor esfuerzo operativo?",
+      "en": "On-premises data center servers must resolve the names of records that exist only in an Amazon Route 53 private hosted zone associated with a VPC. Connectivity through AWS Direct Connect already exists. Which solution meets this requirement with the least operational effort?"
+    },
+    "options": {
+      "es": [
+        "Crear un endpoint de entrada de Route 53 Resolver en la VPC y configurar un reenvío condicional en los servidores DNS locales hacia las direcciones IP del endpoint",
+        "Crear un endpoint de salida de Route 53 Resolver en la VPC y una regla de reenvío para el dominio de la zona hospedada privada",
+        "Modificar el conjunto de opciones de DHCP de la VPC para que incluya las direcciones IP de los servidores DNS locales",
+        "Convertir la zona hospedada privada en una zona hospedada pública y restringir las consultas con una política de IAM"
+      ],
+      "en": [
+        "Create a Route 53 Resolver inbound endpoint in the VPC and configure conditional forwarding on the on-premises DNS servers to the endpoint IP addresses",
+        "Create a Route 53 Resolver outbound endpoint in the VPC and a forwarding rule for the private hosted zone domain",
+        "Modify the VPC DHCP options set to include the IP addresses of the on-premises DNS servers",
+        "Convert the private hosted zone into a public hosted zone and restrict queries with an IAM policy"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Un endpoint de entrada de Route 53 Resolver expone direcciones IP dentro de la VPC a las que la red local puede enviar consultas mediante reenvío condicional. Los endpoints de salida sirven para el flujo inverso, de AWS hacia el DNS local.",
+    "explanation": {
+      "es": "Un endpoint de entrada de Route 53 Resolver expone direcciones IP dentro de la VPC a las que la red local puede enviar consultas mediante reenvío condicional. Los endpoints de salida sirven para el flujo inverso, de AWS hacia el DNS local.",
+      "en": "A Route 53 Resolver inbound endpoint exposes IP addresses inside the VPC that the on-premises network can send queries to through conditional forwarding. Outbound endpoints serve the reverse flow, from AWS to on-premises DNS."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.2",
-    "text": "Una organización con 40 cuentas de AWS quiere centralizar la resolución de nombres. Un dominio interno debe resolverse de forma idéntica desde las VPC de todas las cuentas, y las reglas de reenvío hacia el DNS local deben definirse una sola vez. ¿Qué dos acciones debe realizar el equipo de redes? (Elija dos).",
-    "options": [
-      "Crear la zona hospedada privada en la cuenta de red y usar autorizaciones de asociación de VPC para asociar las VPC de las demás cuentas",
-      "Compartir las reglas de Route 53 Resolver de la cuenta de red con las cuentas miembro mediante AWS Resource Access Manager y asociarlas a sus VPC",
-      "Replicar manualmente los registros en una zona hospedada privada por cada cuenta y sincronizarlos con una función programada",
-      "Convertir la zona hospedada privada en pública y restringir el acceso mediante políticas de IAM basadas en la VPC de origen",
-      "Habilitar el uso compartido de VPC para que todas las cuentas hereden automáticamente las zonas hospedadas privadas de la cuenta de red"
-    ],
+    "text": {
+      "es": "Una organización con 40 cuentas de AWS quiere centralizar la resolución de nombres. Un dominio interno debe resolverse de forma idéntica desde las VPC de todas las cuentas, y las reglas de reenvío hacia el DNS local deben definirse una sola vez. ¿Qué dos acciones debe realizar el equipo de redes? (Elija dos).",
+      "en": "An organization with 40 AWS accounts wants to centralize name resolution. An internal domain must resolve identically from the VPCs in every account, and the forwarding rules to on-premises DNS must be defined only once. Which two actions should the networking team take? (Choose two.)"
+    },
+    "options": {
+      "es": [
+        "Crear la zona hospedada privada en la cuenta de red y usar autorizaciones de asociación de VPC para asociar las VPC de las demás cuentas",
+        "Compartir las reglas de Route 53 Resolver de la cuenta de red con las cuentas miembro mediante AWS Resource Access Manager y asociarlas a sus VPC",
+        "Replicar manualmente los registros en una zona hospedada privada por cada cuenta y sincronizarlos con una función programada",
+        "Convertir la zona hospedada privada en pública y restringir el acceso mediante políticas de IAM basadas en la VPC de origen",
+        "Habilitar el uso compartido de VPC para que todas las cuentas hereden automáticamente las zonas hospedadas privadas de la cuenta de red"
+      ],
+      "en": [
+        "Create the private hosted zone in the network account and use VPC association authorizations to associate the VPCs of the other accounts",
+        "Share the Route 53 Resolver rules from the network account with the member accounts through AWS Resource Access Manager and associate them with their VPCs",
+        "Manually replicate the records in a private hosted zone in each account and synchronize them with a scheduled function",
+        "Convert the private hosted zone into a public one and restrict access with IAM policies based on the source VPC",
+        "Enable VPC sharing so that all accounts automatically inherit the private hosted zones of the network account"
+      ]
+    },
     "correct": [
       0,
       1
     ],
     "type": "multiple",
-    "explanation": "Una zona hospedada privada puede asociarse a VPC de otras cuentas mediante autorizaciones de asociación entre cuentas, y las reglas de Route 53 Resolver son recursos que se comparten con AWS RAM. Ambos mecanismos evitan duplicar configuración por cuenta.",
+    "explanation": {
+      "es": "Una zona hospedada privada puede asociarse a VPC de otras cuentas mediante autorizaciones de asociación entre cuentas, y las reglas de Route 53 Resolver son recursos que se comparten con AWS RAM. Ambos mecanismos evitan duplicar configuración por cuenta.",
+      "en": "A private hosted zone can be associated with VPCs in other accounts through cross-account association authorizations, and Route 53 Resolver rules are resources that are shared with AWS RAM. Both mechanisms avoid duplicating configuration in each account."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.2",
-    "text": "Una compañía necesita que el dominio de nivel superior example.com (el ápice de la zona) resuelva a un Application Load Balancer. El equipo quiere evitar cargos por consultas de DNS y que el registro deje de responder si el balanceador no está disponible. ¿Qué configuración de Route 53 cumple estos requisitos?",
-    "options": [
-      "Un registro alias de tipo A que apunte al Application Load Balancer con la evaluación del estado del destino habilitada",
-      "Un registro CNAME en el ápice de la zona que apunte al nombre DNS del Application Load Balancer",
-      "Un registro de tipo A con las direcciones IP actuales del balanceador y un TTL de 60 segundos",
-      "Un registro NS que delegue el ápice de la zona al servicio de DNS del Application Load Balancer"
-    ],
+    "text": {
+      "es": "Una compañía necesita que el dominio de nivel superior example.com (el ápice de la zona) resuelva a un Application Load Balancer. El equipo quiere evitar cargos por consultas de DNS y que el registro deje de responder si el balanceador no está disponible. ¿Qué configuración de Route 53 cumple estos requisitos?",
+      "en": "A company needs the top-level domain example.com (the zone apex) to resolve to an Application Load Balancer. The team wants to avoid DNS query charges and wants the record to stop responding if the load balancer is unavailable. Which Route 53 configuration meets these requirements?"
+    },
+    "options": {
+      "es": [
+        "Un registro alias de tipo A que apunte al Application Load Balancer con la evaluación del estado del destino habilitada",
+        "Un registro CNAME en el ápice de la zona que apunte al nombre DNS del Application Load Balancer",
+        "Un registro de tipo A con las direcciones IP actuales del balanceador y un TTL de 60 segundos",
+        "Un registro NS que delegue el ápice de la zona al servicio de DNS del Application Load Balancer"
+      ],
+      "en": [
+        "An A-type alias record that points to the Application Load Balancer with evaluate target health enabled",
+        "A CNAME record at the zone apex that points to the DNS name of the Application Load Balancer",
+        "An A-type record with the load balancer's current IP addresses and a TTL of 60 seconds",
+        "An NS record that delegates the zone apex to the Application Load Balancer DNS service"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "El protocolo DNS no permite registros CNAME en el ápice de una zona, y los registros alias de Route 53 hacia recursos de AWS no generan cargos por consulta y pueden evaluar el estado del destino. Las direcciones IP de un ALB son dinámicas y no deben codificarse.",
+    "explanation": {
+      "es": "El protocolo DNS no permite registros CNAME en el ápice de una zona, y los registros alias de Route 53 hacia recursos de AWS no generan cargos por consulta y pueden evaluar el estado del destino. Las direcciones IP de un ALB son dinámicas y no deben codificarse.",
+      "en": "The DNS protocol does not allow CNAME records at a zone apex, and Route 53 alias records that point to AWS resources incur no query charges and can evaluate target health. The IP addresses of an ALB are dynamic and must not be hardcoded."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.3",
-    "text": "Una compañía debe inspeccionar de forma transparente todo el tráfico que entra y sale de una VPC utilizando dispositivos virtuales de firewall de un tercero. Los dispositivos deben ver las direcciones IP de origen y destino originales, escalar horizontalmente y no requerir cambios en las aplicaciones. ¿Qué solución cumple estos requisitos?",
-    "options": [
-      "Desplegar un Gateway Load Balancer con un grupo de destino que use el protocolo GENEVE en el puerto 6081 e insertar endpoints de Gateway Load Balancer en las tablas de rutas",
-      "Desplegar un Network Load Balancer con el protocolo proxy v2 habilitado y enrutar el tráfico hacia los dispositivos",
-      "Desplegar un Application Load Balancer con reglas de reenvío basadas en encabezados hacia el grupo de dispositivos",
-      "Desplegar los dispositivos como instancias NAT y agregar rutas específicas en las tablas de rutas de las subredes"
-    ],
+    "text": {
+      "es": "Una compañía debe inspeccionar de forma transparente todo el tráfico que entra y sale de una VPC utilizando dispositivos virtuales de firewall de un tercero. Los dispositivos deben ver las direcciones IP de origen y destino originales, escalar horizontalmente y no requerir cambios en las aplicaciones. ¿Qué solución cumple estos requisitos?",
+      "en": "A company must transparently inspect all traffic entering and leaving a VPC using third-party virtual firewall appliances. The appliances must see the original source and destination IP addresses, scale horizontally, and require no application changes. Which solution meets these requirements?"
+    },
+    "options": {
+      "es": [
+        "Desplegar un Gateway Load Balancer con un grupo de destino que use el protocolo GENEVE en el puerto 6081 e insertar endpoints de Gateway Load Balancer en las tablas de rutas",
+        "Desplegar un Network Load Balancer con el protocolo proxy v2 habilitado y enrutar el tráfico hacia los dispositivos",
+        "Desplegar un Application Load Balancer con reglas de reenvío basadas en encabezados hacia el grupo de dispositivos",
+        "Desplegar los dispositivos como instancias NAT y agregar rutas específicas en las tablas de rutas de las subredes"
+      ],
+      "en": [
+        "Deploy a Gateway Load Balancer with a target group that uses the GENEVE protocol on port 6081 and insert Gateway Load Balancer endpoints into the route tables",
+        "Deploy a Network Load Balancer with proxy protocol v2 enabled and route the traffic to the appliances",
+        "Deploy an Application Load Balancer with header-based forwarding rules to the appliance fleet",
+        "Deploy the appliances as NAT instances and add specific routes in the subnet route tables"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Gateway Load Balancer opera en la capa 3 y encapsula el tráfico con GENEVE en el puerto 6081, lo que conserva los paquetes originales y permite la inserción transparente mediante endpoints de GWLB. Los balanceadores de capa 4 y 7 terminan o traducen la conexión.",
+    "explanation": {
+      "es": "Gateway Load Balancer opera en la capa 3 y encapsula el tráfico con GENEVE en el puerto 6081, lo que conserva los paquetes originales y permite la inserción transparente mediante endpoints de GWLB. Los balanceadores de capa 4 y 7 terminan o traducen la conexión.",
+      "en": "Gateway Load Balancer operates at Layer 3 and encapsulates traffic with GENEVE on port 6081, which preserves the original packets and allows transparent insertion through GWLB endpoints. Layer 4 and Layer 7 load balancers terminate or translate the connection."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.3",
-    "text": "Una plataforma de IoT recibe millones de conexiones MQTT sobre TLS desde dispositivos remotos. Los dispositivos tienen las direcciones IP de destino grabadas en firmware, la aplicación debe validar los certificados de cliente por sí misma y necesita ver la dirección IP de origen del dispositivo. ¿Qué solución de balanceo de carga cumple estos requisitos?",
-    "options": [
-      "Un Network Load Balancer con un listener TCP en el puerto 8883, direcciones IP elásticas por zona de disponibilidad y terminación de TLS en las instancias de destino",
-      "Un Application Load Balancer con un listener TLS y grupos de destino de tipo instancia",
-      "Un Gateway Load Balancer con endpoints en cada subred de los dispositivos",
-      "Un Classic Load Balancer en modo TCP con balanceo de carga entre zonas habilitado"
-    ],
+    "text": {
+      "es": "Una plataforma de IoT recibe millones de conexiones MQTT sobre TLS desde dispositivos remotos. Los dispositivos tienen las direcciones IP de destino grabadas en firmware, la aplicación debe validar los certificados de cliente por sí misma y necesita ver la dirección IP de origen del dispositivo. ¿Qué solución de balanceo de carga cumple estos requisitos?",
+      "en": "An IoT platform receives millions of MQTT over TLS connections from remote devices. The devices have the destination IP addresses burned into firmware, the application must validate client certificates itself, and it needs to see the device source IP address. Which load balancing solution meets these requirements?"
+    },
+    "options": {
+      "es": [
+        "Un Network Load Balancer con un listener TCP en el puerto 8883, direcciones IP elásticas por zona de disponibilidad y terminación de TLS en las instancias de destino",
+        "Un Application Load Balancer con un listener TLS y grupos de destino de tipo instancia",
+        "Un Gateway Load Balancer con endpoints en cada subred de los dispositivos",
+        "Un Classic Load Balancer en modo TCP con balanceo de carga entre zonas habilitado"
+      ],
+      "en": [
+        "A Network Load Balancer with a TCP listener on port 8883, Elastic IP addresses per Availability Zone, and TLS termination on the target instances",
+        "An Application Load Balancer with a TLS listener and instance-type target groups",
+        "A Gateway Load Balancer with endpoints in every device subnet",
+        "A Classic Load Balancer in TCP mode with cross-zone load balancing enabled"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "MQTT no es HTTP, por lo que se requiere un balanceador de capa 4; el Network Load Balancer admite direcciones IP elásticas estáticas por zona, hace pasar el TLS sin terminarlo y conserva la IP de origen con destinos de tipo instancia.",
+    "explanation": {
+      "es": "MQTT no es HTTP, por lo que se requiere un balanceador de capa 4; el Network Load Balancer admite direcciones IP elásticas estáticas por zona, hace pasar el TLS sin terminarlo y conserva la IP de origen con destinos de tipo instancia.",
+      "en": "MQTT is not HTTP, so a Layer 4 load balancer is required; the Network Load Balancer supports static Elastic IP addresses per zone, passes TLS through without terminating it, and preserves the source IP with instance-type targets."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.3",
-    "text": "Un clúster de Amazon EKS con nodos de AWS Fargate debe exponer una aplicación HTTP a internet y, en un espacio de nombres distinto, un servicio gRPC sobre TCP que requiere direcciones IP estáticas. El equipo ya instaló el AWS Load Balancer Controller. ¿Qué dos acciones cumplen estos requisitos? (Elija dos).",
-    "options": [
-      "Crear un recurso Ingress con las anotaciones del AWS Load Balancer Controller para aprovisionar un Application Load Balancer en modo de destino IP",
-      "Crear un Service de tipo LoadBalancer con la anotación service.beta.kubernetes.io/aws-load-balancer-type: external y el modo de destino IP para aprovisionar un Network Load Balancer",
-      "Configurar kube-proxy en modo IPVS para que el balanceador registre automáticamente los pods de Fargate",
-      "Usar un Gateway Load Balancer como punto de entrada HTTP hacia los pods de Fargate",
-      "Registrar manualmente las direcciones IP de los pods en el grupo de destino mediante una función de AWS Lambda invocada por EventBridge"
-    ],
+    "text": {
+      "es": "Un clúster de Amazon EKS con nodos de AWS Fargate debe exponer una aplicación HTTP a internet y, en un espacio de nombres distinto, un servicio gRPC sobre TCP que requiere direcciones IP estáticas. El equipo ya instaló el AWS Load Balancer Controller. ¿Qué dos acciones cumplen estos requisitos? (Elija dos).",
+      "en": "An Amazon EKS cluster with AWS Fargate nodes must expose an HTTP application to the internet and, in a separate namespace, a gRPC service over TCP that requires static IP addresses. The team has already installed the AWS Load Balancer Controller. Which two actions meet these requirements? (Choose two.)"
+    },
+    "options": {
+      "es": [
+        "Crear un recurso Ingress con las anotaciones del AWS Load Balancer Controller para aprovisionar un Application Load Balancer en modo de destino IP",
+        "Crear un Service de tipo LoadBalancer con la anotación service.beta.kubernetes.io/aws-load-balancer-type: external y el modo de destino IP para aprovisionar un Network Load Balancer",
+        "Configurar kube-proxy en modo IPVS para que el balanceador registre automáticamente los pods de Fargate",
+        "Usar un Gateway Load Balancer como punto de entrada HTTP hacia los pods de Fargate",
+        "Registrar manualmente las direcciones IP de los pods en el grupo de destino mediante una función de AWS Lambda invocada por EventBridge"
+      ],
+      "en": [
+        "Create an Ingress resource with the AWS Load Balancer Controller annotations to provision an Application Load Balancer in IP target mode",
+        "Create a Service of type LoadBalancer with the annotation service.beta.kubernetes.io/aws-load-balancer-type: external and IP target mode to provision a Network Load Balancer",
+        "Configure kube-proxy in IPVS mode so that the load balancer automatically registers the Fargate pods",
+        "Use a Gateway Load Balancer as the HTTP entry point to the Fargate pods",
+        "Manually register the pod IP addresses in the target group through an AWS Lambda function invoked by EventBridge"
+      ]
+    },
     "correct": [
       0,
       1
     ],
     "type": "multiple",
-    "explanation": "El AWS Load Balancer Controller crea un Application Load Balancer a partir de recursos Ingress y un Network Load Balancer a partir de Services de tipo LoadBalancer. Los pods de Fargate solo admiten el modo de destino IP, ya que no existen instancias que registrar.",
+    "explanation": {
+      "es": "El AWS Load Balancer Controller crea un Application Load Balancer a partir de recursos Ingress y un Network Load Balancer a partir de Services de tipo LoadBalancer. Los pods de Fargate solo admiten el modo de destino IP, ya que no existen instancias que registrar.",
+      "en": "The AWS Load Balancer Controller creates an Application Load Balancer from Ingress resources and a Network Load Balancer from Services of type LoadBalancer. Fargate pods support only IP target mode, because there are no instances to register."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.4",
-    "text": "El equipo de seguridad necesita entregar copias completas de los paquetes, incluidas las cargas útiles, de un subconjunto de instancias EC2 a un sistema de detección de intrusiones para su análisis forense. ¿Qué solución cumple este requisito?",
-    "options": [
-      "Configurar sesiones de VPC Traffic Mirroring desde las interfaces de red de origen hacia un Network Load Balancer con un listener UDP en el puerto 4789 delante de los dispositivos de IDS",
-      "Habilitar VPC Flow Logs con un formato personalizado que incluya todos los campos disponibles y entregarlos al IDS",
-      "Instalar el agente de Amazon CloudWatch en las instancias y publicar métricas personalizadas de red",
-      "Habilitar eventos de datos de AWS CloudTrail para las interfaces de red de las instancias"
-    ],
+    "text": {
+      "es": "El equipo de seguridad necesita entregar copias completas de los paquetes, incluidas las cargas útiles, de un subconjunto de instancias EC2 a un sistema de detección de intrusiones para su análisis forense. ¿Qué solución cumple este requisito?",
+      "en": "The security team needs to deliver full packet copies, including payloads, from a subset of EC2 instances to an intrusion detection system for forensic analysis. Which solution meets this requirement?"
+    },
+    "options": {
+      "es": [
+        "Configurar sesiones de VPC Traffic Mirroring desde las interfaces de red de origen hacia un Network Load Balancer con un listener UDP en el puerto 4789 delante de los dispositivos de IDS",
+        "Habilitar VPC Flow Logs con un formato personalizado que incluya todos los campos disponibles y entregarlos al IDS",
+        "Instalar el agente de Amazon CloudWatch en las instancias y publicar métricas personalizadas de red",
+        "Habilitar eventos de datos de AWS CloudTrail para las interfaces de red de las instancias"
+      ],
+      "en": [
+        "Configure VPC Traffic Mirroring sessions from the source network interfaces to a Network Load Balancer with a UDP listener on port 4789 in front of the IDS appliances",
+        "Enable VPC Flow Logs with a custom format that includes all available fields and deliver them to the IDS",
+        "Install the Amazon CloudWatch agent on the instances and publish custom network metrics",
+        "Enable AWS CloudTrail data events for the instances' network interfaces"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "VPC Traffic Mirroring copia los paquetes completos, con cabeceras y carga útil, y los encapsula en VXLAN hacia un destino como un NLB con listener UDP 4789. Los flow logs solo contienen metadatos de los flujos, nunca el contenido.",
+    "explanation": {
+      "es": "VPC Traffic Mirroring copia los paquetes completos, con cabeceras y carga útil, y los encapsula en VXLAN hacia un destino como un NLB con listener UDP 4789. Los flow logs solo contienen metadatos de los flujos, nunca el contenido.",
+      "en": "VPC Traffic Mirroring copies complete packets, with headers and payload, and encapsulates them in VXLAN to a target such as an NLB with a UDP 4789 listener. Flow logs contain only flow metadata, never the content."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.4",
-    "text": "Una empresa opera transit gateways en cinco Regiones, con conexiones de Direct Connect y VPN de sitio a sitio. El equipo de operaciones necesita una vista topológica única de la red global y la capacidad de determinar la ruta que seguiría el tráfico entre una VPC y un centro de datos local. ¿Qué solución cumple estos requisitos?",
-    "options": [
-      "Registrar los transit gateways en una red global de AWS Transit Gateway Network Manager y usar Route Analyzer para evaluar las rutas",
-      "Habilitar VPC Flow Logs en todas las VPC y visualizar la topología con consultas de Amazon Athena",
-      "Ejecutar VPC Reachability Analyzer entre la VPC y el router local para obtener el diagrama de la red global",
-      "Usar AWS Config con reglas administradas de red para generar el inventario topológico"
-    ],
+    "text": {
+      "es": "Una empresa opera transit gateways en cinco Regiones, con conexiones de Direct Connect y VPN de sitio a sitio. El equipo de operaciones necesita una vista topológica única de la red global y la capacidad de determinar la ruta que seguiría el tráfico entre una VPC y un centro de datos local. ¿Qué solución cumple estos requisitos?",
+      "en": "A company operates transit gateways in five Regions, with Direct Connect and Site-to-Site VPN connections. The operations team needs a single topological view of the global network and the ability to determine the path that traffic would take between a VPC and an on-premises data center. Which solution meets these requirements?"
+    },
+    "options": {
+      "es": [
+        "Registrar los transit gateways en una red global de AWS Transit Gateway Network Manager y usar Route Analyzer para evaluar las rutas",
+        "Habilitar VPC Flow Logs en todas las VPC y visualizar la topología con consultas de Amazon Athena",
+        "Ejecutar VPC Reachability Analyzer entre la VPC y el router local para obtener el diagrama de la red global",
+        "Usar AWS Config con reglas administradas de red para generar el inventario topológico"
+      ],
+      "en": [
+        "Register the transit gateways in an AWS Transit Gateway Network Manager global network and use Route Analyzer to evaluate the paths",
+        "Enable VPC Flow Logs in all VPCs and visualize the topology with Amazon Athena queries",
+        "Run VPC Reachability Analyzer between the VPC and the on-premises router to obtain the global network diagram",
+        "Use AWS Config with managed network rules to generate the topological inventory"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Transit Gateway Network Manager ofrece una vista topológica y de estado centralizada de las redes globales, incluidos accesorios de Direct Connect y VPN, y Route Analyzer evalúa las rutas entre orígenes y destinos. Reachability Analyzer no analiza destinos fuera de AWS.",
+    "explanation": {
+      "es": "Transit Gateway Network Manager ofrece una vista topológica y de estado centralizada de las redes globales, incluidos accesorios de Direct Connect y VPN, y Route Analyzer evalúa las rutas entre orígenes y destinos. Reachability Analyzer no analiza destinos fuera de AWS.",
+      "en": "Transit Gateway Network Manager offers a centralized topological and status view of global networks, including Direct Connect and VPN attachments, and Route Analyzer evaluates the paths between sources and destinations. Reachability Analyzer does not analyze destinations outside AWS."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.4",
-    "text": "Antes de migrar una aplicación sensible a la latencia, un arquitecto de redes debe capturar una línea base del rendimiento de la conexión de AWS Direct Connect y generar alertas cuando el comportamiento se desvíe de esa línea base. ¿Qué enfoque cumple mejor este requisito?",
-    "options": [
-      "Recopilar durante varias semanas las métricas de CloudWatch de la conexión y de las interfaces virtuales, como ConnectionBpsEgress y ConnectionErrorCount, construir un panel y crear alarmas con umbrales derivados de esos valores",
-      "Habilitar VPC Flow Logs en todas las subredes y contar los bytes por flujo para deducir la latencia de la conexión",
-      "Configurar VPC Traffic Mirroring de forma permanente hacia un dispositivo de análisis y revisar los informes manualmente cada semana",
-      "Revisar las recomendaciones de AWS Trusted Advisor en la categoría de tolerancia a errores para obtener la línea base"
-    ],
+    "text": {
+      "es": "Antes de migrar una aplicación sensible a la latencia, un arquitecto de redes debe capturar una línea base del rendimiento de la conexión de AWS Direct Connect y generar alertas cuando el comportamiento se desvíe de esa línea base. ¿Qué enfoque cumple mejor este requisito?",
+      "en": "Before migrating a latency-sensitive application, a network architect must capture a performance baseline of the AWS Direct Connect connection and generate alerts when behavior deviates from that baseline. Which approach best meets this requirement?"
+    },
+    "options": {
+      "es": [
+        "Recopilar durante varias semanas las métricas de CloudWatch de la conexión y de las interfaces virtuales, como ConnectionBpsEgress y ConnectionErrorCount, construir un panel y crear alarmas con umbrales derivados de esos valores",
+        "Habilitar VPC Flow Logs en todas las subredes y contar los bytes por flujo para deducir la latencia de la conexión",
+        "Configurar VPC Traffic Mirroring de forma permanente hacia un dispositivo de análisis y revisar los informes manualmente cada semana",
+        "Revisar las recomendaciones de AWS Trusted Advisor en la categoría de tolerancia a errores para obtener la línea base"
+      ],
+      "en": [
+        "Collect CloudWatch metrics for the connection and the virtual interfaces over several weeks, such as ConnectionBpsEgress and ConnectionErrorCount, build a dashboard, and create alarms with thresholds derived from those values",
+        "Enable VPC Flow Logs in all subnets and count the bytes per flow to infer the latency of the connection",
+        "Configure VPC Traffic Mirroring permanently to an analysis appliance and review the reports manually every week",
+        "Review the AWS Trusted Advisor recommendations in the fault tolerance category to obtain the baseline"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Direct Connect publica métricas por conexión e interfaz virtual en CloudWatch, que permiten construir una línea base histórica y definir alarmas sobre esos umbrales. Los flow logs no miden latencia y Trusted Advisor no entrega datos de rendimiento históricos.",
+    "explanation": {
+      "es": "Direct Connect publica métricas por conexión e interfaz virtual en CloudWatch, que permiten construir una línea base histórica y definir alarmas sobre esos umbrales. Los flow logs no miden latencia y Trusted Advisor no entrega datos de rendimiento históricos.",
+      "en": "Direct Connect publishes per-connection and per-virtual-interface metrics in CloudWatch, which make it possible to build a historical baseline and define alarms on those thresholds. Flow logs do not measure latency, and Trusted Advisor does not deliver historical performance data."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.5",
-    "text": "Una compañía tiene una conexión de AWS Direct Connect y una conexión de AWS Site-to-Site VPN hacia el mismo transit gateway. Ambas anuncian y reciben los mismos prefijos por BGP. El requisito es que el tráfico originado en el centro de datos local hacia AWS utilice siempre Direct Connect y solo use la VPN si Direct Connect falla. ¿Qué acción cumple este requisito?",
-    "options": [
-      "Configurar una preferencia local más alta en los routers locales para las rutas recibidas a través de la interfaz virtual de Direct Connect",
-      "Aplicar prepending de AS_PATH a las rutas que AWS anuncia por la conexión de VPN",
-      "Etiquetar con la comunidad BGP 7224:7100 las rutas que el centro de datos anuncia hacia AWS por la VPN",
-      "Deshabilitar la propagación de rutas del accesorio de VPN en la tabla de rutas del transit gateway"
-    ],
+    "text": {
+      "es": "Una compañía tiene una conexión de AWS Direct Connect y una conexión de AWS Site-to-Site VPN hacia el mismo transit gateway. Ambas anuncian y reciben los mismos prefijos por BGP. El requisito es que el tráfico originado en el centro de datos local hacia AWS utilice siempre Direct Connect y solo use la VPN si Direct Connect falla. ¿Qué acción cumple este requisito?",
+      "en": "A company has an AWS Direct Connect connection and an AWS Site-to-Site VPN connection to the same transit gateway. Both advertise and receive the same prefixes over BGP. The requirement is that traffic originating in the on-premises data center toward AWS always use Direct Connect and use the VPN only if Direct Connect fails. Which action meets this requirement?"
+    },
+    "options": {
+      "es": [
+        "Configurar una preferencia local más alta en los routers locales para las rutas recibidas a través de la interfaz virtual de Direct Connect",
+        "Aplicar prepending de AS_PATH a las rutas que AWS anuncia por la conexión de VPN",
+        "Etiquetar con la comunidad BGP 7224:7100 las rutas que el centro de datos anuncia hacia AWS por la VPN",
+        "Deshabilitar la propagación de rutas del accesorio de VPN en la tabla de rutas del transit gateway"
+      ],
+      "en": [
+        "Configure a higher local preference on the on-premises routers for the routes received through the Direct Connect virtual interface",
+        "Apply AS_PATH prepending to the routes that AWS advertises over the VPN connection",
+        "Tag the routes that the data center advertises to AWS over the VPN with BGP community 7224:7100",
+        "Disable route propagation for the VPN attachment in the transit gateway route table"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "La dirección del tráfico saliente del centro de datos la deciden los routers locales, por lo que la preferencia local es el atributo adecuado y no requiere cooperación de AWS. Las comunidades 7224:71xx y el prepending influyen en la selección que hace AWS para el tráfico hacia el centro de datos.",
+    "explanation": {
+      "es": "La dirección del tráfico saliente del centro de datos la deciden los routers locales, por lo que la preferencia local es el atributo adecuado y no requiere cooperación de AWS. Las comunidades 7224:71xx y el prepending influyen en la selección que hace AWS para el tráfico hacia el centro de datos.",
+      "en": "The direction of outbound traffic from the data center is decided by the on-premises routers, so local preference is the appropriate attribute and requires no cooperation from AWS. The 7224:71xx communities and prepending influence the selection that AWS makes for traffic toward the data center."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.5",
-    "text": "Una empresa desplegará dispositivos SD-WAN virtuales de un tercero en una VPC para extender su red definida por software hacia AWS. Necesita enrutamiento dinámico con BGP entre los dispositivos y el transit gateway, con alto ancho de banda y sin la sobrecarga de administrar túneles IPsec por cada dispositivo. ¿Qué solución cumple estos requisitos?",
-    "options": [
-      "Crear un accesorio de Transit Gateway Connect sobre el accesorio de VPC donde residen los dispositivos y establecer pares de Connect con túneles GRE y BGP",
-      "Crear una conexión de Site-to-Site VPN por cada dispositivo SD-WAN con enrutamiento dinámico y ECMP",
-      "Crear conexiones de emparejamiento de VPC entre la VPC de los dispositivos y cada VPC de aplicación",
-      "Crear una interfaz virtual de tránsito en un Direct Connect gateway asociado a los dispositivos"
-    ],
+    "text": {
+      "es": "Una empresa desplegará dispositivos SD-WAN virtuales de un tercero en una VPC para extender su red definida por software hacia AWS. Necesita enrutamiento dinámico con BGP entre los dispositivos y el transit gateway, con alto ancho de banda y sin la sobrecarga de administrar túneles IPsec por cada dispositivo. ¿Qué solución cumple estos requisitos?",
+      "en": "A company will deploy third-party virtual SD-WAN appliances in a VPC to extend its software-defined network into AWS. It needs dynamic routing with BGP between the appliances and the transit gateway, with high bandwidth and without the overhead of managing IPsec tunnels for each appliance. Which solution meets these requirements?"
+    },
+    "options": {
+      "es": [
+        "Crear un accesorio de Transit Gateway Connect sobre el accesorio de VPC donde residen los dispositivos y establecer pares de Connect con túneles GRE y BGP",
+        "Crear una conexión de Site-to-Site VPN por cada dispositivo SD-WAN con enrutamiento dinámico y ECMP",
+        "Crear conexiones de emparejamiento de VPC entre la VPC de los dispositivos y cada VPC de aplicación",
+        "Crear una interfaz virtual de tránsito en un Direct Connect gateway asociado a los dispositivos"
+      ],
+      "en": [
+        "Create a Transit Gateway Connect attachment over the VPC attachment where the appliances reside and establish Connect peers with GRE tunnels and BGP",
+        "Create a Site-to-Site VPN connection for each SD-WAN appliance with dynamic routing and ECMP",
+        "Create VPC peering connections between the appliance VPC and each application VPC",
+        "Create a transit virtual interface on a Direct Connect gateway associated with the appliances"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Transit Gateway Connect usa un accesorio de VPC o de Direct Connect existente como transporte y establece túneles GRE con BGP hacia los dispositivos SD-WAN, con mayor ancho de banda que las VPN IPsec y menos objetos que administrar.",
+    "explanation": {
+      "es": "Transit Gateway Connect usa un accesorio de VPC o de Direct Connect existente como transporte y establece túneles GRE con BGP hacia los dispositivos SD-WAN, con mayor ancho de banda que las VPN IPsec y menos objetos que administrar.",
+      "en": "Transit Gateway Connect uses an existing VPC or Direct Connect attachment as transport and establishes GRE tunnels with BGP to the SD-WAN appliances, with higher bandwidth than IPsec VPNs and fewer objects to manage."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.5",
-    "text": "Un arquitecto debe diseñar conectividad híbrida con máxima resiliencia hacia un transit gateway y debe tolerar la pérdida completa de una ubicación de Direct Connect. ¿Qué dos elementos de diseño debe incluir? (Elija dos).",
-    "options": [
-      "Aprovisionar conexiones dedicadas en dos ubicaciones distintas de Direct Connect y asociarlas al mismo Direct Connect gateway",
-      "Configurar una conexión de AWS Site-to-Site VPN como ruta de respaldo hacia el mismo transit gateway",
-      "Agrupar dos puertos de la misma ubicación y el mismo dispositivo de AWS en un grupo de agregación de enlaces",
-      "Crear dos interfaces virtuales de tránsito sobre la misma conexión dedicada, cada una con una VLAN distinta",
-      "Habilitar tramas jumbo en las interfaces virtuales para incrementar la disponibilidad del enlace"
-    ],
+    "text": {
+      "es": "Un arquitecto debe diseñar conectividad híbrida con máxima resiliencia hacia un transit gateway y debe tolerar la pérdida completa de una ubicación de Direct Connect. ¿Qué dos elementos de diseño debe incluir? (Elija dos).",
+      "en": "An architect must design hybrid connectivity with maximum resiliency to a transit gateway and must tolerate the complete loss of one Direct Connect location. Which two design elements should be included? (Choose two.)"
+    },
+    "options": {
+      "es": [
+        "Aprovisionar conexiones dedicadas en dos ubicaciones distintas de Direct Connect y asociarlas al mismo Direct Connect gateway",
+        "Configurar una conexión de AWS Site-to-Site VPN como ruta de respaldo hacia el mismo transit gateway",
+        "Agrupar dos puertos de la misma ubicación y el mismo dispositivo de AWS en un grupo de agregación de enlaces",
+        "Crear dos interfaces virtuales de tránsito sobre la misma conexión dedicada, cada una con una VLAN distinta",
+        "Habilitar tramas jumbo en las interfaces virtuales para incrementar la disponibilidad del enlace"
+      ],
+      "en": [
+        "Provision dedicated connections at two different Direct Connect locations and associate them with the same Direct Connect gateway",
+        "Configure an AWS Site-to-Site VPN connection as a backup path to the same transit gateway",
+        "Aggregate two ports on the same location and the same AWS device into a link aggregation group",
+        "Create two transit virtual interfaces over the same dedicated connection, each with a different VLAN",
+        "Enable jumbo frames on the virtual interfaces to increase link availability"
+      ]
+    },
     "correct": [
       0,
       1
     ],
     "type": "multiple",
-    "explanation": "La redundancia frente a la pérdida de una ubicación exige conexiones en ubicaciones de Direct Connect diferentes, y una VPN de sitio a sitio agrega una ruta de respaldo independiente. Un LAG y varias VLAN sobre la misma conexión comparten el mismo dominio de fallo.",
+    "explanation": {
+      "es": "La redundancia frente a la pérdida de una ubicación exige conexiones en ubicaciones de Direct Connect diferentes, y una VPN de sitio a sitio agrega una ruta de respaldo independiente. Un LAG y varias VLAN sobre la misma conexión comparten el mismo dominio de fallo.",
+      "en": "Redundancy against the loss of one location requires connections at different Direct Connect locations, and a Site-to-Site VPN adds an independent backup path. A LAG and multiple VLANs over the same connection share the same failure domain."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.6",
-    "text": "Después de una adquisición, una compañía debe permitir que las aplicaciones de la VPC A consuman un servicio TCP alojado en la VPC B. Ambas VPC usan el bloque CIDR 10.20.0.0/16 y no es posible reasignar direcciones. ¿Qué solución cumple este requisito?",
-    "options": [
-      "Publicar el servicio detrás de un Network Load Balancer en la VPC B y exponerlo como un servicio de endpoint de AWS PrivateLink que la VPC A consuma con un endpoint de interfaz",
-      "Crear una conexión de emparejamiento de VPC y agregar rutas más específicas para el rango del servicio en ambas tablas de rutas",
-      "Conectar ambas VPC a un transit gateway y usar tablas de rutas separadas para aislar los prefijos superpuestos",
-      "Configurar una conexión de Site-to-Site VPN entre las dos VPC con traducción de direcciones de red en los túneles"
-    ],
+    "text": {
+      "es": "Después de una adquisición, una compañía debe permitir que las aplicaciones de la VPC A consuman un servicio TCP alojado en la VPC B. Ambas VPC usan el bloque CIDR 10.20.0.0/16 y no es posible reasignar direcciones. ¿Qué solución cumple este requisito?",
+      "en": "After an acquisition, a company must allow applications in VPC A to consume a TCP service hosted in VPC B. Both VPCs use the CIDR block 10.20.0.0/16, and re-addressing is not possible. Which solution meets this requirement?"
+    },
+    "options": {
+      "es": [
+        "Publicar el servicio detrás de un Network Load Balancer en la VPC B y exponerlo como un servicio de endpoint de AWS PrivateLink que la VPC A consuma con un endpoint de interfaz",
+        "Crear una conexión de emparejamiento de VPC y agregar rutas más específicas para el rango del servicio en ambas tablas de rutas",
+        "Conectar ambas VPC a un transit gateway y usar tablas de rutas separadas para aislar los prefijos superpuestos",
+        "Configurar una conexión de Site-to-Site VPN entre las dos VPC con traducción de direcciones de red en los túneles"
+      ],
+      "en": [
+        "Publish the service behind a Network Load Balancer in VPC B and expose it as an AWS PrivateLink endpoint service that VPC A consumes with an interface endpoint",
+        "Create a VPC peering connection and add more specific routes for the service range in both route tables",
+        "Connect both VPCs to a transit gateway and use separate route tables to isolate the overlapping prefixes",
+        "Configure a Site-to-Site VPN connection between the two VPCs with network address translation on the tunnels"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "AWS PrivateLink no requiere enrutamiento entre los espacios de direcciones, por lo que funciona con CIDR superpuestos. El emparejamiento de VPC y el transit gateway requieren rangos únicos y no admiten CIDR idénticos.",
+    "explanation": {
+      "es": "AWS PrivateLink no requiere enrutamiento entre los espacios de direcciones, por lo que funciona con CIDR superpuestos. El emparejamiento de VPC y el transit gateway requieren rangos únicos y no admiten CIDR idénticos.",
+      "en": "AWS PrivateLink does not require routing between the address spaces, so it works with overlapping CIDRs. VPC peering and transit gateway require unique ranges and do not support identical CIDRs."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.6",
-    "text": "Un equipo central de redes debe conservar el control exclusivo de las tablas de rutas, los accesorios del transit gateway y los bloques CIDR, mientras varios equipos de aplicaciones despliegan instancias EC2 y balanceadores de carga en sus propias cuentas de AWS. También se busca reducir el consumo de direcciones IP privadas. ¿Qué solución cumple estos requisitos?",
-    "options": [
-      "Crear la VPC en la cuenta de red y compartir subredes específicas con las cuentas de aplicación mediante AWS Resource Access Manager",
-      "Crear una VPC por cuenta de aplicación y conectarlas todas con emparejamiento de VPC administrado por la cuenta de red",
-      "Crear una VPC por cuenta de aplicación y delegar la administración de las tablas de rutas a la cuenta de red mediante roles de IAM",
-      "Exponer todos los recursos de las cuentas de aplicación mediante servicios de endpoint de AWS PrivateLink en la cuenta de red"
-    ],
+    "text": {
+      "es": "Un equipo central de redes debe conservar el control exclusivo de las tablas de rutas, los accesorios del transit gateway y los bloques CIDR, mientras varios equipos de aplicaciones despliegan instancias EC2 y balanceadores de carga en sus propias cuentas de AWS. También se busca reducir el consumo de direcciones IP privadas. ¿Qué solución cumple estos requisitos?",
+      "en": "A central networking team must retain exclusive control of the route tables, the transit gateway attachments, and the CIDR blocks, while several application teams deploy EC2 instances and load balancers in their own AWS accounts. The team also wants to reduce private IP address consumption. Which solution meets these requirements?"
+    },
+    "options": {
+      "es": [
+        "Crear la VPC en la cuenta de red y compartir subredes específicas con las cuentas de aplicación mediante AWS Resource Access Manager",
+        "Crear una VPC por cuenta de aplicación y conectarlas todas con emparejamiento de VPC administrado por la cuenta de red",
+        "Crear una VPC por cuenta de aplicación y delegar la administración de las tablas de rutas a la cuenta de red mediante roles de IAM",
+        "Exponer todos los recursos de las cuentas de aplicación mediante servicios de endpoint de AWS PrivateLink en la cuenta de red"
+      ],
+      "en": [
+        "Create the VPC in the network account and share specific subnets with the application accounts through AWS Resource Access Manager",
+        "Create one VPC per application account and connect them all with VPC peering managed by the network account",
+        "Create one VPC per application account and delegate route table administration to the network account through IAM roles",
+        "Expose all resources in the application accounts through AWS PrivateLink endpoint services in the network account"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Con el uso compartido de VPC, la cuenta propietaria mantiene el control de la VPC, sus subredes, tablas de rutas y accesorios, mientras las cuentas participantes solo crean recursos en las subredes compartidas, lo que consolida el uso de direcciones IP.",
+    "explanation": {
+      "es": "Con el uso compartido de VPC, la cuenta propietaria mantiene el control de la VPC, sus subredes, tablas de rutas y accesorios, mientras las cuentas participantes solo crean recursos en las subredes compartidas, lo que consolida el uso de direcciones IP.",
+      "en": "With VPC sharing, the owner account retains control of the VPC, its subnets, route tables, and attachments, while the participant accounts only create resources in the shared subnets, which consolidates IP address usage."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 1,
     "taskStatementNumber": "1.6",
-    "text": "Una organización crecerá de 12 a más de 60 VPC distribuidas en varias cuentas dentro de la misma Región. Todas las VPC necesitan comunicación de cualquiera a cualquiera y acceso compartido a la conectividad híbrida existente, con el mínimo esfuerzo operativo de enrutamiento. ¿Qué arquitectura debe elegir el arquitecto?",
-    "options": [
-      "Un transit gateway compartido con AWS Resource Access Manager, con un accesorio por VPC y tablas de rutas del transit gateway para segmentar el tráfico",
-      "Una malla completa de conexiones de emparejamiento de VPC con rutas estáticas en cada tabla de rutas de subred",
-      "Una VPC de tránsito con instancias EC2 que ejecuten software de router y túneles GRE hacia cada VPC",
-      "Un servicio de endpoint de AWS PrivateLink por cada aplicación publicada en cada VPC"
-    ],
+    "text": {
+      "es": "Una organización crecerá de 12 a más de 60 VPC distribuidas en varias cuentas dentro de la misma Región. Todas las VPC necesitan comunicación de cualquiera a cualquiera y acceso compartido a la conectividad híbrida existente, con el mínimo esfuerzo operativo de enrutamiento. ¿Qué arquitectura debe elegir el arquitecto?",
+      "en": "An organization will grow from 12 to more than 60 VPCs spread across multiple accounts within the same Region. All VPCs need any-to-any communication and shared access to the existing hybrid connectivity, with the least operational routing effort. Which architecture should the architect choose?"
+    },
+    "options": {
+      "es": [
+        "Un transit gateway compartido con AWS Resource Access Manager, con un accesorio por VPC y tablas de rutas del transit gateway para segmentar el tráfico",
+        "Una malla completa de conexiones de emparejamiento de VPC con rutas estáticas en cada tabla de rutas de subred",
+        "Una VPC de tránsito con instancias EC2 que ejecuten software de router y túneles GRE hacia cada VPC",
+        "Un servicio de endpoint de AWS PrivateLink por cada aplicación publicada en cada VPC"
+      ],
+      "en": [
+        "A transit gateway shared with AWS Resource Access Manager, with one attachment per VPC and transit gateway route tables to segment the traffic",
+        "A full mesh of VPC peering connections with static routes in every subnet route table",
+        "A transit VPC with EC2 instances running router software and GRE tunnels to each VPC",
+        "An AWS PrivateLink endpoint service for each application published in each VPC"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "El transit gateway ofrece enrutamiento transitivo centralizado y escala a miles de accesorios, mientras que una malla de emparejamiento requeriría cerca de 1.800 conexiones y no admite tránsito. PrivateLink expone servicios individuales, no conectividad de red completa.",
+    "explanation": {
+      "es": "El transit gateway ofrece enrutamiento transitivo centralizado y escala a miles de accesorios, mientras que una malla de emparejamiento requeriría cerca de 1.800 conexiones y no admite tránsito. PrivateLink expone servicios individuales, no conectividad de red completa.",
+      "en": "The transit gateway offers centralized transitive routing and scales to thousands of attachments, whereas a peering mesh would require close to 1,800 connections and does not support transit. PrivateLink exposes individual services, not full network connectivity."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.1",
-    "text": "Una compañía transfiere grandes volúmenes de datos entre su centro de datos y una VPC a través de una interfaz virtual de tránsito conectada a un Direct Connect gateway y un transit gateway. El equipo quiere habilitar tramas jumbo de extremo a extremo. ¿Cuál es la unidad máxima de transmisión admitida en esta ruta?",
-    "options": [
-      "1.500 bytes",
-      "8.500 bytes",
-      "9.001 bytes",
-      "9.216 bytes"
-    ],
+    "text": {
+      "es": "Una compañía transfiere grandes volúmenes de datos entre su centro de datos y una VPC a través de una interfaz virtual de tránsito conectada a un Direct Connect gateway y un transit gateway. El equipo quiere habilitar tramas jumbo de extremo a extremo. ¿Cuál es la unidad máxima de transmisión admitida en esta ruta?",
+      "en": "A company transfers large volumes of data between its data center and a VPC through a transit virtual interface connected to a Direct Connect gateway and a transit gateway. The team wants to enable end-to-end jumbo frames. What is the maximum transmission unit supported on this path?"
+    },
+    "options": {
+      "es": [
+        "1.500 bytes",
+        "8.500 bytes",
+        "9.001 bytes",
+        "9.216 bytes"
+      ],
+      "en": [
+        "1,500 bytes",
+        "8,500 bytes",
+        "9,001 bytes",
+        "9,216 bytes"
+      ]
+    },
     "correct": [
       1
     ],
     "type": "single",
-    "explanation": "Un transit gateway admite una MTU máxima de 8.500 bytes en los accesorios de VPC, Direct Connect y Connect. La MTU de 9.001 bytes solo aplica a interfaces virtuales privadas asociadas a una gateway privada virtual.",
+    "explanation": {
+      "es": "Un transit gateway admite una MTU máxima de 8.500 bytes en los accesorios de VPC, Direct Connect y Connect. La MTU de 9.001 bytes solo aplica a interfaces virtuales privadas asociadas a una gateway privada virtual.",
+      "en": "A transit gateway supports a maximum MTU of 8,500 bytes on VPC, Direct Connect, and Connect attachments. The 9,001-byte MTU applies only to private virtual interfaces associated with a virtual private gateway."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.1",
-    "text": "Las cargas de trabajo de una VPC deben resolver los nombres del dominio corp.example.local, alojado en servidores DNS de Microsoft Active Directory en el centro de datos local, mientras siguen resolviendo los nombres de AWS y de internet con normalidad. Ya existe conectividad por Direct Connect. ¿Qué dos acciones debe realizar el ingeniero? (Elija dos).",
-    "options": [
-      "Crear un endpoint de salida de Route 53 Resolver con interfaces de red en dos zonas de disponibilidad de la VPC",
-      "Crear una regla de reenvío de Route 53 Resolver para corp.example.local que apunte a las direcciones IP de los servidores DNS locales y asociarla a la VPC",
-      "Crear un endpoint de entrada de Route 53 Resolver y configurar los servidores DNS locales para que reenvíen las consultas hacia él",
-      "Modificar el conjunto de opciones de DHCP de la VPC para que use exclusivamente las direcciones IP de los servidores DNS locales",
-      "Habilitar la firma DNSSEC en una zona hospedada privada creada para corp.example.local"
-    ],
+    "text": {
+      "es": "Las cargas de trabajo de una VPC deben resolver los nombres del dominio corp.example.local, alojado en servidores DNS de Microsoft Active Directory en el centro de datos local, mientras siguen resolviendo los nombres de AWS y de internet con normalidad. Ya existe conectividad por Direct Connect. ¿Qué dos acciones debe realizar el ingeniero? (Elija dos).",
+      "en": "Workloads in a VPC must resolve names in the corp.example.local domain, hosted on Microsoft Active Directory DNS servers in the on-premises data center, while continuing to resolve AWS and internet names normally. Direct Connect connectivity already exists. Which two actions should the engineer take? (Choose two.)"
+    },
+    "options": {
+      "es": [
+        "Crear un endpoint de salida de Route 53 Resolver con interfaces de red en dos zonas de disponibilidad de la VPC",
+        "Crear una regla de reenvío de Route 53 Resolver para corp.example.local que apunte a las direcciones IP de los servidores DNS locales y asociarla a la VPC",
+        "Crear un endpoint de entrada de Route 53 Resolver y configurar los servidores DNS locales para que reenvíen las consultas hacia él",
+        "Modificar el conjunto de opciones de DHCP de la VPC para que use exclusivamente las direcciones IP de los servidores DNS locales",
+        "Habilitar la firma DNSSEC en una zona hospedada privada creada para corp.example.local"
+      ],
+      "en": [
+        "Create a Route 53 Resolver outbound endpoint with network interfaces in two Availability Zones of the VPC",
+        "Create a Route 53 Resolver forwarding rule for corp.example.local that points to the IP addresses of the on-premises DNS servers and associate it with the VPC",
+        "Create a Route 53 Resolver inbound endpoint and configure the on-premises DNS servers to forward queries to it",
+        "Modify the VPC DHCP options set to use only the IP addresses of the on-premises DNS servers",
+        "Enable DNSSEC signing on a private hosted zone created for corp.example.local"
+      ]
+    },
     "correct": [
       0,
       1
     ],
     "type": "multiple",
-    "explanation": "El reenvío condicional desde AWS hacia el DNS local requiere un endpoint de salida de Route 53 Resolver y una regla de reenvío asociada a la VPC para el dominio específico. Reemplazar el conjunto de opciones de DHCP rompería la resolución de nombres internos de AWS.",
+    "explanation": {
+      "es": "El reenvío condicional desde AWS hacia el DNS local requiere un endpoint de salida de Route 53 Resolver y una regla de reenvío asociada a la VPC para el dominio específico. Reemplazar el conjunto de opciones de DHCP rompería la resolución de nombres internos de AWS.",
+      "en": "Conditional forwarding from AWS to on-premises DNS requires a Route 53 Resolver outbound endpoint and a forwarding rule associated with the VPC for the specific domain. Replacing the DHCP options set would break resolution of internal AWS names."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.1",
-    "text": "Una compañía solicitó una conexión dedicada de Direct Connect de 10 Gbps en una ubicación donde ya tiene equipos en una instalación de colocación. La conexión aparece en la consola con el estado pendiente. ¿Cuál es el siguiente paso correcto para completar la instalación física?",
-    "options": [
-      "Descargar el documento LOA-CFA desde la consola de AWS y entregarlo al proveedor de la instalación de colocación para que tienda la conexión cruzada",
-      "Abrir un caso de soporte para que AWS configure la VLAN 802.1Q y el direccionamiento BGP en el router de la compañía",
-      "Crear una interfaz virtual privada y esperar a que la conexión cruzada se aprovisione automáticamente",
-      "Solicitar que AWS envíe un técnico a la instalación de colocación para instalar los transceptores ópticos de la compañía"
-    ],
+    "text": {
+      "es": "Una compañía solicitó una conexión dedicada de Direct Connect de 10 Gbps en una ubicación donde ya tiene equipos en una instalación de colocación. La conexión aparece en la consola con el estado pendiente. ¿Cuál es el siguiente paso correcto para completar la instalación física?",
+      "en": "A company requested a 10 Gbps Direct Connect dedicated connection at a location where it already has equipment in a colocation facility. The connection appears in the console with a pending status. What is the correct next step to complete the physical installation?"
+    },
+    "options": {
+      "es": [
+        "Descargar el documento LOA-CFA desde la consola de AWS y entregarlo al proveedor de la instalación de colocación para que tienda la conexión cruzada",
+        "Abrir un caso de soporte para que AWS configure la VLAN 802.1Q y el direccionamiento BGP en el router de la compañía",
+        "Crear una interfaz virtual privada y esperar a que la conexión cruzada se aprovisione automáticamente",
+        "Solicitar que AWS envíe un técnico a la instalación de colocación para instalar los transceptores ópticos de la compañía"
+      ],
+      "en": [
+        "Download the LOA-CFA document from the AWS console and give it to the colocation facility provider so that they run the cross connect",
+        "Open a support case so that AWS configures the 802.1Q VLAN and the BGP addressing on the company's router",
+        "Create a private virtual interface and wait for the cross connect to be provisioned automatically",
+        "Request that AWS send a technician to the colocation facility to install the company's optical transceivers"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "AWS emite el LOA-CFA, que autoriza al operador de la instalación de colocación a tender la conexión cruzada entre el equipo del cliente y el router de AWS. Las interfaces virtuales se crean después de que el enlace físico esté activo.",
+    "explanation": {
+      "es": "AWS emite el LOA-CFA, que autoriza al operador de la instalación de colocación a tender la conexión cruzada entre el equipo del cliente y el router de AWS. Las interfaces virtuales se crean después de que el enlace físico esté activo.",
+      "en": "AWS issues the LOA-CFA, which authorizes the colocation facility operator to run the cross connect between the customer equipment and the AWS router. Virtual interfaces are created after the physical link is up."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.2",
-    "text": "Una arquitectura de tipo hub-and-spoke enruta todo el tráfico entre VPC a través de una VPC de inspección con dispositivos de firewall con estado desplegados en tres zonas de disponibilidad detrás de un Gateway Load Balancer. Algunos flujos se interrumpen porque el tráfico de retorno llega a una zona distinta a la del tráfico de ida. ¿Qué acción resuelve el problema?",
-    "options": [
-      "Habilitar el modo appliance en el accesorio del transit gateway asociado a la VPC de inspección",
-      "Habilitar el balanceo de carga entre zonas en el Gateway Load Balancer",
-      "Habilitar sesiones persistentes basadas en cookies en el Gateway Load Balancer",
-      "Crear una tabla de rutas del transit gateway independiente por cada zona de disponibilidad"
-    ],
+    "text": {
+      "es": "Una arquitectura de tipo hub-and-spoke enruta todo el tráfico entre VPC a través de una VPC de inspección con dispositivos de firewall con estado desplegados en tres zonas de disponibilidad detrás de un Gateway Load Balancer. Algunos flujos se interrumpen porque el tráfico de retorno llega a una zona distinta a la del tráfico de ida. ¿Qué acción resuelve el problema?",
+      "en": "A hub-and-spoke architecture routes all VPC-to-VPC traffic through an inspection VPC with stateful firewall appliances deployed in three Availability Zones behind a Gateway Load Balancer. Some flows break because return traffic arrives in a different zone than the forward traffic. Which action resolves the problem?"
+    },
+    "options": {
+      "es": [
+        "Habilitar el modo appliance en el accesorio del transit gateway asociado a la VPC de inspección",
+        "Habilitar el balanceo de carga entre zonas en el Gateway Load Balancer",
+        "Habilitar sesiones persistentes basadas en cookies en el Gateway Load Balancer",
+        "Crear una tabla de rutas del transit gateway independiente por cada zona de disponibilidad"
+      ],
+      "en": [
+        "Enable appliance mode on the transit gateway attachment associated with the inspection VPC",
+        "Enable cross-zone load balancing on the Gateway Load Balancer",
+        "Enable cookie-based sticky sessions on the Gateway Load Balancer",
+        "Create a separate transit gateway route table for each Availability Zone"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "El modo appliance hace que el transit gateway mantenga la simetría de flujo, enviando ambas direcciones de una conexión a la misma zona de disponibilidad de la VPC de inspección, requisito de los firewalls con estado.",
+    "explanation": {
+      "es": "El modo appliance hace que el transit gateway mantenga la simetría de flujo, enviando ambas direcciones de una conexión a la misma zona de disponibilidad de la VPC de inspección, requisito de los firewalls con estado.",
+      "en": "Appliance mode makes the transit gateway maintain flow symmetry, sending both directions of a connection to the same Availability Zone of the inspection VPC, which stateful firewalls require."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.2",
-    "text": "Un transit gateway reside en la cuenta de red de una organización de AWS Organizations. Los equipos de aplicaciones deben conectar sus VPC a ese transit gateway desde sus propias cuentas, sin recibir permisos para modificar el transit gateway. ¿Qué solución cumple estos requisitos?",
-    "options": [
-      "Compartir el transit gateway con la unidad organizativa mediante AWS Resource Access Manager y permitir que cada cuenta cree su propio accesorio de VPC",
-      "Crear un transit gateway por cuenta y establecer emparejamiento de transit gateway entre todos ellos",
-      "Crear un rol de IAM entre cuentas con permisos completos sobre el transit gateway y asumirlo desde cada cuenta de aplicación",
-      "Crear conexiones de emparejamiento de VPC desde cada VPC de aplicación hacia la VPC de la cuenta de red"
-    ],
+    "text": {
+      "es": "Un transit gateway reside en la cuenta de red de una organización de AWS Organizations. Los equipos de aplicaciones deben conectar sus VPC a ese transit gateway desde sus propias cuentas, sin recibir permisos para modificar el transit gateway. ¿Qué solución cumple estos requisitos?",
+      "en": "A transit gateway resides in the network account of an AWS Organizations organization. The application teams must connect their VPCs to that transit gateway from their own accounts, without receiving permissions to modify the transit gateway. Which solution meets these requirements?"
+    },
+    "options": {
+      "es": [
+        "Compartir el transit gateway con la unidad organizativa mediante AWS Resource Access Manager y permitir que cada cuenta cree su propio accesorio de VPC",
+        "Crear un transit gateway por cuenta y establecer emparejamiento de transit gateway entre todos ellos",
+        "Crear un rol de IAM entre cuentas con permisos completos sobre el transit gateway y asumirlo desde cada cuenta de aplicación",
+        "Crear conexiones de emparejamiento de VPC desde cada VPC de aplicación hacia la VPC de la cuenta de red"
+      ],
+      "en": [
+        "Share the transit gateway with the organizational unit through AWS Resource Access Manager and allow each account to create its own VPC attachment",
+        "Create one transit gateway per account and establish transit gateway peering between all of them",
+        "Create a cross-account IAM role with full permissions over the transit gateway and assume it from each application account",
+        "Create VPC peering connections from each application VPC to the VPC in the network account"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "AWS RAM permite compartir un transit gateway con cuentas u unidades organizativas; las cuentas participantes pueden crear accesorios pero no administrar el recurso ni sus tablas de rutas.",
+    "explanation": {
+      "es": "AWS RAM permite compartir un transit gateway con cuentas u unidades organizativas; las cuentas participantes pueden crear accesorios pero no administrar el recurso ni sus tablas de rutas.",
+      "en": "AWS RAM allows a transit gateway to be shared with accounts or organizational units; the participant accounts can create attachments but cannot manage the resource or its route tables."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.2",
-    "text": "Una compañía quiere centralizar el acceso saliente a internet de 30 VPC de aplicación conectadas a un transit gateway, para reducir costos y simplificar la administración de las direcciones IP de salida. ¿Qué implementación cumple estos requisitos?",
-    "options": [
-      "Crear una VPC de salida con una gateway NAT por zona de disponibilidad y una gateway de internet, y en las VPC de aplicación enrutar 0.0.0.0/0 hacia el accesorio del transit gateway",
-      "Crear una gateway NAT en cada VPC de aplicación y compartir la gateway de internet de la VPC de salida mediante AWS RAM",
-      "Adjuntar una gateway de internet al transit gateway y enrutar 0.0.0.0/0 desde cada VPC hacia ese accesorio",
-      "Desplegar una instancia EC2 con software de proxy en la VPC de salida y configurar las aplicaciones para usarla como proxy explícito único"
-    ],
+    "text": {
+      "es": "Una compañía quiere centralizar el acceso saliente a internet de 30 VPC de aplicación conectadas a un transit gateway, para reducir costos y simplificar la administración de las direcciones IP de salida. ¿Qué implementación cumple estos requisitos?",
+      "en": "A company wants to centralize outbound internet access for 30 application VPCs connected to a transit gateway, to reduce costs and simplify management of the egress IP addresses. Which implementation meets these requirements?"
+    },
+    "options": {
+      "es": [
+        "Crear una VPC de salida con una gateway NAT por zona de disponibilidad y una gateway de internet, y en las VPC de aplicación enrutar 0.0.0.0/0 hacia el accesorio del transit gateway",
+        "Crear una gateway NAT en cada VPC de aplicación y compartir la gateway de internet de la VPC de salida mediante AWS RAM",
+        "Adjuntar una gateway de internet al transit gateway y enrutar 0.0.0.0/0 desde cada VPC hacia ese accesorio",
+        "Desplegar una instancia EC2 con software de proxy en la VPC de salida y configurar las aplicaciones para usarla como proxy explícito único"
+      ],
+      "en": [
+        "Create an egress VPC with one NAT gateway per Availability Zone and an internet gateway, and in the application VPCs route 0.0.0.0/0 to the transit gateway attachment",
+        "Create a NAT gateway in each application VPC and share the internet gateway of the egress VPC through AWS RAM",
+        "Attach an internet gateway to the transit gateway and route 0.0.0.0/0 from each VPC to that attachment",
+        "Deploy an EC2 instance with proxy software in the egress VPC and configure the applications to use it as the single explicit proxy"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "La salida centralizada se implementa con gateways NAT en una VPC de salida, con rutas predeterminadas de las VPC de aplicación hacia el transit gateway. Una gateway de internet no se puede adjuntar a un transit gateway ni compartir entre VPC.",
+    "explanation": {
+      "es": "La salida centralizada se implementa con gateways NAT en una VPC de salida, con rutas predeterminadas de las VPC de aplicación hacia el transit gateway. Una gateway de internet no se puede adjuntar a un transit gateway ni compartir entre VPC.",
+      "en": "Centralized egress is implemented with NAT gateways in an egress VPC, with default routes from the application VPCs to the transit gateway. An internet gateway cannot be attached to a transit gateway or shared between VPCs."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.3",
-    "text": "Una compañía debe habilitar DNSSEC en una zona hospedada pública de Route 53 para que los solucionadores validadores puedan verificar la autenticidad de las respuestas. ¿Qué secuencia de acciones es correcta?",
-    "options": [
-      "Crear una clave asimétrica de AWS KMS con la especificación ECC_NIST_P256 en la Región us-east-1, habilitar la firma DNSSEC en la zona hospedada y publicar el registro DS en la zona padre a través del registrador",
-      "Habilitar la validación DNSSEC en Route 53 Resolver para las VPC asociadas y agregar un registro TXT con la clave pública en la zona hospedada",
-      "Solicitar un certificado público en AWS Certificate Manager y asociarlo a la zona hospedada como clave de firma de zona",
-      "Crear una clave simétrica de AWS KMS en la misma Región de la zona hospedada y habilitar la firma DNSSEC en cada registro por separado"
-    ],
+    "text": {
+      "es": "Una compañía debe habilitar DNSSEC en una zona hospedada pública de Route 53 para que los solucionadores validadores puedan verificar la autenticidad de las respuestas. ¿Qué secuencia de acciones es correcta?",
+      "en": "A company must enable DNSSEC on a Route 53 public hosted zone so that validating resolvers can verify the authenticity of the responses. Which sequence of actions is correct?"
+    },
+    "options": {
+      "es": [
+        "Crear una clave asimétrica de AWS KMS con la especificación ECC_NIST_P256 en la Región us-east-1, habilitar la firma DNSSEC en la zona hospedada y publicar el registro DS en la zona padre a través del registrador",
+        "Habilitar la validación DNSSEC en Route 53 Resolver para las VPC asociadas y agregar un registro TXT con la clave pública en la zona hospedada",
+        "Solicitar un certificado público en AWS Certificate Manager y asociarlo a la zona hospedada como clave de firma de zona",
+        "Crear una clave simétrica de AWS KMS en la misma Región de la zona hospedada y habilitar la firma DNSSEC en cada registro por separado"
+      ],
+      "en": [
+        "Create an asymmetric AWS KMS key with the ECC_NIST_P256 specification in the us-east-1 Region, enable DNSSEC signing on the hosted zone, and publish the DS record in the parent zone through the registrar",
+        "Enable DNSSEC validation on Route 53 Resolver for the associated VPCs and add a TXT record with the public key in the hosted zone",
+        "Request a public certificate in AWS Certificate Manager and associate it with the hosted zone as the zone signing key",
+        "Create a symmetric AWS KMS key in the same Region as the hosted zone and enable DNSSEC signing on each record separately"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "La firma DNSSEC en Route 53 requiere una clave asimétrica de KMS ECC_NIST_P256 en us-east-1 como clave de firma de clave, y la cadena de confianza solo se completa cuando el registro DS se publica en la zona padre. La validación DNSSEC del Resolver es una función distinta para consultas salientes.",
+    "explanation": {
+      "es": "La firma DNSSEC en Route 53 requiere una clave asimétrica de KMS ECC_NIST_P256 en us-east-1 como clave de firma de clave, y la cadena de confianza solo se completa cuando el registro DS se publica en la zona padre. La validación DNSSEC del Resolver es una función distinta para consultas salientes.",
+      "en": "DNSSEC signing in Route 53 requires an ECC_NIST_P256 asymmetric KMS key in us-east-1 as the key-signing key, and the chain of trust is complete only when the DS record is published in the parent zone. Resolver DNSSEC validation is a different feature, for outbound queries."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.3",
-    "text": "Una empresa opera un dominio de horizonte dividido: app.example.com debe resolverse a direcciones privadas desde las VPC y desde el centro de datos local, mientras que las consultas de internet deben seguir recibiendo las direcciones públicas. Además, las VPC deben resolver corp.example.com desde los servidores DNS locales. ¿Qué implementación cumple estos requisitos?",
-    "options": [
-      "Asociar una zona hospedada privada para example.com a la VPC central con los registros privados, crear un endpoint de entrada de Route 53 Resolver para las consultas provenientes del centro de datos y un endpoint de salida con una regla de reenvío para corp.example.com",
-      "Crear únicamente una zona hospedada pública para example.com con registros privados y configurar los servidores locales para que la consulten directamente",
-      "Crear una zona hospedada privada en cada cuenta y sincronizar los registros con una función de AWS Lambda invocada por cambios en la zona pública",
-      "Reemplazar el conjunto de opciones de DHCP de las VPC por las direcciones de los servidores DNS locales y delegar example.com a esos servidores"
-    ],
+    "text": {
+      "es": "Una empresa opera un dominio de horizonte dividido: app.example.com debe resolverse a direcciones privadas desde las VPC y desde el centro de datos local, mientras que las consultas de internet deben seguir recibiendo las direcciones públicas. Además, las VPC deben resolver corp.example.com desde los servidores DNS locales. ¿Qué implementación cumple estos requisitos?",
+      "en": "A company operates a split-horizon domain: app.example.com must resolve to private addresses from the VPCs and from the on-premises data center, while internet queries must continue to receive the public addresses. In addition, the VPCs must resolve corp.example.com from the on-premises DNS servers. Which implementation meets these requirements?"
+    },
+    "options": {
+      "es": [
+        "Asociar una zona hospedada privada para example.com a la VPC central con los registros privados, crear un endpoint de entrada de Route 53 Resolver para las consultas provenientes del centro de datos y un endpoint de salida con una regla de reenvío para corp.example.com",
+        "Crear únicamente una zona hospedada pública para example.com con registros privados y configurar los servidores locales para que la consulten directamente",
+        "Crear una zona hospedada privada en cada cuenta y sincronizar los registros con una función de AWS Lambda invocada por cambios en la zona pública",
+        "Reemplazar el conjunto de opciones de DHCP de las VPC por las direcciones de los servidores DNS locales y delegar example.com a esos servidores"
+      ],
+      "en": [
+        "Associate a private hosted zone for example.com with the central VPC containing the private records, create a Route 53 Resolver inbound endpoint for queries coming from the data center, and an outbound endpoint with a forwarding rule for corp.example.com",
+        "Create only a public hosted zone for example.com with private records and configure the on-premises servers to query it directly",
+        "Create a private hosted zone in each account and synchronize the records with an AWS Lambda function invoked by changes in the public zone",
+        "Replace the VPC DHCP options set with the addresses of the on-premises DNS servers and delegate example.com to those servers"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "El horizonte dividido se logra con una zona hospedada privada que tiene precedencia dentro de las VPC asociadas, mientras la zona pública sigue respondiendo en internet; el endpoint de entrada atiende al centro de datos y el de salida con reglas de reenvío resuelve el dominio local.",
+    "explanation": {
+      "es": "El horizonte dividido se logra con una zona hospedada privada que tiene precedencia dentro de las VPC asociadas, mientras la zona pública sigue respondiendo en internet; el endpoint de entrada atiende al centro de datos y el de salida con reglas de reenvío resuelve el dominio local.",
+      "en": "Split horizon is achieved with a private hosted zone that takes precedence inside the associated VPCs, while the public zone keeps responding on the internet; the inbound endpoint serves the data center, and the outbound endpoint with forwarding rules resolves the on-premises domain."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.3",
-    "text": "Una aplicación se despliega en tres Regiones detrás de Application Load Balancers. El equipo necesita que los usuarios lleguen a la Región con menor latencia, que la conmutación por error sea automática si una Región falla y que una nueva versión reciba el 10 por ciento del tráfico dentro de cada Región. ¿Qué dos configuraciones de Route 53 debe usar? (Elija dos).",
-    "options": [
-      "Registros de enrutamiento por latencia con verificaciones de estado asociadas a cada endpoint regional",
-      "Registros ponderados que distribuyan el tráfico entre la versión estable y la versión nueva dentro de cada Región",
-      "Registros de respuesta de valores múltiples con un TTL de cero para garantizar la selección por latencia",
-      "Registros de geolocalización con una entrada por continente y sin verificaciones de estado",
-      "Registros CNAME en el ápice del dominio con una política de conmutación por error"
-    ],
+    "text": {
+      "es": "Una aplicación se despliega en tres Regiones detrás de Application Load Balancers. El equipo necesita que los usuarios lleguen a la Región con menor latencia, que la conmutación por error sea automática si una Región falla y que una nueva versión reciba el 10 por ciento del tráfico dentro de cada Región. ¿Qué dos configuraciones de Route 53 debe usar? (Elija dos).",
+      "en": "An application is deployed in three Regions behind Application Load Balancers. The team needs users to reach the Region with the lowest latency, failover to be automatic if a Region fails, and a new version to receive 10 percent of the traffic within each Region. Which two Route 53 configurations should be used? (Choose two.)"
+    },
+    "options": {
+      "es": [
+        "Registros de enrutamiento por latencia con verificaciones de estado asociadas a cada endpoint regional",
+        "Registros ponderados que distribuyan el tráfico entre la versión estable y la versión nueva dentro de cada Región",
+        "Registros de respuesta de valores múltiples con un TTL de cero para garantizar la selección por latencia",
+        "Registros de geolocalización con una entrada por continente y sin verificaciones de estado",
+        "Registros CNAME en el ápice del dominio con una política de conmutación por error"
+      ],
+      "en": [
+        "Latency-based routing records with health checks associated with each regional endpoint",
+        "Weighted records that distribute traffic between the stable version and the new version within each Region",
+        "Multivalue answer records with a TTL of zero to guarantee latency-based selection",
+        "Geolocation records with one entry per continent and no health checks",
+        "CNAME records at the domain apex with a failover policy"
+      ]
+    },
     "correct": [
       0,
       1
     ],
     "type": "multiple",
-    "explanation": "El enrutamiento por latencia con verificaciones de estado dirige a la Región más rápida y retira automáticamente los endpoints en mal estado, y los registros ponderados permiten enviar un porcentaje definido de tráfico a la nueva versión. Los registros CNAME no se admiten en el ápice de la zona.",
+    "explanation": {
+      "es": "El enrutamiento por latencia con verificaciones de estado dirige a la Región más rápida y retira automáticamente los endpoints en mal estado, y los registros ponderados permiten enviar un porcentaje definido de tráfico a la nueva versión. Los registros CNAME no se admiten en el ápice de la zona.",
+      "en": "Latency-based routing with health checks directs users to the fastest Region and automatically removes unhealthy endpoints, and weighted records make it possible to send a defined percentage of traffic to the new version. CNAME records are not supported at the zone apex."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.4",
-    "text": "Una plantilla de AWS CloudFormation que crea VPC y subredes falla al desplegarse en una Región nueva porque las zonas de disponibilidad y los bloques CIDR están escritos de forma literal en la plantilla. ¿Qué cambio hace que la plantilla sea reutilizable en cualquier Región y cuenta?",
-    "options": [
-      "Obtener las zonas de disponibilidad con Fn::GetAZs y Fn::Select, y asignar los bloques CIDR mediante parámetros o grupos de Amazon VPC IP Address Manager",
-      "Agregar una sección Mappings que enumere las zonas de disponibilidad y los CIDR de cada Región donde se desplegará la plantilla",
-      "Crear una copia de la plantilla por Región y actualizar manualmente los valores literales en cada copia",
-      "Sustituir los recursos de red por comandos de la AWS CLI ejecutados desde un recurso personalizado en cada despliegue"
-    ],
+    "text": {
+      "es": "Una plantilla de AWS CloudFormation que crea VPC y subredes falla al desplegarse en una Región nueva porque las zonas de disponibilidad y los bloques CIDR están escritos de forma literal en la plantilla. ¿Qué cambio hace que la plantilla sea reutilizable en cualquier Región y cuenta?",
+      "en": "An AWS CloudFormation template that creates VPCs and subnets fails to deploy in a new Region because the Availability Zones and the CIDR blocks are written literally in the template. Which change makes the template reusable in any Region and account?"
+    },
+    "options": {
+      "es": [
+        "Obtener las zonas de disponibilidad con Fn::GetAZs y Fn::Select, y asignar los bloques CIDR mediante parámetros o grupos de Amazon VPC IP Address Manager",
+        "Agregar una sección Mappings que enumere las zonas de disponibilidad y los CIDR de cada Región donde se desplegará la plantilla",
+        "Crear una copia de la plantilla por Región y actualizar manualmente los valores literales en cada copia",
+        "Sustituir los recursos de red por comandos de la AWS CLI ejecutados desde un recurso personalizado en cada despliegue"
+      ],
+      "en": [
+        "Obtain the Availability Zones with Fn::GetAZs and Fn::Select, and assign the CIDR blocks through parameters or Amazon VPC IP Address Manager pools",
+        "Add a Mappings section that lists the Availability Zones and the CIDRs of each Region where the template will be deployed",
+        "Create a copy of the template per Region and manually update the literal values in each copy",
+        "Replace the network resources with AWS CLI commands run from a custom resource on every deployment"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Fn::GetAZs con Fn::Select resuelve dinámicamente las zonas de disponibilidad de la Región del despliegue, y VPC IPAM o los parámetros eliminan los CIDR codificados. Las secciones Mappings mantienen los valores literales y siguen requiriendo mantenimiento manual.",
+    "explanation": {
+      "es": "Fn::GetAZs con Fn::Select resuelve dinámicamente las zonas de disponibilidad de la Región del despliegue, y VPC IPAM o los parámetros eliminan los CIDR codificados. Las secciones Mappings mantienen los valores literales y siguen requiriendo mantenimiento manual.",
+      "en": "Fn::GetAZs with Fn::Select dynamically resolves the Availability Zones of the deployment Region, and VPC IPAM or parameters eliminate hardcoded CIDRs. Mappings sections keep the literal values and still require manual maintenance."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.4",
-    "text": "Una compañía necesita que, cuando una conexión de Direct Connect entre en mantenimiento o falle, se ejecute automáticamente una acción correctiva sobre las tablas de rutas y se notifique al equipo de redes, sin sondeos periódicos. ¿Qué solución cumple estos requisitos?",
-    "options": [
-      "Crear una regla de Amazon EventBridge que coincida con los eventos de AWS Health de Direct Connect e invoque una función de AWS Lambda que ajuste las rutas y publique en un tema de Amazon SNS",
-      "Programar una función de AWS Lambda cada cinco minutos para consultar la API de Direct Connect y comparar el estado con el valor anterior",
-      "Crear una regla de AWS Config que evalúe el estado de la interfaz virtual y aplique una corrección automática mediante Systems Manager",
-      "Crear una alarma de Amazon CloudWatch sobre la métrica ConnectionErrorCount que modifique la tabla de rutas al activarse"
-    ],
+    "text": {
+      "es": "Una compañía necesita que, cuando una conexión de Direct Connect entre en mantenimiento o falle, se ejecute automáticamente una acción correctiva sobre las tablas de rutas y se notifique al equipo de redes, sin sondeos periódicos. ¿Qué solución cumple estos requisitos?",
+      "en": "A company needs that, when a Direct Connect connection enters maintenance or fails, a corrective action is automatically run on the route tables and the networking team is notified, without periodic polling. Which solution meets these requirements?"
+    },
+    "options": {
+      "es": [
+        "Crear una regla de Amazon EventBridge que coincida con los eventos de AWS Health de Direct Connect e invoque una función de AWS Lambda que ajuste las rutas y publique en un tema de Amazon SNS",
+        "Programar una función de AWS Lambda cada cinco minutos para consultar la API de Direct Connect y comparar el estado con el valor anterior",
+        "Crear una regla de AWS Config que evalúe el estado de la interfaz virtual y aplique una corrección automática mediante Systems Manager",
+        "Crear una alarma de Amazon CloudWatch sobre la métrica ConnectionErrorCount que modifique la tabla de rutas al activarse"
+      ],
+      "en": [
+        "Create an Amazon EventBridge rule that matches AWS Health events for Direct Connect and invokes an AWS Lambda function that adjusts the routes and publishes to an Amazon SNS topic",
+        "Schedule an AWS Lambda function every five minutes to query the Direct Connect API and compare the status with the previous value",
+        "Create an AWS Config rule that evaluates the state of the virtual interface and applies automatic remediation through Systems Manager",
+        "Create an Amazon CloudWatch alarm on the ConnectionErrorCount metric that modifies the route table when it triggers"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "AWS Health publica eventos de Direct Connect en EventBridge, lo que habilita automatización basada en eventos sin sondeo. Las alarmas de CloudWatch no pueden modificar tablas de rutas por sí mismas y AWS Config evalúa configuración, no eventos de estado del enlace.",
+    "explanation": {
+      "es": "AWS Health publica eventos de Direct Connect en EventBridge, lo que habilita automatización basada en eventos sin sondeo. Las alarmas de CloudWatch no pueden modificar tablas de rutas por sí mismas y AWS Config evalúa configuración, no eventos de estado del enlace.",
+      "en": "AWS Health publishes Direct Connect events to EventBridge, which enables event-driven automation without polling. CloudWatch alarms cannot modify route tables by themselves, and AWS Config evaluates configuration, not link state events."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 2,
     "taskStatementNumber": "2.4",
-    "text": "Un equipo de redes debe desplegar y mantener una línea base de red idéntica, que incluye VPC, endpoints de interfaz y accesorios de transit gateway, en más de 100 cuentas de una organización de AWS Organizations, con actualizaciones controladas por lotes. ¿Qué solución cumple estos requisitos con el menor esfuerzo operativo?",
-    "options": [
-      "Usar conjuntos de pilas de AWS CloudFormation con permisos administrados por AWS Organizations y desplegar por unidades organizativas y Regiones",
-      "Ejecutar un script de la AWS CLI que asuma un rol en cada cuenta y aplique la plantilla de forma secuencial",
-      "Copiar la plantilla de CloudFormation a cada cuenta y pedir a los equipos de aplicación que la despliegen cuando cambie",
-      "Registrar los recursos deseados en AWS Config y usar reglas administradas para aprovisionarlos automáticamente"
-    ],
+    "text": {
+      "es": "Un equipo de redes debe desplegar y mantener una línea base de red idéntica, que incluye VPC, endpoints de interfaz y accesorios de transit gateway, en más de 100 cuentas de una organización de AWS Organizations, con actualizaciones controladas por lotes. ¿Qué solución cumple estos requisitos con el menor esfuerzo operativo?",
+      "en": "A networking team must deploy and maintain an identical network baseline, which includes VPCs, interface endpoints, and transit gateway attachments, in more than 100 accounts of an AWS Organizations organization, with updates rolled out in controlled batches. Which solution meets these requirements with the least operational effort?"
+    },
+    "options": {
+      "es": [
+        "Usar conjuntos de pilas de AWS CloudFormation con permisos administrados por AWS Organizations y desplegar por unidades organizativas y Regiones",
+        "Ejecutar un script de la AWS CLI que asuma un rol en cada cuenta y aplique la plantilla de forma secuencial",
+        "Copiar la plantilla de CloudFormation a cada cuenta y pedir a los equipos de aplicación que la despliegen cuando cambie",
+        "Registrar los recursos deseados en AWS Config y usar reglas administradas para aprovisionarlos automáticamente"
+      ],
+      "en": [
+        "Use AWS CloudFormation StackSets with AWS Organizations managed permissions and deploy by organizational units and Regions",
+        "Run an AWS CLI script that assumes a role in each account and applies the template sequentially",
+        "Copy the CloudFormation template to each account and ask the application teams to deploy it whenever it changes",
+        "Register the desired resources in AWS Config and use managed rules to provision them automatically"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Los conjuntos de pilas con permisos administrados por Organizations despliegan y actualizan la misma plantilla en muchas cuentas y Regiones desde un punto central, con control de simultaneidad y tolerancia a errores. AWS Config evalúa cumplimiento, no aprovisiona la línea base.",
+    "explanation": {
+      "es": "Los conjuntos de pilas con permisos administrados por Organizations despliegan y actualizan la misma plantilla en muchas cuentas y Regiones desde un punto central, con control de simultaneidad y tolerancia a errores. AWS Config evalúa cumplimiento, no aprovisiona la línea base.",
+      "en": "StackSets with Organizations managed permissions deploy and update the same template across many accounts and Regions from a central point, with concurrency control and failure tolerance. AWS Config evaluates compliance; it does not provision the baseline."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.1",
-    "text": "Después de una fusión, el centro de datos local anuncia más de 130 prefijos por BGP hacia AWS a través de una interfaz virtual de tránsito. Las rutas dejan de aparecer en el transit gateway y la sesión BGP se reinicia de forma intermitente. ¿Qué acción resuelve el problema?",
-    "options": [
-      "Resumir los prefijos locales en superredes para mantenerse por debajo del límite de 100 rutas anunciadas hacia AWS por sesión BGP",
-      "Solicitar un aumento de cuota para el número de rutas BGP por interfaz virtual mediante Service Quotas",
-      "Crear una segunda interfaz virtual de tránsito sobre la misma conexión y dividir los anuncios entre ambas sesiones",
-      "Reemplazar el enrutamiento dinámico por rutas estáticas en la tabla de rutas de las subredes de la VPC"
-    ],
+    "text": {
+      "es": "Después de una fusión, el centro de datos local anuncia más de 130 prefijos por BGP hacia AWS a través de una interfaz virtual de tránsito. Las rutas dejan de aparecer en el transit gateway y la sesión BGP se reinicia de forma intermitente. ¿Qué acción resuelve el problema?",
+      "en": "After a merger, the on-premises data center advertises more than 130 prefixes over BGP to AWS through a transit virtual interface. The routes stop appearing in the transit gateway and the BGP session restarts intermittently. Which action resolves the problem?"
+    },
+    "options": {
+      "es": [
+        "Resumir los prefijos locales en superredes para mantenerse por debajo del límite de 100 rutas anunciadas hacia AWS por sesión BGP",
+        "Solicitar un aumento de cuota para el número de rutas BGP por interfaz virtual mediante Service Quotas",
+        "Crear una segunda interfaz virtual de tránsito sobre la misma conexión y dividir los anuncios entre ambas sesiones",
+        "Reemplazar el enrutamiento dinámico por rutas estáticas en la tabla de rutas de las subredes de la VPC"
+      ],
+      "en": [
+        "Summarize the on-premises prefixes into supernets to stay below the limit of 100 routes advertised to AWS per BGP session",
+        "Request a quota increase for the number of BGP routes per virtual interface through Service Quotas",
+        "Create a second transit virtual interface over the same connection and split the advertisements between both sessions",
+        "Replace dynamic routing with static routes in the route table of the VPC subnets"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "AWS acepta un máximo de 100 rutas por sesión BGP en interfaces virtuales de Direct Connect y en VPN; superarlo desactiva la sesión. El resumen de rutas es la solución, ya que el límite no es ajustable.",
+    "explanation": {
+      "es": "AWS acepta un máximo de 100 rutas por sesión BGP en interfaces virtuales de Direct Connect y en VPN; superarlo desactiva la sesión. El resumen de rutas es la solución, ya que el límite no es ajustable.",
+      "en": "AWS accepts a maximum of 100 routes per BGP session on Direct Connect virtual interfaces and on VPN; exceeding it brings the session down. Route summarization is the solution, because the limit is not adjustable."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.1",
-    "text": "Un transit gateway conecta VPC de producción, de desarrollo y una VPC de inspección compartida. Las VPC de producción y de desarrollo no deben comunicarse entre sí, pero ambas deben alcanzar los servicios compartidos y salir a internet a través de la VPC de inspección. ¿Qué dos acciones implementan este diseño? (Elija dos).",
-    "options": [
-      "Crear tablas de rutas del transit gateway separadas y asociar los accesorios de producción y de desarrollo a tablas distintas que solo propaguen sus rutas hacia la tabla de la VPC de inspección",
-      "Crear rutas estáticas en las tablas de rutas del transit gateway que dirijan 0.0.0.0/0 hacia el accesorio de la VPC de inspección",
-      "Usar tablas de rutas de subred dentro de cada VPC para bloquear el tráfico entre accesorios del transit gateway",
-      "Mantener la tabla de rutas predeterminada con asociación y propagación automáticas para todos los accesorios",
-      "Aplicar grupos de seguridad directamente en el transit gateway para segmentar el tráfico entre accesorios"
-    ],
+    "text": {
+      "es": "Un transit gateway conecta VPC de producción, de desarrollo y una VPC de inspección compartida. Las VPC de producción y de desarrollo no deben comunicarse entre sí, pero ambas deben alcanzar los servicios compartidos y salir a internet a través de la VPC de inspección. ¿Qué dos acciones implementan este diseño? (Elija dos).",
+      "en": "A transit gateway connects production VPCs, development VPCs, and a shared inspection VPC. The production and development VPCs must not communicate with each other, but both must reach the shared services and egress to the internet through the inspection VPC. Which two actions implement this design? (Choose two.)"
+    },
+    "options": {
+      "es": [
+        "Crear tablas de rutas del transit gateway separadas y asociar los accesorios de producción y de desarrollo a tablas distintas que solo propaguen sus rutas hacia la tabla de la VPC de inspección",
+        "Crear rutas estáticas en las tablas de rutas del transit gateway que dirijan 0.0.0.0/0 hacia el accesorio de la VPC de inspección",
+        "Usar tablas de rutas de subred dentro de cada VPC para bloquear el tráfico entre accesorios del transit gateway",
+        "Mantener la tabla de rutas predeterminada con asociación y propagación automáticas para todos los accesorios",
+        "Aplicar grupos de seguridad directamente en el transit gateway para segmentar el tráfico entre accesorios"
+      ],
+      "en": [
+        "Create separate transit gateway route tables and associate the production and development attachments with different tables that propagate their routes only to the inspection VPC table",
+        "Create static routes in the transit gateway route tables that direct 0.0.0.0/0 to the inspection VPC attachment",
+        "Use subnet route tables inside each VPC to block traffic between transit gateway attachments",
+        "Keep the default route table with automatic association and propagation for all attachments",
+        "Apply security groups directly on the transit gateway to segment traffic between attachments"
+      ]
+    },
     "correct": [
       0,
       1
     ],
     "type": "multiple",
-    "explanation": "La segmentación en un transit gateway se logra con varias tablas de rutas y un control explícito de asociaciones y propagaciones, complementado con rutas estáticas hacia el accesorio de inspección. El transit gateway no admite grupos de seguridad y la tabla predeterminada permitiría comunicación de cualquiera a cualquiera.",
+    "explanation": {
+      "es": "La segmentación en un transit gateway se logra con varias tablas de rutas y un control explícito de asociaciones y propagaciones, complementado con rutas estáticas hacia el accesorio de inspección. El transit gateway no admite grupos de seguridad y la tabla predeterminada permitiría comunicación de cualquiera a cualquiera.",
+      "en": "Segmentation on a transit gateway is achieved with multiple route tables and explicit control of associations and propagations, complemented with static routes to the inspection attachment. The transit gateway does not support security groups, and the default table would allow any-to-any communication."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.1",
-    "text": "Aplicaciones del centro de datos local deben cargar objetos en Amazon S3 sin que el tráfico atraviese internet, utilizando la conectividad existente de Direct Connect con una interfaz virtual privada. ¿Qué solución cumple este requisito?",
-    "options": [
-      "Crear un endpoint de interfaz de VPC para Amazon S3 y permitir que los clientes locales resuelvan su nombre DNS mediante un endpoint de entrada de Route 53 Resolver",
-      "Crear un endpoint de gateway de VPC para Amazon S3 y agregar su lista de prefijos a las rutas anunciadas hacia el centro de datos",
-      "Crear una interfaz virtual pública adicional y acceder a los endpoints públicos de S3 a través de ella con cifrado TLS",
-      "Enrutar el tráfico del centro de datos hacia una gateway NAT en la VPC y desde allí hacia el endpoint público de S3"
-    ],
+    "text": {
+      "es": "Aplicaciones del centro de datos local deben cargar objetos en Amazon S3 sin que el tráfico atraviese internet, utilizando la conectividad existente de Direct Connect con una interfaz virtual privada. ¿Qué solución cumple este requisito?",
+      "en": "Applications in the on-premises data center must upload objects to Amazon S3 without the traffic traversing the internet, using the existing Direct Connect connectivity with a private virtual interface. Which solution meets this requirement?"
+    },
+    "options": {
+      "es": [
+        "Crear un endpoint de interfaz de VPC para Amazon S3 y permitir que los clientes locales resuelvan su nombre DNS mediante un endpoint de entrada de Route 53 Resolver",
+        "Crear un endpoint de gateway de VPC para Amazon S3 y agregar su lista de prefijos a las rutas anunciadas hacia el centro de datos",
+        "Crear una interfaz virtual pública adicional y acceder a los endpoints públicos de S3 a través de ella con cifrado TLS",
+        "Enrutar el tráfico del centro de datos hacia una gateway NAT en la VPC y desde allí hacia el endpoint público de S3"
+      ],
+      "en": [
+        "Create a VPC interface endpoint for Amazon S3 and allow the on-premises clients to resolve its DNS name through a Route 53 Resolver inbound endpoint",
+        "Create a VPC gateway endpoint for Amazon S3 and add its prefix list to the routes advertised to the data center",
+        "Create an additional public virtual interface and access the public S3 endpoints through it with TLS encryption",
+        "Route the data center traffic to a NAT gateway in the VPC and from there to the public S3 endpoint"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Los endpoints de gateway solo son accesibles desde dentro de la VPC y no pueden usarse desde redes locales, mientras que los endpoints de interfaz de PrivateLink tienen direcciones IP privadas alcanzables por Direct Connect, siempre que la resolución DNS se atienda con un endpoint de entrada de Resolver.",
+    "explanation": {
+      "es": "Los endpoints de gateway solo son accesibles desde dentro de la VPC y no pueden usarse desde redes locales, mientras que los endpoints de interfaz de PrivateLink tienen direcciones IP privadas alcanzables por Direct Connect, siempre que la resolución DNS se atienda con un endpoint de entrada de Resolver.",
+      "en": "Gateway endpoints are reachable only from inside the VPC and cannot be used from on-premises networks, whereas PrivateLink interface endpoints have private IP addresses reachable over Direct Connect, provided that DNS resolution is served by a Resolver inbound endpoint."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.2",
-    "text": "Después de habilitar tramas jumbo en instancias EC2 que se comunican con servidores locales a través de Direct Connect, las sesiones TCP se establecen correctamente pero las transferencias grandes se detienen. Las transferencias pequeñas funcionan sin problemas. ¿Qué acción resuelve el problema?",
-    "options": [
-      "Permitir los mensajes ICMP de tipo 3 código 4 en los grupos de seguridad y las ACL de red para que funcione el descubrimiento de MTU de la ruta",
-      "Aumentar la MTU de todas las interfaces de red a 9.001 bytes, incluida la de los accesorios del transit gateway",
-      "Deshabilitar la suma de comprobación de descarga en las interfaces de red elásticas de las instancias",
-      "Configurar el ajuste de MSS de TCP en la tabla de rutas del transit gateway"
-    ],
+    "text": {
+      "es": "Después de habilitar tramas jumbo en instancias EC2 que se comunican con servidores locales a través de Direct Connect, las sesiones TCP se establecen correctamente pero las transferencias grandes se detienen. Las transferencias pequeñas funcionan sin problemas. ¿Qué acción resuelve el problema?",
+      "en": "After enabling jumbo frames on EC2 instances that communicate with on-premises servers over Direct Connect, TCP sessions are established correctly but large transfers stall. Small transfers work without problems. Which action resolves the problem?"
+    },
+    "options": {
+      "es": [
+        "Permitir los mensajes ICMP de tipo 3 código 4 en los grupos de seguridad y las ACL de red para que funcione el descubrimiento de MTU de la ruta",
+        "Aumentar la MTU de todas las interfaces de red a 9.001 bytes, incluida la de los accesorios del transit gateway",
+        "Deshabilitar la suma de comprobación de descarga en las interfaces de red elásticas de las instancias",
+        "Configurar el ajuste de MSS de TCP en la tabla de rutas del transit gateway"
+      ],
+      "en": [
+        "Allow ICMP type 3 code 4 messages in the security groups and network ACLs so that path MTU discovery works",
+        "Increase the MTU of all network interfaces to 9,001 bytes, including that of the transit gateway attachments",
+        "Disable checksum offload on the instances' elastic network interfaces",
+        "Configure TCP MSS adjustment in the transit gateway route table"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "El síntoma clásico de un agujero negro de PMTU es que las conexiones se establecen pero las transferencias grandes se cuelgan; para que el descubrimiento de MTU funcione se deben permitir los mensajes ICMP de destino inalcanzable con fragmentación necesaria.",
+    "explanation": {
+      "es": "El síntoma clásico de un agujero negro de PMTU es que las conexiones se establecen pero las transferencias grandes se cuelgan; para que el descubrimiento de MTU funcione se deben permitir los mensajes ICMP de destino inalcanzable con fragmentación necesaria.",
+      "en": "The classic symptom of a PMTU black hole is that connections are established but large transfers hang; for MTU discovery to work, ICMP destination unreachable with fragmentation needed messages must be allowed."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.2",
-    "text": "Un equipo de redes debe demostrar de forma continua que una instancia EC2 de una VPC nunca puede alcanzar una base de datos de otra VPC, y ser alertado si un cambio de configuración rompe esa intención, sin generar tráfico real. ¿Qué solución cumple estos requisitos?",
-    "options": [
-      "Definir rutas en VPC Reachability Analyzer y reevaluarlas automáticamente con una regla de Amazon EventBridge cuando cambie la configuración de red",
-      "Analizar los VPC Flow Logs con Amazon Athena en busca de flujos aceptados entre las dos direcciones IP",
-      "Configurar VPC Traffic Mirroring desde la instancia hacia un dispositivo de análisis y revisar las capturas periódicamente",
-      "Ejecutar pruebas periódicas de ping y traceroute desde la instancia mediante AWS Systems Manager Run Command"
-    ],
+    "text": {
+      "es": "Un equipo de redes debe demostrar de forma continua que una instancia EC2 de una VPC nunca puede alcanzar una base de datos de otra VPC, y ser alertado si un cambio de configuración rompe esa intención, sin generar tráfico real. ¿Qué solución cumple estos requisitos?",
+      "en": "A networking team must continuously prove that an EC2 instance in one VPC can never reach a database in another VPC, and be alerted if a configuration change breaks that intent, without generating real traffic. Which solution meets these requirements?"
+    },
+    "options": {
+      "es": [
+        "Definir rutas en VPC Reachability Analyzer y reevaluarlas automáticamente con una regla de Amazon EventBridge cuando cambie la configuración de red",
+        "Analizar los VPC Flow Logs con Amazon Athena en busca de flujos aceptados entre las dos direcciones IP",
+        "Configurar VPC Traffic Mirroring desde la instancia hacia un dispositivo de análisis y revisar las capturas periódicamente",
+        "Ejecutar pruebas periódicas de ping y traceroute desde la instancia mediante AWS Systems Manager Run Command"
+      ],
+      "en": [
+        "Define paths in VPC Reachability Analyzer and automatically re-evaluate them with an Amazon EventBridge rule when the network configuration changes",
+        "Analyze the VPC Flow Logs with Amazon Athena looking for accepted flows between the two IP addresses",
+        "Configure VPC Traffic Mirroring from the instance to an analysis appliance and review the captures periodically",
+        "Run periodic ping and traceroute tests from the instance through AWS Systems Manager Run Command"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Reachability Analyzer evalúa la configuración de red de forma estática, sin enviar paquetes, y sus rutas pueden reanalizarse mediante automatización cuando cambia la configuración. Los flow logs y la duplicación de tráfico solo muestran tráfico que ya ocurrió.",
+    "explanation": {
+      "es": "Reachability Analyzer evalúa la configuración de red de forma estática, sin enviar paquetes, y sus rutas pueden reanalizarse mediante automatización cuando cambia la configuración. Los flow logs y la duplicación de tráfico solo muestran tráfico que ya ocurrió.",
+      "en": "Reachability Analyzer evaluates the network configuration statically, without sending packets, and its paths can be re-analyzed through automation when the configuration changes. Flow logs and traffic mirroring only show traffic that has already occurred."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.2",
-    "text": "Los usuarios reportan lentitud intermitente en una aplicación cuyo tráfico atraviesa un transit gateway hacia varias VPC. El equipo sospecha descartes de paquetes y retransmisiones. ¿Qué dos acciones aportan la información necesaria para el diagnóstico? (Elija dos).",
-    "options": [
-      "Revisar las métricas de CloudWatch del transit gateway, como PacketDropCountNoRoute y BytesDropCountBlackhole, para identificar descartes por enrutamiento",
-      "Configurar VPC Traffic Mirroring hacia un dispositivo de análisis para inspeccionar retransmisiones y tamaños de paquete",
-      "Consultar los VPC Flow Logs para obtener el tiempo de ida y vuelta de cada flujo",
-      "Habilitar los logs de acceso del Application Load Balancer para medir la pérdida de paquetes en la capa 3",
-      "Usar AWS CloudTrail para identificar los paquetes descartados por los grupos de seguridad"
-    ],
+    "text": {
+      "es": "Los usuarios reportan lentitud intermitente en una aplicación cuyo tráfico atraviesa un transit gateway hacia varias VPC. El equipo sospecha descartes de paquetes y retransmisiones. ¿Qué dos acciones aportan la información necesaria para el diagnóstico? (Elija dos).",
+      "en": "Users report intermittent slowness in an application whose traffic traverses a transit gateway to several VPCs. The team suspects packet drops and retransmissions. Which two actions provide the information needed for the diagnosis? (Choose two.)"
+    },
+    "options": {
+      "es": [
+        "Revisar las métricas de CloudWatch del transit gateway, como PacketDropCountNoRoute y BytesDropCountBlackhole, para identificar descartes por enrutamiento",
+        "Configurar VPC Traffic Mirroring hacia un dispositivo de análisis para inspeccionar retransmisiones y tamaños de paquete",
+        "Consultar los VPC Flow Logs para obtener el tiempo de ida y vuelta de cada flujo",
+        "Habilitar los logs de acceso del Application Load Balancer para medir la pérdida de paquetes en la capa 3",
+        "Usar AWS CloudTrail para identificar los paquetes descartados por los grupos de seguridad"
+      ],
+      "en": [
+        "Review the transit gateway CloudWatch metrics, such as PacketDropCountNoRoute and BytesDropCountBlackhole, to identify drops caused by routing",
+        "Configure VPC Traffic Mirroring to an analysis appliance to inspect retransmissions and packet sizes",
+        "Query the VPC Flow Logs to obtain the round-trip time of each flow",
+        "Enable Application Load Balancer access logs to measure packet loss at Layer 3",
+        "Use AWS CloudTrail to identify the packets dropped by the security groups"
+      ]
+    },
     "correct": [
       0,
       1
     ],
     "type": "multiple",
-    "explanation": "El transit gateway publica métricas de descartes en CloudWatch que revelan problemas de enrutamiento, y la duplicación de tráfico permite analizar los paquetes reales para detectar retransmisiones. Los flow logs no incluyen latencia y CloudTrail solo registra llamadas a la API.",
+    "explanation": {
+      "es": "El transit gateway publica métricas de descartes en CloudWatch que revelan problemas de enrutamiento, y la duplicación de tráfico permite analizar los paquetes reales para detectar retransmisiones. Los flow logs no incluyen latencia y CloudTrail solo registra llamadas a la API.",
+      "en": "The transit gateway publishes drop metrics in CloudWatch that reveal routing problems, and traffic mirroring makes it possible to analyze the actual packets to detect retransmissions. Flow logs do not include latency, and CloudTrail records only API calls."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.3",
-    "text": "Una carga de trabajo de computación de alto rendimiento usa MPI entre cientos de instancias y requiere la menor latencia posible entre nodos y omitir el kernel del sistema operativo para las comunicaciones. ¿Qué solución cumple estos requisitos?",
-    "options": [
-      "Adjuntar un Elastic Fabric Adapter a las instancias y desplegarlas en un grupo de ubicación de tipo clúster",
-      "Adjuntar varias interfaces de red elásticas a cada instancia y distribuir el tráfico con ECMP",
-      "Habilitar tramas jumbo de 9.001 bytes en las interfaces de red elásticas existentes y usar un grupo de ubicación distribuido",
-      "Colocar las instancias detrás de un Network Load Balancer interno con balanceo de carga entre zonas deshabilitado"
-    ],
+    "text": {
+      "es": "Una carga de trabajo de computación de alto rendimiento usa MPI entre cientos de instancias y requiere la menor latencia posible entre nodos y omitir el kernel del sistema operativo para las comunicaciones. ¿Qué solución cumple estos requisitos?",
+      "en": "A high performance computing workload uses MPI between hundreds of instances and requires the lowest possible latency between nodes and OS kernel bypass for communications. Which solution meets these requirements?"
+    },
+    "options": {
+      "es": [
+        "Adjuntar un Elastic Fabric Adapter a las instancias y desplegarlas en un grupo de ubicación de tipo clúster",
+        "Adjuntar varias interfaces de red elásticas a cada instancia y distribuir el tráfico con ECMP",
+        "Habilitar tramas jumbo de 9.001 bytes en las interfaces de red elásticas existentes y usar un grupo de ubicación distribuido",
+        "Colocar las instancias detrás de un Network Load Balancer interno con balanceo de carga entre zonas deshabilitado"
+      ],
+      "en": [
+        "Attach an Elastic Fabric Adapter to the instances and deploy them in a cluster placement group",
+        "Attach multiple elastic network interfaces to each instance and distribute the traffic with ECMP",
+        "Enable 9,001-byte jumbo frames on the existing elastic network interfaces and use a spread placement group",
+        "Place the instances behind an internal Network Load Balancer with cross-zone load balancing disabled"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "El Elastic Fabric Adapter ofrece una interfaz de omisión del sistema operativo con el protocolo SRD para cargas MPI, y el grupo de ubicación de clúster reduce la latencia al agrupar las instancias físicamente. Las ENI convencionales no permiten omitir el kernel.",
+    "explanation": {
+      "es": "El Elastic Fabric Adapter ofrece una interfaz de omisión del sistema operativo con el protocolo SRD para cargas MPI, y el grupo de ubicación de clúster reduce la latencia al agrupar las instancias físicamente. Las ENI convencionales no permiten omitir el kernel.",
+      "en": "The Elastic Fabric Adapter offers an OS-bypass interface with the SRD protocol for MPI workloads, and the cluster placement group reduces latency by grouping the instances physically close together. Conventional ENIs do not allow kernel bypass."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.3",
-    "text": "Un grupo de Auto Scaling no puede lanzar instancias nuevas porque las subredes de su VPC agotaron las direcciones IP disponibles. La VPC ya está conectada a un transit gateway y no se pueden reasignar los rangos existentes. ¿Qué solución cumple el requisito de escalar con el menor impacto?",
-    "options": [
-      "Agregar un bloque CIDR secundario a la VPC, crear subredes nuevas en varias zonas de disponibilidad y añadirlas al grupo de Auto Scaling",
-      "Modificar el bloque CIDR de las subredes existentes para ampliar su máscara de red",
-      "Crear una VPC nueva con un CIDR mayor y conectarla mediante emparejamiento de VPC a la VPC original",
-      "Convertir las subredes existentes en subredes exclusivamente IPv6 y relanzar las instancias"
-    ],
+    "text": {
+      "es": "Un grupo de Auto Scaling no puede lanzar instancias nuevas porque las subredes de su VPC agotaron las direcciones IP disponibles. La VPC ya está conectada a un transit gateway y no se pueden reasignar los rangos existentes. ¿Qué solución cumple el requisito de escalar con el menor impacto?",
+      "en": "An Auto Scaling group cannot launch new instances because the subnets in its VPC have exhausted the available IP addresses. The VPC is already connected to a transit gateway and the existing ranges cannot be re-addressed. Which solution meets the requirement to scale with the least impact?"
+    },
+    "options": {
+      "es": [
+        "Agregar un bloque CIDR secundario a la VPC, crear subredes nuevas en varias zonas de disponibilidad y añadirlas al grupo de Auto Scaling",
+        "Modificar el bloque CIDR de las subredes existentes para ampliar su máscara de red",
+        "Crear una VPC nueva con un CIDR mayor y conectarla mediante emparejamiento de VPC a la VPC original",
+        "Convertir las subredes existentes en subredes exclusivamente IPv6 y relanzar las instancias"
+      ],
+      "en": [
+        "Add a secondary CIDR block to the VPC, create new subnets in several Availability Zones, and add them to the Auto Scaling group",
+        "Modify the CIDR block of the existing subnets to widen their network mask",
+        "Create a new VPC with a larger CIDR and connect it to the original VPC through VPC peering",
+        "Convert the existing subnets into IPv6-only subnets and relaunch the instances"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Los bloques CIDR de las subredes no se pueden modificar después de su creación, pero una VPC admite bloques CIDR secundarios sobre los que se crean subredes nuevas que el grupo de Auto Scaling puede usar de inmediato.",
+    "explanation": {
+      "es": "Los bloques CIDR de las subredes no se pueden modificar después de su creación, pero una VPC admite bloques CIDR secundarios sobre los que se crean subredes nuevas que el grupo de Auto Scaling puede usar de inmediato.",
+      "en": "Subnet CIDR blocks cannot be modified after creation, but a VPC supports secondary CIDR blocks on which new subnets are created that the Auto Scaling group can use immediately."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 3,
     "taskStatementNumber": "3.3",
-    "text": "Una aplicación financiera heredada distribuye cotizaciones de mercado mediante multicast y debe migrarse a AWS conservando ese modelo de distribución, con receptores en varias VPC que se unan y abandonen los grupos de forma dinámica. ¿Qué dos acciones cumplen estos requisitos? (Elija dos).",
-    "options": [
-      "Crear un dominio multicast en el transit gateway y registrar las subredes y las interfaces de red de los receptores",
-      "Habilitar la compatibilidad con IGMPv2 en el dominio multicast para que los receptores gestionen su pertenencia a los grupos de forma dinámica",
-      "Configurar un Network Load Balancer con un grupo de destino UDP que replique el tráfico hacia todos los receptores",
-      "Habilitar el modo appliance en los accesorios de VPC para permitir el reenvío multicast",
-      "Establecer conexiones de emparejamiento de VPC entre el origen y los receptores para propagar el tráfico multicast"
-    ],
+    "text": {
+      "es": "Una aplicación financiera heredada distribuye cotizaciones de mercado mediante multicast y debe migrarse a AWS conservando ese modelo de distribución, con receptores en varias VPC que se unan y abandonen los grupos de forma dinámica. ¿Qué dos acciones cumplen estos requisitos? (Elija dos).",
+      "en": "A legacy financial application distributes market quotes using multicast and must be migrated to AWS while preserving that distribution model, with receivers in several VPCs that join and leave the groups dynamically. Which two actions meet these requirements? (Choose two.)"
+    },
+    "options": {
+      "es": [
+        "Crear un dominio multicast en el transit gateway y registrar las subredes y las interfaces de red de los receptores",
+        "Habilitar la compatibilidad con IGMPv2 en el dominio multicast para que los receptores gestionen su pertenencia a los grupos de forma dinámica",
+        "Configurar un Network Load Balancer con un grupo de destino UDP que replique el tráfico hacia todos los receptores",
+        "Habilitar el modo appliance en los accesorios de VPC para permitir el reenvío multicast",
+        "Establecer conexiones de emparejamiento de VPC entre el origen y los receptores para propagar el tráfico multicast"
+      ],
+      "en": [
+        "Create a multicast domain on the transit gateway and register the subnets and the network interfaces of the receivers",
+        "Enable IGMPv2 support on the multicast domain so that the receivers manage their group membership dynamically",
+        "Configure a Network Load Balancer with a UDP target group that replicates the traffic to all receivers",
+        "Enable appliance mode on the VPC attachments to allow multicast forwarding",
+        "Establish VPC peering connections between the source and the receivers to propagate the multicast traffic"
+      ]
+    },
     "correct": [
       0,
       1
     ],
     "type": "multiple",
-    "explanation": "El multicast en AWS se implementa con dominios multicast de transit gateway, donde se asocian subredes y se registran las interfaces de red, y la compatibilidad con IGMPv2 permite altas y bajas dinámicas de los grupos. El emparejamiento de VPC no admite tráfico multicast.",
+    "explanation": {
+      "es": "El multicast en AWS se implementa con dominios multicast de transit gateway, donde se asocian subredes y se registran las interfaces de red, y la compatibilidad con IGMPv2 permite altas y bajas dinámicas de los grupos. El emparejamiento de VPC no admite tráfico multicast.",
+      "en": "Multicast in AWS is implemented with transit gateway multicast domains, where subnets are associated and network interfaces are registered, and IGMPv2 support allows dynamic joining and leaving of groups. VPC peering does not support multicast traffic."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.1",
-    "text": "Una organización debe permitir que las instancias EC2 de sus VPC accedan únicamente a una lista aprobada de dominios de internet, con inspección centralizada y registro de los intentos bloqueados para auditoría. ¿Qué solución cumple estos requisitos?",
-    "options": [
-      "Enrutar el tráfico saliente a través de una VPC de inspección con AWS Network Firewall y reglas con estado de filtrado por nombre de dominio, habilitando los logs de alertas y de flujos",
-      "Aplicar ACL de red en las subredes de salida con reglas de denegación para los dominios no aprobados",
-      "Crear grupos de seguridad con reglas de salida que hagan referencia a los nombres de dominio aprobados",
-      "Asociar una ACL web de AWS WAF a las gateways NAT de la VPC de salida y filtrar por encabezado Host"
-    ],
+    "text": {
+      "es": "Una organización debe permitir que las instancias EC2 de sus VPC accedan únicamente a una lista aprobada de dominios de internet, con inspección centralizada y registro de los intentos bloqueados para auditoría. ¿Qué solución cumple estos requisitos?",
+      "en": "An organization must allow the EC2 instances in its VPCs to access only an approved list of internet domains, with centralized inspection and logging of blocked attempts for auditing. Which solution meets these requirements?"
+    },
+    "options": {
+      "es": [
+        "Enrutar el tráfico saliente a través de una VPC de inspección con AWS Network Firewall y reglas con estado de filtrado por nombre de dominio, habilitando los logs de alertas y de flujos",
+        "Aplicar ACL de red en las subredes de salida con reglas de denegación para los dominios no aprobados",
+        "Crear grupos de seguridad con reglas de salida que hagan referencia a los nombres de dominio aprobados",
+        "Asociar una ACL web de AWS WAF a las gateways NAT de la VPC de salida y filtrar por encabezado Host"
+      ],
+      "en": [
+        "Route the outbound traffic through an inspection VPC with AWS Network Firewall and stateful domain name filtering rules, enabling alert and flow logs",
+        "Apply network ACLs on the egress subnets with deny rules for the non-approved domains",
+        "Create security groups with outbound rules that reference the approved domain names",
+        "Associate an AWS WAF web ACL with the NAT gateways of the egress VPC and filter by the Host header"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "AWS Network Firewall admite reglas con estado que filtran por nombre de dominio y entrega logs de alertas y de flujos, lo que permite inspección centralizada del tráfico saliente. Los grupos de seguridad y las ACL de red solo evalúan direcciones IP, protocolos y puertos, y AWS WAF no se asocia a gateways NAT.",
+    "explanation": {
+      "es": "AWS Network Firewall admite reglas con estado que filtran por nombre de dominio y entrega logs de alertas y de flujos, lo que permite inspección centralizada del tráfico saliente. Los grupos de seguridad y las ACL de red solo evalúan direcciones IP, protocolos y puertos, y AWS WAF no se asocia a gateways NAT.",
+      "en": "AWS Network Firewall supports stateful rules that filter by domain name and delivers alert and flow logs, which allows centralized inspection of outbound traffic. Security groups and network ACLs evaluate only IP addresses, protocols, and ports, and AWS WAF cannot be associated with NAT gateways."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.1",
-    "text": "Un sitio de comercio electrónico servido por Amazon CloudFront sufre ataques volumétricos y ataques a nivel de aplicación que agotan los recursos del origen con solicitudes HTTP costosas. La compañía necesita protección gestionada, respuesta asistida por AWS y limitación de solicitudes por dirección IP. ¿Qué solución cumple estos requisitos?",
-    "options": [
-      "Suscribirse a AWS Shield Advanced y asociar a la distribución de CloudFront una ACL web de AWS WAF con reglas basadas en tasa y grupos de reglas administradas",
-      "Confiar en AWS Shield Standard y aumentar el TTL de la caché de CloudFront para absorber el tráfico de ataque",
-      "Aplicar ACL de red en las subredes del origen con límites de tasa por dirección IP de origen",
-      "Insertar un Gateway Load Balancer con dispositivos de inspección entre CloudFront y el origen"
-    ],
+    "text": {
+      "es": "Un sitio de comercio electrónico servido por Amazon CloudFront sufre ataques volumétricos y ataques a nivel de aplicación que agotan los recursos del origen con solicitudes HTTP costosas. La compañía necesita protección gestionada, respuesta asistida por AWS y limitación de solicitudes por dirección IP. ¿Qué solución cumple estos requisitos?",
+      "en": "An ecommerce site served by Amazon CloudFront suffers volumetric attacks and application-layer attacks that exhaust origin resources with expensive HTTP requests. The company needs managed protection, AWS-assisted response, and request rate limiting per IP address. Which solution meets these requirements?"
+    },
+    "options": {
+      "es": [
+        "Suscribirse a AWS Shield Advanced y asociar a la distribución de CloudFront una ACL web de AWS WAF con reglas basadas en tasa y grupos de reglas administradas",
+        "Confiar en AWS Shield Standard y aumentar el TTL de la caché de CloudFront para absorber el tráfico de ataque",
+        "Aplicar ACL de red en las subredes del origen con límites de tasa por dirección IP de origen",
+        "Insertar un Gateway Load Balancer con dispositivos de inspección entre CloudFront y el origen"
+      ],
+      "en": [
+        "Subscribe to AWS Shield Advanced and associate an AWS WAF web ACL with rate-based rules and managed rule groups with the CloudFront distribution",
+        "Rely on AWS Shield Standard and increase the CloudFront cache TTL to absorb the attack traffic",
+        "Apply network ACLs on the origin subnets with rate limits per source IP address",
+        "Insert a Gateway Load Balancer with inspection appliances between CloudFront and the origin"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Shield Advanced añade detección mejorada, protección de costos y acceso al equipo de respuesta de AWS, mientras que las reglas basadas en tasa de AWS WAF limitan las solicitudes por dirección IP en la capa 7. Las ACL de red no aplican límites de tasa y no protegen el borde.",
+    "explanation": {
+      "es": "Shield Advanced añade detección mejorada, protección de costos y acceso al equipo de respuesta de AWS, mientras que las reglas basadas en tasa de AWS WAF limitan las solicitudes por dirección IP en la capa 7. Las ACL de red no aplican límites de tasa y no protegen el borde.",
+      "en": "Shield Advanced adds enhanced detection, cost protection, and access to the AWS response team, while AWS WAF rate-based rules limit requests per IP address at Layer 7. Network ACLs do not apply rate limits and do not protect the edge."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.1",
-    "text": "Un modelo de amenazas exige inspección con dispositivos de terceros para todo el tráfico saliente de las VPC y, además, restringir el tráfico entre VPC de la misma cuenta al mínimo necesario. ¿Qué dos acciones cumplen estos requisitos? (Elija dos).",
-    "options": [
-      "Desplegar los dispositivos detrás de un Gateway Load Balancer e insertar endpoints de Gateway Load Balancer en las tablas de rutas para una inspección transparente",
-      "Restringir el tráfico entre VPC con grupos de seguridad que hagan referencia a otros grupos de seguridad y con políticas de endpoints de VPC para los servicios accedidos por PrivateLink",
-      "Asociar una ACL web de AWS WAF al Network Load Balancer que expone los dispositivos de inspección",
-      "Usar ACL de red con estado para inspeccionar el tráfico saliente por nombre de dominio",
-      "Habilitar AWS Shield Advanced en la VPC de salida para inspeccionar los flujos entre VPC"
-    ],
+    "text": {
+      "es": "Un modelo de amenazas exige inspección con dispositivos de terceros para todo el tráfico saliente de las VPC y, además, restringir el tráfico entre VPC de la misma cuenta al mínimo necesario. ¿Qué dos acciones cumplen estos requisitos? (Elija dos).",
+      "en": "A threat model requires inspection with third-party appliances for all outbound VPC traffic and, in addition, restricting traffic between VPCs in the same account to the minimum necessary. Which two actions meet these requirements? (Choose two.)"
+    },
+    "options": {
+      "es": [
+        "Desplegar los dispositivos detrás de un Gateway Load Balancer e insertar endpoints de Gateway Load Balancer en las tablas de rutas para una inspección transparente",
+        "Restringir el tráfico entre VPC con grupos de seguridad que hagan referencia a otros grupos de seguridad y con políticas de endpoints de VPC para los servicios accedidos por PrivateLink",
+        "Asociar una ACL web de AWS WAF al Network Load Balancer que expone los dispositivos de inspección",
+        "Usar ACL de red con estado para inspeccionar el tráfico saliente por nombre de dominio",
+        "Habilitar AWS Shield Advanced en la VPC de salida para inspeccionar los flujos entre VPC"
+      ],
+      "en": [
+        "Deploy the appliances behind a Gateway Load Balancer and insert Gateway Load Balancer endpoints into the route tables for transparent inspection",
+        "Restrict traffic between VPCs with security groups that reference other security groups and with VPC endpoint policies for the services accessed through PrivateLink",
+        "Associate an AWS WAF web ACL with the Network Load Balancer that exposes the inspection appliances",
+        "Use stateful network ACLs to inspect outbound traffic by domain name",
+        "Enable AWS Shield Advanced on the egress VPC to inspect the flows between VPCs"
+      ]
+    },
     "correct": [
       0,
       1
     ],
     "type": "multiple",
-    "explanation": "El Gateway Load Balancer permite insertar dispositivos de terceros de forma transparente mediante endpoints en las tablas de rutas, y los grupos de seguridad con referencias cruzadas junto con las políticas de endpoints limitan el tráfico entre VPC al mínimo necesario. Las ACL de red no tienen estado y Shield no inspecciona tráfico interno.",
+    "explanation": {
+      "es": "El Gateway Load Balancer permite insertar dispositivos de terceros de forma transparente mediante endpoints en las tablas de rutas, y los grupos de seguridad con referencias cruzadas junto con las políticas de endpoints limitan el tráfico entre VPC al mínimo necesario. Las ACL de red no tienen estado y Shield no inspecciona tráfico interno.",
+      "en": "The Gateway Load Balancer allows third-party appliances to be inserted transparently through endpoints in the route tables, and cross-referencing security groups together with endpoint policies limit traffic between VPCs to the minimum necessary. Network ACLs are stateless, and Shield does not inspect internal traffic."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.2",
-    "text": "El equipo de seguridad de una organización de AWS Organizations debe garantizar que ninguna cuenta tenga grupos de seguridad que permitan el puerto 22 desde 0.0.0.0/0, corregir automáticamente las infracciones y aplicar una ACL web base de AWS WAF a todos los Application Load Balancers nuevos. ¿Qué solución cumple estos requisitos?",
-    "options": [
-      "Usar AWS Firewall Manager con una política de grupos de seguridad de auditoría y una política de AWS WAF aplicadas al ámbito de la organización",
-      "Usar reglas de AWS Config en cada cuenta y revisar manualmente el panel de conformidad agregado",
-      "Usar políticas de control de servicios que denieguen la creación de grupos de seguridad con reglas abiertas",
-      "Revisar semanalmente las comprobaciones de seguridad de AWS Trusted Advisor en la cuenta de administración"
-    ],
+    "text": {
+      "es": "El equipo de seguridad de una organización de AWS Organizations debe garantizar que ninguna cuenta tenga grupos de seguridad que permitan el puerto 22 desde 0.0.0.0/0, corregir automáticamente las infracciones y aplicar una ACL web base de AWS WAF a todos los Application Load Balancers nuevos. ¿Qué solución cumple estos requisitos?",
+      "en": "The security team of an AWS Organizations organization must ensure that no account has security groups that allow port 22 from 0.0.0.0/0, automatically remediate violations, and apply a baseline AWS WAF web ACL to all new Application Load Balancers. Which solution meets these requirements?"
+    },
+    "options": {
+      "es": [
+        "Usar AWS Firewall Manager con una política de grupos de seguridad de auditoría y una política de AWS WAF aplicadas al ámbito de la organización",
+        "Usar reglas de AWS Config en cada cuenta y revisar manualmente el panel de conformidad agregado",
+        "Usar políticas de control de servicios que denieguen la creación de grupos de seguridad con reglas abiertas",
+        "Revisar semanalmente las comprobaciones de seguridad de AWS Trusted Advisor en la cuenta de administración"
+      ],
+      "en": [
+        "Use AWS Firewall Manager with an audit security group policy and an AWS WAF policy applied at the organization scope",
+        "Use AWS Config rules in each account and manually review the aggregated compliance dashboard",
+        "Use service control policies that deny the creation of security groups with open rules",
+        "Review the AWS Trusted Advisor security checks in the management account weekly"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "AWS Firewall Manager aplica de forma centralizada políticas de grupos de seguridad, AWS WAF y Network Firewall en toda la organización, incluidos los recursos creados después de definir la política, con corrección automática opcional. AWS Config y Trusted Advisor solo detectan.",
+    "explanation": {
+      "es": "AWS Firewall Manager aplica de forma centralizada políticas de grupos de seguridad, AWS WAF y Network Firewall en toda la organización, incluidos los recursos creados después de definir la política, con corrección automática opcional. AWS Config y Trusted Advisor solo detectan.",
+      "en": "AWS Firewall Manager centrally applies security group, AWS WAF, and Network Firewall policies across the entire organization, including resources created after the policy is defined, with optional automatic remediation. AWS Config and Trusted Advisor only detect."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.2",
-    "text": "Una compañía debe conservar los registros de flujo de red durante siete años para auditorías, con consultas puntuales de bajo costo, y además necesita alertas casi en tiempo real cuando aumenten los rechazos hacia un puerto específico. ¿Qué dos acciones cumplen estos requisitos? (Elija dos).",
-    "options": [
-      "Entregar los VPC Flow Logs a Amazon S3 en formato Apache Parquet con particionamiento por hora y consultarlos con Amazon Athena",
-      "Entregar los VPC Flow Logs a Amazon CloudWatch Logs y crear filtros de métricas con alarmas de CloudWatch sobre los registros rechazados",
-      "Entregar los VPC Flow Logs directamente a Amazon SNS para su análisis y retención a largo plazo",
-      "Habilitar AWS CloudTrail para registrar cada paquete que atraviesa la VPC y archivarlo en S3",
-      "Usar VPC Traffic Mirroring como destino de entrega de los flow logs para conservar el historial"
-    ],
+    "text": {
+      "es": "Una compañía debe conservar los registros de flujo de red durante siete años para auditorías, con consultas puntuales de bajo costo, y además necesita alertas casi en tiempo real cuando aumenten los rechazos hacia un puerto específico. ¿Qué dos acciones cumplen estos requisitos? (Elija dos).",
+      "en": "A company must retain network flow records for seven years for audits, with low-cost ad hoc queries, and also needs near real-time alerts when rejections to a specific port increase. Which two actions meet these requirements? (Choose two.)"
+    },
+    "options": {
+      "es": [
+        "Entregar los VPC Flow Logs a Amazon S3 en formato Apache Parquet con particionamiento por hora y consultarlos con Amazon Athena",
+        "Entregar los VPC Flow Logs a Amazon CloudWatch Logs y crear filtros de métricas con alarmas de CloudWatch sobre los registros rechazados",
+        "Entregar los VPC Flow Logs directamente a Amazon SNS para su análisis y retención a largo plazo",
+        "Habilitar AWS CloudTrail para registrar cada paquete que atraviesa la VPC y archivarlo en S3",
+        "Usar VPC Traffic Mirroring como destino de entrega de los flow logs para conservar el historial"
+      ],
+      "en": [
+        "Deliver the VPC Flow Logs to Amazon S3 in Apache Parquet format with hourly partitioning and query them with Amazon Athena",
+        "Deliver the VPC Flow Logs to Amazon CloudWatch Logs and create metric filters with CloudWatch alarms on the rejected records",
+        "Deliver the VPC Flow Logs directly to Amazon SNS for analysis and long-term retention",
+        "Enable AWS CloudTrail to record every packet that traverses the VPC and archive it in S3",
+        "Use VPC Traffic Mirroring as the delivery destination for the flow logs to retain the history"
+      ]
+    },
     "correct": [
       0,
       1
     ],
     "type": "multiple",
-    "explanation": "S3 con Parquet particionado ofrece retención económica a largo plazo y consultas eficientes con Athena, mientras que CloudWatch Logs permite filtros de métricas y alarmas casi en tiempo real. Los flow logs no se entregan a SNS ni a sesiones de duplicación de tráfico.",
+    "explanation": {
+      "es": "S3 con Parquet particionado ofrece retención económica a largo plazo y consultas eficientes con Athena, mientras que CloudWatch Logs permite filtros de métricas y alarmas casi en tiempo real. Los flow logs no se entregan a SNS ni a sesiones de duplicación de tráfico.",
+      "en": "S3 with partitioned Parquet offers economical long-term retention and efficient queries with Athena, while CloudWatch Logs allows metric filters and near real-time alarms. Flow logs are not delivered to SNS or to traffic mirroring sessions."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.2",
-    "text": "Un equipo de respuesta a incidentes necesita capturar solo el tráfico HTTPS entrante de una interfaz de red específica y entregarlo a un conjunto escalable de dispositivos de análisis de paquetes, minimizando el volumen capturado. ¿Qué configuración cumple estos requisitos?",
-    "options": [
-      "Crear una sesión de duplicación de tráfico con un filtro que incluya únicamente el tráfico TCP entrante del puerto 443 y un destino de tipo Network Load Balancer con un listener UDP en el puerto 4789",
-      "Crear VPC Flow Logs con un formato personalizado limitado al puerto 443 y entregarlos a los dispositivos de análisis",
-      "Habilitar la duplicación de puertos en el accesorio del transit gateway y filtrar por puerto en los dispositivos",
-      "Configurar la gateway de internet para duplicar el tráfico entrante hacia una interfaz de red dedicada"
-    ],
+    "text": {
+      "es": "Un equipo de respuesta a incidentes necesita capturar solo el tráfico HTTPS entrante de una interfaz de red específica y entregarlo a un conjunto escalable de dispositivos de análisis de paquetes, minimizando el volumen capturado. ¿Qué configuración cumple estos requisitos?",
+      "en": "An incident response team needs to capture only the inbound HTTPS traffic of a specific network interface and deliver it to a scalable set of packet analysis appliances, minimizing the captured volume. Which configuration meets these requirements?"
+    },
+    "options": {
+      "es": [
+        "Crear una sesión de duplicación de tráfico con un filtro que incluya únicamente el tráfico TCP entrante del puerto 443 y un destino de tipo Network Load Balancer con un listener UDP en el puerto 4789",
+        "Crear VPC Flow Logs con un formato personalizado limitado al puerto 443 y entregarlos a los dispositivos de análisis",
+        "Habilitar la duplicación de puertos en el accesorio del transit gateway y filtrar por puerto en los dispositivos",
+        "Configurar la gateway de internet para duplicar el tráfico entrante hacia una interfaz de red dedicada"
+      ],
+      "en": [
+        "Create a traffic mirror session with a filter that includes only inbound TCP traffic on port 443 and a Network Load Balancer target with a UDP listener on port 4789",
+        "Create VPC Flow Logs with a custom format limited to port 443 and deliver them to the analysis appliances",
+        "Enable port mirroring on the transit gateway attachment and filter by port on the appliances",
+        "Configure the internet gateway to mirror the inbound traffic to a dedicated network interface"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Los filtros de VPC Traffic Mirroring restringen la captura por protocolo, puerto y dirección, y un Network Load Balancer con listener UDP 4789 distribuye el tráfico VXLAN entre varios dispositivos de análisis. Los flow logs no contienen paquetes y no existe duplicación de puertos en el transit gateway ni en la gateway de internet.",
+    "explanation": {
+      "es": "Los filtros de VPC Traffic Mirroring restringen la captura por protocolo, puerto y dirección, y un Network Load Balancer con listener UDP 4789 distribuye el tráfico VXLAN entre varios dispositivos de análisis. Los flow logs no contienen paquetes y no existe duplicación de puertos en el transit gateway ni en la gateway de internet.",
+      "en": "VPC Traffic Mirroring filters restrict the capture by protocol, port, and direction, and a Network Load Balancer with a UDP 4789 listener distributes the VXLAN traffic across several analysis appliances. Flow logs do not contain packets, and port mirroring does not exist on the transit gateway or on the internet gateway."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.3",
-    "text": "Una entidad regulada requiere cifrado de capa 2 con integridad y confidencialidad en el enlace físico entre su instalación de colocación y AWS, sin la sobrecarga de rendimiento del cifrado por túnel. ¿Qué solución cumple este requisito?",
-    "options": [
-      "Solicitar una conexión dedicada de Direct Connect de 10 Gbps o 100 Gbps compatible con MACsec y configurar las claves CAK y CKN en la asociación de conectividad",
-      "Configurar IPsec en la interfaz virtual privada de una conexión hospedada de Direct Connect",
-      "Habilitar TLS 1.3 en las aplicaciones y considerar cumplido el requisito de cifrado del enlace",
-      "Incrementar la MTU a 9.001 bytes en la interfaz virtual privada para habilitar el cifrado de tramas jumbo"
-    ],
+    "text": {
+      "es": "Una entidad regulada requiere cifrado de capa 2 con integridad y confidencialidad en el enlace físico entre su instalación de colocación y AWS, sin la sobrecarga de rendimiento del cifrado por túnel. ¿Qué solución cumple este requisito?",
+      "en": "A regulated entity requires Layer 2 encryption with integrity and confidentiality on the physical link between its colocation facility and AWS, without the performance overhead of per-tunnel encryption. Which solution meets this requirement?"
+    },
+    "options": {
+      "es": [
+        "Solicitar una conexión dedicada de Direct Connect de 10 Gbps o 100 Gbps compatible con MACsec y configurar las claves CAK y CKN en la asociación de conectividad",
+        "Configurar IPsec en la interfaz virtual privada de una conexión hospedada de Direct Connect",
+        "Habilitar TLS 1.3 en las aplicaciones y considerar cumplido el requisito de cifrado del enlace",
+        "Incrementar la MTU a 9.001 bytes en la interfaz virtual privada para habilitar el cifrado de tramas jumbo"
+      ],
+      "en": [
+        "Request a 10 Gbps or 100 Gbps Direct Connect dedicated connection that supports MACsec and configure the CAK and CKN keys in the connectivity association",
+        "Configure IPsec on the private virtual interface of a Direct Connect hosted connection",
+        "Enable TLS 1.3 in the applications and consider the link encryption requirement met",
+        "Increase the MTU to 9,001 bytes on the private virtual interface to enable jumbo frame encryption"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "MACsec cifra el tráfico en la capa 2 a velocidad de línea y está disponible en conexiones dedicadas de Direct Connect de 10 Gbps y 100 Gbps mediante claves CAK y CKN. Las interfaces virtuales no admiten IPsec por sí mismas y TLS opera en una capa superior.",
+    "explanation": {
+      "es": "MACsec cifra el tráfico en la capa 2 a velocidad de línea y está disponible en conexiones dedicadas de Direct Connect de 10 Gbps y 100 Gbps mediante claves CAK y CKN. Las interfaces virtuales no admiten IPsec por sí mismas y TLS opera en una capa superior.",
+      "en": "MACsec encrypts traffic at Layer 2 at line rate and is available on 10 Gbps and 100 Gbps Direct Connect dedicated connections through CAK and CKN keys. Virtual interfaces do not support IPsec by themselves, and TLS operates at a higher layer."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.3",
-    "text": "Una compañía debe cifrar el tráfico que circula entre su centro de datos y un transit gateway a través de Direct Connect. Una política interna prohíbe que el tráfico atraviese espacio de direcciones públicas o dependa de endpoints con direcciones IP públicas. ¿Qué solución cumple estos requisitos?",
-    "options": [
-      "Configurar una conexión de AWS Site-to-Site VPN con direcciones IP privadas sobre una interfaz virtual de tránsito asociada a un Direct Connect gateway y al transit gateway",
-      "Crear una interfaz virtual pública y establecer la VPN de sitio a sitio hacia las direcciones IP públicas de los endpoints del túnel",
-      "Establecer túneles GRE mediante Transit Gateway Connect y habilitar el cifrado en los dispositivos locales",
-      "Habilitar MACsec en una conexión hospedada de Direct Connect de 1 Gbps"
-    ],
+    "text": {
+      "es": "Una compañía debe cifrar el tráfico que circula entre su centro de datos y un transit gateway a través de Direct Connect. Una política interna prohíbe que el tráfico atraviese espacio de direcciones públicas o dependa de endpoints con direcciones IP públicas. ¿Qué solución cumple estos requisitos?",
+      "en": "A company must encrypt the traffic that flows between its data center and a transit gateway over Direct Connect. An internal policy prohibits the traffic from traversing public address space or depending on endpoints with public IP addresses. Which solution meets these requirements?"
+    },
+    "options": {
+      "es": [
+        "Configurar una conexión de AWS Site-to-Site VPN con direcciones IP privadas sobre una interfaz virtual de tránsito asociada a un Direct Connect gateway y al transit gateway",
+        "Crear una interfaz virtual pública y establecer la VPN de sitio a sitio hacia las direcciones IP públicas de los endpoints del túnel",
+        "Establecer túneles GRE mediante Transit Gateway Connect y habilitar el cifrado en los dispositivos locales",
+        "Habilitar MACsec en una conexión hospedada de Direct Connect de 1 Gbps"
+      ],
+      "en": [
+        "Configure an AWS Site-to-Site VPN connection with private IP addresses over a transit virtual interface associated with a Direct Connect gateway and the transit gateway",
+        "Create a public virtual interface and establish the Site-to-Site VPN to the public IP addresses of the tunnel endpoints",
+        "Establish GRE tunnels through Transit Gateway Connect and enable encryption on the on-premises appliances",
+        "Enable MACsec on a 1 Gbps Direct Connect hosted connection"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "Las VPN de IP privada sobre una interfaz virtual de tránsito permiten cifrado IPsec sin usar direcciones públicas para los endpoints del túnel. Transit Gateway Connect con GRE no cifra el tráfico y MACsec no está disponible en conexiones hospedadas de 1 Gbps.",
+    "explanation": {
+      "es": "Las VPN de IP privada sobre una interfaz virtual de tránsito permiten cifrado IPsec sin usar direcciones públicas para los endpoints del túnel. Transit Gateway Connect con GRE no cifra el tráfico y MACsec no está disponible en conexiones hospedadas de 1 Gbps.",
+      "en": "Private IP VPNs over a transit virtual interface allow IPsec encryption without using public addresses for the tunnel endpoints. Transit Gateway Connect with GRE does not encrypt traffic, and MACsec is not available on 1 Gbps hosted connections."
+    },
     "source": "llm"
   },
   {
     "domainNumber": 4,
     "taskStatementNumber": "4.3",
-    "text": "Una aplicación interna requiere autenticación TLS mutua entre clientes y servidores que se ejecutan en instancias EC2, con certificados privados emitidos por una autoridad certificadora corporativa y rotación automatizada. ¿Qué solución cumple estos requisitos?",
-    "options": [
-      "Crear una jerarquía con AWS Private Certificate Authority y emitir certificados de servidor y de cliente que se instalen en las instancias EC2 y en los clientes",
-      "Solicitar certificados públicos en AWS Certificate Manager y exportarlos para instalarlos en las instancias EC2 y los clientes",
-      "Generar certificados autofirmados en cada instancia y distribuir las claves públicas mediante un bucket de Amazon S3",
-      "Usar claves simétricas de AWS KMS para autenticar mutuamente las conexiones TLS entre clientes y servidores"
-    ],
+    "text": {
+      "es": "Una aplicación interna requiere autenticación TLS mutua entre clientes y servidores que se ejecutan en instancias EC2, con certificados privados emitidos por una autoridad certificadora corporativa y rotación automatizada. ¿Qué solución cumple estos requisitos?",
+      "en": "An internal application requires mutual TLS authentication between clients and servers running on EC2 instances, with private certificates issued by a corporate certificate authority and automated rotation. Which solution meets these requirements?"
+    },
+    "options": {
+      "es": [
+        "Crear una jerarquía con AWS Private Certificate Authority y emitir certificados de servidor y de cliente que se instalen en las instancias EC2 y en los clientes",
+        "Solicitar certificados públicos en AWS Certificate Manager y exportarlos para instalarlos en las instancias EC2 y los clientes",
+        "Generar certificados autofirmados en cada instancia y distribuir las claves públicas mediante un bucket de Amazon S3",
+        "Usar claves simétricas de AWS KMS para autenticar mutuamente las conexiones TLS entre clientes y servidores"
+      ],
+      "en": [
+        "Create a hierarchy with AWS Private Certificate Authority and issue server and client certificates that are installed on the EC2 instances and on the clients",
+        "Request public certificates in AWS Certificate Manager and export them to install them on the EC2 instances and the clients",
+        "Generate self-signed certificates on each instance and distribute the public keys through an Amazon S3 bucket",
+        "Use symmetric AWS KMS keys to mutually authenticate the TLS connections between clients and servers"
+      ]
+    },
     "correct": [
       0
     ],
     "type": "single",
-    "explanation": "AWS Private CA emite certificados privados de servidor y de cliente para TLS mutuo y permite automatizar su ciclo de vida y renovación. Los certificados públicos de ACM no se pueden exportar para usarse en instancias EC2.",
+    "explanation": {
+      "es": "AWS Private CA emite certificados privados de servidor y de cliente para TLS mutuo y permite automatizar su ciclo de vida y renovación. Los certificados públicos de ACM no se pueden exportar para usarse en instancias EC2.",
+      "en": "AWS Private CA issues private server and client certificates for mutual TLS and allows their lifecycle and renewal to be automated. Public ACM certificates cannot be exported for use on EC2 instances."
+    },
     "source": "llm"
   }
 ]

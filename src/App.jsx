@@ -7,14 +7,26 @@ import QuestionPanel from './components/QuestionPanel';
 import Sidebar from './components/Sidebar';
 import Result from './components/Result';
 import { ThemeContext } from './context/ThemeContext';
-import { translations } from './translations/es';
+import { useTranslations } from './context/LanguageContext';
 
+// Options may be a plain array (legacy, not yet translated) or a bilingual
+// { es: [...], en: [...] } object — shuffle once and apply the same
+// permutation to whichever shape is present.
 const shuffleQuestionOptions = (question) => {
-  const optionsWithIndices = question.options.map((opt, idx) => ({ option: opt, originalIdx: idx }));
-  const shuffled = shuffleUtil(optionsWithIndices);
-  const newOptions = shuffled.map(item => item.option);
-  const newCorrect = question.correct.map(correctIdx => shuffled.findIndex(item => item.originalIdx === correctIdx));
-  
+  const isBilingual = question.options && !Array.isArray(question.options);
+  const langs = isBilingual ? Object.keys(question.options) : null;
+  const length = isBilingual ? question.options[langs[0]].length : question.options.length;
+  const order = shuffleUtil(Array.from({ length }, (_, i) => i));
+
+  const newOptions = isBilingual
+    ? langs.reduce((acc, lang) => {
+        acc[lang] = order.map((i) => question.options[lang][i]);
+        return acc;
+      }, {})
+    : order.map((i) => question.options[i]);
+
+  const newCorrect = question.correct.map((correctIdx) => order.indexOf(correctIdx));
+
   return {
     ...question,
     options: newOptions,
@@ -24,6 +36,7 @@ const shuffleQuestionOptions = (question) => {
 
 const App = () => {
   const { isDarkMode } = useContext(ThemeContext);
+  const translations = useTranslations();
   const [view, setView] = useState('menu'); // 'menu', 'quiz'
   const [selectedCertification, setSelectedCertification] = useState(null);
   const [quizConfig, setQuizConfig] = useState(null);
@@ -96,7 +109,7 @@ const App = () => {
   const startQuiz = (certificationId, type, domainId = null) => {
     const certification = CERTIFICATIONS[certificationId];
     if (!certification) {
-      alert('Certification not found!');
+      alert(translations.menu.certificationNotFound);
       return;
     }
 
@@ -132,7 +145,7 @@ const App = () => {
 
     setQuestions(selected);
     if (!selected || selected.length === 0) {
-      alert(`No hay preguntas disponibles para el Dominio ${domainId}`);
+      alert(`${translations.menu.noQuestionsForDomain} ${domainId}`);
     }
     setQuizConfig({ type, domainId, immediateFeedback: type === 'domain', certificationId });
     setView('quiz');
@@ -150,7 +163,7 @@ const App = () => {
     try {
       startQuiz(certificationId, type, domainId);
     } catch (err) {
-      alert('Error al iniciar el examen: ' + (err && err.message));
+      alert(translations.menu.errorStartingExam + (err && err.message));
     }
   };
 

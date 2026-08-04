@@ -1,14 +1,18 @@
 import React, { useState, useContext } from 'react';
 import { X, Clock, ClipboardCheck, Moon, Sun } from 'lucide-react';
 import { ThemeContext } from '../context/ThemeContext';
-import { translations } from '../translations/es';
+import { useTranslations } from '../context/LanguageContext';
+import LanguageToggle from './LanguageToggle';
 
 const Header = ({ onBack, quizConfig, domains, timeLeft, formatTime, quizFinished, finishQuiz }) => {
   const [showAbandonDialog, setShowAbandonDialog] = useState(false);
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+  const translations = useTranslations();
 
   const domainMeta = domains?.find((d) => d.number === quizConfig?.domainId);
-  const domainTitle = domainMeta ? `Dominio ${domainMeta.number}: ${domainMeta.title}` : `Dominio ${quizConfig?.domainId}`;
+  const domainTitle = domainMeta
+    ? `${translations.menu.domainWord} ${domainMeta.number}: ${domainMeta.title}`
+    : `${translations.menu.domainWord} ${quizConfig?.domainId}`;
 
   const animationStyles = `
     @keyframes fadeIn {
@@ -51,6 +55,7 @@ const Header = ({ onBack, quizConfig, domains, timeLeft, formatTime, quizFinishe
       </div>
 
       <div className="flex items-center gap-6">
+        <LanguageToggle isDarkMode={isDarkMode} />
         <button
           onClick={() => toggleTheme()}
           className={`p-2 rounded-lg transition-colors ${isDarkMode ? 'glass text-slate-200 hover:border-[#00C9DB]/50' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}

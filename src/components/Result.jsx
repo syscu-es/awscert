@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import { Trophy, Share2 } from 'lucide-react';
 import { ThemeContext } from '../context/ThemeContext';
-import { translations } from '../translations/es';
+import { useTranslations } from '../context/LanguageContext';
 import html2canvas from 'html2canvas';
 
 const Result = ({ score, onRetry, onBack }) => {
   const { isDarkMode } = useContext(ThemeContext);
+  const translations = useTranslations();
 
   // Function to share result on LinkedIn
   const shareOnLinkedIn = async () => {
@@ -30,7 +31,7 @@ const Result = ({ score, onRetry, onBack }) => {
           position: relative;
           overflow: hidden;
         ">
-          <div style="position: absolute; top: 15px; left: 15px; font-size: 14px; color: ${isDarkMode ? '#94a3b8' : '#64748b'};">AWS Certification Prep</div>
+          <div style="position: absolute; top: 15px; left: 15px; font-size: 14px; color: ${isDarkMode ? '#94a3b8' : '#64748b'};">${translations.result.shareCardBrand}</div>
           <div style="margin-bottom: 20px;">
             <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: ${score >= 700 ? (isDarkMode ? '#10b981' : '#059669') : (isDarkMode ? '#ef4444' : '#dc2626')}; display: block;">
               <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="${score >= 700 ? (isDarkMode ? '#10b981' : '#059669') : (isDarkMode ? '#ef4444' : '#dc2626')}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="${score >= 700 ? (isDarkMode ? '#10b981' : '#059669') : (isDarkMode ? '#ef4444' : '#dc2626')}"/>
@@ -49,7 +50,7 @@ const Result = ({ score, onRetry, onBack }) => {
               <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; color: ${isDarkMode ? '#94a3b8' : '#64748b'}">${translations.result.minimumToPass}</div>
             </div>
           </div>
-          <p style="font-size: 16px; margin-top: 20px; color: ${isDarkMode ? '#94a3b8' : '#64748b'}; font-style: italic;">¡Prepárate para tu próximo examen de certificación gratuitamente!</p>
+          <p style="font-size: 16px; margin-top: 20px; color: ${isDarkMode ? '#94a3b8' : '#64748b'}; font-style: italic;">${translations.result.shareCardFooter}</p>
           <div style="position: absolute; bottom: 15px; right: 15px; font-size: 12px; color: ${isDarkMode ? '#64748b' : '#94a3b8'};">awscert.syscu.es</div>
         </div>
       `;
@@ -77,8 +78,8 @@ const Result = ({ score, onRetry, onBack }) => {
       document.body.removeChild(tempDiv);
 
       // Create the LinkedIn share URL with pre-filled content
-      const title = encodeURIComponent(`¡Logro obtenido! He conseguido ${score} puntos en el examen de certificación AWS.`);
-      const summary = encodeURIComponent(`Me he preparado usando la herramienta gratuita de práctica de exámenes de AWS Certification Prep. ¡Comparto mi resultado y animo a otros a prepararse para sus certificaciones AWS!`);
+      const title = encodeURIComponent(translations.result.shareLinkedInTitle.replace('{score}', score));
+      const summary = encodeURIComponent(translations.result.shareLinkedInSummary);
       const url = encodeURIComponent('https://awscert.syscu.es');
 
       const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}&title=${title}&summary=${summary}&source=AWS%20Certification%20Prep`;
@@ -93,10 +94,10 @@ const Result = ({ score, onRetry, onBack }) => {
       window.open(linkedInUrl, '_blank');
 
       // Show a message to the user with clear instructions
-      alert(`¡Tu imagen de resultados se ha descargado!\n\nAhora puedes:\n1. Abrir LinkedIn en una nueva pestaña\n2. Crear una nueva publicación\n3. Pegar la imagen que se descargó\n4. Agregar el texto: "¡Acabo de obtener ${score} puntos en el examen de certificación AWS! Me preparé usando la herramienta gratuita de práctica de exámenes de AWS Certification Prep. ¡Prepárate para tu próximo examen de certificación gratuitamente en https://awscert.syscu.es!"`);
+      alert(translations.result.shareAlert.replace('{score}', score));
     } catch (error) {
       console.error('Error generating image:', error);
-      alert('Hubo un error al generar la imagen. Por favor, inténtalo de nuevo.');
+      alert(translations.result.shareError);
     }
   };
 
@@ -146,10 +147,10 @@ const Result = ({ score, onRetry, onBack }) => {
           className="flex items-center justify-center gap-2 p-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-colors w-full max-w-xs mx-auto"
         >
           <Share2 className="w-5 h-5" />
-          Compartir en LinkedIn
+          {translations.result.shareOnLinkedIn}
         </button>
         <p className="text-sm mt-2 text-slate-500 dark:text-slate-400">
-          Descarga una imagen de tu resultado para compartir en LinkedIn
+          {translations.result.shareDescription}
         </p>
       </div>
     </div>
