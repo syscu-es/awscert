@@ -1,0 +1,388 @@
+{
+  "code": "SOA-C03",
+  "slug": "sysops-administrator-associate-03",
+  "name": "AWS Certified CloudOps Engineer - Associate",
+  "level": "associate",
+  "examGuideUrl": "https://docs.aws.amazon.com/aws-certification/latest/sysops-administrator-associate-03/sysops-administrator-associate-03.md",
+  "scrapedAt": "2026-08-04T15:42:30.491Z",
+  "domains": [
+    {
+      "number": 1,
+      "title": "Monitoring, Logging, Analysis, Remediation, and Performance Optimization",
+      "weightPct": 22,
+      "taskStatements": [
+        {
+          "number": "1.1",
+          "text": "Implement metrics, alarms, and filters by using AWS monitoring and logging services.",
+          "knowledge": [],
+          "skills": [
+            "Use AWS services (for example, Amazon CloudWatch, AWS CloudTrail, Amazon Managed Service for Prometheus) to configure monitoring and logging for workloads (for example, serverless, compute, AI).",
+            "Configure and manage the CloudWatch agent to collect metrics and logs from EC2 instances, Amazon ECS clusters, or Amazon EKS clusters.",
+            "Configure, identify, and troubleshoot CloudWatch alarms that can invoke AWS services directly or through Amazon EventBridge (for example, by creating composite alarms and identifying their invokable actions).",
+            "Create, implement, and manage customizable and shareable CloudWatch dashboards that display metrics and alarms for AWS resources across multiple accounts and AWS Regions.",
+            "Configure AWS services to send notifications to Amazon SNS and to invoke alarms that send notifications to Amazon SNS."
+          ]
+        },
+        {
+          "number": "1.2",
+          "text": "Identify and remediate issues by using monitoring and availability metrics.",
+          "knowledge": [],
+          "skills": [
+            "Analyze performance metrics and automate remediation strategies by using AWS services and functionality (for example, CloudWatch, Lambda, AWS Systems Manager, CloudTrail, Kiro, AWS DevOps Agent).",
+            "Use EventBridge to route, enrich, and deliver events, and troubleshoot any issues with event bus rules.",
+            "Create or run custom and predefined Systems Manager Automation runbooks (for example, by using AWS SDKs or custom scripts) to automate tasks and streamline processes on AWS."
+          ]
+        },
+        {
+          "number": "1.3",
+          "text": "Implement performance optimization strategies for compute, storage, and database resources.",
+          "knowledge": [],
+          "skills": [
+            "Optimize compute resources and remediate performance problems by using performance metrics, resource tags, and AWS tools.",
+            "Analyze Amazon EBS performance metrics, troubleshoot issues, and optimize volume types to improve performance and reduce cost.",
+            "Implement and optimize S3 performance strategies (for example, AWS DataSync, S3 Transfer Acceleration, multipart uploads, S3 Lifecycle policies) to enhance data transfer, storage efficiency, and access patterns.",
+            "Evaluate and select shared storage solutions (for example, Amazon EFS, Amazon FSx, Amazon S3 Files), and optimize the solutions (for example, EFS lifecycle policies) for specific use cases and requirements.",
+            "Monitor Amazon RDS metrics (for example, Amazon RDS Performance Insights, CloudWatch alarms) and modify configurations to increase performance efficiency (for example, Performance Insights proactive recommendations, RDS Proxy).",
+            "Implement, monitor, and optimize EC2 instances and their associated storage and networking capabilities (for example, EC2 placement groups)."
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Reliability and Business Continuity",
+      "weightPct": 22,
+      "taskStatements": [
+        {
+          "number": "2.1",
+          "text": "Implement scalability and elasticity.",
+          "knowledge": [],
+          "skills": [
+            "Configure and manage scaling mechanisms in compute environments.",
+            "Implement caching by using AWS services to enhance dynamic scalability (for example, Amazon CloudFront, Amazon ElastiCache).",
+            "Configure and manage scaling in AWS managed databases (for example, Amazon RDS, DynamoDB)."
+          ]
+        },
+        {
+          "number": "2.2",
+          "text": "Implement highly available and resilient environments.",
+          "knowledge": [],
+          "skills": [
+            "Configure and troubleshoot Elastic Load Balancing (ELB) and Amazon Route 53 health checks.",
+            "Configure fault-tolerant systems (for example, Multi-AZ deployments)."
+          ]
+        },
+        {
+          "number": "2.3",
+          "text": "Implement backup and restore strategies.",
+          "knowledge": [],
+          "skills": [
+            "Automate snapshots and backups for AWS resources (for example, EC2 instances, RDS DB instances, EBS volumes, S3 buckets, DynamoDB tables) by using AWS services (for example, AWS Backup).",
+            "Use various methods to restore databases (for example, point-in-time restore) to meet recovery time objective (RTO), recovery point objective (RPO), and cost requirements.",
+            "Implement versioning for storage services (for example, Amazon S3, Amazon FSx).",
+            "Follow disaster recovery procedures and best practices (for example, backup and restore, pilot light, warm standby, active/active)."
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Deployment, Provisioning, and Automation",
+      "weightPct": 22,
+      "taskStatements": [
+        {
+          "number": "3.1",
+          "text": "Provision and maintain cloud resources.",
+          "knowledge": [],
+          "skills": [
+            "Create and manage AMIs and container images (for example, EC2 Image Builder).",
+            "Create and manage AWS resources by using CloudFormation and the AWS CDK.",
+            "Identify and remediate deployment issues (for example, subnet sizing issues, CloudFormation errors, permissions issues).",
+            "Provision and share resources across multiple Regions and accounts (for example, AWS Resource Access Manager [AWS RAM], CloudFormation StackSets).",
+            "Implement deployment strategies and services.",
+            "Use and manage third-party tools to automate resource deployment (for example, Terraform, Git)."
+          ]
+        },
+        {
+          "number": "3.2",
+          "text": "Automate the management of existing resources.",
+          "knowledge": [],
+          "skills": [
+            "Use AWS services to automate operational processes (for example, Systems Manager).",
+            "Implement event-driven automation by using AWS services and features (for example, Lambda, S3 Event Notifications, EventBridge, AWS DevOps Agent)."
+          ]
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Security and Compliance",
+      "weightPct": 16,
+      "taskStatements": [
+        {
+          "number": "4.1",
+          "text": "Implement and manage security and compliance tools and policies.",
+          "knowledge": [],
+          "skills": [
+            "Implement IAM features (for example, password policies, multi-factor authentication [MFA], roles, federated identity, resource policies, policy conditions).",
+            "Troubleshoot and audit access issues by using AWS tools (for example, CloudTrail, IAM Access Analyzer, IAM policy simulator).",
+            "Implement multi-account strategies securely (for example, AWS Organizations, service control policies, IAM Identity Center).",
+            "Implement remediation based on the results of AWS Trusted Advisor security checks.",
+            "Enforce compliance requirements and continuous monitoring (for example, Region and service selections, AWS Config conformance packs)."
+          ]
+        },
+        {
+          "number": "4.2",
+          "text": "Implement strategies to protect data and infrastructure.",
+          "knowledge": [],
+          "skills": [
+            "Implement and enforce a data classification scheme.",
+            "Implement, configure, and troubleshoot encryption at rest (for example, AWS KMS).",
+            "Implement, configure, and troubleshoot encryption in transit (for example, AWS Certificate Manager [ACM]).",
+            "Securely store secrets by using AWS services.",
+            "Configure reports and remediate findings from AWS services (for example, AWS Security Hub, Amazon GuardDuty, AWS Config, Amazon Inspector, AWS Security Agent)."
+          ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Networking and Content Delivery",
+      "weightPct": 18,
+      "taskStatements": [
+        {
+          "number": "5.1",
+          "text": "Implement and optimize networking features and connectivity.",
+          "knowledge": [],
+          "skills": [
+            "Configure a VPC (for example, subnets, route tables, network ACLs, security groups, NAT gateways, internet gateway, egress-only internet gateway).",
+            "Configure private networking connectivity (for example, VPC endpoints, AWS PrivateLink, VPC peering).",
+            "Audit AWS network protection services (for example, Route 53 Resolver DNS Firewall, AWS WAF, AWS Shield, AWS Network Firewall) in a single account.",
+            "Optimize the cost of network architectures."
+          ]
+        },
+        {
+          "number": "5.2",
+          "text": "Configure domains, DNS services, and content delivery.",
+          "knowledge": [],
+          "skills": [
+            "Configure DNS (for example, Route 53 Resolver).",
+            "Implement Route 53 routing policies, configurations, and query logging.",
+            "Configure content and service distribution (for example, CloudFront, AWS Global Accelerator)."
+          ]
+        },
+        {
+          "number": "5.3",
+          "text": "Troubleshoot network connectivity issues.",
+          "knowledge": [],
+          "skills": [
+            "Troubleshoot VPC configurations (for example, subnets, route tables, network ACLs, security groups, transit gateways, NAT gateways).",
+            "Collect and interpret networking logs to troubleshoot issues (for example, VPC flow logs, ELB access logs, AWS WAF web ACL logs, CloudFront logs, container logs).",
+            "Identify and remediate CloudFront caching issues.",
+            "Identify and troubleshoot hybrid connectivity issues and private connectivity issues.",
+            "Configure and analyze CloudWatch network monitoring services."
+          ]
+        }
+      ]
+    }
+  ],
+  "inScopeServices": {
+    "Analytics": [
+      "Amazon Athena",
+      "Amazon Data Firehose"
+    ],
+    "Application Integration": [
+      "Amazon EventBridge",
+      "Amazon SNS",
+      "Amazon SQS",
+      "AWS Step Functions"
+    ],
+    "Business Applications": [
+      "Amazon SES"
+    ],
+    "Cloud Financial Management": [
+      "AWS Cost and Usage Reports",
+      "AWS Cost Explorer",
+      "Savings Plans"
+    ],
+    "Compute": [
+      "Amazon EC2",
+      "Amazon EC2 Image Builder",
+      "AWS Lambda"
+    ],
+    "Containers": [
+      "Amazon ECR",
+      "Amazon ECS",
+      "Amazon EKS"
+    ],
+    "Database": [
+      "Amazon Aurora",
+      "Amazon Aurora Serverless v2",
+      "Amazon DynamoDB",
+      "Amazon DynamoDB Accelerator (DAX)",
+      "Amazon ElastiCache",
+      "Amazon RDS",
+      "Amazon RDS Proxy"
+    ],
+    "Developer Tools": [
+      "AWS X-Ray",
+      "Kiro"
+    ],
+    "Machine Learning and Artificial Intelligence": [
+      "Amazon Bedrock"
+    ],
+    "Management and Governance": [
+      "AWS Auto Scaling",
+      "AWS CDK",
+      "AWS CloudFormation",
+      "AWS CloudTrail",
+      "Amazon CloudWatch",
+      "AWS Compute Optimizer",
+      "AWS Config",
+      "AWS Control Tower",
+      "AWS DevOps Agent",
+      "AWS Health Dashboard",
+      "Amazon Managed Grafana",
+      "AWS Managed Service for Prometheus",
+      "AWS Organizations",
+      "AWS Resource Access Manager (AWS RAM)",
+      "AWS Service Catalog",
+      "Service control policies (SCPs)",
+      "AWS Systems Manager",
+      "AWS Trusted Advisor",
+      "Amazon VPC IP Address Manager (IPAM)"
+    ],
+    "Migration and Transfer": [
+      "AWS DataSync"
+    ],
+    "Network and Content Delivery": [
+      "Amazon Application Recovery Controller",
+      "AWS Client VPN",
+      "Amazon CloudFront",
+      "Elastic IP addresses",
+      "AWS Global Accelerator",
+      "AWS PrivateLink",
+      "Amazon Route 53",
+      "Amazon Route 53 Resolver DNS Firewall",
+      "AWS Site-to-Site VPN",
+      "AWS Transit Gateway",
+      "Amazon VPC",
+      "VPC endpoints",
+      "VPC Flow Logs",
+      "VPC peering",
+      "VPC Reachability Analyzer"
+    ],
+    "Security, Identity, and Compliance": [
+      "AWS Certificate Manager (ACM)",
+      "Amazon EC2 security groups",
+      "Egress-only internet gateways",
+      "Elastic Load Balancing (ELB)",
+      "Amazon GuardDuty",
+      "AWS IAM Access Analyzer",
+      "AWS IAM Identity Center",
+      "IAM",
+      "Amazon Inspector",
+      "Internet gateways",
+      "AWS KMS",
+      "Amazon Macie",
+      "AWS Network Firewall",
+      "NAT gateways",
+      "Network ACLs",
+      "AWS Secrets Manager",
+      "AWS Security Agent",
+      "AWS Security Hub",
+      "AWS Shield",
+      "AWS WAF"
+    ],
+    "Storage": [
+      "AWS Backup",
+      "Amazon EBS",
+      "Amazon EFS",
+      "Amazon FSx",
+      "Amazon S3",
+      "AWS Storage Gateway"
+    ]
+  },
+  "outOfScopeServices": {
+    "Analytics": [
+      "AWS Clean Rooms",
+      "AWS Data Exchange",
+      "Amazon EMR",
+      "Amazon FinSpace",
+      "Amazon Managed Streaming for Apache Kafka (Amazon MSK)"
+    ],
+    "Application Integration": [
+      "Amazon AppFlow",
+      "Amazon Managed Workflows for Apache Airflow (Amazon MWAA)",
+      "Amazon Simple Workflow Service (Amazon SWF)"
+    ],
+    "Blockchain": [
+      "Amazon Managed Blockchain (AMB)"
+    ],
+    "Business Applications": [
+      "AWS AppFabric",
+      "Amazon Chime",
+      "Amazon Connect",
+      "AWS End User Messaging SMS",
+      "Amazon One Enterprise",
+      "Amazon Pinpoint",
+      "AWS Supply Chain",
+      "Amazon WorkDocs",
+      "Amazon WorkMail"
+    ],
+    "Compute": [
+      "Amazon Lightsail",
+      "AWS Nitro Enclaves",
+      "AWS Parallel Computing Service",
+      "AWS SimSpace Weaver"
+    ],
+    "Database": [
+      "Amazon Neptune",
+      "Amazon Timestream"
+    ],
+    "Developer Tools": [
+      "AWS AppConfig",
+      "AWS App Studio"
+    ],
+    "End User Computing": [
+      "Amazon WorkSpaces applications",
+      "Amazon WorkSpaces"
+    ],
+    "Frontend Web and Mobile": [
+      "AWS Device Farm",
+      "Amazon Location Service"
+    ],
+    "Machine Learning and Artificial Intelligence": [
+      "Amazon CodeGuru",
+      "Amazon Comprehend",
+      "AWS Deep Learning AMIs (DLAMI)",
+      "AWS HealthLake",
+      "AWS HealthOmics",
+      "Amazon Lex",
+      "Amazon Polly",
+      "Amazon Rekognition",
+      "Amazon Textract",
+      "Amazon Transcribe",
+      "Amazon Translate"
+    ],
+    "Migration and Transfer": [
+      "AWS Application Discovery Service",
+      "AWS Application Migration Service",
+      "AWS Migration Hub",
+      "AWS Transfer Family"
+    ],
+    "Network and Content Delivery": [
+      "AWS App Mesh",
+      "AWS Cloud WAN"
+    ],
+    "Security, Identity, and Compliance": [
+      "AWS CloudHSM",
+      "AWS Payment Cryptography",
+      "Amazon Security Lake",
+      "AWS Signer"
+    ],
+    "Storage": [
+      "Amazon FSx for OpenZFS"
+    ]
+  }
+}

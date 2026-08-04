@@ -1,0 +1,914 @@
+[
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.1",
+    "text": "Una aseguradora quiere incorporar generación automática de resúmenes de siniestros con IA generativa. Antes de comprometer presupuesto para un despliegue a gran escala, el equipo de arquitectura debe demostrar viabilidad técnica, características de latencia y valor de negocio. ¿Cuál es el enfoque MÁS apropiado?",
+    "options": [
+      "Construir una prueba de concepto técnica en Amazon Bedrock con modelos bajo demanda y medir calidad, latencia y costo por solicitud usando datos representativos de siniestros.",
+      "Adquirir throughput provisionado en Amazon Bedrock para el modelo más grande disponible y ejecutar de inmediato el volumen completo de producción.",
+      "Realizar un ajuste fino completo de un modelo base en Amazon SageMaker AI antes de evaluar cualquier alternativa de integración.",
+      "Desplegar un modelo de código abierto en instancias Amazon EC2 con GPU administradas por el equipo para tener control total desde el inicio."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Una prueba de concepto con modelos bajo demanda en Amazon Bedrock valida viabilidad, rendimiento y valor de negocio con inversión mínima y sin compromisos de capacidad. Las demás opciones asumen costos y esfuerzo operativo antes de validar la hipótesis.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.1",
+    "text": "Una organización tiene cinco unidades de negocio que implementan casos de uso de IA generativa de forma independiente, con resultados inconsistentes en seguridad, observabilidad y control de costos. El arquitecto principal debe establecer componentes técnicos estandarizados y reutilizables. ¿Cuál es la acción MÁS efectiva?",
+    "options": [
+      "Evaluar cada carga de trabajo con la AWS Well-Architected Tool y el Generative AI Lens, y publicar los patrones aprobados como productos reutilizables en AWS Service Catalog.",
+      "Exigir que las cinco unidades usen el mismo modelo base para todos los casos de uso, independientemente del requisito funcional.",
+      "Centralizar todas las invocaciones en una única función AWS Lambda compartida por las cinco unidades de negocio.",
+      "Documentar recomendaciones en una wiki interna y revisarlas en una auditoría anual de arquitectura."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "El Generative AI Lens de la AWS Well-Architected Tool aporta el marco de evaluación consistente, y AWS Service Catalog convierte los patrones aprobados en componentes desplegables y reutilizables. Estandarizar el modelo o centralizar el cómputo no resuelve la inconsistencia de prácticas.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.1",
+    "text": "Un despacho jurídico necesita una solución que responda preguntas sobre un corpus de 500.000 documentos internos que cambian a diario. Las respuestas deben citar el documento de origen y el contenido no puede salir de la Región de AWS donde reside. ¿Qué diseño arquitectónico cumple MEJOR los requisitos?",
+    "options": [
+      "Generación aumentada por recuperación con Amazon Bedrock Knowledge Bases sobre Amazon S3, con sincronización incremental y devolución de citas de origen.",
+      "Ajuste fino diario del modelo base con los documentos nuevos para que el conocimiento quede incorporado en los pesos.",
+      "Insertar el corpus completo en el prompt aprovechando un modelo con ventana de contexto extendida.",
+      "Preentrenamiento continuo mensual sobre el corpus completo y almacenamiento de los pesos resultantes en Amazon S3."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "La recuperación aumentada permite reflejar cambios diarios mediante sincronización incremental y devolver atribución de origen, algo que el ajuste fino y el preentrenamiento no ofrecen. Insertar 500.000 documentos en el prompt es inviable por límites de contexto y costo.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.2",
+    "text": "Un equipo de plataforma debe permitir que las aplicaciones cambien de modelo base y de proveedor sin modificar ni redesplegar el código. Los cambios deben aplicarse de forma gradual y poder revertirse rápidamente. ¿Qué enfoque cumple los requisitos con el MENOR esfuerzo operativo?",
+    "options": [
+      "Exponer las invocaciones a través de Amazon API Gateway y AWS Lambda, y almacenar el identificador del modelo y sus parámetros de inferencia en AWS AppConfig con despliegues graduales.",
+      "Codificar el identificador del modelo en variables de entorno de la función Lambda y redesplegar la función en cada cambio.",
+      "Mantener una rama de código por modelo y usar AWS CodePipeline para promover la rama correspondiente a producción.",
+      "Crear una función Lambda distinta por modelo y actualizar los registros de Amazon Route 53 para dirigir el tráfico."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "AWS AppConfig externaliza la configuración del modelo y admite despliegues graduales con reversión automática ante alarmas, sin cambios de código. Las otras opciones requieren redespliegue o duplicación de artefactos para cada modelo.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.2",
+    "text": "Una aplicación de IA generativa de misión crítica depende de un modelo base que solo está disponible en un subconjunto de Regiones de AWS. El equipo debe mantener la operación continua durante interrupciones del servicio y eventos de limitación. ¿Qué DOS acciones debe implementar el equipo? (Seleccione DOS respuestas.)",
+    "options": [
+      "Habilitar la inferencia entre Regiones de Amazon Bedrock para distribuir automáticamente las solicitudes hacia Regiones alternativas con capacidad disponible.",
+      "Implementar un patrón de cortacircuitos con AWS Step Functions que derive a un modelo alternativo o a una respuesta degradada cuando se superen los umbrales de error.",
+      "Aumentar el tiempo de espera de la función AWS Lambda al máximo permitido para absorber las interrupciones del servicio.",
+      "Almacenar las solicitudes fallidas en Amazon S3 y reprocesarlas de forma manual al día siguiente.",
+      "Migrar toda la carga de trabajo a un punto de enlace de Amazon SageMaker AI desplegado en una sola zona de disponibilidad."
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "La inferencia entre Regiones aumenta la disponibilidad de modelos con cobertura regional limitada, y el cortacircuitos con degradación controlada evita que los fallos se propaguen al usuario. Ampliar tiempos de espera, reprocesar manualmente o concentrar el despliegue en una zona de disponibilidad no aportan continuidad operativa.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.2",
+    "text": "Un equipo mantiene varias variantes de un modelo base adaptadas por dominio mediante adaptación de rango bajo (LoRA). Debe versionar las variantes, promoverlas a producción con una canalización automatizada y revertir rápidamente si la calidad se degrada. ¿Qué enfoque cumple MEJOR estos requisitos?",
+    "options": [
+      "Registrar cada adaptador como una versión de paquete de modelo en Amazon SageMaker Model Registry y usar estados de aprobación con despliegues azul/verde para promover y revertir.",
+      "Guardar los pesos de cada adaptador en Amazon S3 con nombres que incluyan la fecha y reemplazar el objeto en producción en cada actualización.",
+      "Fusionar todos los adaptadores en un único modelo monolítico para simplificar el ciclo de vida del despliegue.",
+      "Mantener cada adaptador en una cuenta de AWS distinta y cambiar de cuenta cuando se requiera una reversión."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "SageMaker Model Registry aporta versionado, linaje y estados de aprobación que la canalización puede consumir, y el despliegue azul/verde permite reversión inmediata. Reemplazar objetos en S3 o fusionar adaptadores elimina la trazabilidad y la capacidad de revertir.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.3",
+    "text": "Una canalización ingiere miles de documentos diarios que alimentan una base de conocimiento para modelos base. El equipo necesita aplicar reglas de calidad declarativas de completitud, unicidad y formato antes de la vectorización, y publicar métricas para alertar cuando la calidad se degrade. ¿Qué solución requiere el MENOR esfuerzo de desarrollo?",
+    "options": [
+      "Definir conjuntos de reglas de AWS Glue Data Quality dentro del trabajo de ETL y publicar los resultados como métricas de Amazon CloudWatch para las alarmas.",
+      "Escribir funciones AWS Lambda personalizadas que implementen cada regla y registrar los resultados en Amazon DynamoDB.",
+      "Usar Amazon Comprehend para clasificar los documentos y descartar aquellos cuya puntuación de confianza sea baja.",
+      "Validar los datos de forma manual con Amazon SageMaker Data Wrangler antes de cada ejecución de la canalización."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "AWS Glue Data Quality permite declarar reglas sin escribir código de validación y emite métricas consumibles por CloudWatch para alertar sobre degradación. Las alternativas implican desarrollo personalizado, no evalúan calidad o no son automatizables.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.3",
+    "text": "Una empresa de centro de contacto necesita procesar grabaciones de llamadas y capturas de pantalla de tickets para que un modelo base genere resúmenes unificados. Las grabaciones deben convertirse a texto con marcas de tiempo y separación de interlocutores. ¿Qué canalización de procesamiento es la MÁS apropiada?",
+    "options": [
+      "Transcribir el audio con Amazon Transcribe usando diarización de interlocutores, extraer el texto de las imágenes con Amazon Textract y enviar el contenido normalizado a un modelo de Amazon Bedrock.",
+      "Enviar los archivos de audio sin procesar directamente a un modelo de texto de Amazon Bedrock mediante la API Converse.",
+      "Usar Amazon Rekognition para transcribir el audio y Amazon Polly para normalizar el contenido de las imágenes.",
+      "Cargar el audio y las imágenes en Amazon S3 y depender de un trabajo de Amazon SageMaker Processing para inferir el texto sin usar servicios especializados."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Amazon Transcribe aporta la transcripción con marcas de tiempo y diarización, y Amazon Textract extrae texto de las capturas antes de la inferencia. Los modelos de texto no consumen audio sin procesar, y Rekognition y Polly no realizan transcripción de voz a texto.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.3",
+    "text": "Una aplicación de chat multiturno debe enviar el historial de la conversación a distintos modelos base de Amazon Bedrock sin reescribir la lógica de formato para cada familia de modelos. ¿Cuál es el enfoque MÁS eficiente?",
+    "options": [
+      "Usar la API Converse de Amazon Bedrock, que normaliza la estructura de mensajes con roles y bloques de contenido para los modelos compatibles.",
+      "Construir el prompt con las etiquetas específicas de cada proveedor mediante sentencias condicionales en el código de la aplicación.",
+      "Almacenar el historial en Amazon DynamoDB y enviarlo como una única cadena de texto plano sin distinción de roles.",
+      "Reformatear el historial de la conversación con Amazon Comprehend antes de cada invocación del modelo."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "La API Converse ofrece una interfaz unificada de mensajes con roles, lo que evita mantener lógica de formato por proveedor. Las demás opciones aumentan el acoplamiento o pierden la estructura conversacional que el modelo necesita.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.4",
+    "text": "Un almacén vectorial en Amazon OpenSearch Service contiene 800 millones de embeddings que abarcan seis dominios de negocio. La latencia p99 de las consultas semánticas crece de forma sostenida y las búsquedas rara vez necesitan cruzar dominios. ¿Qué acción mejora MÁS el rendimiento de la búsqueda a escala?",
+    "options": [
+      "Separar los embeddings en índices especializados por dominio, con una estrategia de particiones dimensionada por índice, y enrutar cada consulta al índice correspondiente.",
+      "Aumentar el número de réplicas del índice único existente para acelerar las escrituras de indexación.",
+      "Sustituir la búsqueda k-NN aproximada por búsqueda exacta de fuerza bruta sobre el índice completo.",
+      "Trasladar los embeddings a Amazon DynamoDB y calcular la similitud del coseno en el código de la aplicación."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Los índices múltiples por dominio reducen el espacio de búsqueda por consulta y permiten dimensionar las particiones según el volumen real de cada dominio. Más réplicas no reducen la latencia de búsqueda vectorial, y la búsqueda exacta o el cálculo en la aplicación la empeoran.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.4",
+    "text": "Un equipo debe mejorar la precisión de recuperación de una base de conocimiento para que el modelo base pueda restringir los resultados por fecha de vigencia del documento y por unidad de negocio propietaria. ¿Qué DOS acciones debe realizar el equipo? (Seleccione DOS respuestas.)",
+    "options": [
+      "Adjuntar atributos personalizados como la fecha de vigencia y la unidad propietaria a los metadatos de cada objeto de Amazon S3 que se ingiere.",
+      "Indexar esos atributos como campos filtrables junto con los embeddings y aplicar filtros de metadatos en el momento de la consulta.",
+      "Concatenar la fecha y la unidad de negocio al final del texto de cada fragmento y confiar en la similitud semántica para filtrar.",
+      "Aumentar el tamaño de los fragmentos para que cada uno contenga el documento completo con todos sus encabezados.",
+      "Crear una base de conocimiento independiente para cada día del calendario en el que se publique un documento."
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "Capturar los atributos como metadatos en la ingesta e indexarlos como campos filtrables habilita el filtrado determinista en el momento de la consulta. La similitud semántica no garantiza filtros exactos por fecha o propietario, y las otras opciones degradan la recuperación o multiplican la administración.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.4",
+    "text": "Los documentos de origen de un almacén vectorial se actualizan continuamente en Amazon S3 y los usuarios reportan que el modelo base cita información obsoleta. El equipo necesita mantener el almacén actualizado sin volver a procesar todo el corpus. ¿Qué solución es la MÁS eficiente?",
+    "options": [
+      "Activar notificaciones de eventos de Amazon S3 hacia Amazon EventBridge para desencadenar una sincronización incremental que solo vuelva a incrustar los objetos creados, modificados o eliminados.",
+      "Programar una reconstrucción completa del índice vectorial cada noche durante la ventana de mantenimiento.",
+      "Aumentar el tiempo de vida de la caché de respuestas del modelo base para que las respuestas se mantengan consistentes.",
+      "Habilitar la replicación entre Regiones de Amazon S3 para que el índice vectorial detecte los cambios de forma automática."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "La detección de cambios basada en eventos de S3 permite sincronización incremental casi en tiempo real y evita el costo de reindexar el corpus completo. La reconstrucción nocturna mantiene una ventana de obsolescencia y la replicación no dispara reindexación.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.5",
+    "text": "Un corpus técnico consta de manuales extensos con capítulos, secciones y tablas anidadas. Con fragmentación de tamaño fijo, el modelo base recibe fragmentos que pierden el encabezado de su sección y produce respuestas imprecisas. ¿Qué estrategia de segmentación resuelve MEJOR el problema?",
+    "options": [
+      "Aplicar fragmentación jerárquica que conserve los encabezados de capítulo y sección como contexto asociado a cada fragmento hijo.",
+      "Reducir el tamaño fijo de los fragmentos a 100 tokens para aumentar la granularidad de la recuperación.",
+      "Eliminar la fragmentación y almacenar cada manual completo como un único vector.",
+      "Aumentar el solapamiento entre fragmentos consecutivos al 90 por ciento del tamaño del fragmento."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "La fragmentación jerárquica preserva la estructura del documento y adjunta el contexto de los encabezados al fragmento recuperado. Reducir el tamaño agrava la pérdida de contexto, un vector por manual destruye la precisión y un solapamiento extremo solo multiplica el costo de almacenamiento.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.5",
+    "text": "Los usuarios de una aplicación de recuperación aumentada informan que las consultas con códigos de producto exactos y números de pieza devuelven documentos irrelevantes, mientras que las preguntas conceptuales funcionan bien. ¿Qué combinación de técnicas mejora MÁS la relevancia?",
+    "options": [
+      "Implementar búsqueda híbrida que combine coincidencia léxica con búsqueda vectorial y aplicar un modelo de reordenamiento sobre los resultados fusionados.",
+      "Aumentar el valor de k en la búsqueda vectorial para devolver más resultados al modelo base.",
+      "Incrementar la temperatura del modelo base para que genere respuestas más variadas.",
+      "Volver a incrustar el corpus con un modelo de embeddings de mayor dimensionalidad y mantener solo la búsqueda vectorial."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "La búsqueda vectorial pura no captura coincidencias exactas de identificadores; la búsqueda híbrida añade la señal léxica y el reordenamiento eleva los pasajes realmente pertinentes. Ajustar k, la temperatura o la dimensionalidad no corrige la falta de coincidencia exacta.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.5",
+    "text": "Un equipo debe elegir un modelo de embeddings para un almacén vectorial de 200 millones de fragmentos, con un presupuesto de almacenamiento acotado y un requisito de latencia de recuperación inferior a 100 ms. La evaluación muestra que una variante de menor dimensionalidad conserva el 98 por ciento de la calidad de recuperación. ¿Qué decisión es la MÁS apropiada?",
+    "options": [
+      "Seleccionar la variante de menor dimensionalidad de Amazon Titan Text Embeddings, porque reduce el tamaño del índice y la latencia con una pérdida de calidad aceptable.",
+      "Seleccionar siempre la mayor dimensionalidad disponible, porque la calidad de recuperación es el único criterio relevante.",
+      "Usar un modelo generativo de texto en lugar de un modelo de embeddings para producir las representaciones vectoriales.",
+      "Generar embeddings con dos modelos distintos y almacenar ambos conjuntos de vectores en el mismo campo del índice."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "A escala profesional la selección de embeddings es una compensación medida entre dimensionalidad, costo de almacenamiento y latencia; una pérdida del 2 por ciento justifica el ahorro cuando existe un requisito duro de latencia. Los modelos generativos no producen embeddings y mezclar espacios vectoriales en un mismo campo invalida la similitud.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.6",
+    "text": "Una entidad financiera regulada debe garantizar que solo se usen en producción plantillas de prompts aprobadas, mantener su versionado y demostrar en una auditoría quién invocó cada plantilla y cuándo. ¿Qué solución cumple los requisitos con el MENOR esfuerzo operativo?",
+    "options": [
+      "Administrar plantillas parametrizadas y versionadas en Amazon Bedrock Prompt Management, referenciar únicamente versiones aprobadas desde la aplicación y auditar el acceso con AWS CloudTrail.",
+      "Almacenar las plantillas en un repositorio Git y permitir que cada equipo las copie dentro del código de su aplicación.",
+      "Guardar las plantillas en variables de entorno de AWS Lambda y registrar los cambios en Amazon CloudWatch Logs.",
+      "Incluir las plantillas en la imagen de contenedor de la aplicación y reconstruir la imagen en cada modificación."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Bedrock Prompt Management aporta plantillas parametrizadas, versiones y referencias estables, mientras CloudTrail registra el acceso para la evidencia de auditoría. Copiar plantillas en el código o en imágenes elimina el control centralizado de versiones aprobadas.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.6",
+    "text": "Un caso de uso requiere clasificar la intención de una solicitud, enrutarla a uno de tres prompts especializados según la clasificación y aplicar después un paso común de posprocesamiento. El equipo quiere minimizar el código personalizado y reutilizar componentes entre casos de uso. ¿Qué DOS acciones debe realizar el equipo? (Seleccione DOS respuestas.)",
+    "options": [
+      "Modelar la secuencia como un flujo de Amazon Bedrock Prompt Flows con nodos de condición que ramifiquen según la salida de la clasificación.",
+      "Definir cada prompt especializado como una plantilla versionada en Amazon Bedrock Prompt Management y referenciarla desde los nodos del flujo.",
+      "Concatenar las tres tareas en un único prompt extenso e indicar al modelo que decida internamente qué sección debe aplicar.",
+      "Implementar la ramificación con expresiones regulares dentro de una función AWS Lambda monolítica.",
+      "Crear una base de conocimiento de Amazon Bedrock independiente para cada intención posible."
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "Prompt Flows proporciona encadenamiento y ramificación condicional sin código, y Prompt Management aporta los componentes de prompt versionados y reutilizables que los nodos referencian. Un prompt monolítico o una ramificación con expresiones regulares reducen la observabilidad y la reutilización.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.6",
+    "text": "Una aplicación conversacional debe conservar el contexto entre turnos, reconocer la intención del usuario para decidir si se requiere una pregunta de aclaración y orquestar ese diálogo de aclaración. ¿Qué combinación de servicios es la MÁS adecuada?",
+    "options": [
+      "Amazon DynamoDB para el historial de la conversación, Amazon Comprehend para el reconocimiento de intención y AWS Step Functions para orquestar el flujo de aclaración.",
+      "Amazon S3 para el historial de la conversación, Amazon Macie para el reconocimiento de intención y Amazon SQS para el flujo de aclaración.",
+      "Amazon ElastiCache para el historial, Amazon Rekognition para la intención y Amazon EventBridge para el flujo de aclaración.",
+      "Amazon Neptune para el historial, Amazon Transcribe para la intención y AWS AppConfig para el flujo de aclaración."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "DynamoDB ofrece acceso de baja latencia por clave de sesión para el historial, Amazon Comprehend clasifica intención sobre texto y Step Functions orquesta el diálogo de aclaración con estado. Macie, Rekognition y Transcribe resuelven problemas distintos al reconocimiento de intención textual.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.1",
+    "text": "Un equipo expone herramientas a sus agentes mediante Model Context Protocol (MCP). Algunas herramientas son consultas sin estado de pocos milisegundos y otras requieren dependencias nativas grandes y conexiones persistentes de larga duración. ¿Qué DOS decisiones de implementación son las MÁS apropiadas? (Seleccione DOS respuestas.)",
+    "options": [
+      "Implementar los servidores MCP sin estado y de baja latencia como funciones de AWS Lambda.",
+      "Ejecutar los servidores MCP con dependencias pesadas y conexiones persistentes como servicios de larga duración en Amazon ECS.",
+      "Empaquetar todas las herramientas en un único servidor MCP monolítico desplegado en una instancia Amazon EC2 sin escalado.",
+      "Reemplazar MCP por llamadas directas del modelo a cada API sin definiciones de herramientas estandarizadas.",
+      "Almacenar el estado de las herramientas en variables globales de la función Lambda para reutilizarlo entre invocaciones de distintos usuarios."
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "Lambda encaja con servidores MCP sin estado y de vida corta, mientras ECS soporta procesos de larga duración con dependencias pesadas y conexiones persistentes. Un monolito sin escalado, el abandono de definiciones estandarizadas o compartir estado global entre usuarios introducen riesgos de escalabilidad y de aislamiento.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.1",
+    "text": "Un agente autónomo entra ocasionalmente en bucles de razonamiento y consume tokens de forma descontrolada al invocar herramientas de manera repetida. El equipo debe imponer límites deterministas sin depender del comportamiento del modelo. ¿Cuál es el enfoque MÁS efectivo?",
+    "options": [
+      "Orquestar el ciclo de razonamiento y acción con AWS Step Functions aplicando un número máximo de iteraciones, condiciones de parada y tiempos de espera explícitos.",
+      "Añadir al prompt del sistema una instrucción que indique al modelo no repetir llamadas a herramientas.",
+      "Reducir la temperatura del modelo a cero para eliminar los bucles de razonamiento.",
+      "Aumentar la cuota de tokens por minuto del modelo para que el bucle finalice en menos tiempo."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Los límites deben aplicarse en la capa de orquestación, donde el contador de iteraciones y los tiempos de espera son deterministas e independientes del modelo. Las instrucciones en el prompt y los parámetros de inferencia no garantizan la terminación del bucle.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.1",
+    "text": "Un flujo agéntico genera ajustes de facturación que, por política interna, requieren aprobación humana cuando el monto supera un umbral. La aprobación puede tardar horas y el proceso debe reanudarse exactamente donde se detuvo. ¿Qué diseño cumple los requisitos?",
+    "options": [
+      "Usar AWS Step Functions con una tarea de token de devolución de llamada que se complete cuando un revisor apruebe o rechace a través de Amazon API Gateway.",
+      "Mantener una función AWS Lambda en espera activa consultando el estado de la aprobación hasta que llegue la decisión.",
+      "Solicitar al modelo base que estime la decisión que tomaría el revisor humano y continuar el flujo sin intervención.",
+      "Almacenar la solicitud en Amazon SQS con un tiempo de espera de visibilidad de varias horas y reintentar hasta que aparezca la aprobación."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "El patrón de token de devolución de llamada de Step Functions pausa la ejecución sin consumir cómputo y la reanuda con el resultado de la revisión humana. La espera activa en Lambda excede los límites de ejecución y las otras opciones eliminan o degradan el control humano.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.2",
+    "text": "Una aplicación de IA generativa procesa un volumen constante y predecible de 4 millones de tokens de entrada por hora, con requisitos estrictos de latencia y sin tolerancia a la limitación del servicio. El equipo quiere reducir el costo unitario. ¿Qué modelo de consumo es el MÁS apropiado?",
+    "options": [
+      "Adquirir throughput provisionado en Amazon Bedrock dimensionado para la carga sostenida.",
+      "Mantener la invocación bajo demanda y aumentar el número de reintentos con retroceso exponencial.",
+      "Desplegar la aplicación en AWS Lambda con concurrencia provisionada para evitar la limitación del servicio del modelo.",
+      "Usar la inferencia por lotes de Amazon Bedrock para la totalidad de las solicitudes."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "El throughput provisionado reserva capacidad dedicada, lo que garantiza rendimiento estable y reduce el costo unitario en cargas sostenidas y predecibles. La concurrencia provisionada de Lambda no afecta las cuotas del modelo y la inferencia por lotes no cumple requisitos de latencia interactiva.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.2",
+    "text": "Un equipo debe autoalojar en Amazon SageMaker AI un modelo de lenguaje grande de código abierto de 70.000 millones de parámetros. Las primeras pruebas fallan por tiempos de espera al iniciar el contenedor y por memoria de GPU insuficiente. ¿Qué acción aborda MEJOR estas diferencias respecto a los despliegues de aprendizaje automático tradicionales?",
+    "options": [
+      "Usar un contenedor de inferencia para modelos grandes con paralelismo de tensores en una familia de instancias con GPU adecuada, y ampliar el tiempo de espera de descarga y arranque del modelo.",
+      "Reducir el tamaño del lote de inferencia a uno y desplegar en instancias optimizadas para cómputo sin GPU.",
+      "Compilar el modelo con Amazon SageMaker Neo y desplegarlo en un punto de enlace sin servidor.",
+      "Aumentar el número de instancias detrás del punto de enlace para que la memoria de GPU se agregue entre ellas."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Los modelos de lenguaje grandes requieren particionar los pesos entre GPU mediante paralelismo de tensores y tolerar tiempos de carga prolongados, lo que se configura en el contenedor de inferencia y en los tiempos de espera del punto de enlace. La memoria de GPU no se suma entre instancias y las instancias sin GPU no soportan esta carga.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.2",
+    "text": "Una plataforma de soporte recibe una mezcla de preguntas: el 80 por ciento son consultas rutinarias y el 20 por ciento requieren razonamiento complejo. El costo es elevado porque todas las solicitudes usan el modelo más capaz. ¿Qué enfoque reduce el costo manteniendo la calidad?",
+    "options": [
+      "Implementar cascada de modelos basada en API: atender primero con un modelo más pequeño y escalar al modelo más capaz solo cuando la validación de la respuesta o la confianza sean insuficientes.",
+      "Reducir la ventana de contexto utilizada por el modelo más capaz en todas las solicitudes.",
+      "Migrar todo el tráfico al modelo más pequeño y aceptar la degradación de calidad en las consultas complejas.",
+      "Habilitar throughput provisionado para el modelo más capaz con el fin de reducir el costo por token de todas las consultas."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "La cascada de modelos resuelve la mayoría del volumen con un modelo económico y reserva el modelo capaz para los casos que lo necesitan, preservando la calidad. Recortar contexto o migrar todo al modelo pequeño degrada resultados y el throughput provisionado no ayuda con tráfico heterogéneo.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.3",
+    "text": "Una empresa debe permitir que empleados de distintas áreas consuman modelos base desde una aplicación interna. Los usuarios se autentican en un proveedor de identidad corporativo y cada área solo puede acceder a los modelos y a las bases de conocimiento de su dominio. ¿Qué DOS acciones cumplen los requisitos? (Seleccione DOS respuestas.)",
+    "options": [
+      "Federar la identidad corporativa con AWS mediante IAM Identity Center y asumir roles de IAM diferenciados por área.",
+      "Aplicar políticas de IAM de mínimo privilegio que restrinjan las acciones de Amazon Bedrock a los ARN de modelos y bases de conocimiento autorizados para cada área.",
+      "Compartir un único conjunto de claves de acceso de IAM de larga duración entre todas las áreas y filtrar el acceso en el código de la aplicación.",
+      "Otorgar al rol de la aplicación una política administrada de acceso completo a Amazon Bedrock y registrar el uso con AWS CloudTrail.",
+      "Colocar AWS WAF delante de la aplicación para autorizar a los usuarios según el área a la que pertenecen."
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "La federación con IAM Identity Center vincula la identidad corporativa a roles de IAM y las políticas de mínimo privilegio por ARN imponen la segmentación de modelos y bases de conocimiento. Las credenciales compartidas, el acceso completo o AWS WAF no proporcionan autorización por identidad y recurso.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.3",
+    "text": "Un sistema ERP heredado y local debe desencadenar enriquecimiento con IA generativa cuando se crean pedidos, sin que el ERP dependa de la disponibilidad ni de la latencia del servicio de inferencia. ¿Qué patrón de integración es el MÁS adecuado?",
+    "options": [
+      "Publicar los eventos de creación de pedidos en Amazon EventBridge y procesarlos de forma asíncrona con destinos desacoplados que invoquen el modelo base.",
+      "Hacer que el ERP invoque de forma sincrónica la API del modelo base y espere la respuesta completa antes de confirmar el pedido.",
+      "Programar una consulta horaria desde AWS Lambda a la base de datos del ERP para detectar los pedidos nuevos.",
+      "Replicar la base de datos del ERP en Amazon Aurora y ejecutar disparadores de base de datos que llamen al modelo base."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Una arquitectura basada en eventos con EventBridge desacopla el ERP del servicio de inferencia y absorbe fallos y latencia mediante reintentos y colas de mensajes fallidos. La invocación sincrónica acopla la disponibilidad y el sondeo horario introduce retrasos innecesarios.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.3",
+    "text": "Una empresa con 30 equipos de desarrollo necesita un punto de consumo centralizado para modelos base que aplique cuotas por equipo, registre prompts y respuestas para auditoría y permita cambiar de modelo sin modificar las aplicaciones. Además, los componentes de IA generativa deben desplegarse con análisis de seguridad y capacidad de reversión. ¿Qué enfoque cumple MEJOR los requisitos?",
+    "options": [
+      "Construir una puerta de enlace de IA generativa con Amazon API Gateway y AWS Lambda como capa de abstracción centralizada, y desplegarla mediante AWS CodePipeline y AWS CodeBuild con pruebas automatizadas, análisis de seguridad y reversión.",
+      "Permitir que cada equipo invoque directamente Amazon Bedrock con sus propias credenciales y consolidar el consumo con AWS Cost Explorer.",
+      "Distribuir una biblioteca compartida que cada equipo debe compilar en su aplicación y actualizar de forma manual.",
+      "Desplegar un punto de enlace de Amazon SageMaker AI por equipo y controlar las cuotas con grupos de seguridad de Amazon VPC."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Una puerta de enlace centralizada concentra cuotas, registro de auditoría y abstracción del modelo, y la canalización de CI/CD aporta pruebas, análisis de seguridad y reversión. El acceso directo o una biblioteca distribuida dejan el control en cada equipo, y los grupos de seguridad no gestionan cuotas de uso.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.4",
+    "text": "Una aplicación web de chat debe mostrar la respuesta del modelo token por token para reducir la latencia percibida. El cliente es un navegador y la conexión debe permanecer abierta durante toda la generación. ¿Qué implementación es la MÁS apropiada?",
+    "options": [
+      "Invocar la API de streaming de Amazon Bedrock y entregar los fragmentos al navegador mediante una API de WebSocket de Amazon API Gateway.",
+      "Invocar la API sincrónica de Amazon Bedrock y hacer que el navegador consulte un objeto de Amazon S3 cada 500 ms.",
+      "Escribir la respuesta completa en Amazon DynamoDB y usar DynamoDB Streams como canal de entrega hacia el navegador.",
+      "Enviar la solicitud a Amazon SQS y notificar al navegador con Amazon SNS cuando la respuesta esté completa."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "La API de streaming de Bedrock entrega la respuesta de forma incremental y una API de WebSocket mantiene la conexión bidireccional con el navegador. Las demás opciones solo entregan la respuesta finalizada, por lo que no reducen la latencia percibida.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.4",
+    "text": "Durante los picos de tráfico, una aplicación recibe excepciones de limitación del servicio del modelo base y los usuarios ven errores. El equipo también necesita identificar en qué límite entre servicios se origina la latencia. ¿Qué combinación es la MÁS adecuada?",
+    "options": [
+      "Configurar reintentos con retroceso exponencial y jitter en el AWS SDK, aplicar planes de uso y limitación en Amazon API Gateway y habilitar el rastreo distribuido con AWS X-Ray.",
+      "Aumentar el tiempo de espera del cliente y desactivar los reintentos del SDK para no amplificar la carga sobre el servicio.",
+      "Reintentar de inmediato en un bucle cerrado y registrar cada error en Amazon CloudWatch Logs para su análisis posterior.",
+      "Reemplazar todas las invocaciones sincrónicas por inferencia por lotes y notificar los resultados por correo electrónico."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "El retroceso exponencial con jitter absorbe la limitación sin generar tormentas de reintentos, la limitación en API Gateway protege el sistema y X-Ray localiza la latencia entre servicios. Los reintentos inmediatos agravan la saturación y desactivarlos deja los errores expuestos al usuario.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.4",
+    "text": "Una aplicación debe dirigir cada solicitud al modelo base más adecuado según el idioma detectado, la longitud del contenido y el nivel de servicio del cliente. Las reglas de enrutamiento cambian con frecuencia y deben ser auditables. ¿Qué diseño es el MÁS apropiado?",
+    "options": [
+      "Implementar enrutamiento dinámico basado en contenido con una máquina de estados de AWS Step Functions, cuyas decisiones queden registradas en el historial de ejecución.",
+      "Codificar las reglas de enrutamiento con sentencias condicionales dentro del cliente móvil y de la aplicación web.",
+      "Crear una etapa distinta de Amazon API Gateway por modelo y pedir a los clientes que seleccionen la URL correcta.",
+      "Usar Amazon Route 53 con enrutamiento basado en latencia para seleccionar el modelo base de cada solicitud."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Step Functions permite expresar reglas de enrutamiento declarativas basadas en el contenido y deja un historial de ejecución auditable por solicitud. Codificar reglas en el cliente impide cambios rápidos y Route 53 enruta por red, no por contenido.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.5",
+    "text": "Un equipo necesita diagnosticar respuestas de baja calidad en producción. Requiere analizar los prompts y las respuestas reales y también identificar qué llamada dentro de una cadena de varios servicios agrega la mayor latencia. ¿Qué DOS acciones debe realizar el equipo? (Seleccione DOS respuestas.)",
+    "options": [
+      "Habilitar el registro de invocaciones de modelos de Amazon Bedrock y consultar los prompts y las respuestas con CloudWatch Logs Insights.",
+      "Instrumentar la aplicación con AWS X-Ray para rastrear las llamadas a la API del modelo base a través de los límites de los servicios.",
+      "Aumentar el nivel de detalle de los registros de AWS CloudTrail para capturar el contenido completo de los prompts.",
+      "Habilitar los registros de acceso de Amazon S3 en el bucket de la base de conocimiento para medir la latencia de inferencia.",
+      "Activar AWS Cost Anomaly Detection para localizar el origen de la latencia en la cadena de servicios."
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "El registro de invocaciones de modelos captura prompts y respuestas para su análisis con Logs Insights, y X-Ray proporciona los trazos distribuidos que aíslan la latencia por segmento. CloudTrail registra llamadas de API sin el contenido de los prompts, y los registros de S3 o la detección de anomalías de costos no miden latencia de inferencia.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.5",
+    "text": "Una aseguradora recibe a diario miles de documentos mixtos, entre PDF escaneados, imágenes y videos de peritaje, y necesita extraer campos estructurados y generar resúmenes con una configuración administrada, sin construir una canalización de extracción personalizada. ¿Qué servicio es el MÁS adecuado?",
+    "options": [
+      "Amazon Bedrock Data Automation.",
+      "Amazon Textract con consultas personalizadas y una canalización de AWS Step Functions desarrollada a medida.",
+      "Amazon Comprehend con clasificadores y entidades personalizados.",
+      "Amazon Kendra con conectores de origen de datos."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Amazon Bedrock Data Automation ofrece extracción estructurada y resumen de documentos, imágenes, audio y video mediante configuración administrada. Las alternativas requieren construir la orquestación y la lógica de extracción, o están orientadas a la búsqueda empresarial.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.5",
+    "text": "Una organización quiere acelerar la adopción de sus capacidades de IA generativa: los equipos de frontend necesitan componentes de interfaz declarativos y los equipos de backend requieren un contrato de API estable para desarrollar en paralelo. ¿Qué enfoque cumple MEJOR ambos objetivos?",
+    "options": [
+      "Publicar una especificación OpenAPI como contrato de la API de IA generativa y construir la interfaz con componentes declarativos de AWS Amplify.",
+      "Permitir que cada equipo de frontend invoque directamente el SDK del modelo base desde el navegador con credenciales incrustadas.",
+      "Generar la interfaz con Amazon Q Developer y omitir la definición formal del contrato de la API.",
+      "Exponer la lógica únicamente mediante Amazon Bedrock Prompt Flows como punto de integración para los clientes web."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Un contrato OpenAPI habilita el desarrollo en paralelo con un enfoque API-first y Amplify aporta componentes de interfaz declarativos que aceleran el frontend. Incrustar credenciales en el navegador es una vulnerabilidad y omitir el contrato bloquea el trabajo paralelo.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.1",
+    "text": "Una aplicación pública de IA generativa debe bloquear contenido de odio en las entradas, evitar que el modelo aborde temas prohibidos y garantizar que la salida cumpla un esquema JSON estricto antes de llegar al cliente. ¿Qué DOS controles debe implementar el equipo? (Seleccione DOS respuestas.)",
+    "options": [
+      "Configurar Amazon Bedrock Guardrails con filtros de contenido y temas denegados aplicados tanto a la entrada como a la salida.",
+      "Validar la respuesta del modelo contra un esquema JSON en una función AWS Lambda de posprocesamiento y rechazar o corregir las salidas no conformes.",
+      "Reducir la temperatura del modelo a cero para impedir la generación de contenido dañino.",
+      "Indicar en el prompt del sistema que el modelo se autocensure y confiar únicamente en esa instrucción.",
+      "Habilitar AWS WAF con reglas administradas para inspeccionar el contenido semántico de las respuestas del modelo."
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "Guardrails aplica filtros de contenido y temas denegados en ambos sentidos de la interacción, y la validación de esquema en posprocesamiento garantiza que solo salgan respuestas conformes. La temperatura no controla la toxicidad, las instrucciones del prompt son eludibles y AWS WAF no evalúa contenido semántico.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.1",
+    "text": "Una aplicación de recuperación aumentada resume páginas web enviadas por los usuarios. Un atacante incrusta en una página instrucciones que hacen que el modelo ignore sus reglas y revele el prompt del sistema. ¿Qué control mitiga MEJOR este vector de ataque?",
+    "options": [
+      "Tratar el contenido recuperado como datos no confiables: delimitarlo de forma explícita, sanear la entrada y aplicar clasificadores de detección de inyección de prompts y jailbreak antes de la inferencia.",
+      "Cifrar el prompt del sistema con AWS KMS antes de enviarlo al modelo base.",
+      "Aumentar el tamaño de la ventana de contexto para que las instrucciones del sistema tengan mayor peso relativo.",
+      "Colocar el prompt del sistema al final de la solicitud para que el modelo lo procese en último lugar."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "La inyección indirecta de prompts se mitiga tratando el contenido externo como datos no confiables, con delimitación, saneamiento y clasificadores de detección antes de invocar el modelo. El cifrado no aplica porque el modelo debe leer el prompt en claro, y reordenar o ampliar el contexto no bloquea la instrucción maliciosa.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.1",
+    "text": "Un asistente interno cita en ocasiones políticas corporativas que no existen. El equipo debe reducir estas alucinaciones y detectar de forma automática las respuestas que no estén respaldadas por las fuentes recuperadas. ¿Qué enfoque es el MÁS efectivo?",
+    "options": [
+      "Fundamentar las respuestas con Amazon Bedrock Knowledge Bases y aplicar la comprobación de fundamentación contextual de Amazon Bedrock Guardrails para descartar respuestas sin respaldo en las fuentes.",
+      "Aumentar el valor de top-p para que el modelo considere más alternativas antes de responder.",
+      "Ajustar el modelo base con el historial de conversaciones del asistente.",
+      "Incrementar el número máximo de tokens de salida para que el modelo pueda justificar mejor su respuesta."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Fundamentar con una base de conocimiento reduce las alucinaciones y la comprobación de fundamentación contextual de Guardrails detecta y bloquea respuestas no respaldadas por el contexto recuperado. Modificar top-p, el ajuste fino o el límite de tokens no verifica la veracidad de la respuesta.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.2",
+    "text": "Una entidad de salud exige que el tráfico entre sus cargas de trabajo en Amazon VPC y el servicio de modelos base nunca atraviese la red pública de internet, y que el acceso quede restringido a una VPC específica. ¿Qué solución cumple los requisitos?",
+    "options": [
+      "Crear un punto de enlace de VPC de interfaz con AWS PrivateLink para Amazon Bedrock y aplicar una política de punto de enlace junto con condiciones de IAM que limiten el acceso a esa VPC.",
+      "Colocar las cargas de trabajo en subredes privadas con una puerta de enlace NAT que enrute hacia el punto de enlace público del servicio.",
+      "Habilitar el cifrado en tránsito con TLS 1.3 en todas las llamadas al servicio del modelo base.",
+      "Usar AWS Direct Connect entre las instalaciones locales y la VPC para todo el tráfico de inferencia."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Un punto de enlace de interfaz con AWS PrivateLink mantiene el tráfico dentro de la red de AWS y las políticas de punto de enlace con condiciones de IAM restringen el acceso a la VPC autorizada. Una puerta de enlace NAT sigue usando internet y el cifrado o Direct Connect no aíslan la ruta al servicio.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.2",
+    "text": "Un equipo debe detectar información de identificación personal en dos puntos: durante el descubrimiento continuo de los documentos almacenados en Amazon S3 que alimentan una base de conocimiento, y en tiempo real dentro de los prompts que envían los usuarios. ¿Qué combinación de servicios es la MÁS adecuada?",
+    "options": [
+      "Amazon Macie para el descubrimiento de información de identificación personal en Amazon S3 y Amazon Comprehend para su detección en tiempo real en los prompts.",
+      "Amazon Comprehend para el descubrimiento en Amazon S3 y Amazon Macie para la detección en tiempo real en los prompts.",
+      "Amazon Macie para ambos casos, porque también inspecciona cargas útiles de API en tiempo real.",
+      "AWS Glue Data Quality para el descubrimiento en Amazon S3 y Amazon Rekognition para la detección en los prompts."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Macie está diseñado para el descubrimiento continuo de datos sensibles en Amazon S3, mientras Comprehend expone API sincrónicas de detección de información de identificación personal aptas para el flujo de la solicitud. Invertir los roles o usar Glue Data Quality y Rekognition no cubre estos requisitos.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.2",
+    "text": "Un asistente de atención al cliente debe poder razonar sobre el caso del cliente, pero los números de tarjeta y de documento de identidad no deben aparecer en las respuestas ni en los registros, y la utilidad del asistente debe conservarse. ¿Qué enfoque es el MÁS apropiado?",
+    "options": [
+      "Aplicar Amazon Bedrock Guardrails con filtros de información sensible que enmascaren las entidades detectadas con marcadores de posición, conservando la estructura de la conversación.",
+      "Eliminar por completo cualquier mensaje que contenga información de identificación personal antes de enviarlo al modelo base.",
+      "Cifrar los valores sensibles con AWS KMS e incluir el texto cifrado en el prompt para que el modelo lo interprete.",
+      "Desactivar todo el registro de la aplicación para evitar cualquier exposición de datos sensibles."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "El enmascaramiento con marcadores de posición elimina el dato sensible pero preserva el contexto que el modelo necesita para razonar. Descartar mensajes completos rompe la conversación, el texto cifrado no es interpretable por el modelo y desactivar el registro elimina la trazabilidad operativa.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.3",
+    "text": "Un regulador exige demostrar de qué fuentes de datos proviene el contenido generado por los modelos base y quién accedió a esas fuentes. ¿Qué DOS acciones debe implementar el equipo? (Seleccione DOS respuestas.)",
+    "options": [
+      "Registrar los orígenes de datos en el AWS Glue Data Catalog y propagar etiquetas de metadatos de atribución hacia los fragmentos recuperados.",
+      "Habilitar AWS CloudTrail para el registro de auditoría de los accesos a los datos y a las API de inferencia.",
+      "Almacenar todas las fuentes en un único bucket de Amazon S3 sin versionado para simplificar la trazabilidad.",
+      "Sustituir la recuperación por ajuste fino, de modo que las fuentes queden integradas en los pesos del modelo.",
+      "Configurar Amazon CloudWatch Synthetics para verificar de forma periódica el linaje de los datos."
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "El catálogo de datos con etiquetas de atribución sostiene el linaje desde el origen hasta el fragmento citado, y CloudTrail aporta el registro de auditoría de accesos e invocaciones. Eliminar el versionado o incorporar las fuentes en los pesos del modelo destruye la trazabilidad exigida.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.3",
+    "text": "Una organización necesita documentar de forma sistemática y programática el propósito previsto, las limitaciones, los datos de evaluación y los riesgos de cada modelo que pone en producción, e integrar esa documentación en su canalización de despliegue. ¿Qué solución es la MÁS adecuada?",
+    "options": [
+      "Generar y actualizar fichas de modelo de Amazon SageMaker AI mediante la API dentro de la canalización de CI/CD.",
+      "Mantener un documento de texto en Amazon S3 que se actualice de forma manual después de cada despliegue.",
+      "Registrar la información en las etiquetas del punto de enlace de Amazon SageMaker AI.",
+      "Documentar los riesgos y las limitaciones en los comentarios del código fuente del repositorio."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Las fichas de modelo de SageMaker AI son un artefacto de gobernanza versionado y creado mediante API, lo que permite generarlas de forma automática en la canalización. Los documentos manuales, las etiquetas y los comentarios de código no son artefactos de gobernanza auditables.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.3",
+    "text": "Después de seis meses en producción, un sistema de IA generativa comienza a mostrar diferencias de calidad de respuesta entre segmentos demográficos. El equipo de gobernanza necesita detección continua y automatizada de esta desviación, con alertas y flujos de remediación. ¿Qué enfoque es el MÁS apropiado?",
+    "options": [
+      "Configurar la monitorización de desviación de sesgo con Amazon SageMaker Clarify y Amazon SageMaker Model Monitor, publicar las métricas en Amazon CloudWatch y activar flujos de remediación mediante alarmas.",
+      "Realizar una revisión manual trimestral de una muestra aleatoria de conversaciones.",
+      "Aumentar la frecuencia de los reentrenamientos del modelo sin medir métricas de equidad.",
+      "Habilitar AWS Cost Anomaly Detection para identificar los cambios de comportamiento del modelo."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Clarify calcula métricas de sesgo y Model Monitor las evalúa de forma continua, publicando en CloudWatch para alarmas y remediación automatizada. Una revisión trimestral no es continua, reentrenar sin métricas no detecta la desviación y la detección de anomalías de costos no mide equidad.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.4",
+    "text": "Los usuarios de un agente de IA generativa exigen entender cómo llegó a una recomendación, incluidas las herramientas que invocó y los pasos intermedios de razonamiento. ¿Qué mecanismo proporciona esta información con el MENOR esfuerzo de desarrollo?",
+    "options": [
+      "Habilitar los trazos de los agentes de Amazon Bedrock y presentar en la interfaz de usuario los pasos de razonamiento y las invocaciones de herramientas.",
+      "Solicitar al modelo en el prompt que redacte una justificación después de haber producido la respuesta final.",
+      "Registrar únicamente la respuesta final en Amazon CloudWatch Logs y mostrarla al usuario como evidencia.",
+      "Habilitar AWS CloudTrail para reconstruir el razonamiento del agente a partir de los eventos de API."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Los trazos de los agentes de Amazon Bedrock exponen de forma nativa la cadena de razonamiento y las llamadas a herramientas de cada invocación. Una justificación generada a posteriori no refleja el proceso real y CloudTrail registra llamadas de API, no razonamiento.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.4",
+    "text": "Un equipo debe comparar de forma sistemática y a escala si dos versiones de un prompt producen respuestas de calidad equivalente entre distintos grupos de usuarios, sin depender exclusivamente de revisores humanos. ¿Qué enfoque es el MÁS adecuado?",
+    "options": [
+      "Ejecutar evaluaciones automatizadas de Amazon Bedrock con la técnica de LLM como juez sobre un conjunto de datos estratificado por grupo, y comparar las versiones del prompt administradas en Amazon Bedrock Prompt Management.",
+      "Confiar en la puntuación de perplejidad que el modelo base asigna a cada versión del prompt.",
+      "Comparar la latencia media y el consumo de tokens de cada versión del prompt.",
+      "Encuestar al equipo de desarrollo sobre qué versión del prompt le parece de mayor calidad."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "La evaluación automatizada con LLM como juez sobre un conjunto estratificado permite medir equidad a escala y las versiones administradas de prompts hacen la comparación reproducible. La perplejidad, la latencia y las opiniones del equipo no miden calidad ni equidad de las respuestas.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.4",
+    "text": "Una empresa debe garantizar que cada nueva versión de una aplicación de IA generativa cumpla la política interna de IA responsable antes de llegar a producción, incluida la documentación de las limitaciones del modelo. ¿Qué combinación cumple MEJOR el requisito?",
+    "options": [
+      "Aplicar Amazon Bedrock Guardrails alineados con la política, documentar las limitaciones en fichas de modelo y ejecutar comprobaciones de cumplimiento automatizadas con AWS Lambda como puerta de calidad en la canalización.",
+      "Solicitar una firma de aprobación del responsable de producto por correo electrónico antes de cada despliegue.",
+      "Publicar la política de IA responsable en la intranet y capacitar a los desarrolladores una vez al año.",
+      "Restringir el acceso a la consola de Amazon Bedrock únicamente al equipo de cumplimiento."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "La combinación de barreras técnicas, documentación de limitaciones y comprobaciones automatizadas como puerta de calidad convierte la política en un control ejecutable antes del despliegue. Las aprobaciones por correo, la capacitación anual o restringir la consola no impiden que una versión no conforme llegue a producción.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.1",
+    "text": "Una aplicación de asistencia técnica recibe muchas preguntas repetidas y también preguntas con la misma intención redactadas de forma distinta. Además, todas las solicitudes comparten un prefijo extenso de instrucciones del sistema. El equipo debe reducir el costo por token y la latencia. ¿Qué DOS técnicas debe aplicar? (Seleccione DOS respuestas.)",
+    "options": [
+      "Habilitar el almacenamiento en caché de prompts para reutilizar el prefijo estático de instrucciones entre solicitudes.",
+      "Implementar una caché semántica que devuelva respuestas ya generadas cuando el embedding de la nueva consulta supere un umbral de similitud.",
+      "Aumentar el número máximo de tokens de salida para que las respuestas sean más completas.",
+      "Cambiar todas las solicitudes a throughput provisionado con independencia del patrón de tráfico.",
+      "Almacenar en caché únicamente por coincidencia exacta de la cadena completa del prompt, incluidos los identificadores de sesión."
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "La caché de prompts elimina el costo de reprocesar el prefijo estático y la caché semántica evita invocaciones cuando la intención ya fue respondida. Ampliar la salida encarece la inferencia y una caché por coincidencia exacta con identificadores de sesión nunca acierta.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.1",
+    "text": "El costo mensual de inferencia de una plataforma se duplicó. El análisis muestra que el 70 por ciento de las solicitudes son clasificaciones y extracciones simples que un modelo pequeño resuelve con calidad equivalente. ¿Qué acción ofrece el MAYOR ahorro sin degradar la experiencia?",
+    "options": [
+      "Implementar un uso escalonado de modelos que enrute las tareas simples a un modelo más pequeño y económico, y reserve el modelo más capaz para las tareas complejas.",
+      "Reducir en un 50 por ciento el número máximo de tokens de salida de todas las solicitudes.",
+      "Aplicar inferencia por lotes a todo el tráfico interactivo para obtener el descuento por volumen.",
+      "Desactivar el registro de invocaciones de modelos para reducir los costos asociados a la observabilidad."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "El escalonamiento por complejidad ataja directamente el 70 por ciento del volumen con un precio por token mucho menor sin afectar la calidad percibida. Recortar la salida degrada respuestas, la inferencia por lotes no sirve para tráfico interactivo y desactivar el registro elimina observabilidad con ahorro marginal.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.1",
+    "text": "Una aplicación de recuperación aumentada envía en cada invocación los 50 fragmentos recuperados más relevantes junto con todo el historial de la conversación. El costo de tokens de entrada es elevado y la calidad de las respuestas no mejora respecto a configuraciones más reducidas. ¿Qué acción reduce MÁS el costo manteniendo la calidad?",
+    "options": [
+      "Reordenar los resultados con un modelo de reordenamiento y enviar solo los fragmentos con mayor puntuación, además de resumir los turnos antiguos de la conversación.",
+      "Cambiar a un modelo con una ventana de contexto mayor para acomodar todo el contenido actual.",
+      "Aumentar el tamaño de los fragmentos para reducir su cantidad total manteniendo el mismo volumen de texto.",
+      "Enviar los 50 fragmentos en solicitudes paralelas separadas y combinar después las respuestas."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "El reordenamiento permite conservar solo los fragmentos verdaderamente relevantes y la poda o resumen del historial recorta el contexto sin perder información útil. Una ventana mayor, fragmentos más grandes o solicitudes paralelas mantienen o incrementan el volumen total de tokens facturados.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.2",
+    "text": "Un asistente de voz debe entregar el primer token en menos de 400 ms. El equipo ya usa streaming, pero el tiempo hasta el primer token sigue siendo elevado. ¿Qué acción adicional es la MÁS efectiva?",
+    "options": [
+      "Usar la inferencia optimizada para latencia de Amazon Bedrock en un modelo compatible y precomputar las porciones predecibles del contexto.",
+      "Aumentar el número máximo de tokens de salida para que la generación no se interrumpa a mitad de la respuesta.",
+      "Reemplazar el streaming por invocaciones sincrónicas para eliminar la sobrecarga de la conexión.",
+      "Ejecutar inferencia por lotes con un tamaño de lote grande para amortizar el costo de arranque."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "La inferencia optimizada para latencia reduce el tiempo hasta el primer token en modelos compatibles y la precomputación acorta el contexto que debe procesarse en la solicitud. Sustituir el streaming o usar lotes empeora la latencia percibida y el límite de tokens de salida no la afecta.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.2",
+    "text": "Una canalización extrae campos estructurados de facturas y debe producir la misma salida para la misma entrada en cada ejecución, con un formato JSON estable. ¿Qué configuración de parámetros de inferencia es la MÁS apropiada?",
+    "options": [
+      "Fijar la temperatura en un valor cercano a cero, restringir top-p y exigir un esquema de salida estructurado en la definición de la solicitud.",
+      "Fijar una temperatura alta y un top-k amplio para que el modelo explore más formatos posibles.",
+      "Mantener los parámetros predeterminados y aumentar el número de reintentos hasta obtener un JSON válido.",
+      "Incrementar la penalización por repetición para estabilizar el formato de la salida."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Una temperatura cercana a cero con top-p restringido minimiza la variabilidad del muestreo, y el esquema estructurado impone el formato de salida. Aumentar la aleatoriedad, confiar en reintentos o ajustar la penalización por repetición no aporta determinismo.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.2",
+    "text": "Una empresa debe clasificar y resumir 20 millones de documentos históricos. El proceso no tiene requisitos de latencia interactiva, pero debe completarse con el menor costo y en el menor tiempo posible. ¿Qué enfoque es el MÁS adecuado?",
+    "options": [
+      "Usar la inferencia por lotes de Amazon Bedrock, que procesa grandes volúmenes de forma asíncrona con un costo por token menor.",
+      "Invocar el modelo de forma sincrónica desde miles de funciones AWS Lambda concurrentes.",
+      "Adquirir throughput provisionado suficiente para procesar todo el corpus en una hora.",
+      "Desplegar un punto de enlace en tiempo real de Amazon SageMaker AI con escalado automático agresivo."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "La inferencia por lotes está diseñada para volúmenes masivos sin requisitos de latencia y ofrece un precio por token reducido. Las alternativas sincrónicas topan con cuotas de servicio o requieren capacidad reservada sobredimensionada y mucho más costosa.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.3",
+    "text": "Un equipo de operaciones debe detectar de forma proactiva ráfagas anómalas de consumo de tokens y analizar en detalle las solicitudes y respuestas asociadas cuando se dispare una alerta. ¿Qué DOS acciones debe implementar? (Seleccione DOS respuestas.)",
+    "options": [
+      "Habilitar el registro de invocaciones de modelos de Amazon Bedrock hacia Amazon CloudWatch Logs y Amazon S3 para el análisis detallado de solicitudes y respuestas.",
+      "Publicar el consumo de tokens como métrica de Amazon CloudWatch y aplicar detección de anomalías de CloudWatch con alarmas.",
+      "Revisar de forma manual el panel de AWS Cost Explorer cada mañana para identificar las ráfagas.",
+      "Habilitar los registros de acceso de Amazon API Gateway como única fuente de datos del consumo de tokens.",
+      "Configurar AWS Config para registrar los cambios en la configuración de los modelos base."
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "El registro de invocaciones conserva los prompts y las respuestas para el análisis forense, y la detección de anomalías de CloudWatch sobre la métrica de tokens genera la alerta proactiva. La revisión manual no es proactiva, los registros de API Gateway no contienen recuentos de tokens y AWS Config solo audita configuración.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.3",
+    "text": "Tras actualizar la versión del modelo base, algunos usuarios reportan respuestas inconsistentes que antes eran correctas, pero las métricas de latencia y de error no muestran cambios. ¿Qué práctica de observabilidad detecta MEJOR este modo de fallo específico de la IA generativa?",
+    "options": [
+      "Ejecutar un conjunto de datos de referencia contra ambas versiones del modelo y aplicar comparación de salidas para medir consistencia y tasa de alucinaciones.",
+      "Aumentar la retención de los registros de Amazon CloudWatch Logs a un año.",
+      "Añadir más alarmas de utilización de CPU y de memoria a los servicios de la aplicación.",
+      "Habilitar el muestreo del 100 por ciento en AWS X-Ray para todas las solicitudes."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Los conjuntos de datos de referencia con comparación de salidas revelan degradaciones semánticas que las métricas de infraestructura no capturan. Ampliar la retención, añadir alarmas de recursos o aumentar el muestreo de trazos no mide calidad de respuesta.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.3",
+    "text": "La latencia de recuperación de un almacén vectorial se degrada de forma progresiva a medida que se ingieren documentos nuevos, y en ocasiones se devuelven fragmentos duplicados. ¿Qué sistema de gestión operativa aborda MEJOR ambos problemas?",
+    "options": [
+      "Monitorizar las métricas del almacén vectorial, ejecutar rutinas automatizadas de optimización y fusión de índices, y aplicar validación de calidad de datos con deduplicación en la ingesta.",
+      "Aumentar el tamaño de las instancias del clúster cada vez que se detecte una degradación de latencia.",
+      "Reducir el valor de k en las consultas para que se devuelvan menos fragmentos duplicados.",
+      "Volver a incrustar todo el corpus con un modelo de embeddings distinto una vez por semana."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "La monitorización con optimización automatizada de índices ataca la degradación estructural, y la deduplicación en la ingesta elimina el origen de los fragmentos repetidos. Escalar instancias solo enmascara el síntoma, reducir k no elimina duplicados y reindexar semanalmente es costoso e innecesario.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 5,
+    "taskStatementNumber": "5.1",
+    "text": "Un equipo debe evaluar de forma integral una aplicación de recuperación aumentada en producción. Necesita saber si el recuperador devuelve los pasajes correctos y si la respuesta final está respaldada por esos pasajes. ¿Qué DOS mecanismos de evaluación debe implementar? (Seleccione DOS respuestas.)",
+    "options": [
+      "Medir métricas de recuperación como precisión y exhaustividad del contexto frente a un conjunto de preguntas con pasajes relevantes anotados.",
+      "Evaluar la fundamentación y la fidelidad de la respuesta respecto al contexto recuperado con la técnica de LLM como juez.",
+      "Medir únicamente la latencia de extremo a extremo y la tasa de errores HTTP de la aplicación.",
+      "Calcular la exactitud de clasificación con una matriz de confusión sobre las respuestas generadas en texto libre.",
+      "Comparar el número de tokens de salida entre versiones del modelo como indicador de calidad."
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "La evaluación de una aplicación de recuperación aumentada requiere separar la calidad del recuperador, medida con precisión y exhaustividad del contexto, de la calidad del generador, medida por fundamentación y fidelidad respecto al contexto. Las métricas operativas, la matriz de confusión sobre texto libre y el recuento de tokens no evalúan estos aspectos.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 5,
+    "taskStatementNumber": "5.1",
+    "text": "Antes de sustituir el modelo base de una aplicación en producción, el equipo necesita comparar de forma objetiva varios modelos candidatos con sus propios conjuntos de datos y liberar después el ganador limitando el riesgo de exposición. ¿Qué enfoque es el MÁS apropiado?",
+    "options": [
+      "Ejecutar evaluaciones de modelos de Amazon Bedrock con conjuntos de datos propios y métricas automáticas y humanas, y liberar el modelo seleccionado mediante un despliegue canario con métricas de calidad.",
+      "Elegir el modelo con la mayor cantidad de parámetros y sustituirlo en producción en una sola ventana de mantenimiento.",
+      "Basar la decisión en las tablas de clasificación públicas de referencia y omitir la evaluación con datos propios.",
+      "Habilitar throughput provisionado para todos los modelos candidatos y comparar sus costos mensuales."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Las evaluaciones de modelos de Amazon Bedrock permiten comparar candidatos con datos representativos del caso de uso, y el despliegue canario limita el impacto mientras se validan las métricas de calidad en tráfico real. El tamaño del modelo y las tablas públicas no predicen el desempeño en un dominio específico.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 5,
+    "taskStatementNumber": "5.1",
+    "text": "Una organización debe validar que sus agentes de IA generativa completan correctamente tareas de varios pasos y que utilizan las herramientas adecuadas. ¿Qué conjunto de métricas es el MÁS relevante?",
+    "options": [
+      "Tasa de finalización de tareas, efectividad y corrección del uso de herramientas, y calidad del razonamiento en los flujos de varios pasos.",
+      "Perplejidad del modelo base y puntuación BLEU de las respuestas finales.",
+      "Utilización de CPU del entorno de ejecución del agente y profundidad de la cola de mensajes.",
+      "Número de tokens de entrada por invocación y tamaño total del índice vectorial."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "La evaluación de agentes se centra en si la tarea se completa, si las herramientas se invocan de forma correcta y si el razonamiento intermedio es válido. La perplejidad, BLEU y las métricas de infraestructura no reflejan el desempeño de un flujo agéntico de varios pasos.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 5,
+    "taskStatementNumber": "5.2",
+    "text": "Una aplicación de chat con recuperación aumentada empieza a fallar con errores de longitud de contexto excedida en conversaciones largas y, en otros casos, devuelve respuestas truncadas a mitad de una oración. ¿Qué DOS acciones resuelven la causa raíz? (Seleccione DOS respuestas.)",
+    "options": [
+      "Aplicar una gestión dinámica del contexto que resuma o descarte los turnos más antiguos y recorte los fragmentos recuperados según un presupuesto de tokens calculado.",
+      "Reservar de forma explícita el presupuesto de tokens de salida al construir el prompt y ajustar el número máximo de tokens de la respuesta para que no se trunque.",
+      "Reintentar la solicitud con retroceso exponencial hasta que el error de longitud de contexto deje de producirse.",
+      "Reducir la temperatura del modelo para que las respuestas generadas sean más cortas.",
+      "Dividir cada mensaje del usuario en varias invocaciones independientes que no compartan contexto."
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "El desbordamiento se resuelve gestionando activamente el presupuesto de tokens de entrada mediante resumen y recorte, y el truncamiento se evita reservando explícitamente espacio para la salida. Los reintentos no cambian la longitud del prompt, la temperatura no controla la extensión y dividir sin contexto rompe la conversación.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 5,
+    "taskStatementNumber": "5.2",
+    "text": "Después de cambiar el modelo de embeddings del recuperador, la relevancia de los resultados cae de forma drástica aunque el índice se reconstruyó sin errores. ¿Cuál es la causa MÁS probable y su remediación?",
+    "options": [
+      "Las consultas se siguen incrustando con el modelo anterior; hay que garantizar que consultas y documentos usen exactamente el mismo modelo y versión de embeddings.",
+      "La ventana de contexto del modelo generativo es insuficiente; hay que migrar a un modelo con contexto más amplio.",
+      "La temperatura del modelo generativo es demasiado alta; hay que reducirla a cero.",
+      "El número de particiones del índice es demasiado bajo; hay que aumentarlo y reequilibrar el clúster."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "La similitud vectorial solo es válida cuando consultas y documentos residen en el mismo espacio de embeddings, por lo que una discrepancia de modelo o versión destruye la relevancia. La ventana de contexto, la temperatura y las particiones afectan generación o rendimiento, no la coherencia del espacio vectorial.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 5,
+    "taskStatementNumber": "5.2",
+    "text": "Un servicio descendente falla de forma intermitente porque el modelo base a veces devuelve JSON con campos adicionales o acompañado de texto explicativo. El equipo debe detectar estas inconsistencias de formato y aislar qué versión de la plantilla de prompt las provoca. ¿Qué enfoque es el MÁS efectivo?",
+    "options": [
+      "Validar cada respuesta contra un esquema JSON, registrar los fallos junto con el identificador y la versión de la plantilla en Amazon CloudWatch Logs, y comparar versiones para refinar el prompt de forma sistemática.",
+      "Envolver la llamada en un bloque de manejo de errores que descarte de forma silenciosa las respuestas no válidas.",
+      "Aumentar el tiempo de espera de la invocación para que el modelo disponga de más tiempo para formatear la salida.",
+      "Incrementar la temperatura del modelo para diversificar los formatos de salida y seleccionar el mejor resultado."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "La validación de esquema detecta la inconsistencia y el registro correlacionado con la versión de la plantilla permite atribuir el fallo y refinar el prompt de forma sistemática. Descartar respuestas en silencio oculta el problema, y el tiempo de espera y la temperatura no gobiernan el cumplimiento del formato.",
+    "source": "llm"
+  }
+]

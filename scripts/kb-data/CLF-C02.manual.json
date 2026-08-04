@@ -1,0 +1,4572 @@
+[
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Cuáles son los principales beneficios de la computación en la nube? (Selecciona DOS)",
+    "options": [
+      "Cambiar gastos de capital por gastos variables",
+      "Mantener centros de datos físicos",
+      "Beneficiarse de economías de escala masivas",
+      "Gestionar infraestructura de hardware",
+      "Alcance global limitado"
+    ],
+    "correct": [
+      0,
+      2
+    ],
+    "type": "multiple",
+    "explanation": "Cambiar CapEx por OpEx y beneficiarse de economías de escala son ventajas clave de la nube.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué principio de diseño de AWS soporta la capacidad de escalar recursos automáticamente?",
+    "options": [
+      "Elasticidad",
+      "Durabilidad",
+      "Disponibilidad",
+      "Resistencia"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "La elasticidad permite a los sistemas escalar recursos automáticamente hacia arriba o abajo según la demanda.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es la ventaja de desplegar una aplicación en múltiples Zonas de Disponibilidad?",
+    "options": [
+      "Reduce la latencia para usuarios globales",
+      "Aumenta la tolerancia a fallos",
+      "Reduce costos",
+      "Mejora la velocidad de red"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Múltiples AZs proporcionan alta disponibilidad y tolerancia a fallos contra fallas de centros de datos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué describe la capacidad de adquirir recursos según se necesiten y liberarlos cuando ya no se necesiten?",
+    "options": [
+      "Escalabilidad",
+      "Elasticidad",
+      "Agilidad",
+      "Confiabilidad"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "La elasticidad es la capacidad de aprovisionar y desaprovisionar recursos dinámicamente.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué significa el modelo de precios 'paga por lo que usas' en AWS?",
+    "options": [
+      "Pagar tarifas de suscripción mensual",
+      "Pagar solo por lo que usas",
+      "Pagar por adelantado por capacidad reservada",
+      "Pagar basado en el número de usuarios"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Paga por lo que usas significa que solo pagas por los recursos que consumes sin compromisos por adelantado.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Cuáles de los siguientes son pilares del AWS Well-Architected Framework? (Selecciona DOS)",
+    "options": [
+      "Eficiencia de Rendimiento",
+      "Optimización de Costos",
+      "Gestión de Servidores",
+      "Adquisición de Hardware",
+      "Seguridad Física"
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "Los seis pilares son: Excelencia Operacional, Seguridad, Confiabilidad, Eficiencia de Rendimiento, Optimización de Costos y Sostenibilidad.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué es una Región de AWS?",
+    "options": [
+      "Un solo centro de datos",
+      "Un área geográfica con múltiples Zonas de Disponibilidad",
+      "Una nube privada virtual",
+      "Una red de distribución de contenido"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Una Región de AWS es una ubicación física con múltiples Zonas de Disponibilidad aisladas.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué es una Zona de Disponibilidad?",
+    "options": [
+      "Una región geográfica",
+      "Uno o más centros de datos discretos con recursos redundantes",
+      "Un punto de distribución de contenido",
+      "Una red virtual"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Una AZ consiste en uno o más centros de datos con energía, redes y conectividad redundantes.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué principio permite a AWS ofrecer costos variables más bajos comparado con infraestructura tradicional?",
+    "options": [
+      "Economías de escala",
+      "Capacidad reservada",
+      "Instancias Spot",
+      "Hosts dedicados"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "La escala masiva de AWS les permite lograr mayores economías de escala y transferir ahorros a los clientes.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué significa 'alta disponibilidad' en computación en la nube?",
+    "options": [
+      "El sistema siempre está accesible con tiempo de inactividad mínimo",
+      "El sistema tiene rendimiento rápido",
+      "El sistema es barato de operar",
+      "El sistema puede escalar automáticamente"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Alta disponibilidad significa que el sistema permanece operativo y accesible con interrupciones mínimas.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es un beneficio de migrar a AWS Cloud en términos de mejorar velocidad y agilidad?",
+    "options": [
+      "Mayor tiempo de comercialización",
+      "Aprovisionar recursos en minutos en lugar de semanas",
+      "Despliegue global limitado",
+      "Solo escalado manual"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS permite aprovisionamiento rápido de recursos, reduciendo el tiempo de semanas a minutos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es el propósito de las Ubicaciones de Borde de AWS?",
+    "options": [
+      "Alojar instancias EC2",
+      "Almacenar contenido en caché más cerca de los usuarios",
+      "Almacenar datos de respaldo",
+      "Ejecutar consultas de base de datos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Las Ubicaciones de Borde almacenan contenido en caché para CloudFront CDN para reducir latencia para usuarios finales.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué ventaja permite a las empresas enfocarse en proyectos que diferencian su negocio?",
+    "options": [
+      "Dejar de gastar dinero ejecutando centros de datos",
+      "Aumentar velocidad y agilidad",
+      "Volverse global en minutos",
+      "Beneficiarse de economías de escala"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Al eliminar la gestión de centros de datos, las empresas pueden enfocarse en sus innovaciones de negocio principales.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué tipo de despliegue en la nube usa tanto recursos locales como en la nube?",
+    "options": [
+      "Nube pública",
+      "Nube privada",
+      "Nube híbrida",
+      "Multi-nube"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "La nube híbrida combina infraestructura local con servicios en la nube.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué declaración describe la tolerancia a fallos?",
+    "options": [
+      "El sistema puede escalar automáticamente",
+      "El sistema continúa operando a pesar de fallas de componentes",
+      "El sistema tiene baja latencia",
+      "El sistema tiene alto rendimiento"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Tolerancia a fallos significa que el sistema permanece operativo incluso cuando los componentes fallan.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "Bajo el Modelo de Responsabilidad Compartida de AWS, ¿cuáles tareas son responsabilidades del cliente? (Selecciona DOS)",
+    "options": [
+      "Parchear sistemas operativos invitados",
+      "Seguridad física de centros de datos",
+      "Configurar grupos de seguridad",
+      "Mantener infraestructura de red",
+      "Gestionar eliminación de hardware"
+    ],
+    "correct": [
+      0,
+      2
+    ],
+    "type": "multiple",
+    "explanation": "Los clientes gestionan la seguridad 'en' la nube: parches de SO, grupos de seguridad y seguridad de aplicaciones.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio protege aplicaciones web de exploits web comunes?",
+    "options": [
+      "AWS Shield",
+      "AWS WAF",
+      "Amazon GuardDuty",
+      "AWS Inspector"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS WAF (Web Application Firewall) protege contra inyección SQL, XSS y otros exploits web.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es el propósito de AWS Identity and Access Management (IAM)?",
+    "options": [
+      "Monitorear tráfico de red",
+      "Gestionar acceso de usuarios y permisos",
+      "Cifrar datos en reposo",
+      "Escanear vulnerabilidades"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "IAM gestiona identidades de usuarios, autenticación y autorización a recursos de AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS proporciona protección DDoS?",
+    "options": [
+      "AWS WAF",
+      "AWS Shield",
+      "Amazon GuardDuty",
+      "AWS Config"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Shield proporciona protección DDoS gestionada, con niveles Standard y Advanced.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué es el principio de menor privilegio?",
+    "options": [
+      "Otorgar todos los permisos por defecto",
+      "Otorgar solo los permisos requeridos para realizar una tarea",
+      "Otorgar acceso de administrador a todos los usuarios",
+      "Otorgar acceso de solo lectura a todos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Menor privilegio significa otorgar solo los permisos mínimos necesarios para una tarea.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio ayuda a detectar actividad inusual de cuenta y amenazas potenciales?",
+    "options": [
+      "AWS Inspector",
+      "Amazon GuardDuty",
+      "AWS Config",
+      "AWS CloudTrail"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon GuardDuty es un servicio de detección de amenazas que monitorea actividad maliciosa.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué hace AWS CloudTrail?",
+    "options": [
+      "Monitorea rendimiento de aplicaciones",
+      "Registra llamadas de API de AWS para tu cuenta",
+      "Gestiona permisos de usuarios",
+      "Cifra datos en tránsito"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "CloudTrail registra todas las llamadas de API realizadas en tu cuenta de AWS para auditoría y cumplimiento.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio ayuda a asegurar que las configuraciones de recursos de AWS cumplan con las políticas de la empresa?",
+    "options": [
+      "AWS Config",
+      "AWS CloudTrail",
+      "AWS Inspector",
+      "AWS Trusted Advisor"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "AWS Config monitorea y registra continuamente configuraciones de recursos para cumplimiento.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Artifact?",
+    "options": [
+      "Un servicio de despliegue",
+      "Un portal para informes de cumplimiento y acuerdos",
+      "Una herramienta de monitoreo",
+      "Un servicio de base de datos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Artifact proporciona acceso bajo demanda a informes de cumplimiento y acuerdos de AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona evaluaciones de seguridad automatizadas para instancias EC2?",
+    "options": [
+      "AWS Inspector",
+      "Amazon GuardDuty",
+      "AWS Config",
+      "AWS Shield"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "AWS Inspector evalúa automáticamente aplicaciones para vulnerabilidades y desviaciones.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué es un rol de IAM?",
+    "options": [
+      "Una cuenta de usuario permanente",
+      "Un conjunto de permisos que pueden ser asumidos temporalmente",
+      "Un token de seguridad físico",
+      "Una credencial de base de datos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Los roles de IAM proporcionan credenciales temporales y permisos que pueden ser asumidos por usuarios o servicios.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué características deben habilitarse para la cuenta root de AWS? (Selecciona DOS)",
+    "options": [
+      "Autenticación Multi-Factor (MFA)",
+      "Claves de acceso para acceso programático",
+      "Eliminar la cuenta root",
+      "Evitar usarla para tareas cotidianas",
+      "Compartir credenciales con el equipo"
+    ],
+    "correct": [
+      0,
+      3
+    ],
+    "type": "multiple",
+    "explanation": "La cuenta root debe tener MFA habilitado y no debe usarse para operaciones diarias.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué hace Amazon Macie?",
+    "options": [
+      "Monitorea tráfico de red",
+      "Descubre y protege datos sensibles en S3",
+      "Gestiona claves de cifrado",
+      "Escanea EC2 para vulnerabilidades"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon Macie usa aprendizaje automático para descubrir, clasificar y proteger datos sensibles en S3.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio gestiona claves de cifrado en AWS?",
+    "options": [
+      "AWS IAM",
+      "AWS KMS",
+      "AWS Certificate Manager",
+      "AWS Secrets Manager"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Key Management Service (KMS) crea y gestiona claves de cifrado.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "Bajo el Modelo de Responsabilidad Compartida, ¿quién es responsable de los permisos de buckets de S3?",
+    "options": [
+      "AWS",
+      "Cliente",
+      "Tanto AWS como cliente",
+      "Auditor de terceros"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Los clientes son responsables de configurar controles de acceso y permisos para sus buckets de S3.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Security Hub?",
+    "options": [
+      "Un servicio de firewall",
+      "Una vista centralizada de seguridad y cumplimiento",
+      "Un servicio de cifrado",
+      "Un servicio VPN"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Security Hub proporciona una vista integral de alertas de seguridad y estado de cumplimiento en cuentas de AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué programa de cumplimiento certifica centros de datos de AWS para procesamiento de tarjetas de pago?",
+    "options": [
+      "HIPAA",
+      "PCI DSS",
+      "SOC 2",
+      "ISO 27001"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "PCI DSS (Payment Card Industry Data Security Standard) certifica entornos para procesamiento de tarjetas.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es el propósito de las políticas de IAM?",
+    "options": [
+      "Monitorear actividad de usuarios",
+      "Definir permisos para usuarios, grupos y roles",
+      "Cifrar datos",
+      "Respaldar datos de usuarios"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Las políticas de IAM son documentos JSON que definen permisos para identidades de AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio ayuda a asegurar secretos como contraseñas de base de datos?",
+    "options": [
+      "AWS IAM",
+      "AWS KMS",
+      "AWS Secrets Manager",
+      "AWS Config"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "AWS Secrets Manager ayuda a proteger y rotar secretos a lo largo de su ciclo de vida.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué es un grupo de seguridad en AWS?",
+    "options": [
+      "Una colección de usuarios de IAM",
+      "Un firewall virtual para instancias EC2",
+      "Un protocolo de cifrado",
+      "Un marco de cumplimiento"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Los grupos de seguridad actúan como firewalls virtuales controlando tráfico entrante y saliente para instancias.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio te permite ejecutar código sin aprovisionar servidores?",
+    "options": [
+      "Amazon EC2",
+      "AWS Lambda",
+      "Amazon ECS",
+      "AWS Batch"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Lambda es un servicio de computación sin servidor que ejecuta código en respuesta a eventos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué tipo de base de datos es Amazon DynamoDB?",
+    "options": [
+      "Relacional",
+      "NoSQL",
+      "Grafo",
+      "En memoria"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "DynamoDB es un servicio de base de datos NoSQL completamente gestionado con rendimiento de milisegundos de un dígito.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona almacenamiento de objetos en AWS?",
+    "options": [
+      "Amazon EBS",
+      "Amazon EFS",
+      "Amazon S3",
+      "Amazon RDS"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "Amazon S3 (Simple Storage Service) proporciona almacenamiento de objetos escalable.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon EC2?",
+    "options": [
+      "Servicio de almacenamiento de objetos",
+      "Servidor virtual en la nube",
+      "Red de distribución de contenido",
+      "Servicio de base de datos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "EC2 (Elastic Compute Cloud) proporciona servidores virtuales redimensionables en la nube.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué opción de almacenamiento es mejor para datos accedidos frecuentemente con requisitos de baja latencia?",
+    "options": [
+      "Amazon S3 Glacier",
+      "Amazon EBS",
+      "Amazon S3 Standard",
+      "AWS Backup"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon EBS proporciona almacenamiento de bloques persistente con baja latencia para instancias EC2.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon RDS?",
+    "options": [
+      "Una base de datos NoSQL",
+      "Servicio de base de datos relacional gestionado",
+      "Almacenamiento de objetos",
+      "Cola de mensajes"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "RDS es un servicio gestionado que facilita configurar, operar y escalar bases de datos relacionales.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio distribuye tráfico de aplicación entrante entre múltiples objetivos?",
+    "options": [
+      "Amazon Route 53",
+      "AWS Auto Scaling",
+      "Elastic Load Balancing",
+      "Amazon CloudFront"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "Elastic Load Balancing distribuye automáticamente el tráfico entre múltiples objetivos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon CloudFront?",
+    "options": [
+      "Un servicio de base de datos",
+      "Red de distribución de contenido (CDN)",
+      "Nube privada virtual",
+      "Servicio de monitoreo"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "CloudFront es una CDN que entrega contenido a usuarios con baja latencia y altas velocidades de transferencia.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona un servicio de cola de mensajes completamente gestionado?",
+    "options": [
+      "Amazon SNS",
+      "Amazon SQS",
+      "Amazon Kinesis",
+      "AWS Step Functions"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon SQS (Simple Queue Service) es un servicio de cola de mensajes completamente gestionado.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon VPC?",
+    "options": [
+      "Servidor virtual",
+      "Red virtual aislada",
+      "Servicio de almacenamiento",
+      "Motor de base de datos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "VPC (Virtual Private Cloud) te permite aprovisionar una sección lógicamente aislada de AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio monitorea recursos y aplicaciones de AWS?",
+    "options": [
+      "AWS CloudTrail",
+      "Amazon CloudWatch",
+      "AWS Config",
+      "AWS X-Ray"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "CloudWatch recopila datos de monitoreo y operacionales en forma de logs y métricas.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Elastic Beanstalk?",
+    "options": [
+      "Servicio de orquestación de contenedores",
+      "Servicio de plataforma para desplegar aplicaciones",
+      "Servicio de computación sin servidor",
+      "Herramienta de migración de base de datos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Elastic Beanstalk es un PaaS que facilita desplegar y escalar aplicaciones web.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona servicios DNS?",
+    "options": [
+      "Amazon CloudFront",
+      "AWS Direct Connect",
+      "Amazon Route 53",
+      "AWS VPN"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "Route 53 es un servicio web de Sistema de Nombres de Dominio (DNS) escalable.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué tipo de almacenamiento es Amazon EBS?",
+    "options": [
+      "Almacenamiento de objetos",
+      "Almacenamiento de bloques",
+      "Almacenamiento de archivos",
+      "Almacenamiento de archivo"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "EBS proporciona volúmenes de almacenamiento persistente a nivel de bloque para usar con instancias EC2.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué clase de almacenamiento de S3 está diseñada para archivo a largo plazo con tiempos de recuperación de horas?",
+    "options": [
+      "S3 Standard",
+      "S3 Intelligent-Tiering",
+      "S3 Glacier Deep Archive",
+      "S3 One Zone-IA"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "S3 Glacier Deep Archive es el almacenamiento de menor costo para retención a largo plazo y preservación digital.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon Aurora?",
+    "options": [
+      "Base de datos NoSQL",
+      "Base de datos relacional compatible con MySQL y PostgreSQL",
+      "Almacén de datos",
+      "Caché en memoria"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Aurora es una base de datos relacional compatible con MySQL y PostgreSQL construida para la nube.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio escala automáticamente la capacidad de EC2?",
+    "options": [
+      "Elastic Load Balancing",
+      "AWS Auto Scaling",
+      "Amazon CloudWatch",
+      "AWS CloudFormation"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Auto Scaling monitorea aplicaciones y ajusta automáticamente la capacidad.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Para qué se usa Amazon Redshift?",
+    "options": [
+      "Base de datos NoSQL",
+      "Almacenamiento de datos y análisis",
+      "Almacenamiento de objetos",
+      "Caché en memoria"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Redshift es un almacén de datos rápido y completamente gestionado para analizar datos usando SQL.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona un servicio de mensajería pub/sub?",
+    "options": [
+      "Amazon SQS",
+      "Amazon SNS",
+      "Amazon MQ",
+      "AWS AppSync"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "SNS (Simple Notification Service) es un servicio de mensajería pub/sub para comunicación aplicación-a-aplicación y aplicación-a-persona.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS CloudFormation?",
+    "options": [
+      "Servicio de monitoreo",
+      "Servicio de Infraestructura como Código",
+      "Servicio de base de datos",
+      "Red de distribución de contenido"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "CloudFormation te permite modelar y aprovisionar recursos de AWS usando plantillas.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona caché en memoria?",
+    "options": [
+      "Amazon RDS",
+      "Amazon ElastiCache",
+      "Amazon DynamoDB",
+      "Amazon Aurora"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "ElastiCache es un servicio de caché en memoria completamente gestionado que soporta Redis y Memcached.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon EFS?",
+    "options": [
+      "Almacenamiento de bloques",
+      "Almacenamiento de objetos",
+      "Almacenamiento de archivos gestionado para EC2",
+      "Almacenamiento de archivo"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "EFS (Elastic File System) proporciona almacenamiento de archivos escalable para usar con instancias EC2.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio ayuda a migrar bases de datos a AWS?",
+    "options": [
+      "AWS DataSync",
+      "AWS Database Migration Service",
+      "AWS Transfer Family",
+      "AWS Snow Family"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS DMS ayuda a migrar bases de datos a AWS con tiempo de inactividad mínimo.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon Lightsail?",
+    "options": [
+      "Computación sin servidor",
+      "Servicio simplificado de servidor privado virtual",
+      "Orquestación de contenedores",
+      "Almacén de datos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Lightsail proporciona servidores privados virtuales fáciles de usar con gestión simple.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio ejecuta contenedores Docker en AWS?",
+    "options": [
+      "AWS Lambda",
+      "Amazon ECS",
+      "AWS Batch",
+      "Amazon EC2"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "ECS (Elastic Container Service) es un servicio de orquestación de contenedores completamente gestionado.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Fargate?",
+    "options": [
+      "Servicio de máquina virtual",
+      "Computación sin servidor para contenedores",
+      "Servicio de base de datos",
+      "Red de distribución de contenido"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Fargate es un motor de computación sin servidor para contenedores que funciona con ECS y EKS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué clase de almacenamiento proporciona recuperación instantánea con menor costo que S3 Standard?",
+    "options": [
+      "S3 Glacier",
+      "S3 Standard-IA",
+      "S3 One Zone-IA",
+      "S3 Intelligent-Tiering"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "S3 Standard-IA (Acceso Infrecuente) ofrece menor costo para datos accedidos infrecuentemente con acceso de milisegundos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Para qué se usa Amazon Kinesis?",
+    "options": [
+      "Alojamiento de sitios web estáticos",
+      "Transmisión de datos en tiempo real",
+      "Procesamiento por lotes",
+      "Respaldos de base de datos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Kinesis recopila, procesa y analiza datos de transmisión en tiempo real.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona Kubernetes gestionado?",
+    "options": [
+      "Amazon ECS",
+      "Amazon EKS",
+      "AWS Fargate",
+      "AWS Batch"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "EKS (Elastic Kubernetes Service) es un servicio de Kubernetes gestionado.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Systems Manager?",
+    "options": [
+      "Herramienta de gestión de base de datos",
+      "Servicio de gestión operacional para recursos de AWS",
+      "Servicio de monitoreo",
+      "Servicio de despliegue"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Systems Manager proporciona visibilidad y control de tu infraestructura en AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona una API GraphQL?",
+    "options": [
+      "Amazon API Gateway",
+      "AWS AppSync",
+      "Amazon Route 53",
+      "AWS Lambda"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS AppSync facilita construir APIs GraphQL con actualizaciones en tiempo real.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon Athena?",
+    "options": [
+      "Servicio de base de datos",
+      "Servicio de consulta para datos de S3 usando SQL",
+      "Almacén de datos",
+      "Servicio ETL"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Athena es un servicio de consulta interactivo para analizar datos en S3 usando SQL estándar.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio ayuda a transferir grandes cantidades de datos a AWS usando dispositivos físicos?",
+    "options": [
+      "AWS Direct Connect",
+      "AWS Snow Family",
+      "AWS DataSync",
+      "AWS Transfer Family"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Snow Family proporciona dispositivos físicos para migrar petabytes de datos a AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Glue?",
+    "options": [
+      "Almacén de datos",
+      "Servicio ETL (Extraer, Transformar, Cargar)",
+      "Servicio de base de datos",
+      "Servicio de análisis"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Glue es un servicio ETL completamente gestionado para preparar y cargar datos para análisis.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona conexión de red dedicada desde instalaciones locales a AWS?",
+    "options": [
+      "AWS VPN",
+      "AWS Direct Connect",
+      "Amazon VPC",
+      "AWS Transit Gateway"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Direct Connect establece una conexión de red dedicada desde tus instalaciones a AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué herramienta proporciona visualización de costos y uso de AWS a lo largo del tiempo?",
+    "options": [
+      "AWS Budgets",
+      "AWS Cost Explorer",
+      "AWS Pricing Calculator",
+      "AWS Organizations"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Cost Explorer visualiza, entiende y gestiona costos y uso de AWS a lo largo del tiempo.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué plan de soporte proporciona acceso a un Gerente de Cuenta Técnica?",
+    "options": [
+      "Basic",
+      "Developer",
+      "Business",
+      "Enterprise"
+    ],
+    "correct": [
+      3
+    ],
+    "type": "single",
+    "explanation": "Solo el plan de soporte Enterprise incluye un Gerente de Cuenta Técnica (TAM) dedicado.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué es el Nivel Gratuito de AWS?",
+    "options": [
+      "Uso gratuito ilimitado",
+      "Uso gratuito limitado de servicios de AWS por 12 meses",
+      "Soporte empresarial gratuito",
+      "Transferencia de datos gratuita"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "El Nivel Gratuito de AWS ofrece uso gratuito limitado de muchos servicios por 12 meses para nuevos clientes.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué modelo de precios ofrece el descuento más significativo para EC2?",
+    "options": [
+      "Bajo Demanda",
+      "Instancias Reservadas",
+      "Instancias Spot",
+      "Hosts Dedicados"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "Las Instancias Spot pueden proporcionar hasta 90% de descuento comparado con precios Bajo Demanda.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Cuáles son las características de las Instancias Reservadas de AWS? (Selecciona DOS)",
+    "options": [
+      "Descuento significativo comparado con Bajo Demanda",
+      "Pueden ser interrumpidas por AWS",
+      "Requieren compromiso de 1 o 3 años",
+      "No requieren pago por adelantado",
+      "Opción de mayor costo"
+    ],
+    "correct": [
+      0,
+      2
+    ],
+    "type": "multiple",
+    "explanation": "Las Instancias Reservadas ofrecen descuentos hasta 75% por compromisos de 1 o 3 años.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio ayuda a establecer presupuestos personalizados de costo y uso?",
+    "options": [
+      "AWS Cost Explorer",
+      "AWS Budgets",
+      "AWS Pricing Calculator",
+      "AWS Billing Dashboard"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Budgets te permite establecer presupuestos personalizados y recibir alertas cuando los costos excedan los umbrales.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Para qué se usa AWS Organizations?",
+    "options": [
+      "Monitorear costos",
+      "Gestionar centralmente múltiples cuentas de AWS",
+      "Desplegar aplicaciones",
+      "Gestionar usuarios de IAM"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Organizations ayuda a gestionar y gobernar centralmente múltiples cuentas de AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué plan de soporte se recomienda para cargas de trabajo de producción?",
+    "options": [
+      "Basic",
+      "Developer",
+      "Business",
+      "Enterprise"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "Los planes Business y Enterprise se recomiendan para cargas de trabajo de producción.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Trusted Advisor?",
+    "options": [
+      "Solo herramienta de optimización de costos",
+      "Servicio que proporciona recomendaciones en múltiples categorías",
+      "Servicio de monitoreo de seguridad",
+      "Servicio de respaldo"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Trusted Advisor proporciona recomendaciones de mejores prácticas para optimización de costos, seguridad, rendimiento y tolerancia a fallos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué modelo de precios te permite pagar solo cuando las instancias están ejecutándose?",
+    "options": [
+      "Instancias Reservadas",
+      "Instancias Bajo Demanda",
+      "Instancias Spot",
+      "Savings Plans"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Las Instancias Bajo Demanda te permiten pagar por capacidad de computación por hora sin compromisos a largo plazo.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué es la facturación consolidada en AWS Organizations?",
+    "options": [
+      "Facturas individuales para cada cuenta",
+      "Una sola factura combinando uso de múltiples cuentas",
+      "Procesamiento automático de pagos",
+      "Etiquetas de asignación de costos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "La facturación consolidada combina uso de múltiples cuentas en una sola factura con posibles descuentos por volumen.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué herramienta ayuda a estimar el costo de servicios de AWS antes de usarlos?",
+    "options": [
+      "AWS Cost Explorer",
+      "AWS Pricing Calculator",
+      "AWS Budgets",
+      "AWS Cost and Usage Report"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Pricing Calculator ayuda a estimar facturas mensuales de AWS basadas en uso esperado.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué son los AWS Savings Plans?",
+    "options": [
+      "Beneficios de nivel gratuito",
+      "Modelo de precios flexible con compromiso de uso",
+      "Descuentos de compra única",
+      "Servicio de suscripción mensual"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Los Savings Plans ofrecen precios flexibles con ahorros significativos a cambio de compromiso de uso.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS es siempre gratuito?",
+    "options": [
+      "Amazon EC2",
+      "Amazon S3",
+      "AWS IAM",
+      "Amazon RDS"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "AWS IAM es siempre gratuito sin cargos adicionales por su uso.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es el beneficio de usar etiquetas para asignación de costos?",
+    "options": [
+      "Mejorar seguridad",
+      "Rastrear y categorizar costos por proyecto o departamento",
+      "Aumentar rendimiento",
+      "Automatizar despliegues"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Las etiquetas de asignación de costos ayudan a organizar y rastrear costos de AWS categorizando recursos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué plan de soporte proporciona acceso 24/7 a Ingenieros de Soporte en la Nube?",
+    "options": [
+      "Basic",
+      "Developer",
+      "Business",
+      "Todos los planes"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "Los planes Business y Enterprise proporcionan acceso 24/7 a Ingenieros de Soporte en la Nube.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Para qué se usa la Calculadora de Costo Total de Propiedad (TCO) de AWS?",
+    "options": [
+      "Calcular costos actuales de AWS",
+      "Comparar costos de ejecutar infraestructura local vs AWS",
+      "Establecer alertas de presupuesto",
+      "Estimar uso futuro"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "La Calculadora TCO ayuda a comparar el costo de infraestructura local con la nube de AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona datos detallados de costo y uso?",
+    "options": [
+      "AWS Cost Explorer",
+      "AWS Cost and Usage Report",
+      "AWS Budgets",
+      "AWS Pricing Calculator"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Cost and Usage Report proporciona los datos de costo y uso más completos disponibles.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué sucede cuando excedes los límites del Nivel Gratuito de AWS?",
+    "options": [
+      "La cuenta se suspende",
+      "Se aplican tarifas estándar de pago por uso",
+      "No hay cargos adicionales",
+      "Actualización automática a nivel pagado"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Cuando se exceden los límites del Nivel Gratuito, se aplican automáticamente las tarifas de uso estándar.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué factores afectan los costos de S3? (Selecciona DOS)",
+    "options": [
+      "Clase de almacenamiento usada",
+      "Número de usuarios de IAM",
+      "Número de solicitudes",
+      "Tipo de instancia EC2",
+      "Configuración de VPC"
+    ],
+    "correct": [
+      0,
+      2
+    ],
+    "type": "multiple",
+    "explanation": "Los costos de S3 se basan en la clase de almacenamiento, cantidad de datos almacenados y número/tipo de solicitudes.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es el beneficio de usar múltiples Zonas de Disponibilidad para desplegar aplicaciones?",
+    "options": [
+      "Menores costos",
+      "Mejor tolerancia a fallos y alta disponibilidad",
+      "Rendimiento más rápido",
+      "Gestión simplificada"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Múltiples AZs protegen contra fallas de un solo centro de datos, mejorando disponibilidad y tolerancia a fallos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué modelo de despliegue en la nube combina infraestructura local con servicios en la nube?",
+    "options": [
+      "Pública",
+      "Privada",
+      "Híbrida",
+      "Comunitaria"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "La nube híbrida integra centros de datos locales con infraestructura en la nube.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué significa 'infraestructura como código'?",
+    "options": [
+      "Escribir código de aplicación",
+      "Gestionar infraestructura a través de archivos legibles por máquina",
+      "Codificar políticas de seguridad",
+      "Programar rutas de red"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Infraestructura como código gestiona infraestructura usando archivos de configuración en lugar de procesos manuales.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué ventaja permite a los clientes dejar de adivinar las necesidades de capacidad?",
+    "options": [
+      "Escalabilidad y elasticidad",
+      "Alcance global",
+      "Ahorro de costos",
+      "Seguridad"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "La escalabilidad y elasticidad permiten ajuste automático de capacidad basado en demanda real.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es el principal beneficio de la infraestructura global de AWS?",
+    "options": [
+      "Menores costos",
+      "Desplegar aplicaciones cerca de usuarios finales en todo el mundo",
+      "Facturación simplificada",
+      "Riesgos de seguridad reducidos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "La infraestructura global permite desplegar aplicaciones en múltiples regiones geográficas para menor latencia.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué debes hacer con claves de acceso de usuario de IAM no utilizadas?",
+    "options": [
+      "Compartirlas con miembros del equipo",
+      "Rotarlas anualmente",
+      "Eliminarlas o desactivarlas",
+      "Almacenarlas en documentación"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "Las claves de acceso no utilizadas deben eliminarse o desactivarse para seguir mejores prácticas de seguridad.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio analiza automáticamente e identifica recursos de AWS compartidos externamente?",
+    "options": [
+      "AWS IAM Access Analyzer",
+      "Amazon GuardDuty",
+      "AWS Config",
+      "AWS CloudTrail"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "IAM Access Analyzer ayuda a identificar recursos compartidos con entidades externas.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Para qué se usa AWS Certificate Manager?",
+    "options": [
+      "Gestionar certificados de IAM",
+      "Aprovisionar y gestionar certificados SSL/TLS",
+      "Preparación para examen de certificación",
+      "Certificaciones de cumplimiento"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Certificate Manager aprovisiona, gestiona y despliega certificados SSL/TLS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "Bajo el Modelo de Responsabilidad Compartida, ¿quién gestiona la seguridad de infraestructura de AWS?",
+    "options": [
+      "Cliente",
+      "AWS",
+      "Auditor de terceros",
+      "Tanto AWS como cliente"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS es responsable de la seguridad 'de' la nube - la infraestructura que ejecuta servicios de AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es el propósito de AWS Network Firewall?",
+    "options": [
+      "Monitorear llamadas de API",
+      "Proteger VPC con servicio de firewall gestionado",
+      "Gestionar certificados SSL",
+      "Escanear malware"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Network Firewall proporciona filtrado de tráfico de red para Amazon VPC.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona registro de contenedores Docker completamente gestionado?",
+    "options": [
+      "Amazon ECS",
+      "Amazon ECR",
+      "Amazon EKS",
+      "AWS Fargate"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon ECR (Elastic Container Registry) es un registro de contenedores completamente gestionado.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Step Functions?",
+    "options": [
+      "Servicio de base de datos",
+      "Servicio de orquestación de flujos de trabajo",
+      "Servicio de monitoreo",
+      "Servicio de almacenamiento"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Step Functions coordina múltiples servicios de AWS en flujos de trabajo sin servidor.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona broker de mensajes gestionado para Apache ActiveMQ y RabbitMQ?",
+    "options": [
+      "Amazon SQS",
+      "Amazon SNS",
+      "Amazon MQ",
+      "Amazon Kinesis"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "Amazon MQ es un servicio de broker de mensajes gestionado para ActiveMQ y RabbitMQ.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Global Accelerator?",
+    "options": [
+      "Servicio CDN",
+      "Servicio de red que mejora disponibilidad y rendimiento",
+      "Aceleración de base de datos",
+      "Optimización de computación"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Global Accelerator mejora disponibilidad y rendimiento de aplicaciones usando la red global de AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona Apache Spark y Hadoop gestionados?",
+    "options": [
+      "AWS Glue",
+      "Amazon EMR",
+      "Amazon Athena",
+      "AWS Data Pipeline"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon EMR (Elastic MapReduce) proporciona marcos de big data gestionados incluyendo Spark y Hadoop.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Outposts?",
+    "options": [
+      "Servicio de computación en el borde",
+      "Servicio completamente gestionado que extiende infraestructura de AWS a instalaciones locales",
+      "Red de distribución de contenido",
+      "Servicio de base de datos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Outposts lleva infraestructura y servicios de AWS a instalaciones locales.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona flujos de trabajo gestionados para procesamiento de big data?",
+    "options": [
+      "AWS Step Functions",
+      "AWS Data Pipeline",
+      "Amazon EMR",
+      "AWS Glue"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Data Pipeline procesa y mueve datos entre diferentes servicios de computación y almacenamiento de AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon QuickSight?",
+    "options": [
+      "Servicio de monitoreo",
+      "Servicio de inteligencia de negocios y visualización",
+      "Servicio de base de datos",
+      "Servicio de seguridad"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon QuickSight es un servicio de inteligencia de negocios en la nube para crear visualizaciones.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona base de datos de series temporales gestionada?",
+    "options": [
+      "Amazon DynamoDB",
+      "Amazon Timestream",
+      "Amazon RDS",
+      "Amazon Neptune"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon Timestream es una base de datos de series temporales rápida, escalable y completamente gestionada.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS App Runner?",
+    "options": [
+      "Orquestación de contenedores",
+      "Servicio completamente gestionado para desplegar aplicaciones web en contenedores",
+      "Computación sin servidor",
+      "Migración de base de datos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS App Runner facilita desplegar aplicaciones web y APIs en contenedores a escala.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué opción de precios no requiere pago por adelantado?",
+    "options": [
+      "Instancias Reservadas Todo por Adelantado",
+      "Instancias Reservadas Parcialmente por Adelantado",
+      "Instancias Bajo Demanda",
+      "Instancias Spot"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "Las Instancias Bajo Demanda no tienen costos por adelantado - solo pagas por lo que usas.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué son los AWS Compute Savings Plans?",
+    "options": [
+      "Programa de descuento de EC2",
+      "Modelo de precios flexible para uso de computación en EC2, Lambda y Fargate",
+      "Descuento de almacenamiento",
+      "Descuento de transferencia de red"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Los Compute Savings Plans proporcionan ahorros en uso de computación independientemente de familia, tamaño o región de instancia.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué factores afectan los precios de EC2? (Selecciona DOS)",
+    "options": [
+      "Tipo de instancia",
+      "Número de usuarios de IAM",
+      "Región",
+      "Nombres de buckets de S3",
+      "Métricas de CloudWatch"
+    ],
+    "correct": [
+      0,
+      2
+    ],
+    "type": "multiple",
+    "explanation": "Los precios de EC2 varían por tipo de instancia y la región donde se despliegan las instancias.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué es la Red de Socios de AWS (APN)?",
+    "options": [
+      "Red de empleados de AWS",
+      "Comunidad global de socios que aprovechan AWS",
+      "Herramienta de comunicación interna de AWS",
+      "Foro de soporte al cliente"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "APN es una comunidad global de socios que construyen soluciones y servicios en AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué plan de soporte proporciona acceso a la API de AWS Support?",
+    "options": [
+      "Basic",
+      "Developer",
+      "Business",
+      "Todos los planes"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "Los planes de soporte Business y Enterprise incluyen acceso a la API de AWS Support.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué es la computación sin servidor?",
+    "options": [
+      "Ejecutar servidores sin SO",
+      "El proveedor de nube gestiona la infraestructura del servidor",
+      "Servidores privados virtuales",
+      "Servidores físicos dedicados"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "La computación sin servidor permite ejecutar código sin aprovisionar o gestionar servidores.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué representa el concepto de 'agilidad' en computación en la nube?",
+    "options": [
+      "Planificación manual de capacidad",
+      "Acceso rápido a recursos de TI e innovación más rápida",
+      "Propiedad de hardware físico",
+      "Ciclos de adquisición largos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Agilidad significa tiempo reducido para hacer recursos disponibles a desarrolladores de semanas a minutos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Systems Manager Parameter Store?",
+    "options": [
+      "Configuración de parámetros de base de datos",
+      "Almacenamiento seguro para datos de configuración y secretos",
+      "Parámetros de instancia EC2",
+      "Configuración de parámetros de red"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Parameter Store proporciona almacenamiento seguro y jerárquico para datos de configuración y secretos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio ayuda a detectar y responder a hallazgos de seguridad?",
+    "options": [
+      "AWS Security Hub",
+      "AWS Config",
+      "AWS CloudTrail",
+      "AWS Systems Manager"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Security Hub agrega y prioriza hallazgos de seguridad de múltiples servicios de AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon EventBridge?",
+    "options": [
+      "Balanceador de carga",
+      "Servicio de bus de eventos sin servidor",
+      "Servicio de base de datos",
+      "Gateway de almacenamiento"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "EventBridge es un bus de eventos sin servidor que conecta aplicaciones usando eventos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona Apache Kafka gestionado?",
+    "options": [
+      "Amazon MQ",
+      "Amazon MSK",
+      "Amazon SQS",
+      "Amazon Kinesis"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon MSK (Managed Streaming for Apache Kafka) es un servicio de Apache Kafka completamente gestionado.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Transit Gateway?",
+    "options": [
+      "Gateway de API",
+      "Hub de tránsito de red que conecta VPCs y redes locales",
+      "Gateway de almacenamiento",
+      "Gateway de base de datos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Transit Gateway conecta VPCs y redes locales a través de un hub central.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona redes blockchain gestionadas?",
+    "options": [
+      "AWS Lambda",
+      "Amazon Managed Blockchain",
+      "Amazon DynamoDB",
+      "AWS Step Functions"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon Managed Blockchain crea y gestiona redes blockchain escalables.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Storage Gateway?",
+    "options": [
+      "Bucket de S3",
+      "Servicio de almacenamiento híbrido en la nube que conecta instalaciones locales con AWS",
+      "Servicio de base de datos",
+      "Servicio CDN"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Storage Gateway conecta aplicaciones de software locales con almacenamiento basado en la nube.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona base de datos de grafos gestionada?",
+    "options": [
+      "Amazon DynamoDB",
+      "Amazon Neptune",
+      "Amazon RDS",
+      "Amazon DocumentDB"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon Neptune es un servicio de base de datos de grafos completamente gestionado.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué determina los costos de transferencia de datos en AWS?",
+    "options": [
+      "La transferencia de datos hacia AWS es gratuita, la transferencia saliente se cobra",
+      "Toda la transferencia de datos es gratuita",
+      "Tanto la entrada como la salida se cobran por igual",
+      "Solo se cobra la transferencia entre regiones"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "La transferencia de datos hacia AWS es típicamente gratuita, mientras que la transferencia saliente incurre en cargos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio ayuda a optimizar los costos de AWS a través de recomendaciones?",
+    "options": [
+      "AWS Cost Explorer",
+      "AWS Trusted Advisor",
+      "AWS Budgets",
+      "AWS Organizations"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Trusted Advisor proporciona recomendaciones de optimización de costos junto con otras mejores prácticas.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué es una zona local en AWS?",
+    "options": [
+      "Lo mismo que una Zona de Disponibilidad",
+      "Extensión de una Región de AWS más cerca de los usuarios finales",
+      "Centro de datos local",
+      "Ubicación de borde"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Las Local Zones colocan computación, almacenamiento y otros servicios de AWS más cerca de grandes centros de población.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué principio de diseño se enfoca en automatizar las mejores prácticas de seguridad?",
+    "options": [
+      "Revisiones manuales de seguridad",
+      "Seguridad por oscuridad",
+      "Implementar seguridad en todas las capas",
+      "Registro mínimo"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "Implementar seguridad en todas las capas es un principio clave del AWS Well-Architected Framework.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon Detective?",
+    "options": [
+      "Servicio de detección de amenazas",
+      "Servicio de investigación y análisis de seguridad",
+      "Herramienta de auditoría de cumplimiento",
+      "Escáner de vulnerabilidades"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Detective analiza y visualiza datos de seguridad para investigar posibles problemas de seguridad.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué característica ayuda a hacer cumplir MFA para el acceso a la consola de AWS?",
+    "options": [
+      "Grupos de seguridad",
+      "Políticas de IAM",
+      "ACLs de red",
+      "Endpoints de VPC"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Las políticas de IAM pueden configurarse para requerir MFA para el acceso a la consola.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon MemoryDB for Redis?",
+    "options": [
+      "Servicio de caché",
+      "Base de datos en memoria duradera compatible con Redis",
+      "Base de datos relacional",
+      "Base de datos NoSQL"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "MemoryDB es una base de datos en memoria duradera compatible con Redis.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona Apache Cassandra gestionado?",
+    "options": [
+      "Amazon DynamoDB",
+      "Amazon Keyspaces",
+      "Amazon DocumentDB",
+      "Amazon Neptune"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon Keyspaces (for Apache Cassandra) es una base de datos escalable y gestionada compatible con Cassandra.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Wavelength?",
+    "options": [
+      "Servicio CDN",
+      "Servicio que lleva AWS al borde de la red 5G",
+      "Servicio de comunicación satelital",
+      "Servicio IoT"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Wavelength integra computación y almacenamiento de AWS dentro de redes 5G para latencia ultra baja.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona Apache Airflow gestionado?",
+    "options": [
+      "AWS Glue",
+      "AWS Step Functions",
+      "Amazon MWAA",
+      "AWS Data Pipeline"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "Amazon MWAA (Managed Workflows for Apache Airflow) es un servicio de orquestación gestionado.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Backup?",
+    "options": [
+      "Replicación de S3",
+      "Servicio de respaldo centralizado para servicios de AWS",
+      "Solo respaldo de base de datos",
+      "Servicio de instantáneas de EC2"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Backup centraliza y automatiza el respaldo de datos en servicios de AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Marketplace?",
+    "options": [
+      "Mercado de bienes físicos",
+      "Catálogo digital de soluciones de software de terceros",
+      "Mercado de entrenamiento de AWS",
+      "Mercado de empleos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Marketplace es un catálogo digital de listados de software de proveedores independientes.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué informe proporciona los datos de costo y uso más granulares?",
+    "options": [
+      "AWS Cost Explorer",
+      "AWS Cost and Usage Report",
+      "AWS Budgets",
+      "Panel de Facturación"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Cost and Usage Report proporciona la información de costos más completa y detallada.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es la diferencia entre escalabilidad y elasticidad?",
+    "options": [
+      "Son lo mismo",
+      "La escalabilidad es manual, la elasticidad es automática",
+      "La escalabilidad agrega recursos, la elasticidad los reduce",
+      "No hay diferencia significativa"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "La escalabilidad puede ser manual o automática; la elasticidad se refiere específicamente al escalado automático hacia arriba y abajo.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Cuál NO es un pilar del AWS Well-Architected Framework?",
+    "options": [
+      "Optimización de Costos",
+      "Sostenibilidad",
+      "Velocidad",
+      "Seguridad"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "Los seis pilares son: Excelencia Operacional, Seguridad, Confiabilidad, Eficiencia de Rendimiento, Optimización de Costos y Sostenibilidad.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Resource Access Manager (RAM)?",
+    "options": [
+      "Servicio de gestión de memoria",
+      "Servicio para compartir recursos de AWS entre cuentas",
+      "Gestor de roles de IAM",
+      "Control de acceso a base de datos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "RAM permite compartir recursos de AWS entre cuentas de AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio ayuda a mantener evidencia de cumplimiento?",
+    "options": [
+      "AWS CloudTrail",
+      "AWS Audit Manager",
+      "AWS Config",
+      "AWS Inspector"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Audit Manager ayuda a auditar continuamente el uso de AWS y automatizar la recopilación de evidencia.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon AppFlow?",
+    "options": [
+      "Servicio de despliegue de aplicaciones",
+      "Servicio de integración para aplicaciones SaaS y servicios de AWS",
+      "Logs de flujo de red",
+      "Almacén de datos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AppFlow es un servicio de integración completamente gestionado para transferir datos de forma segura entre aplicaciones SaaS y AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona Microsoft SQL Server gestionado?",
+    "options": [
+      "Amazon Aurora",
+      "Amazon RDS",
+      "Amazon Redshift",
+      "Amazon DynamoDB"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon RDS soporta múltiples motores de base de datos incluyendo Microsoft SQL Server.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS IoT Core?",
+    "options": [
+      "Servicio de computación en el borde",
+      "Servicio en la nube gestionado para dispositivos IoT",
+      "Servicio de contenedores",
+      "Servicio de aprendizaje automático"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "IoT Core conecta dispositivos IoT a la nube y otros dispositivos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona base de datos completamente gestionada compatible con MongoDB?",
+    "options": [
+      "Amazon DynamoDB",
+      "Amazon DocumentDB",
+      "Amazon RDS",
+      "Amazon Neptune"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon DocumentDB es una base de datos de documentos completamente gestionada compatible con MongoDB.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Application Discovery Service?",
+    "options": [
+      "Mercado de aplicaciones",
+      "Ayuda a planificar migraciones recopilando datos sobre centros de datos locales",
+      "Descubrimiento de servicios para microservicios",
+      "Monitoreo de aplicaciones"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Application Discovery Service ayuda a planificar migraciones recopilando información sobre centros de datos locales.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué es un Reserved Instance Marketplace?",
+    "options": [
+      "Comprar nuevas Instancias Reservadas",
+      "Vender Instancias Reservadas no utilizadas a otros clientes de AWS",
+      "Intercambiar Instancias Reservadas",
+      "Alquilar Instancias Reservadas"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "RI Marketplace permite vender Instancias Reservadas Estándar no utilizadas a otros clientes de AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es el principio de diseño de AWS con respecto a las fallas?",
+    "options": [
+      "Evitar fallas a toda costa",
+      "Diseñar para fallas y nada falla",
+      "Las fallas son aceptables",
+      "Solo recuperación manual"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS recomienda diseñar sistemas para manejar automáticamente fallas de componentes.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué concepto permite tratar la infraestructura como software?",
+    "options": [
+      "Redes definidas por software",
+      "Infraestructura como Código",
+      "DevOps",
+      "Integración continua"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Infraestructura como Código permite control de versiones y despliegue automatizado de infraestructura.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Firewall Manager?",
+    "options": [
+      "Firewall de EC2",
+      "Gestión centralizada de firewall entre cuentas",
+      "Monitoreo de red",
+      "Servicio VPN"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Firewall Manager configura y gestiona centralmente reglas de firewall entre cuentas.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué programa de cumplimiento es para datos de salud?",
+    "options": [
+      "PCI DSS",
+      "HIPAA",
+      "SOC 2",
+      "FedRAMP"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "HIPAA (Health Insurance Portability and Accountability Act) gobierna la protección de datos de salud.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon Managed Grafana?",
+    "options": [
+      "Servicio de base de datos",
+      "Servicio de visualización gestionado para métricas operacionales",
+      "Servicio de contenedores",
+      "Servicio de almacenamiento"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon Managed Grafana es un servicio completamente gestionado para visualizaciones de Grafana.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona Prometheus gestionado?",
+    "options": [
+      "CloudWatch",
+      "Amazon Managed Service for Prometheus",
+      "X-Ray",
+      "CloudTrail"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon Managed Service for Prometheus es un servicio de monitoreo compatible con Prometheus.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Proton?",
+    "options": [
+      "Servicio de física de partículas",
+      "Despliegue automatizado de infraestructura para aplicaciones de contenedores y sin servidor",
+      "Servicio de red",
+      "Servicio de base de datos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Proton es un servicio de entrega automatizada para aplicaciones de contenedores y sin servidor.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona flujos de trabajo ETL gestionados?",
+    "options": [
+      "AWS Glue",
+      "Amazon EMR",
+      "AWS Data Pipeline",
+      "Todos los anteriores"
+    ],
+    "correct": [
+      3
+    ],
+    "type": "single",
+    "explanation": "Los tres servicios pueden realizar operaciones ETL, aunque cada uno tiene diferentes casos de uso.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Lake Formation?",
+    "options": [
+      "Almacén de datos",
+      "Servicio para construir y gestionar lagos de datos",
+      "Servicio de base de datos",
+      "Servicio de análisis"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Lake Formation facilita configurar, asegurar y gestionar lagos de datos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona rastreo distribuido para aplicaciones?",
+    "options": [
+      "CloudWatch",
+      "CloudTrail",
+      "AWS X-Ray",
+      "Config"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "AWS X-Ray ayuda a analizar y depurar aplicaciones distribuidas.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué es un servicio del Nivel Gratuito de AWS que es siempre gratuito?",
+    "options": [
+      "Amazon EC2 (750 horas/mes)",
+      "AWS Lambda (1M solicitudes/mes)",
+      "Amazon S3 (5GB almacenamiento)",
+      "Amazon RDS (750 horas/mes)"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Lambda ofrece 1M de solicitudes gratuitas por mes permanentemente, no solo por 12 meses.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué herramienta ayuda a comparar costos de Instancias Reservadas vs Bajo Demanda?",
+    "options": [
+      "AWS Pricing Calculator",
+      "AWS Cost Explorer",
+      "AWS Budgets",
+      "AWS Trusted Advisor"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "AWS Pricing Calculator puede modelar diferentes opciones de compra para comparar costos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué significa la filosofía 'ganado no mascotas'?",
+    "options": [
+      "Los servidores son desechables y reemplazables",
+      "Los servidores necesitan cuidado individual",
+      "Gestión manual de servidores",
+      "Propiedad de servidores físicos"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Tratar servidores como ganado significa que son intercambiables y pueden ser reemplazados automáticamente.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Cuántas Zonas de Disponibilidad tiene típicamente una Región de AWS?",
+    "options": [
+      "1",
+      "2 o más (típicamente 3 o más)",
+      "Siempre exactamente 3",
+      "10 o más"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Las Regiones de AWS tienen al menos 2 AZs, con la mayoría teniendo 3 o más para alta disponibilidad.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Control Tower?",
+    "options": [
+      "Herramienta de gestión de servidores",
+      "Servicio para configurar y gobernar un entorno AWS multi-cuenta seguro",
+      "Servicio de monitoreo",
+      "Servicio de despliegue"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Control Tower automatiza la configuración de un entorno multi-cuenta bien arquitecturado.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona visibilidad y reportes de ataques DDoS?",
+    "options": [
+      "AWS WAF",
+      "AWS Shield Advanced",
+      "Amazon GuardDuty",
+      "AWS Security Hub"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Shield Advanced proporciona diagnósticos detallados de ataques y soporte del Equipo de Respuesta DDoS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon Elastic Transcoder?",
+    "options": [
+      "Servicio de conversión de código",
+      "Servicio de conversión de archivos multimedia",
+      "Traducción de idiomas",
+      "Transformación de datos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Elastic Transcoder convierte archivos multimedia del formato fuente a versiones para reproducción en dispositivos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona OpenSearch gestionado (anteriormente Elasticsearch)?",
+    "options": [
+      "Amazon RDS",
+      "Amazon OpenSearch Service",
+      "Amazon CloudSearch",
+      "Amazon Kendra"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon OpenSearch Service facilita desplegar, operar y escalar clústeres de OpenSearch.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Amplify?",
+    "options": [
+      "Servicio de amplificación de audio",
+      "Plataforma para construir aplicaciones móviles y web",
+      "Amplificador de red",
+      "Servicio de almacenamiento"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Amplify es una solución completa para construir y desplegar aplicaciones full-stack.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona Apache Flink gestionado?",
+    "options": [
+      "Amazon Kinesis Data Analytics",
+      "AWS Glue",
+      "Amazon EMR",
+      "AWS Data Pipeline"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Kinesis Data Analytics for Apache Flink proporciona procesamiento de datos de transmisión gestionado.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS CodeDeploy?",
+    "options": [
+      "Editor de código",
+      "Servicio de despliegue automatizado",
+      "Control de versiones",
+      "Compilación de código"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "CodeDeploy automatiza despliegues de código a cualquier instancia, incluyendo EC2 y locales.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué es una Instancia Reservada Convertible?",
+    "options": [
+      "Puede convertirse a Instancia Spot",
+      "Puede cambiar familia de instancia, SO y tenencia",
+      "Puede convertirse a Bajo Demanda",
+      "Conversión de una sola vía únicamente"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Las RIs Convertibles proporcionan flexibilidad para cambiar atributos de instancia durante el término.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué es el acoplamiento débil en arquitectura de nube?",
+    "options": [
+      "Los componentes están estrechamente integrados",
+      "Los componentes son independientes y pueden fallar sin afectar a otros",
+      "Todos los servicios ejecutan en un servidor",
+      "Se requiere coordinación manual"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "El acoplamiento débil significa que los componentes interactúan a través de interfaces bien definidas y pueden operar independientemente.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué pilar del Well-Architected se enfoca en el impacto ambiental?",
+    "options": [
+      "Optimización de Costos",
+      "Excelencia Operacional",
+      "Sostenibilidad",
+      "Eficiencia de Rendimiento"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "El pilar de Sostenibilidad se enfoca en minimizar los impactos ambientales de las cargas de trabajo en la nube.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué es la Política de Uso Aceptable de AWS?",
+    "options": [
+      "Código de conducta de empleados",
+      "Política que describe usos prohibidos de los servicios de AWS",
+      "Política de retención de datos",
+      "Política de precios"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "La Política de Uso Aceptable describe los usos prohibidos de los servicios de AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona Active Directory gestionado?",
+    "options": [
+      "AWS IAM",
+      "AWS Directory Service",
+      "Amazon Cognito",
+      "AWS SSO"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Directory Service proporciona Microsoft Active Directory gestionado.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon Comprehend?",
+    "options": [
+      "Compresión de datos",
+      "Servicio de procesamiento de lenguaje natural",
+      "Servicio de base de datos",
+      "Analizador de red"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon Comprehend usa aprendizaje automático para encontrar insights y relaciones en texto.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona despliegue de modelos de aprendizaje automático gestionado?",
+    "options": [
+      "Amazon SageMaker",
+      "AWS Deep Learning AMIs",
+      "Amazon Rekognition",
+      "Amazon Comprehend"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Amazon SageMaker proporciona todo lo necesario para construir, entrenar y desplegar modelos de ML.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Device Farm?",
+    "options": [
+      "Gestión de dispositivos IoT",
+      "Servicio de pruebas de aplicaciones en dispositivos reales",
+      "Mercado de hardware",
+      "Inventario de dispositivos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Device Farm prueba aplicaciones móviles y web en dispositivos reales en la Nube de AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona análisis de imágenes y videos?",
+    "options": [
+      "Amazon Comprehend",
+      "Amazon Rekognition",
+      "Amazon Textract",
+      "Amazon Transcribe"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon Rekognition analiza imágenes y videos para objetos, personas, texto y actividades.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS CodeCommit?",
+    "options": [
+      "Despliegue de código",
+      "Servicio de control de código fuente gestionado (Git)",
+      "Herramienta de revisión de código",
+      "IDE"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "CodeCommit es un servicio de control de código fuente completamente gestionado que aloja repositorios Git.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué sucede con la transferencia de datos entre servicios en la misma Zona de Disponibilidad?",
+    "options": [
+      "Siempre se cobra",
+      "Gratuita cuando se usan direcciones IP privadas",
+      "Cargos dobles",
+      "50% de descuento"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "La transferencia de datos dentro de la misma AZ usando direcciones IP privadas es gratuita.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué es infraestructura inmutable?",
+    "options": [
+      "Infraestructura que nunca cambia",
+      "Reemplazar servidores en lugar de actualizarlos",
+      "Servidores físicos permanentes",
+      "Direcciones IP estáticas"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Infraestructura inmutable significa que los servidores se reemplazan en lugar de modificarse después del despliegue.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon Cognito?",
+    "options": [
+      "Servicio de aprendizaje automático",
+      "Servicio de autenticación y autorización de usuarios",
+      "Servicio de base de datos",
+      "Servicio de monitoreo"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon Cognito proporciona autenticación, autorización y gestión de usuarios para aplicaciones web y móviles.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio descubre datos sensibles en AWS?",
+    "options": [
+      "Amazon Macie",
+      "AWS Config",
+      "Amazon Inspector",
+      "AWS Security Hub"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Amazon Macie descubre y protege datos sensibles como PII usando aprendizaje automático.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon Polly?",
+    "options": [
+      "Servicio de encuestas",
+      "Servicio de texto a voz",
+      "Herramienta de encuestas",
+      "Sistema de votación"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon Polly convierte texto en habla realista usando aprendizaje profundo.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio extrae texto de documentos?",
+    "options": [
+      "Amazon Comprehend",
+      "Amazon Textract",
+      "Amazon Rekognition",
+      "Amazon Transcribe"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon Textract extrae automáticamente texto y datos de documentos escaneados.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS CodeBuild?",
+    "options": [
+      "Editor de código",
+      "Servicio de construcción gestionado que compila código",
+      "Control de código fuente",
+      "Servicio de despliegue"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "CodeBuild es un servicio de construcción completamente gestionado que compila código fuente y ejecuta pruebas.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio convierte voz a texto?",
+    "options": [
+      "Amazon Polly",
+      "Amazon Transcribe",
+      "Amazon Translate",
+      "Amazon Comprehend"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon Transcribe convierte automáticamente voz a texto.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS CodePipeline?",
+    "options": [
+      "Pipeline de datos",
+      "Servicio de entrega continua",
+      "Pipeline de red",
+      "Pipeline de almacenamiento"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "CodePipeline es un servicio de entrega continua para actualizaciones de aplicaciones rápidas y confiables.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es la principal diferencia entre Instancias Reservadas Todo por Adelantado y Sin Pago Adelantado?",
+    "options": [
+      "Diferencia de rendimiento",
+      "Estructura de pago y nivel de descuento",
+      "Disponibilidad de región",
+      "Tipos de instancia disponibles"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Todo por Adelantado proporciona el mayor descuento, Sin Pago Adelantado distribuye costos pero ofrece menor descuento.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS no incurre en cargos?",
+    "options": [
+      "Amazon EC2",
+      "Amazon VPC",
+      "Amazon RDS",
+      "Amazon S3"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon VPC en sí no tiene cargos adicionales, aunque los recursos dentro de él pueden incurrir en cargos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué significa 'recursos desechables' en la nube?",
+    "options": [
+      "Los recursos se desperdician",
+      "Los recursos pueden crearse y terminarse fácilmente",
+      "Recursos de baja calidad",
+      "Solo almacenamiento temporal"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Los recursos desechables pueden lanzarse y terminarse fácilmente sin impacto significativo.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué describe una arquitectura monolítica?",
+    "options": [
+      "Microservicios independientes",
+      "Aplicación única estrechamente acoplada",
+      "Sistema distribuido",
+      "Arquitectura sin servidor"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "La arquitectura monolítica tiene todos los componentes estrechamente integrados en una sola aplicación.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Single Sign-On (AWS SSO / IAM Identity Center)?",
+    "options": [
+      "Gestor de contraseñas",
+      "Gestión de acceso centralizada para múltiples cuentas de AWS",
+      "Servicio VPN",
+      "Gateway de API"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS SSO (ahora IAM Identity Center) proporciona acceso de inicio de sesión único a múltiples cuentas de AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué es cifrado en reposo?",
+    "options": [
+      "Cifrar datos durante transmisión",
+      "Cifrar datos almacenados en disco",
+      "Cifrar llamadas de API",
+      "Cifrar tráfico de red"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "El cifrado en reposo protege datos almacenados en discos del acceso no autorizado.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon Translate?",
+    "options": [
+      "Traducción de código",
+      "Servicio de traducción de idiomas",
+      "Transformación de datos",
+      "Conversión de formato"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon Translate proporciona traducción automática neuronal para texto entre idiomas.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona datos de transmisión en tiempo real gestionados?",
+    "options": [
+      "Amazon SQS",
+      "Amazon Kinesis",
+      "AWS Batch",
+      "AWS Step Functions"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon Kinesis facilita recopilar, procesar y analizar datos de transmisión en tiempo real.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Batch?",
+    "options": [
+      "Servicio de procesamiento por lotes gestionado",
+      "Almacén de datos",
+      "Cola de mensajes",
+      "Almacenamiento de archivos"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "AWS Batch ejecuta cargas de trabajo de computación por lotes en AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona búsqueda inteligente de documentos?",
+    "options": [
+      "Amazon Kendra",
+      "Amazon CloudSearch",
+      "Amazon Comprehend",
+      "Amazon Textract"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Amazon Kendra es un servicio de búsqueda inteligente impulsado por aprendizaje automático.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS CloudShell?",
+    "options": [
+      "Emulador de terminal",
+      "Shell basado en navegador para gestión de AWS",
+      "Escritorio virtual",
+      "Shell de contenedor"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS CloudShell es un shell basado en navegador que facilita gestionar recursos de AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué es EC2 Savings Plans?",
+    "options": [
+      "Descuento solo en EC2",
+      "Precios flexibles para uso de EC2, Fargate y Lambda",
+      "Descuento de almacenamiento",
+      "Descuento de red"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Los Savings Plans proporcionan precios flexibles para EC2, Fargate y Lambda con compromiso.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué es una arquitectura de microservicios?",
+    "options": [
+      "Solo aplicaciones pequeñas",
+      "Aplicación construida como servicios independientes débilmente acoplados",
+      "Aplicación monolítica",
+      "Despliegue de un solo servidor"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "La arquitectura de microservicios estructura una aplicación como colección de servicios débilmente acoplados.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué significa RTO en recuperación ante desastres?",
+    "options": [
+      "Recovery Time Objective",
+      "Real-Time Operations",
+      "Return to Operations",
+      "Rapid Transfer Operations"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "RTO es el tiempo máximo aceptable que una aplicación puede estar fuera de línea.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué significa RPO en recuperación ante desastres?",
+    "options": [
+      "Rapid Protection Operations",
+      "Recovery Point Objective",
+      "Real-time Processing Operations",
+      "Return Protection Operations"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "RPO es la cantidad máxima aceptable de pérdida de datos medida en tiempo.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué es cifrado en tránsito?",
+    "options": [
+      "Cifrar datos almacenados",
+      "Cifrar datos mientras se mueven por redes",
+      "Cifrar bases de datos",
+      "Cifrar archivos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "El cifrado en tránsito protege datos mientras se mueven entre ubicaciones por redes.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué es la rotación de AWS Secrets Manager?",
+    "options": [
+      "Cambios manuales de contraseña",
+      "Rotación automática de credenciales secretas",
+      "Rotación de logs",
+      "Rotación de pares de claves"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Secrets Manager puede rotar automáticamente secretos en un horario programado.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon Forecast?",
+    "options": [
+      "Predicción del clima",
+      "Servicio de pronóstico de series temporales usando ML",
+      "Predicción de recursos",
+      "Pronóstico de costos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon Forecast usa aprendizaje automático para entregar pronósticos precisos basados en datos de series temporales.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona recomendaciones personalizadas?",
+    "options": [
+      "Amazon Personalize",
+      "Amazon Forecast",
+      "Amazon Kendra",
+      "Amazon Comprehend"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Amazon Personalize crea recomendaciones personalizadas de productos y contenido.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS App Mesh?",
+    "options": [
+      "Mercado de aplicaciones",
+      "Malla de servicios para microservicios",
+      "Constructor de aplicaciones móviles",
+      "Malla de red"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "App Mesh proporciona redes a nivel de aplicación para microservicios.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona detección de fraude?",
+    "options": [
+      "Amazon Fraud Detector",
+      "Amazon GuardDuty",
+      "Amazon Macie",
+      "Amazon Detective"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Amazon Fraud Detector usa aprendizaje automático para identificar actividad potencialmente fraudulenta.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS PrivateLink?",
+    "options": [
+      "Servicio VPN",
+      "Conectividad privada entre VPCs y servicios",
+      "Alternativa a Direct Connect",
+      "Subred privada"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "PrivateLink proporciona conectividad privada entre VPCs, servicios de AWS y locales.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es el beneficio de los descuentos por volumen con facturación consolidada?",
+    "options": [
+      "Descuentos de cuenta individual",
+      "Uso combinado entre cuentas para niveles de volumen",
+      "Solo facturación separada",
+      "Sin descuentos por volumen"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "La facturación consolidada combina el uso entre cuentas para alcanzar niveles de descuento por volumen más rápido.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué plan de soporte proporciona respuesta de menos de 15 minutos para problemas críticos del negocio?",
+    "options": [
+      "Business",
+      "Enterprise",
+      "Developer",
+      "Basic"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "El soporte Enterprise proporciona tiempo de respuesta de 15 minutos para problemas críticos de sistema caído del negocio.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es el propósito de las AWS Local Zones?",
+    "options": [
+      "Ubicaciones de respaldo",
+      "Colocar recursos más cerca de usuarios finales para baja latencia",
+      "Entornos de desarrollo",
+      "Ahorro de costos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Las Local Zones colocan computación y almacenamiento más cerca de usuarios finales para latencia de milisegundos de un dígito.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es el límite del modelo de responsabilidad compartida para S3?",
+    "options": [
+      "AWS gestiona todo",
+      "AWS gestiona infraestructura, cliente gestiona datos y controles de acceso",
+      "Cliente gestiona todo",
+      "Terceros gestionan seguridad"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Para S3, AWS asegura la infraestructura mientras los clientes aseguran sus datos y configuran acceso.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué es el principio de defensa en profundidad?",
+    "options": [
+      "Capa de seguridad única",
+      "Múltiples capas de controles de seguridad",
+      "Solo seguridad física",
+      "Solo seguridad de red"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Defensa en profundidad usa múltiples capas de seguridad para que si una falla, otras aún proporcionen protección.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué es un endpoint de VPC?",
+    "options": [
+      "Punto de conexión VPN",
+      "Conexión privada a servicios de AWS sin gateway de internet",
+      "Dirección IP pública",
+      "Endpoint de balanceador de carga"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Los endpoints de VPC permiten conexiones privadas a servicios de AWS sin usar internet público.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon Connect?",
+    "options": [
+      "Servicio VPN",
+      "Servicio de centro de contacto en la nube",
+      "Conexión de red",
+      "Agrupación de conexiones de base de datos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon Connect es un servicio de centro de contacto basado en la nube.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona recomendaciones de código?",
+    "options": [
+      "AWS CodeCommit",
+      "Amazon CodeGuru",
+      "AWS CodeBuild",
+      "AWS CodeDeploy"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon CodeGuru proporciona recomendaciones inteligentes para mejorar la calidad del código.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS DataSync?",
+    "options": [
+      "Sincronización de base de datos",
+      "Servicio de transferencia de datos para mover datos a AWS",
+      "Respaldo de datos",
+      "Replicación de datos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "DataSync simplifica, automatiza y acelera el movimiento de datos entre instalaciones locales y AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio gestiona la creación y publicación de APIs?",
+    "options": [
+      "AWS Lambda",
+      "Amazon API Gateway",
+      "AWS AppSync",
+      "Amazon CloudFront"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "API Gateway crea, publica, mantiene, monitorea y asegura APIs REST y WebSocket.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Para qué son más adecuadas las Instancias Spot?",
+    "options": [
+      "Bases de datos críticas",
+      "Cargas de trabajo tolerantes a fallos, flexibles y sin estado",
+      "Servidores web de producción",
+      "Procesos críticos de larga duración"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Las Instancias Spot son ideales para cargas de trabajo tolerantes a fallos que pueden manejar interrupciones.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es el período mínimo de compromiso para Instancias Reservadas?",
+    "options": [
+      "6 meses",
+      "1 año",
+      "2 años",
+      "5 años"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Las Instancias Reservadas requieren un compromiso de 1 año o 3 años.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es el beneficio de desacoplar componentes de aplicación?",
+    "options": [
+      "Costos reducidos",
+      "Los componentes pueden escalar y fallar independientemente",
+      "Rendimiento más rápido",
+      "Gestión más simple"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "El desacoplamiento permite que los componentes operen independientemente, mejorando resistencia y escalabilidad.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es la recomendación de AWS para pruebas?",
+    "options": [
+      "Probar solo en producción",
+      "Probar a escala en entornos aislados",
+      "Solo pruebas manuales",
+      "Omitir pruebas en la nube"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS recomienda crear entornos de prueba que reflejen la producción para pruebas integrales.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS CloudHSM?",
+    "options": [
+      "Monitoreo de nube",
+      "Módulo de seguridad de hardware en AWS Cloud",
+      "Gestión de seguridad",
+      "Software de cifrado"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "CloudHSM proporciona módulos de seguridad de hardware en AWS Cloud para operaciones criptográficas.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué es una ACL de Red?",
+    "options": [
+      "Firewall a nivel de subred",
+      "Firewall a nivel de instancia",
+      "Firewall de aplicación",
+      "Filtro DNS"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Las ACLs de Red son firewalls sin estado que controlan tráfico a nivel de subred.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon SageMaker Canvas?",
+    "options": [
+      "Herramienta de dibujo",
+      "Construcción de modelos ML sin código",
+      "Editor de código",
+      "Visualización de datos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "SageMaker Canvas proporciona aprendizaje automático sin código para analistas de negocio.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona virtualización de escritorio?",
+    "options": [
+      "Amazon WorkSpaces",
+      "AWS AppStream",
+      "Amazon Connect",
+      "AWS Cloud9"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Amazon WorkSpaces es una solución gestionada y segura de Escritorio como Servicio (DaaS).",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Cloud9?",
+    "options": [
+      "Almacenamiento en la nube",
+      "IDE basado en la nube",
+      "Servicio de base de datos",
+      "Herramienta de monitoreo"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Cloud9 es un entorno de desarrollo integrado (IDE) basado en la nube.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio transmite aplicaciones de escritorio?",
+    "options": [
+      "Amazon WorkSpaces",
+      "AWS AppStream 2.0",
+      "Amazon Connect",
+      "AWS Amplify"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AppStream 2.0 transmite aplicaciones de escritorio de forma segura a un navegador web.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS IoT Greengrass?",
+    "options": [
+      "Monitoreo ambiental",
+      "Computación en el borde para dispositivos IoT",
+      "Servicio de energía verde",
+      "Monitoreo de plantas"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "IoT Greengrass extiende AWS a dispositivos de borde para computación y mensajería local.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es la diferencia entre Instancias Reservadas Estándar y Convertibles?",
+    "options": [
+      "No hay diferencia",
+      "Convertible permite cambiar atributos de instancia",
+      "Estándar es más costosa",
+      "Convertible tiene términos más cortos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Las RIs Convertibles pueden intercambiarse por diferentes familias de instancia, SO o tenencia.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Cost Anomaly Detection?",
+    "options": [
+      "Monitoreo de seguridad",
+      "Servicio ML para detectar patrones de gasto inusuales",
+      "Monitoreo de rendimiento",
+      "Verificación de cumplimiento"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Cost Anomaly Detection usa ML para identificar gastos inusuales y causas raíz.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es la ventaja de la automatización en la nube?",
+    "options": [
+      "Costos más altos",
+      "Consistencia, velocidad y error humano reducido",
+      "Más complejidad",
+      "Despliegues más lentos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "La automatización mejora consistencia, acelera despliegues y reduce error humano.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué significa 'diseñar para fallas'?",
+    "options": [
+      "Aceptar fallas sin recuperación",
+      "Construir sistemas asumiendo que los componentes fallarán",
+      "Evitar redundancia",
+      "Puntos únicos de falla"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Diseñar para fallas significa arquitecturar sistemas para manejar fallas de componentes con gracia.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es el propósito de las políticas de control de servicios (SCPs)?",
+    "options": [
+      "Controlar servicios EC2",
+      "Establecer barreras de permisos para AWS Organizations",
+      "Políticas de base de datos",
+      "Políticas de red"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Las SCPs definen permisos máximos disponibles para cuentas en una organización.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS License Manager?",
+    "options": [
+      "Compra de licencias de software",
+      "Rastrear y gestionar licencias de software",
+      "Gestor de certificaciones de AWS",
+      "Verificador de licencias de código abierto"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "License Manager ayuda a gestionar licencias de software de proveedores en AWS y locales.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon Lex?",
+    "options": [
+      "Servicio legal",
+      "Servicio de IA conversacional para chatbots",
+      "Análisis de texto",
+      "Traducción de idiomas"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon Lex construye interfaces conversacionales usando voz y texto.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona automatización de procesos robóticos?",
+    "options": [
+      "AWS RoboMaker",
+      "Amazon Augmented AI",
+      "AWS IoT",
+      "Amazon SageMaker"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "AWS RoboMaker proporciona herramientas para desarrollar, probar y desplegar aplicaciones robóticas.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Ground Station?",
+    "options": [
+      "Ubicación física de AWS",
+      "Estación terrestre satelital como servicio",
+      "Centro de datos",
+      "Punto de presencia de red"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Ground Station proporciona estación terrestre satelital como servicio para comunicaciones satelitales.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona computación cuántica?",
+    "options": [
+      "AWS Lambda",
+      "Amazon Braket",
+      "Amazon SageMaker",
+      "AWS Batch"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon Braket ayuda a explorar y experimentar con computación cuántica.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Snowball Edge?",
+    "options": [
+      "Dispositivo de transferencia de datos con capacidades de computación",
+      "Router de borde de red",
+      "Dispositivo de seguridad",
+      "Gateway IoT"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Snowball Edge es un dispositivo de migración de datos con capacidades de computación y almacenamiento a bordo.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es la duración del Nivel Gratuito de AWS para la mayoría de servicios?",
+    "options": [
+      "6 meses",
+      "12 meses",
+      "24 meses",
+      "Para siempre"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "La mayoría de servicios del Nivel Gratuito de AWS están disponibles por 12 meses desde la creación de la cuenta.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de alertas de facturación es gratuito?",
+    "options": [
+      "AWS Budgets (primeros 2 presupuestos)",
+      "Cost Explorer",
+      "Cost and Usage Report",
+      "Trusted Advisor (verificaciones básicas)"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Los primeros dos AWS Budgets son gratuitos, presupuestos adicionales cuestan $0.02/día.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Infraestructura como Servicio (IaaS)?",
+    "options": [
+      "Aplicaciones gestionadas",
+      "Recursos de computación virtualizados por internet",
+      "Computación sin servidor",
+      "Escritorio como servicio"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "IaaS proporciona recursos de computación virtualizados como servidores, almacenamiento y redes.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Plataforma como Servicio (PaaS)?",
+    "options": [
+      "Servidores físicos",
+      "Plataforma para desplegar aplicaciones sin gestionar infraestructura",
+      "Aplicaciones de escritorio",
+      "Servicios de red"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "PaaS proporciona una plataforma para que desarrolladores construyan y desplieguen aplicaciones sin gestión de infraestructura.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Software como Servicio (SaaS)?",
+    "options": [
+      "Software descargable",
+      "Software entregado por internet con base de suscripción",
+      "Software de código abierto",
+      "Software local"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "SaaS entrega aplicaciones de software por internet, típicamente basado en suscripción.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué debes hacer si las claves de acceso de AWS están expuestas?",
+    "options": [
+      "Ignorarlo",
+      "Rotar o eliminar inmediatamente las claves",
+      "Esperar 30 días",
+      "Solo cambiar contraseña"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Las claves de acceso expuestas deben rotarse o eliminarse inmediatamente para prevenir acceso no autorizado.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Nitro System?",
+    "options": [
+      "Protocolo de red",
+      "Plataforma subyacente para instancias EC2",
+      "Motor de base de datos",
+      "Runtime de contenedores"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Nitro System es la plataforma subyacente que impulsa las instancias EC2 para mejor seguridad y rendimiento.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon Monitron?",
+    "options": [
+      "Monitoreo de seguridad",
+      "Sistema integral para monitoreo de equipos",
+      "Monitor de red",
+      "Monitoreo de costos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon Monitron es un sistema integral para monitorear equipos industriales.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona recopilación de datos industriales?",
+    "options": [
+      "AWS IoT SiteWise",
+      "Amazon CloudWatch",
+      "AWS IoT Core",
+      "Amazon Kinesis"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "AWS IoT SiteWise recopila, organiza y analiza datos de equipos industriales.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon Honeycode?",
+    "options": [
+      "Pruebas de seguridad",
+      "Constructor de aplicaciones sin código",
+      "Gestor de contraseñas",
+      "Servicio de cifrado"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon Honeycode permite construir aplicaciones sin conocimiento de programación.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué determina los costos de recuperación de S3 Glacier?",
+    "options": [
+      "Duración de almacenamiento",
+      "Velocidad de recuperación y cantidad de datos",
+      "Número de archivos",
+      "Ubicación del bucket"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Los costos de recuperación de Glacier dependen de la velocidad (acelerada, estándar, masiva) y cantidad de datos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es el beneficio de usar Instance Savings Plans?",
+    "options": [
+      "Descuentos de almacenamiento",
+      "Descuentos flexibles de computación con compromiso de familia de instancia",
+      "Descuentos de red",
+      "Descuentos de base de datos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Instance Savings Plans proporcionan descuentos para uso específico de familia de instancia en una región.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué es la Herramienta AWS Well-Architected?",
+    "options": [
+      "Herramienta de despliegue",
+      "Herramienta de revisión para arquitectura de carga de trabajo contra mejores prácticas",
+      "Herramienta de monitoreo",
+      "Calculadora de costos"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "La Herramienta Well-Architected ayuda a revisar cargas de trabajo contra mejores prácticas arquitectónicas de AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué es arquitectura dirigida por eventos?",
+    "options": [
+      "Procesamiento manual",
+      "Arquitectura donde los componentes reaccionan a eventos",
+      "Solo procesamiento por lotes",
+      "Solo tareas programadas"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "La arquitectura dirigida por eventos usa eventos para activar y comunicar entre servicios.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Signer?",
+    "options": [
+      "Firma de documentos",
+      "Servicio de firma de código para AWS Lambda",
+      "Autoridad de certificación",
+      "Servicio de autenticación"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Signer es un servicio de firma de código gestionado para asegurar confianza e integridad del código.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es Amazon Managed Blockchain Ethereum?",
+    "options": [
+      "Billetera de criptomonedas",
+      "Servicio de gestión de nodos Ethereum",
+      "Plataforma de trading",
+      "Servicio de minería"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Este servicio crea y gestiona nodos Ethereum para aplicaciones blockchain.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona plataforma de desarrollo de juegos?",
+    "options": [
+      "AWS GameLift",
+      "Amazon Lumberyard",
+      "AWS Lambda",
+      "Amazon EC2"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "AWS GameLift proporciona alojamiento de servidores de juegos gestionado con escalado automático.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Migration Hub?",
+    "options": [
+      "Mercado de migración",
+      "Servicio de seguimiento para migraciones de aplicaciones",
+      "Servicio de transferencia de datos",
+      "Entrenamiento de migración"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Migration Hub proporciona ubicación única para rastrear migraciones a través de múltiples herramientas de AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué sucede después de 12 meses del Nivel Gratuito de AWS?",
+    "options": [
+      "La cuenta se elimina",
+      "Se aplican tarifas estándar de pago por uso",
+      "Se requiere actualización automática",
+      "Los servicios dejan de funcionar"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Después de que expire el Nivel Gratuito, los precios estándar se aplican automáticamente a todo el uso.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio ayuda con recomendaciones de optimización de costos?",
+    "options": [
+      "AWS Compute Optimizer",
+      "AWS Budgets",
+      "AWS Pricing Calculator",
+      "Cost Explorer"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Compute Optimizer recomienda recursos óptimos de AWS basados en métricas de utilización.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es el beneficio de usar la infraestructura global de AWS?",
+    "options": [
+      "Centro de datos único",
+      "Baja latencia y alta disponibilidad mundial",
+      "Costos más altos",
+      "Ubicaciones limitadas"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "La infraestructura global de AWS permite acceso de baja latencia y alta disponibilidad en todo el mundo.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS IAM Access Analyzer?",
+    "options": [
+      "Analizador de rendimiento",
+      "Identifica recursos compartidos con entidades externas",
+      "Analizador de costos",
+      "Analizador de logs"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "IAM Access Analyzer ayuda a identificar recursos accesibles desde fuera de tu organización.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS SimSpace Weaver?",
+    "options": [
+      "Servidor web",
+      "Servicio de simulación espacial",
+      "Almacén de datos",
+      "Simulador de red"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "SimSpace Weaver permite simulaciones espaciales a gran escala a través de sistemas distribuidos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio proporciona computación de usuario final?",
+    "options": [
+      "Amazon WorkSpaces y AppStream",
+      "AWS Lambda",
+      "Amazon EC2",
+      "AWS Fargate"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "WorkSpaces y AppStream proporcionan escritorios virtuales y transmisión de aplicaciones para usuarios finales.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué es AWS Service Catalog?",
+    "options": [
+      "Documentación de servicios",
+      "Crear y gestionar catálogos de servicios de TI aprobados",
+      "Alternativa al marketplace",
+      "Directorio de servicios"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Service Catalog permite a las organizaciones crear catálogos de servicios de TI aprobados.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es el ciclo de facturación de AWS?",
+    "options": [
+      "Semanal",
+      "Mensual",
+      "Trimestral",
+      "Anual"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS factura a los clientes mensualmente basado en el uso real durante el período de facturación.",
+    "source": "manual"
+  }
+]

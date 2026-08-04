@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: aws-exam-app
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:5173/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    networks:
+      - app-network
+    # Security enhancements
+    user: "1001:1001"  # Run as non-root user
+    read_only: true      # Make filesystem read-only except for specific volumes
+    tmpfs:
+      - /tmp            # Mount temporary directories as tmpfs
+      - /app/dist       # Mount dist directory as tmpfs to allow runtime changes
+    security_opt:
+      - no-new-privileges:true  # Prevent gaining additional privileges
+    cap_drop:
+      - ALL             # Drop all capabilities
+    cap_add:
+      - NET_BIND_SERVICE  # Only add necessary capabilities
+
+networks:
+  app-network:
+    driver: bridge

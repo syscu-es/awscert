@@ -1,0 +1,993 @@
+[
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.1",
+    "text": "Una empresa ejecuta un pipeline de AWS CodePipeline en una cuenta de herramientas. El pipeline debe desplegar plantillas de AWS CloudFormation en las cuentas de desarrollo y de producción, que pertenecen a la misma organización de AWS Organizations. Las acciones de despliegue fallan con errores de acceso denegado al leer el bucket de artefactos. ¿Qué combinación de configuración resuelve el problema de forma segura?",
+    "options": [
+      "Cifrar el bucket de artefactos con una clave administrada por el cliente de AWS KMS, otorgar permisos de uso de la clave y del bucket a los roles entre cuentas, y configurar la acción de CloudFormation para asumir el rol de despliegue de cada cuenta destino.",
+      "Mantener el cifrado predeterminado SSE-S3 del bucket de artefactos y agregar una política de bucket que permita s3:GetObject al principal raíz de cada cuenta destino.",
+      "Habilitar la replicación entre cuentas del bucket de artefactos para que cada cuenta destino tenga su propia copia local de los artefactos.",
+      "Crear un pipeline independiente en cada cuenta destino y usar un webhook del repositorio de código para invocar los tres pipelines en paralelo."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "En pipelines multicuenta, los artefactos deben cifrarse con una clave administrada por el cliente de AWS KMS porque la clave predeterminada de S3 no permite acceso entre cuentas; además, las cuentas destino requieren roles que CodePipeline asuma para desplegar.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.1",
+    "text": "Un proyecto de AWS CodeBuild necesita credenciales de un registro privado de contenedores durante la fase de compilación. El equipo de seguridad exige que las credenciales no aparezcan en el archivo buildspec, en las variables de entorno del proyecto ni en los logs de compilación. ¿Cuál es la solución más adecuada?",
+    "options": [
+      "Almacenar las credenciales en AWS Secrets Manager, referenciarlas en el bloque env/secrets-manager del buildspec y otorgar secretsmanager:GetSecretValue y permisos de KMS al rol de servicio de CodeBuild.",
+      "Definir las credenciales como variables de entorno de tipo PLAINTEXT en el proyecto de CodeBuild y ofuscarlas con codificación base64 antes de usarlas.",
+      "Guardar las credenciales en un archivo dentro del repositorio de código y restringir el acceso al repositorio mediante políticas de IAM.",
+      "Publicar las credenciales como variables de entorno del pipeline de AWS CodePipeline y pasarlas a CodeBuild como parámetros de anulación de la acción."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "CodeBuild admite el tipo de variable SECRETS_MANAGER en el buildspec, que resuelve el valor en tiempo de ejecución sin exponerlo en los logs, siempre que el rol de servicio tenga permiso de lectura del secreto y de la clave de KMS.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.1",
+    "text": "Una aplicación monolítica se ejecuta en un grupo de Auto Scaling de Amazon EC2 detrás de un Application Load Balancer. El negocio exige que un despliegue defectuoso pueda revertirse en segundos y que ninguna solicitud de usuario se dirija a la versión nueva hasta que pasen las pruebas de humo. La empresa acepta duplicar la capacidad de forma temporal. ¿Qué estrategia de AWS CodeDeploy cumple los requisitos?",
+    "options": [
+      "Despliegue blue/green que crea un grupo de Auto Scaling de reemplazo, valida con el enlace de ciclo de vida BeforeAllowTraffic y desvía el tráfico del balanceador solo después de la validación.",
+      "Despliegue en el lugar con la configuración CodeDeployDefault.OneAtATime y reversión automática ante alarmas de CloudWatch.",
+      "Despliegue en el lugar con la configuración CodeDeployDefault.HalfAtATime y un enlace AfterAllowTraffic que ejecute las pruebas de humo.",
+      "Despliegue blue/green de Elastic Beanstalk mediante intercambio de URL de entorno, actualizando la plantilla de lanzamiento del grupo de Auto Scaling existente."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "El despliegue blue/green de CodeDeploy aprovisiona un entorno de reemplazo y permite validar con BeforeAllowTraffic antes de mover el tráfico; la reversión consiste en devolver el balanceador al entorno original, lo que ocurre en segundos.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.2",
+    "text": "Un equipo quiere que las pruebas unitarias y el análisis estático se ejecuten automáticamente cada vez que se crea o se actualiza una solicitud de extracción, y que el resultado se refleje como estado de la confirmación antes de permitir la fusión. ¿Cuál es la implementación más apropiada?",
+    "options": [
+      "Configurar un webhook en el proyecto de AWS CodeBuild con filtros de evento PULL_REQUEST_CREATED y PULL_REQUEST_UPDATED, y publicar los resultados en grupos de informes de prueba.",
+      "Agregar una etapa de pruebas al pipeline de AWS CodePipeline que se activa con cada confirmación en la rama principal e invoca CodeBuild.",
+      "Programar una regla de Amazon EventBridge que ejecute el proyecto de CodeBuild cada 15 minutos para compilar todas las ramas abiertas.",
+      "Usar una acción de aprobación manual en CodePipeline para que un revisor ejecute las pruebas localmente antes de aprobar la fusión."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Los filtros de webhook de CodeBuild permiten ejecutar compilaciones solo en eventos de solicitud de extracción y devolver el estado de la verificación al repositorio, lo que bloquea fusiones con pruebas fallidas.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.2",
+    "text": "Una etapa del pipeline ejecuta pruebas de carga contra el entorno de preproducción mediante un contenedor de AWS CodeBuild y una función de AWS Lambda personalizada. El equipo necesita que la etapa se marque como fallida y detenga la promoción cuando la latencia p99 supere el umbral acordado. ¿Cuáles DOS mecanismos logran ese comportamiento? (Elija DOS)",
+    "options": [
+      "Hacer que el script de pruebas de CodeBuild finalice con un código de salida distinto de cero cuando la métrica supere el umbral.",
+      "Hacer que la acción Lambda personalizada llame a PutJobFailureResult de AWS CodePipeline después de evaluar la alarma de Amazon CloudWatch.",
+      "Aumentar el tiempo de espera de la acción de CodeBuild para que el pipeline expire por sí solo si la latencia es alta.",
+      "Publicar los resultados en un grupo de informes de prueba de CodeBuild y revisar manualmente el informe antes de la etapa siguiente.",
+      "Configurar una acción de aprobación manual posterior a las pruebas de carga para que un ingeniero rechace la promoción."
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "CodeBuild interpreta cualquier código de salida distinto de cero como compilación fallida, y una acción Lambda personalizada solo informa el resultado al pipeline mediante PutJobSuccessResult o PutJobFailureResult; ambos mecanismos detienen la promoción sin intervención humana.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.2",
+    "text": "La dirección exige que ninguna compilación se promueva si la cobertura de pruebas unitarias cae por debajo del 80 %, y que la tendencia de cobertura sea visible para el equipo sin herramientas de terceros. ¿Cuál es la solución con menor esfuerzo operativo?",
+    "options": [
+      "Generar informes de cobertura en formato compatible en el buildspec, declararlos en la sección reports de AWS CodeBuild y hacer que el script falle cuando el umbral configurado no se cumpla.",
+      "Publicar el archivo de cobertura como artefacto en Amazon S3 y crear un panel de Amazon QuickSight que se actualice diariamente.",
+      "Enviar el porcentaje de cobertura a Amazon CloudWatch como métrica personalizada y crear una alarma que notifique por Amazon SNS al equipo de desarrollo.",
+      "Ejecutar la herramienta de cobertura en un runbook de AWS Systems Manager Automation posterior al despliegue en preproducción."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Los grupos de informes de CodeBuild admiten informes de cobertura de código nativos con historial y tendencia, y hacer fallar el script cuando no se alcanza el umbral impide que el artefacto avance en el pipeline.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.3",
+    "text": "Una organización desarrolla paquetes internos de npm y también consume paquetes públicos. Requiere un único punto de consumo para los desarrolladores, control de qué versiones públicas se almacenan en caché y que las compilaciones no fallen si el registro público está inaccesible temporalmente. ¿Qué configuración cumple los requisitos?",
+    "options": [
+      "Un repositorio de AWS CodeArtifact con una conexión externa al registro público de npm, que almacena en caché los paquetes consumidos y publica también los paquetes internos.",
+      "Un bucket de Amazon S3 con versionado que aloje los paquetes internos y un proxy inverso en Amazon EC2 para el registro público.",
+      "Un repositorio de Amazon ECR con reglas de ciclo de vida para paquetes de npm y una réplica del registro público.",
+      "Un repositorio por desarrollador en AWS CodeArtifact con replicación entre regiones y descarga directa del registro público desde cada proyecto de compilación."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "CodeArtifact admite conexiones externas a registros públicos: el primer consumo copia el paquete al repositorio y los siguientes se sirven desde la caché, lo que da un único endpoint y aísla las compilaciones de fallas del registro público.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.3",
+    "text": "Una empresa necesita producir mensualmente una AMI reforzada con las actualizaciones de seguridad más recientes y su agente de monitoreo, validarla con pruebas automáticas y compartirla con 12 cuentas de la organización sin scripts personalizados de creación de instancias. ¿Cuál es el enfoque recomendado?",
+    "options": [
+      "Un pipeline de EC2 Image Builder con una receta de imagen, componentes de compilación y prueba, programación cron y una configuración de distribución que comparta la AMI con las cuentas destino.",
+      "Un proyecto de AWS CodeBuild que lance una instancia con la AWS CLI, aplique los parches, ejecute CreateImage y luego use ModifyImageAttribute para compartirla.",
+      "Un runbook de AWS Systems Manager Automation con el documento AWS-RunPatchBaseline sobre las instancias de producción y luego un snapshot manual de Amazon EBS.",
+      "Una plantilla de AWS CloudFormation con un recurso personalizado respaldado por AWS Lambda que copie la AMI de terceros más reciente del AWS Marketplace."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "EC2 Image Builder gestiona de forma nativa el ciclo completo de compilación, prueba, versionado y distribución multicuenta de AMI a partir de recetas y componentes, sin código de orquestación propio.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.3",
+    "text": "Un repositorio de Amazon ECR almacena imágenes de contenedor de decenas de compilaciones diarias. El equipo debe reducir el costo de almacenamiento y garantizar que una etiqueta ya publicada nunca se sobrescriba para preservar la trazabilidad de los despliegues. ¿Cuáles DOS acciones se deben implementar? (Elija DOS)",
+    "options": [
+      "Configurar una política de ciclo de vida del repositorio que expire las imágenes sin etiquetar y conserve solo las N imágenes etiquetadas más recientes.",
+      "Habilitar la inmutabilidad de etiquetas en el repositorio de Amazon ECR.",
+      "Habilitar el escaneo mejorado de Amazon Inspector en el repositorio para eliminar automáticamente las imágenes con vulnerabilidades críticas.",
+      "Habilitar el versionado de objetos en el bucket de Amazon S3 subyacente del repositorio de ECR.",
+      "Configurar la replicación entre regiones del repositorio para distribuir el costo de almacenamiento entre regiones."
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "Las políticas de ciclo de vida de ECR eliminan imágenes sin etiquetar y antiguas para controlar el costo, y la inmutabilidad de etiquetas impide sobrescribir una etiqueta existente, lo que garantiza que cada despliegue apunte siempre al mismo artefacto.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.4",
+    "text": "Una función de AWS Lambda crítica se despliega mediante AWS SAM. El equipo requiere que el 10 % del tráfico se envíe a la versión nueva durante 10 minutos y que la implementación se revierta automáticamente si aumentan los errores. ¿Qué configuración cumple el requisito?",
+    "options": [
+      "Definir una DeploymentPreference con el tipo Canary10Percent10Minutes, alarmas de Amazon CloudWatch y enlaces de validación, de modo que AWS CodeDeploy desplace el peso del alias de la función.",
+      "Publicar una versión nueva y actualizar la variable de entorno del alias para que el código enrute internamente el 10 % de las invocaciones.",
+      "Crear dos funciones Lambda y usar una regla ponderada de Amazon Route 53 para dividir las invocaciones entre ambas.",
+      "Usar un conjunto de cambios de AWS CloudFormation con una política de actualización que reemplace la función de forma gradual."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "AWS SAM delega el despliegue gradual de Lambda en CodeDeploy: la preferencia canaria desplaza el peso entre versiones del alias y las alarmas de CloudWatch asociadas disparan la reversión automática.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.4",
+    "text": "Un servicio de Amazon ECS en AWS Fargate se despliega con el tipo de implementación blue/green de AWS CodeDeploy. El equipo de QA debe poder ejecutar pruebas funcionales contra la revisión nueva antes de que reciba tráfico productivo. ¿Qué elemento de la configuración lo permite?",
+    "options": [
+      "Un segundo listener de prueba en el Application Load Balancer, apuntando al grupo de destino verde, junto con el enlace AfterAllowTestTraffic.",
+      "Un valor de deployment_minimum_healthy_percent de 100 y deployment_maximum_percent de 200 en el servicio de ECS.",
+      "Un grupo de destino adicional registrado en el mismo listener de producción con enrutamiento basado en encabezados de host.",
+      "Un despliegue continuo con un filtro de acción de CodePipeline que retenga el artefacto hasta la aprobación de QA."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "El tipo blue/green para ECS admite un listener de prueba independiente que dirige tráfico al grupo de destino de reemplazo, y el enlace AfterAllowTestTraffic ejecuta la validación antes del desvío del tráfico productivo.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.4",
+    "text": "Un despliegue de AWS CodeDeploy en instancias de Amazon EC2 falla de forma consistente en el evento de ciclo de vida DownloadBundle con el mensaje de error de acceso denegado, mientras que el agente de CodeDeploy aparece en ejecución y registrado. ¿Cuál es la causa más probable?",
+    "options": [
+      "El perfil de instancia de EC2 carece de permisos s3:GetObject sobre el bucket de la revisión y de permisos de descifrado sobre la clave de AWS KMS asociada.",
+      "El rol de servicio de CodEDeploy no tiene permiso para registrar instancias en el grupo de destino del Application Load Balancer.",
+      "El archivo appspec.yml define el evento ApplicationStop antes de DownloadBundle, lo que invierte el orden del ciclo de vida.",
+      "El grupo de despliegue usa la configuración CodeDeployDefault.AllAtOnce, que no admite revisiones almacenadas en Amazon S3."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "DownloadBundle lo ejecuta el agente con las credenciales del perfil de instancia; si faltan permisos de lectura del bucket o de descifrado de la clave de KMS, la descarga de la revisión falla con acceso denegado.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.1",
+    "text": "Una empresa administra la infraestructura base de seguridad con AWS CloudFormation StackSets. Necesita que cualquier cuenta nueva que se agregue a la unidad organizativa de cargas de trabajo reciba automáticamente la pila, sin ejecutar operaciones manuales. ¿Qué configuración cumple el requisito?",
+    "options": [
+      "Un conjunto de pilas con permisos administrados por el servicio, destinos definidos por unidad organizativa e implementación automática habilitada.",
+      "Un conjunto de pilas con permisos autoadministrados y una lista explícita de identificadores de cuenta actualizada por una función de AWS Lambda.",
+      "Una plantilla de CloudFormation desplegada mediante AWS Service Catalog con una restricción de lanzamiento en cada cuenta miembro.",
+      "Una política de control de servicios que exija la existencia de la pila y bloquee las llamadas de API hasta que un administrador la cree."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Los conjuntos de pilas con permisos administrados por el servicio se integran con AWS Organizations y, con la implementación automática activada, despliegan la pila en las cuentas que ingresan a la unidad organizativa destino y la eliminan cuando salen.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.1",
+    "text": "Varios equipos de aplicación deben poder aprovisionar bases de datos de Amazon RDS preconfiguradas conforme a los estándares corporativos de cifrado, respaldo y etiquetado, sin recibir permisos directos de rds:CreateDBInstance. ¿Cuál es la solución más adecuada?",
+    "options": [
+      "Publicar los estándares como productos de AWS Service Catalog con una restricción de lanzamiento que use un rol de IAM con los permisos necesarios, y otorgar a los equipos acceso solo a la cartera.",
+      "Distribuir plantillas de AWS CloudFormation en un repositorio compartido y confiar en la revisión de código para verificar el cumplimiento de los estándares.",
+      "Otorgar a los equipos permisos de rds:CreateDBInstance con una política que incluya condiciones de etiquetado y una regla de AWS Config para detectar desvíos.",
+      "Crear módulos de AWS CDK internos y exigir que cada equipo despliegue con credenciales de administrador desde un pipeline propio."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Service Catalog con restricciones de lanzamiento permite que los usuarios aprovisionen productos aprobados usando los permisos del rol de lanzamiento, por lo que no necesitan permisos directos sobre los servicios subyacentes.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.1",
+    "text": "Un ingeniero descubre que varios recursos administrados por CloudFormation fueron modificados manualmente en la consola. La empresa necesita detectar estos desvíos de forma continua y corregirlos automáticamente en todas las cuentas. ¿Cuáles DOS acciones se deben implementar? (Elija DOS)",
+    "options": [
+      "Programar la detección de desvíos de las pilas mediante una regla de Amazon EventBridge que invoque una función de AWS Lambda con la API DetectStackDrift.",
+      "Habilitar la regla administrada de AWS Config cloudformation-stack-drift-detection-check con una acción de remediación automática asociada a un documento de AWS Systems Manager Automation.",
+      "Activar AWS CloudTrail Insights en todas las cuentas para revertir de forma automática las llamadas de API que modifiquen recursos de pilas.",
+      "Configurar AWS Trusted Advisor con la comprobación de configuración de pilas y suscribirse al informe semanal por correo electrónico.",
+      "Habilitar la protección de terminación en las pilas para impedir cualquier modificación de los recursos que administran."
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "La API DetectStackDrift invocada de forma programada y la regla administrada de AWS Config para desvío de pilas con remediación automática cubren la detección continua y la corrección; CloudTrail Insights y Trusted Advisor solo informan y no revierten cambios.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.2",
+    "text": "Una empresa incorpora cerca de 20 cuentas nuevas por trimestre. Cada cuenta debe crearse con la línea base de red, roles de auditoría y controles de seguridad estándar, y el proceso completo debe quedar versionado en un repositorio de código y ejecutarse mediante un pipeline. ¿Cuál es la solución más adecuada?",
+    "options": [
+      "Usar AWS Control Tower con Account Factory for Terraform o el pipeline de personalizaciones, de modo que la solicitud de la cuenta y su línea base se definan como código y se apliquen en el aprovisionamiento.",
+      "Crear las cuentas con la API CreateAccount de AWS Organizations desde una función de AWS Lambda y aplicar la línea base manualmente después de cada creación.",
+      "Crear una AMI dorada con la línea base y lanzarla en cada cuenta nueva mediante un conjunto de pilas de AWS CloudFormation autoadministrado.",
+      "Usar AWS Resource Access Manager para compartir los recursos de red y de seguridad de la cuenta de producción con cada cuenta nueva."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Control Tower estandariza el aprovisionamiento y las barreras de protección, y Account Factory for Terraform o el pipeline de personalizaciones permite definir la solicitud y la línea base como código con ejecución automatizada.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.2",
+    "text": "El equipo de cumplimiento exige que en ninguna cuenta miembro se pueda detener el registro de AWS CloudTrail ni eliminar el grabador de AWS Config, pero el rol de automatización de la cuenta de auditoría debe conservar la capacidad de reconfigurar esos servicios. ¿Cuál es el control más eficaz?",
+    "options": [
+      "Una política de control de servicios aplicada a la unidad organizativa que deniegue cloudtrail:StopLogging y config:DeleteConfigurationRecorder, con una condición aws:PrincipalArn que excluya el rol de automatización.",
+      "Una política de IAM de límite de permisos adjunta a todos los usuarios de las cuentas miembro que deniegue esas acciones.",
+      "Una regla de AWS Config con remediación automática que vuelva a habilitar el registro cuando se detecte que fue detenido.",
+      "Una política de recursos en el bucket de CloudTrail que deniegue s3:DeleteObject a todos los principales de las cuentas miembro."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Las políticas de control de servicios limitan los permisos máximos de todos los principales de las cuentas de una unidad organizativa, incluido el usuario raíz, y admiten excepciones mediante condiciones sobre el ARN del principal.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.2",
+    "text": "Una organización con 40 cuentas y operaciones en 5 Regiones necesita una vista única de los hallazgos de seguridad y del estado de los controles, sin habilitar servicios manualmente en cada cuenta nueva. ¿Cuál es el enfoque correcto?",
+    "options": [
+      "Designar una cuenta de administrador delegado de AWS Security Hub mediante AWS Organizations, habilitar el registro automático de cuentas nuevas y configurar la agregación entre Regiones en la Región de origen.",
+      "Habilitar Security Hub en cada cuenta y exportar los hallazgos a un bucket central de Amazon S3 mediante reglas de Amazon EventBridge por Región.",
+      "Consolidar los hallazgos con Amazon Detective en la cuenta de administración y crear un panel de Amazon QuickSight sobre sus resultados.",
+      "Usar un conjunto de pilas de AWS CloudFormation que despliegue reglas de AWS Config en todas las cuentas y consultar los resultados con Amazon Athena."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Security Hub se integra con Organizations mediante un administrador delegado con registro automático de cuentas nuevas, y la agregación entre Regiones concentra los hallazgos en una Región de origen única.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.3",
+    "text": "Una empresa administra 800 servidores: la mitad son instancias de Amazon EC2 y la mitad son servidores locales. Necesita un inventario unificado de software y aplicación de parches en ventanas de mantenimiento definidas, con informes de cumplimiento centralizados. ¿Cuál es la solución más adecuada?",
+    "options": [
+      "Registrar los servidores locales como nodos administrados de AWS Systems Manager mediante activaciones híbridas y usar Inventory, Patch Manager con líneas base de parches y ventanas de mantenimiento.",
+      "Instalar el agente de Amazon CloudWatch en todos los servidores y crear un documento de AWS Systems Manager Automation que ejecute el gestor de paquetes del sistema operativo por SSH.",
+      "Usar AWS Config con reglas personalizadas que consulten el inventario de software y AWS OpsWorks para aplicar los parches en ambos entornos.",
+      "Usar EC2 Image Builder para reconstruir imágenes parcheadas semanalmente y reemplazar los servidores locales por instancias derivadas de esas imágenes."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Systems Manager admite nodos híbridos mediante activaciones, lo que permite usar Inventory para el catálogo de software y Patch Manager con ventanas de mantenimiento e informes de cumplimiento sobre la flota completa.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.3",
+    "text": "Un ingeniero debe automatizar un proceso de remediación que puede tardar hasta cuatro horas, incluye varios pasos condicionales y requiere aprobación humana antes del paso final. ¿Cuáles DOS enfoques cumplen los requisitos? (Elija DOS)",
+    "options": [
+      "Una máquina de estados de AWS Step Functions de tipo estándar que use el patrón de devolución de llamada con token de tarea para esperar la aprobación.",
+      "Un documento de AWS Systems Manager Automation que combine pasos aws:executeAwsApi con la acción aws:approve.",
+      "Una única función de AWS Lambda con el tiempo de espera aumentado a cuatro horas y una llamada síncrona de espera de aprobación.",
+      "Una máquina de estados de AWS Step Functions de tipo exprés con un estado de espera de cuatro horas.",
+      "Un proyecto de AWS CodeBuild programado que sondee una cola de Amazon SQS hasta recibir el mensaje de aprobación."
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "Los flujos de trabajo estándar de Step Functions duran hasta un año y el patrón waitForTaskToken pausa la ejecución hasta la aprobación; los documentos de Automation ofrecen la acción aws:approve de forma nativa. Lambda tiene un límite de 15 minutos y los flujos exprés de 5 minutos.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.3",
+    "text": "Una flota de instancias de Amazon EC2 debe mantener siempre el mismo conjunto de agentes y archivos de configuración. Si un administrador modifica localmente esos valores, el sistema debe volver al estado deseado sin intervención manual y sin reemplazar la instancia. ¿Qué servicio y característica cumplen el requisito?",
+    "options": [
+      "Una asociación de AWS Systems Manager State Manager que aplique el documento de configuración según una programación sobre las instancias seleccionadas por etiquetas.",
+      "Un documento de AWS Systems Manager Run Command ejecutado manualmente cuando el equipo de operaciones detecte la diferencia.",
+      "Una regla de AWS Config personalizada que marque la instancia como no conforme y una alarma de Amazon CloudWatch que notifique al equipo.",
+      "Un enlace de ciclo de vida del grupo de Auto Scaling que reemplace la instancia cada vez que cambie su configuración."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "State Manager aplica documentos de configuración de forma recurrente sobre los nodos administrados, lo que devuelve el sistema al estado deseado sin reemplazar la instancia ni requerir acción humana.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.1",
+    "text": "Una aplicación en subredes privadas de tres zonas de disponibilidad sale a internet por una única puerta de enlace NAT ubicada en una subred pública de la zona A. Durante una interrupción de esa zona, las instancias de las otras zonas perdieron conectividad de salida. ¿Cuál es la corrección adecuada?",
+    "options": [
+      "Desplegar una puerta de enlace NAT en cada zona de disponibilidad y asociar a cada subred privada una tabla de rutas que apunte a la puerta de enlace de su propia zona.",
+      "Reemplazar la puerta de enlace NAT por una instancia NAT en un grupo de Auto Scaling con capacidad mínima de una instancia distribuida entre las tres zonas.",
+      "Agregar una segunda puerta de enlace NAT en la zona B y configurar dos rutas de destino 0.0.0.0/0 con igual costo en la tabla de rutas compartida.",
+      "Asociar una puerta de enlace de internet directamente a las subredes privadas y asignar direcciones IP elásticas a las instancias."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Una puerta de enlace NAT es un recurso zonal, por lo que la alta disponibilidad requiere una por zona con tablas de rutas específicas; una tabla de rutas no admite dos rutas al mismo destino con conmutación automática.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.1",
+    "text": "Una aplicación global debe atender escrituras de baja latencia desde tres Regiones simultáneamente, con replicación de datos entre ellas y enrutamiento de los usuarios a la Región más cercana que esté sana. ¿Qué combinación de servicios cumple el requisito?",
+    "options": [
+      "Tablas globales de Amazon DynamoDB con registros de latencia de Amazon Route 53 asociados a comprobaciones de estado por Región.",
+      "Amazon RDS Multi-AZ con réplicas de lectura en las otras dos Regiones y registros de conmutación por error de Amazon Route 53.",
+      "Amazon Aurora con una réplica de lectura entre Regiones y registros ponderados de Amazon Route 53 con pesos iguales.",
+      "Amazon ElastiCache Global Datastore con Amazon CloudFront y una única Región de origen de escritura."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Las tablas globales de DynamoDB ofrecen replicación activa-activa multiRegión con escrituras locales, y los registros de latencia de Route 53 con comprobaciones de estado dirigen a cada usuario a la Región más cercana que responde correctamente.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.1",
+    "text": "Un Network Load Balancer distribuye tráfico a destinos registrados en tres zonas de disponibilidad, pero las instancias de una zona con menos destinos reciben una carga por instancia mucho mayor que las demás. ¿Cuál es la solución adecuada?",
+    "options": [
+      "Habilitar el balanceo de carga entre zonas en el grupo de destino del Network Load Balancer.",
+      "Habilitar el desvío por comprobación de estado de zona de disponibilidad en el balanceador.",
+      "Registrar los destinos por dirección IP en lugar de por identificador de instancia.",
+      "Aumentar el intervalo de comprobación de estado para que todos los destinos se consideren sanos por más tiempo."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Un Network Load Balancer distribuye por zona de forma predeterminada, por lo que las zonas con menos destinos concentran más carga por destino; habilitar el balanceo entre zonas reparte el tráfico entre todos los destinos registrados.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.2",
+    "text": "Un servicio de Amazon ECS en AWS Fargate procesa mensajes de Amazon SQS. Durante los picos, la cola acumula mensajes durante 20 minutos porque el escalado basado en el uso de CPU responde tarde. ¿Cuál es la solución más eficaz?",
+    "options": [
+      "Escalar el servicio con seguimiento de destino sobre una métrica personalizada de retraso por tarea, calculada a partir de ApproximateNumberOfMessagesVisible dividido entre el número de tareas en ejecución.",
+      "Reducir el periodo de la alarma de uso de CPU a 10 segundos y aumentar el ajuste de escalado a 200 %.",
+      "Cambiar el servicio a escalado programado con el número máximo de tareas durante el horario laboral.",
+      "Habilitar un proveedor de capacidad con Fargate Spot y aumentar el tiempo de espera de visibilidad de la cola."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "El uso de CPU es un indicador rezagado del trabajo pendiente en una arquitectura basada en colas; una métrica de retraso por tarea refleja directamente la demanda y permite que el seguimiento de destino escale antes de que se acumule el backlog.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.2",
+    "text": "En un clúster de Amazon EKS, los pods de una implementación quedan en estado Pending con el evento de que no hay nodos con recursos suficientes, aunque la implementación tiene el escalador horizontal de pods configurado. ¿Cuál es la causa y la corrección?",
+    "options": [
+      "Falta un componente de escalado de nodos: se debe desplegar Karpenter o Cluster Autoscaler para aprovisionar capacidad de cómputo adicional cuando existan pods no programables.",
+      "El escalador horizontal de pods requiere que se habilite el escalado vertical de pods para poder crear réplicas nuevas.",
+      "Los pods necesitan una clase de prioridad más alta para desalojar a otros pods y no requieren nodos adicionales.",
+      "El servidor de métricas debe reemplazarse por Amazon Managed Service for Prometheus para que el escalado de nodos funcione."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "El escalador horizontal de pods solo crea réplicas; si no hay capacidad de nodos disponible, los pods quedan pendientes hasta que Karpenter o Cluster Autoscaler aprovisionen nodos nuevos.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.2",
+    "text": "Una API de Amazon API Gateway respaldada por AWS Lambda presenta errores de limitación y latencia elevada en los primeros arranques durante campañas promocionales. La función crítica comparte la cuota de concurrencia con otras funciones menos importantes. ¿Cuáles DOS acciones mejoran la situación? (Elija DOS)",
+    "options": [
+      "Configurar concurrencia provisionada en la versión de la función crítica y escalarla con Application Auto Scaling según la programación de las campañas.",
+      "Establecer concurrencia reservada en la función crítica para garantizarle capacidad y limitar la concurrencia de las funciones menos importantes.",
+      "Aumentar la memoria de la función a 10 GB para eliminar los primeros arranques.",
+      "Migrar la función a Lambda@Edge para que se ejecute en las ubicaciones de borde de Amazon CloudFront.",
+      "Montar un sistema de archivos de Amazon EFS en la función para almacenar en caché las dependencias del entorno de ejecución."
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "La concurrencia provisionada mantiene entornos de ejecución inicializados y elimina los primeros arranques, mientras que la concurrencia reservada aísla la cuota de la función crítica frente al resto de la cuenta.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.3",
+    "text": "Un sistema transaccional requiere un RTO de 15 minutos y un RPO de 1 minuto en una Región secundaria, con el menor costo posible que cumpla esos objetivos. La base de datos es Amazon Aurora MySQL. ¿Qué estrategia se debe implementar?",
+    "options": [
+      "Warm standby con una base de datos global de Amazon Aurora en la Región secundaria y una capa de cómputo reducida lista para escalar durante la conmutación.",
+      "Copia de seguridad y restauración con copias de snapshots de Aurora entre Regiones cada hora y aprovisionamiento del clúster durante el desastre.",
+      "Pilot light con snapshots automáticos copiados cada 15 minutos y sin instancias de base de datos en la Región secundaria.",
+      "Configuración activa-activa multiRegión con escrituras simultáneas en dos clústeres independientes de Aurora y resolución de conflictos en la aplicación."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "La base de datos global de Aurora replica con retraso típico inferior al segundo y permite promover la Región secundaria en minutos, y el patrón warm standby con cómputo reducido cuesta menos que una configuración activa-activa.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.3",
+    "text": "El área de auditoría exige que las copias de seguridad de producción se conserven en otra Región y en una cuenta distinta, y que nadie, ni siquiera un administrador con credenciales comprometidas, pueda eliminarlas antes del periodo de retención. ¿Cuáles DOS elementos se deben configurar? (Elija DOS)",
+    "options": [
+      "Un plan de AWS Backup con una regla de copia que replique los puntos de recuperación al almacén de una Región y una cuenta distintas.",
+      "AWS Backup Vault Lock en modo de cumplimiento sobre el almacén de destino.",
+      "Versionado y replicación entre Regiones en el bucket de Amazon S3 donde AWS Backup almacena los puntos de recuperación.",
+      "Una política de ciclo de vida de Amazon Data Lifecycle Manager que copie los snapshots de Amazon EBS a la cuenta de auditoría.",
+      "Una política de control de servicios que deniegue ec2:DeleteSnapshot en la cuenta de producción."
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "Las reglas de copia de AWS Backup replican puntos de recuperación a almacenes de otras Regiones y cuentas, y Vault Lock en modo de cumplimiento hace que la retención sea inmutable incluso para el usuario raíz de la cuenta.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.3",
+    "text": "Cuando el proceso de aplicación de una instancia de Amazon EC2 deja de responder, el Application Load Balancer deja de enviarle tráfico, pero la instancia permanece en el grupo de Auto Scaling en estado degradado durante horas. ¿Qué configuración corrige el comportamiento?",
+    "options": [
+      "Cambiar el tipo de comprobación de estado del grupo de Auto Scaling a ELB y ajustar el periodo de gracia de la comprobación de estado al tiempo de arranque de la aplicación.",
+      "Reducir el retraso de anulación de registro del grupo de destino para que la instancia se elimine del grupo de Auto Scaling.",
+      "Habilitar la recuperación automática de Amazon EC2 mediante una alarma de CloudWatch sobre la métrica StatusCheckFailed_System.",
+      "Habilitar el vaciado de conexiones en el balanceador y activar las comprobaciones de estado del grupo de destino en modo detallado."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Con el tipo de comprobación de estado EC2, el grupo de Auto Scaling solo observa el estado de la instancia; al usar el tipo ELB, considera además la comprobación de la aplicación y reemplaza la instancia degradada.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.1",
+    "text": "Una aplicación escribe la cadena OutOfMemoryError en sus logs de Amazon CloudWatch Logs. El equipo necesita una alarma que se dispare al primer error y que permanezca en estado correcto cuando no haya errores. ¿Cuál es la configuración adecuada?",
+    "options": [
+      "Crear un filtro de métrica en el grupo de logs con un valor predeterminado de 0, y una alarma sobre esa métrica con umbral mayor o igual a 1 y estadística Sum.",
+      "Crear una suscripción del grupo de logs a una función de AWS Lambda que evalúe cada evento y publique un mensaje en Amazon SNS.",
+      "Crear una consulta programada de CloudWatch Logs Insights que se ejecute cada minuto y una alarma sobre su tiempo de ejecución.",
+      "Crear un filtro de métrica sin valor predeterminado y una alarma con la opción de datos faltantes configurada como alarma."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "El filtro de métrica convierte coincidencias del log en una métrica de CloudWatch, y definir el valor predeterminado 0 evita periodos con datos faltantes, de modo que la alarma se mantiene en estado correcto cuando no hay errores.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.1",
+    "text": "Una empresa necesita enviar todas las métricas de Amazon CloudWatch de varios espacios de nombres a una plataforma de observabilidad externa con una latencia de pocos minutos y sin desarrollar sondeos con la API GetMetricData. ¿Cuál es la solución recomendada?",
+    "options": [
+      "Configurar un flujo de métricas de CloudWatch con filtros de espacio de nombres que entregue los datos a Amazon Data Firehose y de ahí al destino externo.",
+      "Programar una función de AWS Lambda cada minuto que ejecute ListMetrics y GetMetricStatistics y publique los resultados por HTTPS.",
+      "Habilitar el monitoreo detallado en todos los recursos y exportar los datos con la característica de exportación de paneles de CloudWatch.",
+      "Crear una regla de Amazon EventBridge sobre el origen aws.cloudwatch que reenvíe todos los puntos de datos de métricas al destino externo."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Los flujos de métricas de CloudWatch entregan métricas de forma continua y casi en tiempo real a Amazon Data Firehose, lo que elimina la necesidad de sondear la API y admite filtros por espacio de nombres.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.1",
+    "text": "Los logs de auditoría de una aplicación se envían a Amazon CloudWatch Logs. La normativa exige cifrado con una clave administrada por el cliente y conservación durante siete años al menor costo posible, manteniendo consultas rápidas solo sobre los últimos 30 días. ¿Cuáles DOS acciones cumplen los requisitos? (Elija DOS)",
+    "options": [
+      "Asociar una clave administrada por el cliente de AWS KMS al grupo de logs y establecer la retención del grupo en 30 días.",
+      "Exportar o suscribir los eventos a Amazon S3 con cifrado de KMS y una configuración de ciclo de vida que los transicione a clases de almacenamiento de archivo hasta cumplir siete años.",
+      "Aumentar la retención del grupo de logs de CloudWatch a siete años y habilitar el cifrado del lado del servidor con claves administradas por Amazon.",
+      "Habilitar Amazon Macie sobre el grupo de logs para clasificar y archivar automáticamente los eventos antiguos.",
+      "Replicar el grupo de logs a otra Región con un flujo de métricas para reducir el costo de almacenamiento a largo plazo."
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "Asociar una clave de KMS al grupo de logs cumple el requisito de cifrado y una retención corta limita el costo de CloudWatch Logs, mientras que la copia en Amazon S3 con transiciones de ciclo de vida a almacenamiento de archivo conserva los siete años de forma económica.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.2",
+    "text": "El tráfico de una aplicación de comercio electrónico sigue un patrón diario y semanal muy marcado. Las alarmas con umbral estático sobre el número de solicitudes generan falsas alertas en las horas valle y no detectan caídas durante los picos. ¿Cuál es la solución adecuada?",
+    "options": [
+      "Crear una alarma de detección de anomalías de CloudWatch sobre la métrica, con una banda basada en el modelo entrenado y el número de desviaciones estándar como sensibilidad.",
+      "Crear una alarma de métrica compuesta que combine el número de solicitudes con la métrica de latencia mediante una regla de expresión booleana.",
+      "Usar una expresión matemática de métricas con la función FILL para rellenar los datos faltantes y comparar con un umbral fijo.",
+      "Configurar varias alarmas con umbrales distintos y activarlas o desactivarlas con acciones programadas de Amazon EventBridge."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "La detección de anomalías de CloudWatch entrena un modelo sobre el historial de la métrica y crea una banda esperada que se ajusta a la estacionalidad diaria y semanal, lo que elimina los umbrales estáticos.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.2",
+    "text": "Una solicitud atraviesa Amazon API Gateway, una función de AWS Lambda y un servicio de Amazon ECS. El equipo necesita un mapa de servicios de extremo a extremo con los tiempos de cada segmento para localizar la causa de la latencia. ¿Qué configuración se requiere?",
+    "options": [
+      "Habilitar el rastreo activo de AWS X-Ray en la etapa de API Gateway y en la función Lambda, y ejecutar el demonio de X-Ray como contenedor complementario en la definición de tarea de ECS, con el SDK instrumentado en la aplicación.",
+      "Habilitar el registro de acceso de API Gateway y los logs de Lambda en CloudWatch, y correlacionarlos con CloudWatch Logs Insights mediante el identificador de solicitud.",
+      "Habilitar Container Insights en el clúster de ECS y el monitoreo detallado en la función Lambda para obtener el desglose de latencia por segmento.",
+      "Instalar el agente de CloudWatch en las tareas de ECS y publicar métricas personalizadas de latencia por componente en un espacio de nombres común."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "El mapa de servicios y el desglose por subsegmentos requieren rastreo de X-Ray en cada componente: rastreo activo en API Gateway y Lambda, y el demonio de X-Ray como contenedor complementario en las tareas de ECS.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.2",
+    "text": "Una empresa almacena en Amazon S3 varios terabytes de logs de acceso de Application Load Balancer organizados por año, mes y día. Los analistas necesitan ejecutar consultas SQL ad hoc sobre rangos de fechas específicos con el menor costo de análisis posible. ¿Cuál es el enfoque más adecuado?",
+    "options": [
+      "Consultar los logs con Amazon Athena mediante una tabla externa con proyección de particiones sobre las columnas de fecha.",
+      "Cargar los logs en Amazon OpenSearch Service con un índice por día y consultarlos desde los paneles del servicio.",
+      "Ingerir los logs en Amazon Redshift mediante COPY y ejecutar las consultas sobre tablas materializadas.",
+      "Enviar los logs a Amazon CloudWatch Logs y analizarlos con CloudWatch Logs Insights."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Athena consulta los datos directamente en Amazon S3 y cobra por datos escaneados; la proyección de particiones evita el mantenimiento del catálogo y limita el escaneo al rango de fechas consultado.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.3",
+    "text": "Cuando una instancia de Amazon EC2 con una etiqueta específica pasa al estado stopped, el equipo de operaciones debe recibir una notificación y registrar el evento, sin sondear la API DescribeInstances. ¿Cuál es la implementación adecuada?",
+    "options": [
+      "Una regla de Amazon EventBridge con un patrón de evento sobre el origen aws.ec2 y el tipo de detalle de cambio de estado de instancia, con Amazon SNS y una función de AWS Lambda como destinos.",
+      "Una alarma de Amazon CloudWatch sobre la métrica StatusCheckFailed_Instance con una acción de notificación de Amazon SNS.",
+      "Una regla de AWS Config que evalúe el estado de las instancias cada 24 horas y publique el resultado en Amazon SNS.",
+      "Una consulta programada de CloudWatch Logs Insights sobre los logs de AWS CloudTrail que busque llamadas StopInstances."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Amazon EC2 emite eventos de cambio de estado de instancia a EventBridge casi en tiempo real, y una regla con patrón de evento puede enviarlos a varios destinos como Amazon SNS y AWS Lambda.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.3",
+    "text": "El equipo de seguridad exige que cualquier grupo de seguridad que permita el puerto 22 desde 0.0.0.0/0 se corrija automáticamente en minutos y que quede registro de la corrección. ¿Cuáles DOS acciones se deben implementar? (Elija DOS)",
+    "options": [
+      "Habilitar la regla administrada de AWS Config restricted-ssh con evaluación activada por cambios de configuración.",
+      "Asociar a la regla una acción de remediación automática que ejecute un documento de AWS Systems Manager Automation con un rol de IAM que tenga permisos para revocar la regla de entrada.",
+      "Crear un filtro de métrica de CloudWatch Logs sobre los eventos de AWS CloudTrail y una alarma que notifique al equipo de seguridad.",
+      "Habilitar Amazon GuardDuty y suscribir sus hallazgos a Amazon SNS para que el equipo corrija el grupo de seguridad manualmente.",
+      "Agregar una regla de denegación del puerto 22 en la ACL de red de todas las subredes de la VPC."
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "La regla administrada restricted-ssh detecta el grupo de seguridad no conforme al producirse el cambio de configuración, y la acción de remediación automática con un documento de Automation aplica la corrección y deja registro en el historial de AWS Config.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.3",
+    "text": "Una tabla de Amazon DynamoDB con modo aprovisionado sufre limitaciones durante picos impredecibles varias veces al día, mientras que el resto del tiempo su uso es muy bajo. El equipo quiere reducir las limitaciones sin sobreaprovisionar de forma permanente. ¿Cuál es la solución adecuada?",
+    "options": [
+      "Habilitar el escalado automático de DynamoDB con Application Auto Scaling y una política de seguimiento de destino sobre el uso de la capacidad, o cambiar la tabla al modo de capacidad bajo demanda.",
+      "Aumentar la capacidad de escritura aprovisionada al valor del pico observado y adquirir capacidad reservada para reducir el costo.",
+      "Habilitar el acelerador en memoria DynamoDB Accelerator para absorber los picos de escritura de la tabla.",
+      "Agregar un índice secundario global con su propia capacidad aprovisionada para redistribuir las solicitudes limitadas."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "El escalado automático con seguimiento de destino ajusta la capacidad aprovisionada según la demanda y el modo bajo demanda la elimina por completo; ambos abordan picos impredecibles sin mantener capacidad excedente todo el día.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 5,
+    "taskStatementNumber": "5.1",
+    "text": "AWS Health publica eventos de retiro programado de instancias de Amazon EC2 en varias cuentas de la organización. El equipo de operaciones necesita reaccionar de forma automática y centralizada creando un ticket y programando el reemplazo. ¿Cuál es la solución adecuada?",
+    "options": [
+      "Habilitar la vista organizacional de AWS Health y la agregación de eventos en la cuenta de administración, y crear una regla de Amazon EventBridge sobre el origen aws.health que invoque un flujo de trabajo de AWS Step Functions.",
+      "Configurar una regla de Amazon EventBridge en cada cuenta sobre el origen aws.ec2 que detecte el estado de retiro y publique en un tema de Amazon SNS central.",
+      "Consultar diariamente la API DescribeEvents de AWS Health desde una función de AWS Lambda programada en cada cuenta miembro.",
+      "Crear una regla de AWS Config con una regla personalizada que evalúe la antigüedad del hardware subyacente de cada instancia."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "La vista organizacional de AWS Health centraliza los eventos de todas las cuentas y AWS Health los publica en EventBridge, lo que permite invocar automatizaciones como una máquina de estados de Step Functions sin sondear la API.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 5,
+    "taskStatementNumber": "5.1",
+    "text": "Un evento de creación de pedido debe procesarse por tres sistemas independientes: facturación, envío y analítica. Cada uno consume a velocidades distintas y ninguno debe perder mensajes si su procesamiento falla de forma temporal. ¿Cuál es el diseño adecuado?",
+    "options": [
+      "Publicar el evento en un tema de Amazon SNS con tres colas de Amazon SQS suscritas, cada una con políticas de filtro y una cola de mensajes fallidos.",
+      "Publicar el evento en una única cola de Amazon SQS y hacer que los tres sistemas consuman de ella con el mismo identificador de grupo de mensajes.",
+      "Invocar de forma síncrona tres funciones de AWS Lambda desde el servicio de pedidos y reintentar dentro del código de la aplicación.",
+      "Escribir el evento en Amazon DynamoDB y hacer que los tres sistemas sondeen la tabla con consultas por rango de tiempo."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "El patrón de distribución con SNS y colas de SQS por consumidor desacopla las velocidades de procesamiento y las colas de mensajes fallidos preservan los eventos que no se pudieron procesar.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 5,
+    "taskStatementNumber": "5.1",
+    "text": "Una plataforma ingiere 30.000 eventos de telemetría por segundo y necesita procesarlos en orden estricto por identificador de dispositivo, con capacidad de reprocesar las últimas 24 horas si se detecta un error de lógica. ¿Qué arquitectura cumple los requisitos?",
+    "options": [
+      "Amazon Kinesis Data Streams con el identificador de dispositivo como clave de partición y AWS Lambda como consumidor, con retención del flujo configurada en al menos 24 horas.",
+      "Amazon SQS estándar con AWS Lambda como consumidor y el identificador de dispositivo en el atributo del mensaje.",
+      "Amazon SNS con suscripciones de AWS Lambda y reintentos configurados con retroceso exponencial.",
+      "Amazon EventBridge con un bus personalizado, reglas por dispositivo y archivado con reproducción de eventos."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Kinesis Data Streams garantiza el orden dentro de cada partición determinada por la clave de partición y conserva los registros durante el periodo de retención configurado, lo que permite reprocesarlos desde un punto anterior del flujo.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 5,
+    "taskStatementNumber": "5.2",
+    "text": "Cuando Amazon GuardDuty genera un hallazgo de gravedad alta que indica comunicación con una dirección IP maliciosa desde una instancia de Amazon EC2, la política corporativa exige aislar la instancia de inmediato y conservar su estado para el análisis forense. ¿Cuál es la implementación adecuada?",
+    "options": [
+      "Una regla de Amazon EventBridge sobre los hallazgos de GuardDuty que invoque una función de AWS Lambda para reemplazar los grupos de seguridad de la instancia por uno de cuarentena sin reglas de salida y crear un snapshot de Amazon EBS.",
+      "Una alarma de Amazon CloudWatch sobre la métrica de hallazgos de GuardDuty que ejecute la acción de terminación de la instancia de Amazon EC2.",
+      "Una regla de AWS Config con remediación automática que separe la instancia del grupo de Auto Scaling y la reemplace por una instancia nueva.",
+      "Una política de control de servicios que deniegue el tráfico de salida de la instancia comprometida a la dirección IP identificada por GuardDuty."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "GuardDuty publica sus hallazgos en EventBridge, y una función de Lambda puede aplicar el cambio de configuración de aislamiento y crear el snapshot; terminar la instancia destruiría la evidencia necesaria para el análisis.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 5,
+    "taskStatementNumber": "5.2",
+    "text": "Las instancias nuevas de un grupo de Auto Scaling comienzan a recibir tráfico antes de terminar de sincronizar su caché local, lo que provoca errores 5xx durante los eventos de escalado. ¿Cuál es la solución más adecuada?",
+    "options": [
+      "Agregar un enlace de ciclo de vida de escalado horizontal que retenga la instancia en el estado Pending:Wait mientras un documento de AWS Systems Manager completa la sincronización, y luego completar la acción del ciclo de vida.",
+      "Aumentar el retraso de anulación de registro del grupo de destino del balanceador para dar tiempo a la sincronización de la caché.",
+      "Configurar el enfriamiento predeterminado del grupo de Auto Scaling en un valor mayor que el tiempo de sincronización de la caché.",
+      "Cambiar la comprobación de estado del grupo de destino a modo TCP para que la instancia se considere sana antes de terminar la sincronización."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Un enlace de ciclo de vida de escalado horizontal mantiene la instancia fuera del estado InService hasta que la automatización termina la preparación, por lo que el balanceador no le envía tráfico prematuramente.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 5,
+    "taskStatementNumber": "5.2",
+    "text": "Ante un incidente, se debe aplicar un cambio urgente de configuración en 5.000 instancias distribuidas en 8 cuentas y 3 Regiones. El cambio debe desplegarse de forma escalonada y detenerse automáticamente si supera un umbral de errores. ¿Cuáles DOS enfoques cumplen los requisitos? (Elija DOS)",
+    "options": [
+      "Usar AWS Systems Manager Run Command con destinos seleccionados por etiquetas y control de tasa mediante concurrencia y umbral de errores.",
+      "Ejecutar un documento de AWS Systems Manager Automation con ejecución multicuenta y multiRegión, definiendo concurrencia y umbral de errores en la ejecución.",
+      "Actualizar los datos de usuario de las plantillas de lanzamiento y esperar el reemplazo natural de las instancias.",
+      "Reconstruir la AMI con EC2 Image Builder y sustituir todas las instancias mediante una actualización de instancia del grupo de Auto Scaling.",
+      "Publicar el cambio en un tema de Amazon SNS al que las instancias estén suscritas mediante un script de sondeo local."
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "Run Command y Automation admiten control de tasa con concurrencia y umbral de errores que detiene la ejecución ante fallas, y Automation además admite objetivos multicuenta y multiRegión de forma nativa; las opciones basadas en reemplazo de instancias no son inmediatas.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 5,
+    "taskStatementNumber": "5.3",
+    "text": "Un despliegue de AWS CodeDeploy en instancias de Amazon EC2 falla en el evento de ciclo de vida ApplicationStart, pero la consola solo muestra que el script devolvió un código de error. ¿Cuál es la forma más eficaz de obtener la causa raíz y conservarla para incidentes futuros?",
+    "options": [
+      "Revisar el log del agente de CodeDeploy y los logs de los scripts de ciclo de vida en la instancia, y configurar el agente de Amazon CloudWatch para enviar esas rutas de log a CloudWatch Logs de forma permanente.",
+      "Habilitar el rastreo de AWS X-Ray en el grupo de despliegue de CodeDeploy para ver el desglose de los eventos de ciclo de vida.",
+      "Consultar los eventos de AWS CloudTrail correspondientes a la llamada CreateDeployment para identificar el error del script.",
+      "Volver a ejecutar el despliegue con la configuración CodeDeployDefault.OneAtATime y observar las métricas de uso de CPU de la instancia."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "La salida detallada de los enlaces de ciclo de vida se escribe en los logs del agente de CodeDeploy en la instancia; enviarlos a CloudWatch Logs con el agente de CloudWatch conserva la evidencia incluso si la instancia se reemplaza.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 5,
+    "taskStatementNumber": "5.3",
+    "text": "Las tareas de un servicio de Amazon ECS en subredes privadas no llegan a iniciarse y el detalle de la tarea detenida indica CannotPullContainerError con un error de tiempo de espera al resolver el registro. ¿Cuál es la causa más probable?",
+    "options": [
+      "Las subredes privadas no tienen ruta de salida ni endpoints de VPC para Amazon ECR y Amazon S3, por lo que el agente no puede descargar la imagen.",
+      "El rol de tarea de ECS carece del permiso ecr:GetAuthorizationToken necesario para que el contenedor se autentique.",
+      "La definición de tarea especifica una CPU y una memoria insuficientes para descomprimir la imagen del contenedor.",
+      "El repositorio de Amazon ECR tiene habilitada la inmutabilidad de etiquetas, lo que impide descargar la etiqueta latest."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Un error de tiempo de espera al descargar la imagen indica falta de conectividad de red: las tareas en subredes privadas necesitan una puerta de enlace NAT o endpoints de VPC para ECR API, ECR DKR y S3; un problema de permisos devolvería un error de autorización, no de tiempo de espera.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 5,
+    "taskStatementNumber": "5.3",
+    "text": "Una pila de AWS CloudFormation queda en el estado UPDATE_ROLLBACK_FAILED porque un recurso no puede volver a su configuración anterior. El equipo necesita recuperar el control de la pila y poder desplegar cambios nuevos. ¿Cuál es la acción correcta?",
+    "options": [
+      "Corregir manualmente el recurso problemático y ejecutar ContinueUpdateRollback, indicando en la lista de recursos a omitir aquellos que sigan bloqueando la reversión.",
+      "Eliminar la pila con la opción de retención de recursos y volver a crearla importando los recursos existentes.",
+      "Crear un conjunto de cambios sobre la pila en estado fallido y ejecutarlo para sobrescribir la reversión pendiente.",
+      "Habilitar la protección de terminación y ejecutar una operación de actualización con la política de pila deshabilitada."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "ContinueUpdateRollback es la operación diseñada para salir de UPDATE_ROLLBACK_FAILED; permite omitir los recursos que impiden la reversión una vez corregidos manualmente y devuelve la pila a un estado estable.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 6,
+    "taskStatementNumber": "6.1",
+    "text": "Los equipos de desarrollo deben poder crear roles de IAM para sus funciones de AWS Lambda sin depender del equipo central, pero sin posibilidad de otorgarse permisos superiores a los suyos. ¿Cuál es la solución adecuada?",
+    "options": [
+      "Definir una política administrada como límite de permisos y otorgar a los desarrolladores permisos de iam:CreateRole y iam:AttachRolePolicy con una condición iam:PermissionsBoundary que exija ese límite.",
+      "Otorgar a los desarrolladores permisos completos de IAM y auditar los roles creados con una regla de AWS Config que detecte políticas excesivas.",
+      "Aplicar una política de control de servicios a la cuenta que deniegue todas las acciones de IAM salvo iam:PassRole.",
+      "Crear previamente todos los roles posibles en la cuenta y otorgar a los desarrolladores solo permisos de iam:PassRole sobre ellos."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Un límite de permisos define el máximo de privilegios efectivos de las identidades creadas, y la condición iam:PermissionsBoundary obliga a que todo rol nuevo lo incluya, lo que evita la escalada de privilegios al delegar la creación de roles.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 6,
+    "taskStatementNumber": "6.1",
+    "text": "Una empresa con un proveedor de identidades corporativo debe otorgar acceso a AWS a 2.000 empleados en 30 cuentas, sin credenciales de larga duración, y con permisos que dependan del proyecto asignado a cada persona en el directorio. ¿Cuáles DOS elementos forman la solución adecuada? (Elija DOS)",
+    "options": [
+      "Configurar AWS IAM Identity Center con federación SAML 2.0 y aprovisionamiento SCIM desde el proveedor de identidades, propagando el atributo de proyecto como etiqueta de sesión.",
+      "Escribir políticas de permisos con condiciones que comparen aws:PrincipalTag/Proyecto con aws:ResourceTag/Proyecto para aplicar control de acceso basado en atributos.",
+      "Crear un usuario de IAM por empleado en cada cuenta y rotar sus claves de acceso automáticamente con AWS Secrets Manager.",
+      "Usar un grupo de usuarios de Amazon Cognito como proveedor de identidades para el acceso de los empleados a la consola de administración de AWS.",
+      "Aplicar una política de control de servicios por empleado que enumere de forma explícita los recursos de su proyecto."
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "IAM Identity Center con SAML y SCIM entrega credenciales temporales y sincroniza los atributos del directorio como etiquetas de sesión, y las condiciones sobre aws:PrincipalTag y aws:ResourceTag implementan control de acceso basado en atributos que escala sin políticas por persona.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 6,
+    "taskStatementNumber": "6.1",
+    "text": "Una aplicación se conecta a Amazon RDS con usuario y contraseña. La política corporativa exige rotar esa credencial cada 30 días sin interrupciones de conexión durante la rotación. ¿Cuál es la solución más adecuada?",
+    "options": [
+      "Almacenar la credencial en AWS Secrets Manager y habilitar la rotación administrada con la estrategia de usuarios alternos, y hacer que la aplicación obtenga el secreto en tiempo de ejecución.",
+      "Almacenar la credencial como parámetro de tipo SecureString en AWS Systems Manager Parameter Store y rotarla con una función de AWS Lambda programada por Amazon EventBridge.",
+      "Habilitar la autenticación de base de datos de IAM y almacenar el token de autenticación en una variable de entorno de la aplicación al iniciar.",
+      "Cifrar el archivo de configuración de la aplicación con AWS KMS y desplegar una versión nueva del artefacto cada 30 días con la contraseña actualizada."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "La rotación administrada de Secrets Manager con la estrategia de usuarios alternos mantiene dos usuarios de base de datos y alterna entre ellos, de modo que siempre existe una credencial válida durante la rotación.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 6,
+    "taskStatementNumber": "6.2",
+    "text": "Una organización con 60 cuentas necesita aplicar de forma automática un conjunto común de controles de seguridad y comprobaciones de cumplimiento en todas las cuentas y Regiones activas, incluidas las cuentas que se incorporen después. ¿Cuál es el enfoque más adecuado?",
+    "options": [
+      "Habilitar AWS Security Hub y AWS Config mediante un administrador delegado de AWS Organizations con inscripción automática, y desplegar paquetes de conformidad de AWS Config a nivel de la organización.",
+      "Desplegar en cada cuenta un conjunto de pilas autoadministrado con reglas de AWS Config y actualizar la lista de cuentas destino cada trimestre.",
+      "Configurar Amazon Inspector en la cuenta de administración y compartir sus resultados con las cuentas miembro mediante AWS Resource Access Manager.",
+      "Aplicar políticas de control de servicios que denieguen todas las acciones en las cuentas donde no se detecten los controles de seguridad requeridos."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "La integración de Security Hub y AWS Config con Organizations mediante administrador delegado inscribe automáticamente las cuentas nuevas, y los paquetes de conformidad a nivel de la organización aplican los mismos controles en todas las cuentas y Regiones.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 6,
+    "taskStatementNumber": "6.2",
+    "text": "Un equipo de gobierno de datos debe descubrir de forma continua si hay información de identificación personal en los buckets de Amazon S3 de 25 cuentas, con informes centralizados y sin desarrollar clasificadores propios. ¿Cuál es la solución adecuada?",
+    "options": [
+      "Habilitar Amazon Macie con un administrador delegado de la organización y activar el descubrimiento automatizado de datos sensibles, complementado con trabajos de clasificación programados sobre los buckets críticos.",
+      "Configurar Amazon Inspector con plantillas de evaluación de datos sobre los buckets de Amazon S3 de cada cuenta.",
+      "Crear un catálogo con AWS Glue y ejecutar consultas de Amazon Athena con expresiones regulares para detectar patrones de datos personales.",
+      "Habilitar el registro de acceso a objetos de Amazon S3 y analizar los patrones de acceso con Amazon Detective."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Macie es el servicio administrado de descubrimiento de datos sensibles en Amazon S3, admite administración delegada por medio de Organizations y ofrece descubrimiento automatizado continuo además de trabajos de clasificación dirigidos.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 6,
+    "taskStatementNumber": "6.2",
+    "text": "Una aplicación web pública distribuida con Amazon CloudFront sufre intentos de inyección SQL y una oleada de solicitudes automatizadas desde un número reducido de direcciones IP. La empresa quiere protección en capas con el menor esfuerzo operativo. ¿Cuál es la solución adecuada?",
+    "options": [
+      "Asociar una ACL web de AWS WAF a la distribución de CloudFront con grupos de reglas administradas de AWS y una regla de límite de tasa, y habilitar AWS Shield Advanced para la protección ampliada y la respuesta ante incidentes.",
+      "Configurar ACL de red en las subredes del origen que denieguen las direcciones IP ofensivas y agregar reglas de grupo de seguridad para el tráfico HTTPS.",
+      "Habilitar AWS Network Firewall en la VPC del origen con reglas de inspección profunda de paquetes para el tráfico HTTPS entrante desde CloudFront.",
+      "Habilitar los logs de acceso de CloudFront y una función de AWS Lambda que revise cada solicitud registrada y agregue las direcciones IP ofensivas a un grupo de seguridad."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "AWS WAF asociado a CloudFront filtra las solicitudes en el borde con reglas administradas contra inyección SQL y limita la tasa por dirección IP, y Shield Advanced agrega protección frente a ataques de denegación de servicio con soporte del equipo de respuesta de AWS.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 6,
+    "taskStatementNumber": "6.3",
+    "text": "El área de auditoría exige un registro completo e inalterable de la actividad de la API en todas las cuentas de la organización, con capacidad de demostrar que ningún archivo de log fue modificado ni eliminado. ¿Cuál es la configuración adecuada?",
+    "options": [
+      "Un registro de seguimiento de la organización en AWS CloudTrail con validación de integridad de archivos de log habilitada, entregado a un bucket de Amazon S3 en una cuenta de archivo con bloqueo de objetos en modo de cumplimiento.",
+      "Un registro de seguimiento por cuenta con entrega a un bucket local con versionado habilitado y una política de bucket que deniegue s3:DeleteObject a los usuarios de IAM.",
+      "Amazon CloudWatch Logs como destino de CloudTrail en cada cuenta, con la retención del grupo de logs configurada en 10 años.",
+      "AWS Config con un agregador multicuenta y snapshots de configuración entregados diariamente a un bucket central de Amazon S3."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "El registro de seguimiento de la organización captura la actividad de todas las cuentas, la validación de integridad permite comprobar criptográficamente que los archivos no cambiaron, y el bloqueo de objetos de S3 en modo de cumplimiento impide su eliminación.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 6,
+    "taskStatementNumber": "6.3",
+    "text": "Un ingeniero debe identificar de forma continua qué buckets de Amazon S3, roles de IAM y claves de AWS KMS son accesibles desde fuera de la organización, con análisis basado en evidencia y no en heurísticas de configuración. ¿Cuál es el servicio adecuado?",
+    "options": [
+      "IAM Access Analyzer con un analizador cuyo ámbito de confianza sea la organización de AWS Organizations.",
+      "Amazon Detective con la investigación de comportamiento de los principales de IAM habilitada.",
+      "Amazon GuardDuty con la protección de S3 activada en todas las cuentas.",
+      "AWS Trusted Advisor con las comprobaciones de la categoría de seguridad en el nivel de soporte Business."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "IAM Access Analyzer usa razonamiento automatizado sobre las políticas para determinar el acceso externo real a recursos como buckets, roles y claves, y al definir la organización como zona de confianza solo informa el acceso desde fuera de ella.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 6,
+    "taskStatementNumber": "6.3",
+    "text": "La empresa necesita alertas en minutos ante eventos de seguridad anómalos, como el uso de las credenciales del usuario raíz o llamadas de API inusuales sobre recursos de red. ¿Cuáles DOS implementaciones cumplen el objetivo? (Elija DOS)",
+    "options": [
+      "Crear un filtro de métrica en el grupo de Amazon CloudWatch Logs que recibe los eventos de AWS CloudTrail para detectar el uso del usuario raíz, y asociarle una alarma con notificación de Amazon SNS.",
+      "Habilitar Amazon GuardDuty y crear una regla de Amazon EventBridge sobre sus hallazgos que invoque una función de AWS Lambda y publique en Amazon SNS.",
+      "Entregar los logs de flujo de VPC a Amazon S3 y ejecutar una consulta semanal de Amazon Athena para revisar el tráfico inusual.",
+      "Programar evaluaciones mensuales de Amazon Inspector sobre las instancias de Amazon EC2 y revisar el informe de vulnerabilidades.",
+      "Revisar el panel de AWS Trusted Advisor cada mañana para verificar las comprobaciones de seguridad pendientes."
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "Un filtro de métrica sobre los eventos de CloudTrail en CloudWatch Logs con una alarma detecta patrones específicos casi en tiempo real, y GuardDuty publica hallazgos de comportamiento anómalo en EventBridge para notificación inmediata; las revisiones semanales o mensuales no cumplen el objetivo de minutos.",
+    "source": "llm"
+  }
+]

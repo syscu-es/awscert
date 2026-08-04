@@ -1,0 +1,455 @@
+{
+  "code": "DEA-C01",
+  "slug": "data-engineer-associate-01",
+  "name": "AWS Certified Data Engineer - Associate",
+  "level": "associate",
+  "examGuideUrl": "https://docs.aws.amazon.com/aws-certification/latest/data-engineer-associate-01/data-engineer-associate-01.md",
+  "scrapedAt": "2026-08-04T15:42:31.828Z",
+  "domains": [
+    {
+      "number": 1,
+      "title": "Data Ingestion and Transformation",
+      "weightPct": 34,
+      "taskStatements": [
+        {
+          "number": "1.1",
+          "text": "Perform data ingestion",
+          "knowledge": [],
+          "skills": [
+            "Read data from streaming sources (for example, Amazon Kinesis, Amazon Managed Streaming for Apache Kafka [Amazon MSK], Amazon DynamoDB Streams, AWS DMS, AWS Glue, Amazon Redshift).",
+            "Read data from batch sources (for example, Amazon S3, AWS Glue, Amazon EMR, AWS DMS, Amazon Redshift, AWS Lambda, Amazon AppFlow).",
+            "Implement appropriate configuration options for batch ingestion.",
+            "Consume data APIs.",
+            "Set up schedulers by using Amazon EventBridge, Apache Airflow, or time-based schedules for jobs and crawlers.",
+            "Set up event triggers (for example, Amazon S3 Event Notifications, EventBridge).",
+            "Call a Lambda function from Kinesis.",
+            "Create allowlists for IP addresses to allow connections to data sources.",
+            "Implement throttling and overcoming rate limits (for example, DynamoDB, Amazon RDS, Kinesis).",
+            "Manage fan-in and fan-out for streaming data distribution.",
+            "Describe replayability of data ingestion pipelines.",
+            "Define stateful and stateless data transactions."
+          ]
+        },
+        {
+          "number": "1.2",
+          "text": "Transform and process data",
+          "knowledge": [],
+          "skills": [
+            "Optimize container usage for performance needs (for example, Amazon EKS, Amazon ECS).",
+            "Connect to different data sources (for example, Java Database Connectivity [JDBC], Open Database Connectivity [ODBC]).",
+            "Integrate data from multiple sources.",
+            "Optimize costs while processing data.",
+            "Implement data transformation services based on requirements (for example, Amazon EMR, AWS Glue, Lambda, Amazon Redshift).",
+            "Transform data between formats (for example, from .csv to Apache Parquet).",
+            "Troubleshoot and debug common transformation failures and performance issues.",
+            "Create data APIs to make data available to other systems by using AWS services.",
+            "Define volume, velocity, and variety of data (for example, structured data, unstructured data).",
+            "Integrate large language models (LLMs) for data processing."
+          ]
+        },
+        {
+          "number": "1.3",
+          "text": "Orchestrate data pipelines",
+          "knowledge": [],
+          "skills": [
+            "Use orchestration services to build workflows for data ETL pipelines (for example, Lambda, EventBridge, Amazon Managed Workflows for Apache Airflow [Amazon MWAA], AWS Step Functions, AWS Glue workflows).",
+            "Build data pipelines for performance, availability, scalability, resiliency, and fault tolerance.",
+            "Implement and maintain serverless workflows.",
+            "Use notification services to send alerts (for example, Amazon SNS, Amazon SQS)."
+          ]
+        },
+        {
+          "number": "1.4",
+          "text": "Apply programming concepts",
+          "knowledge": [],
+          "skills": [
+            "Optimize code to reduce runtime for data ingestion and transformation.",
+            "Configure Lambda functions to meet concurrency and performance needs.",
+            "Use programming languages and frameworks for data engineering (for example, Python, SQL, Scala, R, Java, Bash, PowerShell).",
+            "Use software engineering best practices for data engineering (for example, version control, testing, logging, monitoring).",
+            "Use Infrastructure as Code (IaC) to deploy data engineering solutions.",
+            "Use AWS SAM to package and deploy serverless data pipelines (for example, Lambda functions, Step Functions, DynamoDB tables).",
+            "Use and mount storage volumes from within Lambda functions.",
+            "Use infrastructure as code (IaC) for repeatable resource deployment (for example, AWS CloudFormation and AWS CDK).",
+            "Describe continuous integration and continuous delivery (CI/CD) (implementation, testing, and deployment of data pipelines).",
+            "Define distributed computing.",
+            "Describe data structures and algorithms (for example, graph data structures and tree data structures)."
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Data Store Management",
+      "weightPct": 26,
+      "taskStatements": [
+        {
+          "number": "2.1",
+          "text": "Choose a data store",
+          "knowledge": [],
+          "skills": [
+            "Implement the appropriate storage services for specific cost and performance requirements (for example, Amazon Redshift, Amazon EMR, AWS Lake Formation, Amazon RDS, Amazon DynamoDB, Amazon Kinesis Data Streams, Amazon Managed Streaming for Apache Kafka [Amazon MSK]).",
+            "Configure the appropriate storage services for specific access patterns and requirements (for example, Amazon Redshift, Amazon EMR, Lake Formation, Amazon RDS, DynamoDB).",
+            "Apply storage services to appropriate use cases (for example, using indexing algorithms like Hierarchical Navigable Small Worlds [HNSW] with Amazon Aurora PostgreSQL and using Amazon MemoryDB for fast key/value pair access).",
+            "Integrate migration tools into data processing systems (for example, AWS Transfer Family).",
+            "Implement data migration or remote access methods (for example, Amazon Redshift federated queries, Amazon Redshift materialized views, Amazon Redshift Spectrum).",
+            "Manage locks to prevent access to data (for example, Amazon Redshift, Amazon RDS).",
+            "Manage open table formats (for example Apache Iceberg).",
+            "Describe vector index types (for example, HNSW, IVF)."
+          ]
+        },
+        {
+          "number": "2.2",
+          "text": "Understand data cataloging systems",
+          "knowledge": [],
+          "skills": [
+            "Use data catalogs to consume data from the data's source.",
+            "Build and reference a technical data catalog (for example, AWS Glue Data Catalog, Apache Hive metastore).",
+            "Discover schemas and use AWS Glue crawlers to populate data catalogs.",
+            "Synchronize partitions with a data catalog.",
+            "Create new source or target connections for cataloging (for example, AWS Glue).",
+            "Create and manage business data catalogs (for example, Amazon SageMaker Catalog)."
+          ]
+        },
+        {
+          "number": "2.3",
+          "text": "Manage the lifecycle of data",
+          "knowledge": [],
+          "skills": [
+            "Perform load and unload operations to move data between Amazon S3 and Amazon Redshift.",
+            "Manage S3 Lifecycle policies to change the storage tier of S3 data.",
+            "Expire data when it reaches a specific age by using S3 Lifecycle policies.",
+            "Manage S3 versioning and DynamoDB TTL.",
+            "Delete data to meet business and legal requirements.",
+            "Protect data with appropriate resiliency and availability."
+          ]
+        },
+        {
+          "number": "2.4",
+          "text": "Design data models and schema evolution",
+          "knowledge": [],
+          "skills": [
+            "Design schemas for Amazon Redshift, DynamoDB, and Lake Formation.",
+            "Address changes to the characteristics of data.",
+            "Perform schema conversion (for example, by using AWS SCT and AWS DMS Schema Conversion).",
+            "Establish data lineage by using AWS tools (for example, Amazon SageMaker ML Lineage Tracking and Amazon SageMaker Catalog).",
+            "Describe best practices for indexing, partitioning strategies, compression, and other data optimization techniques.",
+            "Describe vectorization concepts (for example, Amazon Bedrock knowledge base)."
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Data Operations and Support",
+      "weightPct": 22,
+      "taskStatements": [
+        {
+          "number": "3.1",
+          "text": "Automate data processing by using AWS services",
+          "knowledge": [],
+          "skills": [
+            "Orchestrate data pipelines (for example, Amazon Managed Workflows for Apache Airflow [Amazon MWAA], AWS Step Functions).",
+            "Troubleshoot Amazon managed workflows.",
+            "Call SDKs to access Amazon features from code.",
+            "Use the features of AWS services to process data (for example, Amazon EMR, Amazon Redshift, AWS Glue).",
+            "Consume and maintain data APIs.",
+            "Prepare data for transformation (for example, AWS Glue DataBrew and Amazon SageMaker Unified Studio).",
+            "Query data (for example, Amazon Athena).",
+            "Use AWS Lambda to automate data processing.",
+            "Manage events and schedulers (for example, Amazon EventBridge)."
+          ]
+        },
+        {
+          "number": "3.2",
+          "text": "Analyze data by using AWS services",
+          "knowledge": [],
+          "skills": [
+            "Visualize data by using AWS services and tools (for example, DataBrew, Amazon QuickSight).",
+            "Verify and clean data (for example, Lambda, Athena, QuickSight, Jupyter Notebooks, Amazon SageMaker Data Wrangler).",
+            "Use SQL in Amazon Redshift and Athena to query data or to create views.",
+            "Use Athena notebooks that use Apache Spark to explore data.",
+            "Describe tradeoffs between provisioned services and serverless services.",
+            "Define data aggregation, rolling average, grouping, and pivoting."
+          ]
+        },
+        {
+          "number": "3.3",
+          "text": "Maintain and monitor data pipelines",
+          "knowledge": [],
+          "skills": [
+            "Extract logs for audits.",
+            "Deploy logging and monitoring solutions to facilitate auditing and traceability.",
+            "Use notifications during monitoring to send alerts.",
+            "Troubleshoot performance issues.",
+            "Use AWS CloudTrail to track API calls.",
+            "Troubleshoot and maintain pipelines (for example, AWS Glue, Amazon EMR).",
+            "Use Amazon CloudWatch Logs to log application data (with a focus on configuration and automation).",
+            "Analyze logs with AWS services (for example, Athena, Amazon EMR, Amazon OpenSearch Service, CloudWatch Logs Insights, big data application logs)."
+          ]
+        },
+        {
+          "number": "3.4",
+          "text": "Ensure data quality",
+          "knowledge": [],
+          "skills": [
+            "Run data quality checks while processing the data (for example, checking for empty fields).",
+            "Define data quality rules (for example, DataBrew).",
+            "Investigate data consistency (for example, DataBrew).",
+            "Describe data sampling techniques.",
+            "Implement data skew mechanisms."
+          ]
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Data Security and Governance",
+      "weightPct": 18,
+      "taskStatements": [
+        {
+          "number": "4.1",
+          "text": "Apply authentication mechanisms",
+          "knowledge": [],
+          "skills": [
+            "Update VPC security groups.",
+            "Create and update IAM groups, roles, endpoints, and services.",
+            "Create and rotate credentials for password management (for example, AWS Secrets Manager).",
+            "Set up IAM roles for access (for example, AWS Lambda, Amazon API Gateway, AWS CLI, AWS CloudFormation).",
+            "Apply IAM policies to roles, endpoints, and services (for example, S3 Access Points, AWS PrivateLink).",
+            "Describe the differences between managed services and unmanaged services.",
+            "Use domain, domain units, and projects for SageMaker Unified Studio."
+          ]
+        },
+        {
+          "number": "4.2",
+          "text": "Apply authorization mechanisms",
+          "knowledge": [],
+          "skills": [
+            "Create custom IAM policies when a managed policy does not meet the needs.",
+            "Store application and database credentials (for example, Secrets Manager, AWS Systems Manager Parameter Store).",
+            "Provide database users, groups, and roles access and authority in a database (for example, for Amazon Redshift).",
+            "Manage permissions through AWS Lake Formation (for Amazon Redshift, Amazon EMR, Amazon Athena, and Amazon S3).",
+            "Apply authorization methods that address business needs (role-based, tag-based, and attribute-based).",
+            "Construct custom policies that meet the principle of least privilege."
+          ]
+        },
+        {
+          "number": "4.3",
+          "text": "Ensure data encryption and masking",
+          "knowledge": [],
+          "skills": [
+            "Apply data masking and anonymization according to compliance laws or company policies.",
+            "Use encryption keys to encrypt or decrypt data (for example, AWS KMS).",
+            "Configure encryption across AWS account boundaries.",
+            "Enable encryption in transit or before transit for data."
+          ]
+        },
+        {
+          "number": "4.4",
+          "text": "Prepare logs for audit",
+          "knowledge": [],
+          "skills": [
+            "Use AWS CloudTrail to track API calls.",
+            "Use Amazon CloudWatch Logs to store application logs.",
+            "Use AWS CloudTrail Lake for centralized logging queries.",
+            "Analyze logs by using AWS services (for example, Athena, CloudWatch Logs Insights, Amazon OpenSearch Service).",
+            "Integrate various AWS services to perform logging (for example, Amazon EMR in cases of large volumes of log data)."
+          ]
+        },
+        {
+          "number": "4.5",
+          "text": "Understand data privacy and governance",
+          "knowledge": [],
+          "skills": [
+            "Grant permissions for data sharing (for example, data sharing for Amazon Redshift).",
+            "Implement PII identification (for example, Amazon Macie with Lake Formation).",
+            "Implement data privacy strategies to prevent backups or replications of data to disallowed AWS Regions.",
+            "Viewing configuration changes that have occurred in an account (for example, AWS Config).",
+            "Maintain data sovereignty.",
+            "Manage data access through Amazon SageMaker Catalog projects.",
+            "Describe governance data framework and data sharing patterns."
+          ]
+        }
+      ]
+    }
+  ],
+  "inScopeServices": {
+    "Analytics": [
+      "Amazon Athena",
+      "Amazon EMR",
+      "AWS Glue",
+      "AWS Glue DataBrew",
+      "AWS Lake Formation",
+      "Amazon Kinesis Data Firehose",
+      "Amazon Kinesis Data Streams",
+      "Amazon Managed Service for Apache Flink",
+      "Amazon Managed Streaming for Apache Kafka (Amazon MSK)",
+      "Amazon OpenSearch Service",
+      "Amazon Quick",
+      "Amazon SageMaker AI"
+    ],
+    "Application Integration": [
+      "Amazon AppFlow",
+      "Amazon EventBridge",
+      "Amazon Managed Workflows for Apache Airflow (Amazon MWAA)",
+      "Amazon SNS",
+      "Amazon SQS",
+      "AWS Step Functions"
+    ],
+    "Cloud Financial Management": [
+      "AWS Budgets",
+      "AWS Cost Explorer"
+    ],
+    "Compute": [
+      "AWS Batch",
+      "Amazon EC2",
+      "AWS Lambda",
+      "AWS SAM"
+    ],
+    "Containers": [
+      "Amazon ECR",
+      "Amazon ECS",
+      "Amazon EKS"
+    ],
+    "Database": [
+      "Amazon DocumentDB",
+      "Amazon DynamoDB",
+      "Amazon Keyspaces",
+      "Amazon MemoryDB for Redis",
+      "Amazon Neptune",
+      "Amazon RDS",
+      "Amazon Aurora",
+      "Amazon Redshift"
+    ],
+    "Developer Tools": [
+      "AWS CLI",
+      "AWS CloudFormation",
+      "AWS CDK",
+      "AWS CodeBuild",
+      "AWS CodeDeploy",
+      "AWS CodePipeline",
+      "Amazon Q"
+    ],
+    "Web and Mobile": [
+      "Amazon API Gateway"
+    ],
+    "Machine Learning": [
+      "Amazon SageMaker AI",
+      "Amazon Bedrock",
+      "Amazon Kendra"
+    ],
+    "Management and Governance": [
+      "AWS CloudTrail",
+      "Amazon CloudWatch",
+      "Amazon CloudWatch Logs",
+      "AWS Config",
+      "Amazon Managed Grafana",
+      "AWS Systems Manager",
+      "AWS Well-Architected Tool",
+      "AWS Data Exchange"
+    ],
+    "Migration and Transfer": [
+      "AWS Application Discovery Service",
+      "AWS Application Migration Service",
+      "AWS DMS",
+      "AWS DataSync",
+      "AWS Snow Family",
+      "AWS Transfer Family"
+    ],
+    "Networking and Content Delivery": [
+      "Amazon CloudFront",
+      "AWS PrivateLink",
+      "Amazon Route 53",
+      "Amazon VPC"
+    ],
+    "Security, Identity, and Compliance": [
+      "IAM",
+      "AWS KMS",
+      "Amazon Macie",
+      "AWS Secrets Manager",
+      "AWS Shield",
+      "AWS WAF"
+    ],
+    "Storage": [
+      "AWS Backup",
+      "Amazon EBS",
+      "Amazon EFS",
+      "Amazon S3",
+      "Amazon S3 Tables",
+      "Amazon S3 Glacier",
+      "Amazon S3 Tables"
+    ]
+  },
+  "outOfScopeServices": {
+    "Analytics": [
+      "Amazon FinSpace"
+    ],
+    "Business Applications": [
+      "Alexa for Business",
+      "Amazon Chime",
+      "Amazon Connect",
+      "AWS IQ",
+      "Amazon WorkMail"
+    ],
+    "Compute": [
+      "AWS App Runner",
+      "AWS Elastic Beanstalk",
+      "Amazon Lightsail",
+      "AWS Outposts",
+      "AWS Serverless Application Repository"
+    ],
+    "Containers": [
+      "Red Hat OpenShift Service on AWS (ROSA)"
+    ],
+    "Developer Tools": [
+      "AWS Fault Injection Simulator (AWS FIS)",
+      "AWS X-Ray"
+    ],
+    "Frontend Web and Mobile": [
+      "AWS Amplify",
+      "AWS AppSync",
+      "AWS Device Farm",
+      "Amazon Location Service",
+      "Amazon Pinpoint",
+      "Amazon SES"
+    ],
+    "Internet of Things (IoT)": [
+      "FreeRTOS",
+      "AWS IoT 1-Click",
+      "AWS IoT Device Defender",
+      "AWS IoT Device Management",
+      "AWS IoT Events",
+      "AWS IoT FleetWise",
+      "AWS IoT RoboRunner",
+      "AWS IoT SiteWise",
+      "AWS IoT TwinMaker"
+    ],
+    "Machine Learning": [
+      "Amazon DevOps Guru"
+    ],
+    "Management and Governance": [
+      "AWS Activate",
+      "AWS Managed Services (AMS)"
+    ],
+    "Media Services": [
+      "Amazon Elastic Transcoder",
+      "AWS Elemental Appliances and Software",
+      "AWS Elemental MediaConnect",
+      "AWS Elemental MediaConvert",
+      "AWS Elemental MediaLive",
+      "AWS Elemental MediaPackage",
+      "AWS Elemental MediaStore",
+      "AWS Elemental MediaTailor",
+      "Amazon Interactive Video Service (Amazon IVS)",
+      "Amazon Nimble Studio"
+    ],
+    "Migration and Transfer": [
+      "AWS Mainframe Modernization",
+      "AWS Migration Hub"
+    ],
+    "Storage": [
+      "EC2 Image Builder"
+    ]
+  }
+}

@@ -1,0 +1,549 @@
+[
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.1",
+    "text": "Un equipo de ciencia de datos almacena 40 TB de registros de clics en Amazon S3 en formato CSV sin comprimir. Los analistas consultan los datos con Amazon Athena y casi siempre seleccionan solo 5 de las 80 columnas disponibles. El equipo necesita reducir el volumen de datos escaneados y el costo de las consultas con el menor esfuerzo operativo. ¿Que cambio de formato de datos debe aplicar el equipo?",
+    "options": [
+      "Convertir los datos a Apache Parquet con compresion Snappy",
+      "Convertir los datos a JSON delimitado por lineas",
+      "Mantener el formato CSV y comprimir cada archivo con gzip",
+      "Convertir los datos a Apache Avro sin compresion"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Parquet es un formato columnar, por lo que Athena solo lee las columnas solicitadas y reduce drasticamente los datos escaneados. Avro y JSON son orientados a filas y gzip sobre CSV reduce el tamano pero sigue obligando a leer todas las columnas.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.1",
+    "text": "Una empresa recibe telemetria continua de miles de sensores industriales. El equipo de ML necesita entregar los datos crudos en Amazon S3 para entrenamiento posterior y, al mismo tiempo, calcular agregaciones por ventanas de tiempo de 5 minutos sobre el flujo en transito. ¿Cuales DOS servicios debe usar el equipo?",
+    "options": [
+      "Amazon Data Firehose para entregar el flujo en un bucket de Amazon S3",
+      "AWS DataSync para transferir el flujo hacia Amazon S3",
+      "Amazon Managed Service for Apache Flink para calcular las agregaciones por ventanas",
+      "Amazon S3 Transfer Acceleration para acelerar la escritura del flujo",
+      "Amazon RDS con disparadores de base de datos para agregar los eventos"
+    ],
+    "correct": [0, 2],
+    "type": "multiple",
+    "explanation": "Data Firehose entrega flujos casi en tiempo real a S3 sin administrar servidores, y Managed Service for Apache Flink ejecuta agregaciones por ventanas sobre datos en movimiento. DataSync es para transferencias por lotes, Transfer Acceleration acelera cargas HTTP y RDS no es un motor de procesamiento de flujos.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.1",
+    "text": "Equipos ubicados en Asia y Europa cargan archivos de imagenes de varios gigabytes a un bucket de Amazon S3 alojado en us-east-1. Las cargas tardan varias horas y con frecuencia se interrumpen. El equipo de ML necesita mejorar la velocidad de carga sin cambiar la region del bucket. ¿Que debe implementar el equipo?",
+    "options": [
+      "Habilitar Amazon S3 Transfer Acceleration en el bucket",
+      "Configurar replicacion entre regiones desde el bucket de us-east-1",
+      "Mover los objetos a la clase de almacenamiento S3 Glacier Flexible Retrieval",
+      "Adjuntar volumenes de Amazon EBS con IOPS provisionadas a las estaciones de trabajo"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "S3 Transfer Acceleration enruta las cargas por la red de borde de Amazon CloudFront, lo que mejora la velocidad de transferencia de larga distancia. La replicacion copia objetos ya cargados, Glacier es para archivado y EBS no interviene en la carga hacia S3.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.2",
+    "text": "Un ingeniero de ML prepara un dataset para un modelo de regresion lineal. El dataset incluye una columna categorica llamada region con seis valores posibles que no tienen ningun orden intrinseco. ¿Que tecnica de codificacion debe aplicar el ingeniero para evitar introducir una relacion ordinal falsa?",
+    "options": [
+      "Codificacion one-hot de la columna region",
+      "Codificacion de etiquetas (label encoding) asignando enteros de 1 a 6",
+      "Discretizacion en intervalos (binning) de la columna region",
+      "Normalizacion min-max de la columna region"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "One-hot encoding crea una variable binaria por categoria y evita que el modelo interprete un orden entre los valores. El label encoding introduce una relacion ordinal artificial y el binning o la normalizacion aplican a variables numericas.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.2",
+    "text": "Varios equipos de una empresa calculan las mismas caracteristicas de clientes con codigo duplicado. El equipo de ML necesita un repositorio central que sirva las caracteristicas con baja latencia para la inferencia en tiempo real y que tambien conserve el historial para generar datasets de entrenamiento consistentes. ¿Que servicio debe usar el equipo?",
+    "options": [
+      "Amazon SageMaker Feature Store con almacen en linea y almacen sin conexion",
+      "AWS Glue DataBrew con recetas compartidas entre proyectos",
+      "Amazon S3 con una convencion de prefijos por equipo",
+      "Amazon DynamoDB con una tabla por cada equipo"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "SageMaker Feature Store ofrece un almacen en linea de baja latencia para inferencia y un almacen sin conexion con historial para entrenamiento, lo que evita la disparidad entre entrenamiento y servicio. DataBrew transforma datos pero no sirve caracteristicas, y S3 o DynamoDB por si solos no aportan gestion de caracteristicas.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.2",
+    "text": "Una empresa necesita etiquetar 200.000 imagenes de productos para entrenar un modelo de clasificacion. El equipo quiere usar un flujo de trabajo de etiquetado gestionado, con plantillas de tareas integradas y etiquetado automatico basado en aprendizaje activo para reducir el costo de la anotacion manual. ¿Que servicio debe elegir el equipo?",
+    "options": [
+      "Amazon SageMaker Ground Truth",
+      "Amazon Rekognition Custom Labels",
+      "AWS Glue DataBrew",
+      "Amazon Augmented AI (Amazon A2I)"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "SageMaker Ground Truth gestiona flujos de etiquetado con plantillas, fuerza laboral configurable y etiquetado automatico con aprendizaje activo. Rekognition Custom Labels entrena modelos de vision, DataBrew limpia datos tabulares y A2I esta orientado a la revision humana de predicciones ya generadas.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.3",
+    "text": "Un dataset de deteccion de fraude contiene 980.000 transacciones legitimas y 20.000 fraudulentas. Las metricas previas al entrenamiento muestran un desequilibrio de clases (CI) elevado. ¿Que estrategia debe aplicar el ingeniero de ML sobre los datos para mitigar el desequilibrio antes de entrenar?",
+    "options": [
+      "Sobremuestrear la clase minoritaria generando datos sinteticos y submuestrear la clase mayoritaria",
+      "Aumentar el numero de epocas de entrenamiento para que el modelo vea mas veces la clase minoritaria",
+      "Evaluar el modelo con exactitud (accuracy) para confirmar el desempeno global",
+      "Eliminar caracteristicas correlacionadas hasta reducir la dimensionalidad del dataset"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "El remuestreo combinado con generacion de datos sinteticos equilibra la representacion de clases en los datos, que es el origen del problema. Mas epocas, la exactitud como metrica o la reduccion de caracteristicas no corrigen el desequilibrio de clases.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.3",
+    "text": "Una aseguradora debe garantizar que ningun dato de identificacion personal (PII) llegue al dataset de entrenamiento almacenado en Amazon S3. El equipo necesita descubrir donde reside la PII y neutralizarla antes de la fase de entrenamiento. ¿Cuales DOS acciones debe realizar el equipo?",
+    "options": [
+      "Usar Amazon Macie para descubrir y clasificar los datos sensibles en los buckets de Amazon S3",
+      "Aplicar transformaciones de enmascarado o hash a las columnas sensibles con AWS Glue DataBrew",
+      "Habilitar Amazon S3 Transfer Acceleration en los buckets que contienen los datos",
+      "Convertir el dataset al formato RecordIO antes de cargarlo en el trabajo de entrenamiento",
+      "Almacenar el dataset en la clase S3 Glacier Deep Archive durante el entrenamiento"
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "Macie usa ML para identificar y clasificar PII en S3, y DataBrew permite enmascarar, hashear o eliminar esas columnas antes del entrenamiento. Transfer Acceleration, RecordIO y Glacier afectan rendimiento, formato o costo de almacenamiento, no la proteccion de datos sensibles.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.3",
+    "text": "Antes de entrenar un modelo de aprobacion de creditos, un equipo de ML debe comprobar si la proporcion de etiquetas positivas difiere entre grupos demograficos del dataset, para documentar posibles sesgos ante el area de cumplimiento. ¿Que herramienta de AWS debe usar el equipo?",
+    "options": [
+      "Amazon SageMaker Clarify para calcular metricas de sesgo previas al entrenamiento",
+      "Amazon SageMaker Model Monitor para comparar la distribucion con una linea base",
+      "Amazon SageMaker Debugger para inspeccionar los tensores del entrenamiento",
+      "Amazon SageMaker Experiments para comparar las ejecuciones de entrenamiento"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "SageMaker Clarify calcula metricas de sesgo previas al entrenamiento como el desequilibrio de clases (CI) y la diferencia en proporciones de etiquetas (DPL) sobre el dataset. Model Monitor actua sobre endpoints en produccion, Debugger analiza el proceso de entrenamiento y Experiments rastrea ejecuciones.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.1",
+    "text": "Un centro de contacto necesita convertir grabaciones de llamadas en espanol a texto y luego identificar el sentimiento y las entidades mencionadas en cada conversacion. El equipo quiere la solucion con el menor esfuerzo de desarrollo y sin entrenar modelos propios. ¿Que combinacion de servicios debe usar?",
+    "options": [
+      "Amazon Transcribe para la transcripcion y Amazon Comprehend para el analisis de sentimiento y entidades",
+      "Amazon Polly para la transcripcion y Amazon Translate para el analisis de sentimiento",
+      "Amazon Rekognition para la transcripcion y Amazon Kendra para el analisis de sentimiento",
+      "Un modelo seq2seq integrado de SageMaker AI entrenado con las grabaciones historicas"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Transcribe convierte voz a texto y Comprehend extrae sentimiento y entidades del texto resultante, ambos como servicios administrados sin entrenamiento. Polly hace lo contrario (texto a voz), Rekognition procesa imagenes y video, y entrenar un seq2seq propio implica mucho mas esfuerzo.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.1",
+    "text": "Un banco debe implementar un modelo de aprobacion de prestamos. La regulacion exige que el banco pueda explicar a cada solicitante que caracteristicas influyeron en la decision. ¿Que enfoque de modelado debe elegir el equipo de ML?",
+    "options": [
+      "Entrenar un modelo lineal o basado en arboles y explicar las predicciones con SageMaker Clarify y valores SHAP",
+      "Entrenar una red neuronal profunda de multiples capas para maximizar la exactitud",
+      "Usar un modelo fundacional de Amazon Bedrock para generar la decision de credito",
+      "Aplicar agrupamiento con el algoritmo k-means para segmentar a los solicitantes"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Los modelos lineales y de arboles son inherentemente mas interpretables y SageMaker Clarify aporta atribuciones por caracteristica con SHAP para justificar cada decision. Las redes profundas y los modelos fundacionales son menos interpretables, y k-means no realiza clasificacion supervisada.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.1",
+    "text": "Un comercio electronico necesita dos capacidades nuevas: recomendaciones de productos personalizadas en el sitio web y deteccion de transacciones fraudulentas en el momento del pago. El equipo no cuenta con cientificos de datos y quiere usar servicios de IA administrados. ¿Cuales DOS servicios debe seleccionar?",
+    "options": [
+      "Amazon Personalize para las recomendaciones de productos",
+      "Amazon Kendra para las recomendaciones de productos",
+      "Amazon Fraud Detector para la deteccion de transacciones fraudulentas",
+      "Amazon Lookout for Equipment para la deteccion de transacciones fraudulentas",
+      "Amazon Comprehend para las recomendaciones y la deteccion de fraude"
+    ],
+    "correct": [0, 2],
+    "type": "multiple",
+    "explanation": "Personalize entrega recomendaciones personalizadas y Fraud Detector detecta fraude en linea, ambos sin necesidad de experiencia en ML. Kendra es busqueda empresarial, Lookout for Equipment analiza datos de sensores industriales y Comprehend procesa lenguaje natural.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.2",
+    "text": "Durante el entrenamiento de una red neuronal, la perdida en el conjunto de entrenamiento sigue disminuyendo mientras la perdida en el conjunto de validacion comienza a aumentar despues de la epoca 15. ¿Que combinacion de acciones debe aplicar el ingeniero de ML?",
+    "options": [
+      "Aplicar detencion temprana (early stopping) junto con regularizacion como dropout o decaimiento de pesos",
+      "Aumentar la tasa de aprendizaje y continuar el entrenamiento por mas epocas",
+      "Agregar mas capas ocultas para incrementar la capacidad del modelo",
+      "Aumentar el tamano del lote (batch size) al maximo que permita la instancia"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "El patron descrito es sobreajuste, que se mitiga deteniendo el entrenamiento cuando la validacion deja de mejorar y aplicando tecnicas de regularizacion. Aumentar capas o la tasa de aprendizaje agrava el sobreajuste y el tamano del lote no lo corrige.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.2",
+    "text": "Un equipo necesita ajustar seis hiperparametros de un modelo XGBoost. Cada trabajo de entrenamiento cuesta USD 40 y el presupuesto solo permite unas pocas decenas de ejecuciones. El equipo quiere que cada nueva ejecucion aproveche los resultados de las anteriores para converger hacia la mejor configuracion. ¿Que debe configurar el equipo?",
+    "options": [
+      "Ajuste automatico de modelos (AMT) de SageMaker AI con estrategia de optimizacion bayesiana",
+      "Ajuste automatico de modelos (AMT) de SageMaker AI con estrategia de busqueda aleatoria",
+      "Una busqueda exhaustiva en malla (grid search) sobre todas las combinaciones posibles",
+      "Un script propio que lance trabajos de entrenamiento secuenciales con valores fijos"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "La optimizacion bayesiana usa los resultados de los trabajos previos para elegir la siguiente combinacion, lo que reduce el numero de ejecuciones necesarias. La busqueda aleatoria y la busqueda en malla no aprenden de los intentos anteriores y consumen mas presupuesto.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.2",
+    "text": "Un equipo de investigacion ya cuenta con un script de entrenamiento en PyTorch que funciona en estaciones de trabajo locales. El equipo quiere ejecutarlo en SageMaker AI con instancias de GPU administradas y con el menor esfuerzo posible, sin crear ni mantener imagenes de contenedor. ¿Que enfoque debe usar el equipo?",
+    "options": [
+      "Usar el modo script de SageMaker AI con el contenedor administrado de PyTorch",
+      "Construir una imagen propia (BYOC), publicarla en Amazon ECR y usarla en el trabajo de entrenamiento",
+      "Reescribir el script para usar el algoritmo integrado XGBoost de SageMaker AI",
+      "Implementar el modelo directamente desde SageMaker JumpStart sin entrenamiento"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "El modo script permite ejecutar codigo propio de PyTorch dentro de los contenedores de aprendizaje profundo que AWS ya mantiene, sin construir imagenes. BYOC agrega trabajo operativo innecesario, XGBoost implica reescribir el modelo y JumpStart no ejecuta el script existente.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.3",
+    "text": "Un modelo de deteccion de fraude se entrena con un dataset donde solo el 1 % de los registros son fraudulentos. El modelo alcanza un 99 % de exactitud, pero el equipo de negocio reporta que casi ningun fraude real se detecta. ¿Que metricas debe usar el ingeniero de ML para evaluar el modelo?",
+    "options": [
+      "Exhaustividad (recall) y puntuacion F1 sobre la clase minoritaria",
+      "Exactitud (accuracy) global sobre el conjunto de prueba",
+      "Error cuadratico medio (RMSE) sobre las probabilidades predichas",
+      "Coeficiente de determinacion R cuadrado del modelo"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "En datasets muy desequilibrados la exactitud es engañosa, mientras que recall y F1 sobre la clase minoritaria muestran cuantos fraudes se detectan realmente. RMSE y R cuadrado son metricas de regresion, no de clasificacion.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.3",
+    "text": "Antes de promover una nueva version de un modelo, un equipo necesita evaluar como se comportaria con el trafico real de produccion, incluidas su latencia y sus predicciones, sin que ninguna respuesta de la nueva version llegue a los usuarios finales. ¿Que capacidad de SageMaker AI debe usar el equipo?",
+    "options": [
+      "Pruebas con variantes en la sombra (shadow variant) en el endpoint existente",
+      "Un despliegue canary que dirija el 10 % del trafico a la nueva version",
+      "Un despliegue azul/verde con cambio total de trafico al finalizar",
+      "Una transformacion por lotes (batch transform) sobre datos historicos"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "La variante en la sombra recibe una copia del trafico de produccion pero sus respuestas no se devuelven a los clientes, lo que permite comparar desempeno sin riesgo. Canary y azul/verde si exponen la nueva version a usuarios reales y batch transform no usa trafico en vivo.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.3",
+    "text": "El entrenamiento de una red neuronal profunda no converge: la perdida se estanca desde las primeras iteraciones. El equipo sospecha que los gradientes se estan desvaneciendo y necesita inspeccionar tensores y gradientes durante el entrenamiento con reglas automatizadas. ¿Que herramienta debe usar el equipo?",
+    "options": [
+      "Amazon SageMaker Debugger con reglas integradas de deteccion de problemas de entrenamiento",
+      "Amazon SageMaker Model Monitor con una linea base de calidad de datos",
+      "Amazon SageMaker Clarify con analisis de importancia de caracteristicas",
+      "Amazon CloudWatch Logs Insights sobre los registros del trabajo de entrenamiento"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "SageMaker Debugger captura tensores y gradientes durante el entrenamiento y aplica reglas integradas como vanishing_gradient para diagnosticar problemas de convergencia. Model Monitor y Clarify actuan sobre datos y predicciones, y CloudWatch Logs solo muestra la salida textual del trabajo.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.1",
+    "text": "Una aplicacion interna invoca un modelo de clasificacion de forma esporadica: hay rafagas durante unas horas al dia y periodos completos sin ninguna invocacion. El equipo quiere pagar solo por el tiempo de inferencia y no administrar instancias. ¿Que opcion de despliegue de SageMaker AI debe elegir?",
+    "options": [
+      "Un endpoint de inferencia sin servidor (serverless inference)",
+      "Un endpoint en tiempo real con escalado automatico y un minimo de una instancia",
+      "Un endpoint de inferencia asincrona con cola interna",
+      "Trabajos de transformacion por lotes programados cada hora"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "La inferencia sin servidor aprovisiona capacidad automaticamente y cobra solo por la duracion de la inferencia, lo que se ajusta a trafico intermitente con periodos inactivos. Un endpoint en tiempo real cobra por instancia siempre activa y las otras opciones no responden en linea.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.1",
+    "text": "Un modelo de vision por computadora procesa videos de hasta 800 MB por solicitud y cada inferencia tarda entre 4 y 10 minutos. Las solicitudes llegan de forma continua durante el dia y el resultado se consume mas tarde desde una notificacion. ¿Que tipo de endpoint de SageMaker AI debe usar el equipo?",
+    "options": [
+      "Un endpoint de inferencia asincrona que encole las solicitudes y notifique por Amazon SNS",
+      "Un endpoint en tiempo real con un tipo de instancia de GPU de mayor tamano",
+      "Un endpoint de inferencia sin servidor con la memoria maxima configurada",
+      "Una funcion de AWS Lambda que ejecute el modelo tras cada carga en Amazon S3"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "La inferencia asincrona admite cargas utiles grandes y tiempos de procesamiento largos, encola las solicitudes y puede escalar a cero, además de notificar el resultado. Los endpoints en tiempo real y sin servidor tienen limites estrictos de tamano de carga y tiempo de espera, y Lambda tiene un maximo de 15 minutos y limites de paquete.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.1",
+    "text": "Una plataforma SaaS entrena un modelo por cliente y ya tiene 600 modelos del mismo framework almacenados en Amazon S3. Cada modelo recibe muy pocas invocaciones al dia. El equipo necesita reducir el costo de hospedaje y evitar cientos de endpoints. ¿Cuales DOS acciones debe realizar el equipo?",
+    "options": [
+      "Desplegar un endpoint multimodelo (MME) que cargue los modelos desde Amazon S3 bajo demanda",
+      "Crear un endpoint en tiempo real dedicado para cada uno de los 600 modelos",
+      "Dimensionar la memoria de la instancia y vigilar las metricas de aciertos de cache del modelo",
+      "Compilar cada modelo con SageMaker Neo antes de invocarlo",
+      "Ejecutar una transformacion por lotes diaria por cada cliente"
+    ],
+    "correct": [0, 2],
+    "type": "multiple",
+    "explanation": "Un endpoint multimodelo hospeda muchos modelos del mismo framework detras de un unico endpoint y los carga en memoria bajo demanda, y el dimensionamiento de memoria junto con las metricas de cache evita cargas repetidas que degradan la latencia. Un endpoint por modelo multiplica el costo, Neo optimiza para dispositivos de borde y el procesamiento por lotes no atiende solicitudes en linea.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.2",
+    "text": "Un endpoint en tiempo real de SageMaker AI presenta aumentos de latencia durante las horas de mayor demanda comercial. El equipo quiere configurar un escalado automatico de seguimiento de objetivo que reaccione directamente a la carga de solicitudes que recibe cada instancia. ¿Que metrica debe usar la politica de escalado?",
+    "options": [
+      "SageMakerVariantInvocationsPerInstance",
+      "CPUUtilization del contenedor de inferencia",
+      "DiskUtilization del volumen del endpoint",
+      "ModelLatency promedio de la variante"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "SageMakerVariantInvocationsPerInstance es la metrica recomendada para el seguimiento de objetivo porque refleja las invocaciones por instancia, que es el indicador directo de la carga. CPU y disco son indicadores indirectos y ModelLatency sirve para alarmas, no como objetivo de escalado predefinido.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.2",
+    "text": "Una empresa de salud exige que el trafico entre su aplicacion, el endpoint de SageMaker AI y los artefactos del modelo en Amazon S3 nunca salga de la red de AWS. El equipo despliega el endpoint dentro de subredes privadas sin acceso a internet. ¿Que debe configurar el equipo?",
+    "options": [
+      "Endpoints de VPC (AWS PrivateLink) para Amazon S3 y para las APIs de tiempo de ejecucion de SageMaker AI, con el endpoint asociado a subredes privadas y grupos de seguridad especificos",
+      "Una direccion IP elastica publica en el endpoint de SageMaker AI y reglas de entrada restringidas por rango de IP",
+      "Una puerta de enlace de internet en las subredes del endpoint y una politica de bucket que limite el acceso por VPC de origen",
+      "Una puerta de enlace NAT en una subred publica para que el endpoint alcance Amazon S3 a traves de internet"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Los endpoints de VPC mantienen el trafico hacia S3 y las APIs de SageMaker dentro de la red de AWS, y las subredes privadas con grupos de seguridad controlan quien puede alcanzar el endpoint. Las IP publicas, la puerta de enlace de internet y la NAT enrutan el trafico fuera de la red privada.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.2",
+    "text": "Un equipo de plataforma debe automatizar el aprovisionamiento de la infraestructura de ML (endpoints, roles y buckets) en varias cuentas. Los ingenieros prefieren definir la infraestructura con Python, reutilizar componentes mediante clases y compartir referencias entre pilas. ¿Que herramienta de infraestructura como codigo debe elegir el equipo?",
+    "options": [
+      "AWS Cloud Development Kit (AWS CDK)",
+      "Plantillas de AWS CloudFormation escritas directamente en JSON",
+      "Documentos de automatizacion de AWS Systems Manager",
+      "Productos de AWS Service Catalog creados manualmente en la consola"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "AWS CDK permite definir la infraestructura con lenguajes de programacion como Python, crear abstracciones reutilizables y compartir referencias entre pilas, sintetizando CloudFormation. Las plantillas JSON son declarativas y verbosas, y Systems Manager y Service Catalog cubren automatizacion operativa y catalogo de productos, no la definicion de la infraestructura.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.3",
+    "text": "Un equipo debe actualizar el modelo de un endpoint en produccion. La politica de la empresa exige exponer la nueva version a una pequena fraccion del trafico, vigilar metricas de error durante un periodo y revertir automaticamente si se supera un umbral. ¿Que debe configurar el equipo?",
+    "options": [
+      "Barreras de despliegue (deployment guardrails) de SageMaker AI con estrategia canary y alarmas de CloudWatch para la reversion automatica",
+      "Una actualizacion del endpoint de tipo todo a la vez (all at once) con una ventana de mantenimiento",
+      "Un segundo endpoint independiente y un cambio manual de la configuracion de la aplicacion",
+      "Una transformacion por lotes que valide el modelo nuevo con datos historicos antes de reemplazarlo"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Las barreras de despliegue de SageMaker AI admiten estrategias canary y lineales con alarmas de CloudWatch que disparan la reversion automatica. Las demas opciones no combinan trafico parcial, monitoreo y reversion automatica en el mismo endpoint.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.3",
+    "text": "Una empresa necesita reentrenar un modelo automaticamente en dos situaciones: cuando llegan nuevos archivos de datos a un prefijo de Amazon S3 y cuando el monitoreo detecta degradacion de la calidad del modelo en produccion. ¿Cuales DOS mecanismos debe implementar el equipo?",
+    "options": [
+      "Crear una regla de Amazon EventBridge que reaccione a los eventos de Amazon S3 e inicie la ejecucion de un SageMaker Pipeline",
+      "Configurar una alarma de CloudWatch sobre las metricas de SageMaker Model Monitor que invoque el pipeline de reentrenamiento",
+      "Ejecutar manualmente el notebook de entrenamiento al inicio de cada semana",
+      "Usar AWS CodeDeploy para copiar los archivos nuevos al bucket de entrenamiento",
+      "Aumentar la concurrencia provisionada de la funcion de AWS Lambda de inferencia"
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "EventBridge puede reaccionar a eventos de S3 e iniciar un SageMaker Pipeline, y una alarma sobre las metricas de Model Monitor permite disparar el reentrenamiento cuando se detecta degradacion. La ejecucion manual no es automatizada, CodeDeploy despliega aplicaciones y la concurrencia de Lambda no influye en el reentrenamiento.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.3",
+    "text": "Un equipo de MLOps usa AWS CodePipeline para publicar su contenedor de inferencia. El equipo necesita ejecutar pruebas unitarias del codigo de preprocesamiento y pruebas de integracion contra un endpoint temporal antes de que el pipeline actualice el endpoint de produccion. ¿Donde debe ejecutar esas pruebas?",
+    "options": [
+      "En una etapa de AWS CodeBuild previa al despliegue, definida en el archivo buildspec del proyecto",
+      "En un enlace posterior al despliegue de AWS CodeDeploy en el entorno de produccion",
+      "En una accion de aprobacion manual de AWS CodePipeline gestionada por el revisor",
+      "En una regla de Amazon EventBridge programada una vez finalizado el pipeline"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "CodeBuild ejecuta los comandos definidos en el buildspec, por lo que es la etapa adecuada para pruebas unitarias e de integracion antes del despliegue. Un enlace posterior al despliegue en produccion o una regla programada validan demasiado tarde, y la aprobacion manual no ejecuta pruebas.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.1",
+    "text": "Un modelo de prediccion de demanda en produccion empieza a generar predicciones poco confiables. El equipo sospecha que las caracteristicas de entrada ya no se parecen a las del dataset de entrenamiento. ¿Que debe configurar el equipo para detectar esta situacion de forma continua?",
+    "options": [
+      "SageMaker Model Monitor con una linea base de estadisticas y restricciones generada a partir del dataset de entrenamiento",
+      "SageMaker Debugger con reglas de deteccion de gradientes desvanecidos",
+      "AWS CloudTrail para registrar todas las invocaciones del endpoint",
+      "AWS Glue Data Quality sobre los archivos del bucket de artefactos del modelo"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Model Monitor compara los datos capturados del endpoint con una linea base derivada del dataset de entrenamiento y alerta cuando aparece deriva de calidad de datos. Debugger actua durante el entrenamiento, CloudTrail registra llamadas de API y Glue Data Quality valida datos en reposo, no el trafico de inferencia.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.1",
+    "text": "El area de cumplimiento de una empresa exige detectar si la importancia relativa de las caracteristicas de un modelo en produccion cambia con el tiempo respecto a la establecida durante el entrenamiento. ¿Que debe habilitar el equipo de ML?",
+    "options": [
+      "Monitoreo de deriva de atribucion de caracteristicas con SageMaker Clarify integrado en Model Monitor",
+      "Monitoreo de calidad del modelo con etiquetas reales entregadas cada semana",
+      "Un panel de CloudWatch con las metricas de latencia e invocaciones del endpoint",
+      "Un trabajo de SageMaker Debugger programado sobre el endpoint de produccion"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "SageMaker Clarify integrado con Model Monitor calcula la deriva de atribucion de caracteristicas comparando la importancia observada en produccion con la linea base. El monitoreo de calidad del modelo mide el desempeno frente a etiquetas reales y las metricas de CloudWatch no informan sobre la importancia de las caracteristicas.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.1",
+    "text": "Un equipo quiere comparar el desempeno de negocio de dos versiones de un modelo de recomendacion usando trafico real de usuarios, distribuyendo inicialmente el 90 % de las solicitudes a la version actual y el 10 % a la nueva. ¿Que configuracion de SageMaker AI debe usar?",
+    "options": [
+      "Alojar ambas versiones como variantes de produccion en el mismo endpoint y ajustar los pesos de las variantes",
+      "Alojar la nueva version como variante en la sombra del endpoint actual",
+      "Crear dos endpoints separados y alternar la configuracion de la aplicacion cada hora",
+      "Ejecutar transformaciones por lotes con ambos modelos sobre el mismo dataset historico"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Las variantes de produccion con pesos permiten dividir el trafico real entre dos modelos en un mismo endpoint, que es la base de las pruebas A/B en SageMaker AI. La variante en la sombra no devuelve respuestas a los usuarios y las otras opciones no permiten una comparacion controlada del trafico en vivo.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.2",
+    "text": "Antes de pasar un endpoint a produccion, un equipo necesita determinar que tipo y tamano de instancia ofrece la mejor relacion entre latencia, rendimiento y costo, ejecutando pruebas de carga sobre el modelo ya registrado. ¿Que servicio o funcionalidad debe usar el equipo?",
+    "options": [
+      "SageMaker AI Inference Recommender",
+      "AWS Compute Optimizer",
+      "AWS Trusted Advisor",
+      "AWS Cost Explorer con agrupacion por tipo de instancia"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Inference Recommender ejecuta pruebas de carga con el modelo real y recomienda el tipo y tamano de instancia optimo segun latencia, rendimiento y costo. Compute Optimizer analiza cargas de EC2 y Lambda ya en ejecucion, y Trusted Advisor y Cost Explorer no realizan pruebas de carga de inferencia.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.2",
+    "text": "La direccion financiera de una empresa necesita saber cuanto gasta en ML cada equipo de negocio y recibir alertas cuando un equipo se acerque a su limite mensual de gasto. ¿Cuales DOS acciones debe implementar el equipo de plataforma?",
+    "options": [
+      "Aplicar una estrategia de etiquetado a los recursos de ML y activar las etiquetas de asignacion de costos para agruparlos en AWS Cost Explorer",
+      "Crear presupuestos en AWS Budgets por etiqueta con notificaciones por umbral de gasto",
+      "Crear una traza de AWS CloudTrail que registre los eventos de facturacion",
+      "Revisar semanalmente las recomendaciones de AWS Trusted Advisor sobre instancias inactivas",
+      "Habilitar Amazon Macie sobre el bucket que almacena los informes de costos"
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "Las etiquetas de asignacion de costos activadas permiten desglosar el gasto por equipo en Cost Explorer, y AWS Budgets envia alertas cuando el gasto etiquetado se aproxima al umbral definido. CloudTrail audita llamadas de API, Trusted Advisor da recomendaciones generales y Macie clasifica datos sensibles.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.2",
+    "text": "Un equipo ejecuta trabajos de entrenamiento de aprendizaje profundo que duran entre 8 y 20 horas. Los trabajos toleran interrupciones si el progreso se conserva y el equipo debe reducir el costo de entrenamiento al maximo. ¿Que opcion de compra debe utilizar el equipo?",
+    "options": [
+      "Entrenamiento administrado con instancias de spot y puntos de control guardados en Amazon S3",
+      "Instancias reservadas de Amazon EC2 con compromiso de tres anos",
+      "Instancias bajo demanda con escalado automatico habilitado",
+      "SageMaker AI Savings Plans para las instancias de entrenamiento"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "El entrenamiento administrado con spot reduce el costo hasta cerca del 90 % y los puntos de control en S3 permiten reanudar el trabajo tras una interrupcion. Las instancias reservadas y los Savings Plans requieren compromiso de uso constante y las instancias bajo demanda son la opcion mas costosa.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.3",
+    "text": "Un rol de IAM asociado a un trabajo de entrenamiento de SageMaker AI actualmente tiene la accion s3:* sobre todos los buckets de la cuenta. El equipo de seguridad exige aplicar privilegio minimo sin interrumpir el entrenamiento. ¿Que debe hacer el ingeniero de ML?",
+    "options": [
+      "Limitar la politica a las acciones de lectura y escritura necesarias sobre los prefijos especificos de los buckets de datos y artefactos",
+      "Mantener s3:* pero agregar una politica de bucket que permita el acceso a cualquier principal autenticado de AWS",
+      "Incrustar credenciales de un usuario de IAM con permisos reducidos en el script de entrenamiento",
+      "Adjuntar la politica administrada AmazonS3FullAccess al rol para simplificar la administracion"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "El privilegio minimo se consigue restringiendo las acciones y los recursos a los prefijos que el trabajo realmente necesita. Las demas opciones amplian el acceso o introducen credenciales estaticas en el codigo, lo que agrava el riesgo.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.3",
+    "text": "Durante una auditoria, una empresa debe demostrar que identidad creo cada trabajo de entrenamiento y cada endpoint de SageMaker AI en los ultimos seis meses, incluida la direccion IP de origen de cada llamada. ¿Que debe usar el equipo?",
+    "options": [
+      "Una traza de AWS CloudTrail que entregue los eventos de administracion a un bucket de Amazon S3",
+      "Grupos de registros de Amazon CloudWatch Logs de los contenedores de entrenamiento",
+      "Informes de conformidad de AWS Config sobre los recursos de SageMaker AI",
+      "Informes de SageMaker Model Monitor sobre la calidad de los datos de inferencia"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "CloudTrail registra las llamadas a la API con la identidad, la marca de tiempo y la IP de origen, y una traza permite conservar ese historial en S3. CloudWatch Logs guarda la salida de los contenedores, AWS Config evalua configuraciones y Model Monitor supervisa datos de inferencia.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.3",
+    "text": "Una entidad financiera exige que los trabajos de entrenamiento no puedan establecer ninguna conexion saliente a internet y que todo el acceso a los datos ocurra dentro de su VPC. ¿Cuales DOS acciones debe realizar el equipo de ML?",
+    "options": [
+      "Habilitar el aislamiento de red (network isolation) en la configuracion del trabajo de entrenamiento",
+      "Ejecutar el trabajo en subredes privadas de la VPC con un endpoint de VPC para Amazon S3",
+      "Adjuntar una puerta de enlace NAT para que el contenedor pueda descargar dependencias durante el entrenamiento",
+      "Usar una politica de bucket que permita el acceso desde cualquier principal autenticado de AWS",
+      "Cifrar los volumenes de entrenamiento con claves gestionadas por el servicio en lugar de AWS KMS"
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "El aislamiento de red impide que el contenedor de entrenamiento realice llamadas de red salientes, y ejecutar el trabajo en subredes privadas con un endpoint de VPC para S3 mantiene el acceso a los datos dentro de la red de AWS. La puerta de enlace NAT reintroduce salida a internet, la politica de bucket amplia el acceso y el tipo de clave de cifrado no controla la conectividad.",
+    "source": "llm"
+  }
+]

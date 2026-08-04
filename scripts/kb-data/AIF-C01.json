@@ -1,0 +1,451 @@
+{
+  "code": "AIF-C01",
+  "slug": "ai-practitioner-01",
+  "name": "AWS Certified AI Practitioner",
+  "level": "foundational",
+  "examGuideUrl": "https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01.md",
+  "scrapedAt": "2026-08-04T15:42:27.686Z",
+  "domains": [
+    {
+      "number": 1,
+      "title": "Fundamentals of AI and ML",
+      "weightPct": 20,
+      "taskStatements": [
+        {
+          "number": "1.1",
+          "text": "Explain basic AI concepts and terminologies.",
+          "knowledge": [],
+          "skills": [
+            "Define basic AI terms (for example, AI, ML, deep learning, neural networks, computer vision, natural language processing [NLP], model, algorithm, training and inferencing, bias, fairness, fit, large language model [LLM], generative AI [GenAI], agentic AI).",
+            "Describe the similarities and differences between AI, ML, GenAI, deep learning, and agentic AI.",
+            "Describe various types of inferencing (for example, batch, real-time, asynchronous, serverless).",
+            "Describe the different types of data in AI models (for example, labeled and unlabeled, tabular, time-series, image, text, structured and unstructured).",
+            "Describe different types of AI/ML learning (for example, supervised learning, unsupervised learning, reinforcement learning methods)."
+          ]
+        },
+        {
+          "number": "1.2",
+          "text": "Identify practical use cases for AI.",
+          "knowledge": [],
+          "skills": [
+            "Recognize applications where AI/ML can provide value (for example, assist human decision making, solution scalability, automation).",
+            "Determine when AI/ML solutions are not appropriate (for example, cost-benefit analyses, situations when a specific outcome is needed instead of a prediction).",
+            "Select the appropriate AI/ML techniques for specific use cases (for example, regression, classification, clustering).",
+            "Identify examples of real-world AI applications (for example, computer vision, NLP, speech recognition, recommendation systems, fraud detection, forecasting, knowledge bases, agentic AI).",
+            "Explain the capabilities of AWS managed AI/ML services (for example, Amazon SageMaker AI, Amazon Transcribe, Amazon Translate, Amazon Comprehend, Amazon Lex, Amazon Polly).",
+            "Identify when traditional ML models or foundation models (FMs) are appropriate for a specific use case (for example, based on regulatory concerns, explainability requirements, operational constraints)."
+          ]
+        },
+        {
+          "number": "1.3",
+          "text": "Describe the AI/ML development lifecycle.",
+          "knowledge": [],
+          "skills": [
+            "Describe and differentiate components of an AI/ML pipeline.",
+            "Describe sources of FM models (for example, open source pre-trained models, training custom models).",
+            "Describe methods to use a model in production (for example, managed API service, self-hosted API).",
+            "Identify relevant AWS services and features for each stage of an AI/ML pipeline (for example, Amazon Bedrock, Amazon Q, Amazon Quick, Kiro, SageMaker AI).",
+            "Describe fundamental concepts of ML operations (MLOps) (for example, experimentation, repeatable processes, scalable systems, managing technical debt, achieving production readiness, model monitoring, model re-training).",
+            "Describe model performance metrics (for example, accuracy, precision, recall, F1 score) and business metrics (for example, cost per user, development costs, customer feedback, return on investment [ROI]) to evaluate ML models."
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Fundamentals of GenAI",
+      "weightPct": 24,
+      "taskStatements": [
+        {
+          "number": "2.1",
+          "text": "Explain the basic concepts of generative AI (GenAI).",
+          "knowledge": [],
+          "skills": [
+            "Define foundational GenAI concepts (for example, tokens, chunking, embeddings, vectors, prompt engineering, transformer-based large language models [LLMs], foundation models [FMs], multi-modal models, diffusion models).",
+            "Identify potential use cases for GenAI models (for example, image, video, and audio generation; summarization; AI assistants; translation; code generation; customer service agents; search; recommendation engines).",
+            "Describe the FM lifecycle (for example, data selection, model selection, pre-training, fine-tuning, evaluation, deployment, feedback).",
+            "Describe the token-based pricing model and its effect on cost and performance for inference.",
+            "Describe the role of context engineering in FM applications.",
+            "Define foundational agentic AI concepts (for example, multi-agent system patterns for complex AI applications, Model Context Protocol [MCP] and its role in connecting agents to external systems, multi-agent communication patterns, memory management, tool usage, and workflow orchestration)."
+          ]
+        },
+        {
+          "number": "2.2",
+          "text": "Understand the capabilities and limitations of GenAI for solving business problems.",
+          "knowledge": [],
+          "skills": [
+            "Describe the advantages of GenAI (for example, adaptability, responsiveness, conversational capabilities, ability to generate content).",
+            "Identify disadvantages of GenAI solutions (for example, hallucinations, interpretability, inaccuracy, nondeterminism).",
+            "Identify factors to consider when selecting GenAI models (for example, model types, performance requirements, capabilities, constraints, compliance, cost, latency, model complexity).",
+            "Determine business value and metrics for GenAI applications (for example, cross-domain performance, ROI, efficiency, conversion rate, average revenue per user, accuracy, customer lifetime value)."
+          ]
+        },
+        {
+          "number": "2.3",
+          "text": "Describe AWS infrastructure and technologies for building GenAI applications.",
+          "knowledge": [],
+          "skills": [
+            "Identify AWS services and features to develop GenAI applications (for example, Amazon Bedrock, Amazon SageMaker AI, SageMaker JumpStart, Amazon Quick, Kiro, Strands Agents, Amazon Bedrock AgentCore).",
+            "Describe the advantages of using AWS GenAI services to build applications (for example, accessibility, lower barrier to entry, efficiency, cost-effectiveness, speed to market, ability to meet business objectives).",
+            "Describe the benefits of AWS infrastructure for GenAI applications (for example, security, compliance, responsibility, safety).",
+            "Describe cost tradeoffs of AWS GenAI services (for example, responsiveness, availability, redundancy, performance, regional coverage, token-based pricing, provision throughput, custom models)."
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Applications of Foundation Models",
+      "weightPct": 28,
+      "taskStatements": [
+        {
+          "number": "3.1",
+          "text": "Describe design considerations for applications that use foundation models (FMs).",
+          "knowledge": [],
+          "skills": [
+            "Identify selection criteria to choose FMs (for example, cost, modality, latency, multi-lingual, model size, model complexity, customization, input/output length, prompt caching).",
+            "Describe the effect of inference parameters on model responses (for example, temperature, input/output length).",
+            "Define Retrieval Augmented Generation (RAG) and describe its business applications (for example, Amazon Bedrock Knowledge Bases).",
+            "Identify AWS services that help store embeddings within vector databases (for example, Amazon OpenSearch Service, Amazon Aurora, Amazon Neptune, Amazon RDS for PostgreSQL).",
+            "Explain the cost tradeoffs of various approaches to FM customization (for example, pre-training, fine-tuning, in-context learning, RAG, model distillation).",
+            "Define the role of AI agents and describe AI agents' business applications."
+          ]
+        },
+        {
+          "number": "3.2",
+          "text": "Choose effective prompt engineering techniques.",
+          "knowledge": [],
+          "skills": [
+            "Define the concepts and constructs of prompt engineering (for example, context, instruction, negative prompts).",
+            "Define techniques for prompt engineering (for example, chain-of-thought, zero-shot, single-shot, few-shot, prompt templates).",
+            "Identify and describe the benefits and best practices for prompt engineering (for example, response quality improvement, experimentation, guardrails, discovery, specificity and concision, using multiple comments).",
+            "Define potential risks and limitations of prompt engineering (for example, exposure, poisoning, hijacking, jailbreaking).",
+            "Describe prompt versioning and management strategies that use Amazon Bedrock Prompt Management."
+          ]
+        },
+        {
+          "number": "3.3",
+          "text": "Describe the training and fine-tuning process for FMs.",
+          "knowledge": [],
+          "skills": [
+            "Describe the key elements of training an FM (for example, pre-training, fine-tuning, continuous pre-training, distillation).",
+            "Define methods for fine-tuning an FM (for example, instruction tuning, adapting models for specific domains, transfer learning, continuous pre-training).",
+            "Describe how to prepare data to fine-tune an FM (for example, data curation, governance, size, labeling, representativeness, reinforcement learning from human feedback [RLHF])."
+          ]
+        },
+        {
+          "number": "3.4",
+          "text": "Describe methods to evaluate FM performance.",
+          "knowledge": [],
+          "skills": [
+            "Determine approaches to evaluate FM performance (for example, human-in-the-loop evaluation, benchmark datasets, Amazon Bedrock Model Evaluation).",
+            "Identify relevant metrics to assess FM performance (for example, Recall-Oriented Understudy for Gisting Evaluation [ROUGE], Bilingual Evaluation Understudy [BLEU], BERTScore, LLM-as-a-judge).",
+            "Determine whether an FM effectively meets business objectives (for example, productivity, user engagement, task engineering).",
+            "Identify approaches to evaluate the performance of applications built with FM (for example, RAG, agents, workflows).",
+            "Identify business objective alignment metrics for AI applications (for example, task completion rate, user satisfaction, cost per interaction)."
+          ]
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Guidelines for Responsible AI",
+      "weightPct": 14,
+      "taskStatements": [
+        {
+          "number": "4.1",
+          "text": "Explain the development of AI systems that are responsible.",
+          "knowledge": [],
+          "skills": [
+            "Identify features of responsible AI (for example, bias, fairness, inclusivity, robustness, safety, veracity).",
+            "Explain how to use tools to identify features of responsible AI (for example, Amazon Bedrock Guardrails).",
+            "Define responsible practices to select a model (for example, environmental considerations, sustainability).",
+            "Identify legal risks of working with generative AI (GenAI) (for example, intellectual property infringement claims, biased model outputs, loss of customer trust, end user risk, hallucinations).",
+            "Identify characteristics of datasets (for example, inclusivity, diversity, curated data sources, balanced datasets).",
+            "Describe effects of bias and variance (for example, effects on demographic groups, inaccuracy, overfitting, underfitting).",
+            "Describe tools to detect and monitor bias, trustworthiness, and truthfulness (for example, analyzing label quality, human audits, subgroup analysis, Amazon SageMaker Clarify, SageMaker Model Monitor, Amazon Augmented AI [Amazon A2I])."
+          ]
+        },
+        {
+          "number": "4.2",
+          "text": "Recognize the importance of transparent and explainable models.",
+          "knowledge": [],
+          "skills": [
+            "Describe the differences between models that are transparent and explainable and models that are not transparent and explainable.",
+            "Describe tools to identify transparent and explainable models (for example, Amazon SageMaker Model Cards, SageMaker Clarify, Amazon Bedrock Model Evaluations, open source models, data, licensing).",
+            "Identify tradeoffs between model safety and transparency (for example, measure interpretability and performance).",
+            "Describe principles of human-centered design for explainable AI (for example, user-feedback mechanisms, AI decision transparency)."
+          ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Security, Compliance, and Governance for AI Solutions",
+      "weightPct": 14,
+      "taskStatements": [
+        {
+          "number": "5.1",
+          "text": "Explain methods to secure AI systems.",
+          "knowledge": [],
+          "skills": [
+            "Identify AWS services and features to secure AI systems (for example, IAM roles, policies, and permissions; encryption; Amazon Macie; AWS PrivateLink; AWS shared responsibility model; Amazon Bedrock AgentCore Identity; Policy in AgentCore; Amazon Bedrock Guardrails).",
+            "Describe the concept of source citation and documenting data origins (for example, data lineage, data cataloging, Amazon SageMaker Model Cards).",
+            "Describe best practices for secure data engineering (for example, assessing data quality, implementing privacy-enhancing technologies, data access control, data integrity).",
+            "Describe security and privacy considerations for AI systems (for example, application security, threat detection, vulnerability management, infrastructure protection, prompt injection, encryption at rest and in transit, data leakage prevention, output filtering and validation, audit trail and logging requirements for AI interactions, toxicity).",
+            "Describe hallucination detection methods and grounding techniques to improve output accuracy (for example, Retrieval Augmented Generation [RAG] grounding, output validation, confidence scoring)."
+          ]
+        },
+        {
+          "number": "5.2",
+          "text": "Recognize governance and compliance regulations for AI systems.",
+          "knowledge": [],
+          "skills": [
+            "Identify AWS services and features to assist with governance and regulation compliance (for example, AWS Config, Amazon Inspector, AWS Audit Manager, AWS Artifact, AWS CloudTrail, AWS Trusted Advisor).",
+            "Describe data governance strategies (for example, data lifecycles, logging, residency, monitoring, observation, retention).",
+            "Describe processes to follow governance protocols (for example, policies, review cadence, review strategies, governance frameworks such as the Generative AI Security Scoping Matrix, transparency standards, team training requirements)."
+          ]
+        }
+      ]
+    }
+  ],
+  "inScopeServices": {
+    "Analytics": [
+      "AWS Data Exchange",
+      "Amazon EMR",
+      "AWS Glue",
+      "AWS Glue DataBrew",
+      "AWS Lake Formation",
+      "Amazon OpenSearch Service",
+      "Amazon Quick",
+      "Amazon Redshift"
+    ],
+    "Cloud Financial Management": [
+      "AWS Budgets",
+      "AWS Cost Explorer"
+    ],
+    "Compute": [
+      "Amazon EC2",
+      "AWS Lambda"
+    ],
+    "Containers": [
+      "Amazon Elastic Container Service (Amazon ECS)",
+      "Amazon Elastic Kubernetes Service (Amazon EKS)"
+    ],
+    "Database": [
+      "Amazon Aurora",
+      "Amazon DocumentDB (with MongoDB compatibility)",
+      "Amazon DynamoDB",
+      "Amazon ElastiCache",
+      "Amazon Neptune",
+      "Amazon RDS"
+    ],
+    "Developer Tools": [
+      "Kiro",
+      "Strands Agents",
+      "Amazon Q"
+    ],
+    "Machine Learning": [
+      "Amazon Augmented AI (Amazon A2I)",
+      "Amazon Bedrock",
+      "Amazon Bedrock AgentCore",
+      "Amazon Comprehend",
+      "Amazon Kendra",
+      "Amazon Lex",
+      "Amazon Nova",
+      "Amazon Personalize",
+      "Amazon Polly",
+      "Amazon Rekognition",
+      "Amazon SageMaker AI",
+      "Amazon SageMaker JumpStart",
+      "Amazon Textract",
+      "Amazon Transcribe",
+      "Amazon Translate",
+      "AWS Transform"
+    ],
+    "Management and Governance": [
+      "AWS CloudTrail",
+      "Amazon CloudWatch",
+      "AWS Config",
+      "AWS Trusted Advisor",
+      "AWS Well-Architected Tool"
+    ],
+    "Networking and Content Delivery": [
+      "Amazon CloudFront",
+      "Amazon VPC"
+    ],
+    "Security, Identity, and Compliance": [
+      "AWS Artifact",
+      "AWS Audit Manager",
+      "AWS Identity and Access Management (IAM)",
+      "Amazon Inspector",
+      "AWS Key Management Service (AWS KMS)",
+      "Amazon Macie",
+      "AWS Secrets Manager"
+    ],
+    "Storage": [
+      "Amazon S3",
+      "Amazon S3 Glacier"
+    ]
+  },
+  "outOfScopeServices": {
+    "Analytics": [
+      "AWS Clean Rooms",
+      "Amazon CloudSearch",
+      "Amazon Managed Streaming for Apache Kafka (Amazon MSK)"
+    ],
+    "Application Integration": [
+      "Amazon AppFlow",
+      "Amazon MQ",
+      "Amazon Simple Workflow Service (Amazon SWF)"
+    ],
+    "Business Applications": [
+      "Amazon Chime",
+      "Amazon Pinpoint",
+      "Amazon Simple Email Service (Amazon SES)",
+      "AWS Supply Chain",
+      "AWS Wickr",
+      "Amazon WorkMail"
+    ],
+    "Cloud Financial Management": [
+      "AWS Application Cost Profiler",
+      "AWS Billing Conductor",
+      "AWS Marketplace"
+    ],
+    "Compute": [
+      "AWS App Runner",
+      "AWS Elastic Beanstalk",
+      "EC2 Image Builder",
+      "Amazon Lightsail"
+    ],
+    "Containers": [
+      "Red Hat OpenShift Service on AWS (ROSA)"
+    ],
+    "Customer Enablement": [
+      "AWS IQ",
+      "AWS Managed Services (AMS)",
+      "AWS re:Post Private",
+      "AWS Support"
+    ],
+    "Database": [
+      "Amazon Keyspaces (for Apache Cassandra)",
+      "Amazon Quantum Ledger Database (Amazon QLDB)",
+      "Amazon Timestream"
+    ],
+    "Developer Tools": [
+      "AWS AppConfig",
+      "AWS Application Composer",
+      "AWS CloudShell",
+      "Amazon CodeCatalyst",
+      "AWS CodeStar",
+      "AWS Fault Injection Service",
+      "AWS X-Ray"
+    ],
+    "End User Computing": [
+      "Amazon AppStream 2.0",
+      "Amazon WorkSpaces",
+      "Amazon WorkSpaces Thin Client",
+      "Amazon WorkSpaces Web"
+    ],
+    "Frontend Web and Mobile": [
+      "AWS Amplify",
+      "AWS AppSync",
+      "AWS Device Farm",
+      "Amazon Location Service"
+    ],
+    "Internet of Things (IoT)": [
+      "AWS IoT Analytics",
+      "AWS IoT Core",
+      "AWS IoT Device Defender",
+      "AWS IoT Device Management",
+      "AWS IoT Events",
+      "AWS IoT FleetWise",
+      "FreeRTOS",
+      "AWS IoT Greengrass",
+      "AWS IoT 1-Click",
+      "AWS IoT RoboRunner",
+      "AWS IoT SiteWise",
+      "AWS IoT TwinMaker"
+    ],
+    "Machine Learning": [
+      "AWS DeepComposer",
+      "AWS HealthImaging",
+      "AWS HealthOmics",
+      "Amazon Monitron",
+      "AWS Panorama"
+    ],
+    "Management and Governance": [
+      "AWS Control Tower",
+      "AWS Health Dashboard",
+      "AWS Launch Wizard",
+      "AWS License Manager",
+      "Amazon Managed Grafana",
+      "Amazon Managed Service for Prometheus",
+      "AWS OpsWorks",
+      "AWS Organizations",
+      "AWS Proton",
+      "AWS Resilience Hub",
+      "AWS Resource Explorer",
+      "AWS Resource Groups",
+      "AWS Systems Manager Incident Manager",
+      "AWS Service Catalog",
+      "Service Quotas",
+      "AWS Telco Network Builder",
+      "AWS User Notifications"
+    ],
+    "Media": [
+      "Amazon Elastic Transcoder",
+      "AWS Elemental MediaConnect",
+      "AWS Elemental MediaConvert",
+      "AWS Elemental MediaLive",
+      "AWS Elemental MediaPackage",
+      "AWS Elemental MediaStore",
+      "AWS Elemental MediaTailor",
+      "Amazon Interactive Video Service (Amazon IVS)",
+      "Amazon Nimble Studio"
+    ],
+    "Migration and Transfer": [
+      "AWS Application Discovery Service",
+      "AWS Application Migration Service",
+      "AWS Database Migration Service (AWS DMS)",
+      "AWS DataSync",
+      "AWS Mainframe Modernization",
+      "AWS Migration Hub",
+      "AWS Snow Family",
+      "AWS Transfer Family"
+    ],
+    "Networking and Content Delivery": [
+      "AWS App Mesh",
+      "AWS Cloud Map",
+      "AWS Direct Connect",
+      "AWS Global Accelerator",
+      "AWS Private 5G",
+      "Amazon Route 53",
+      "Amazon Route 53 Application Recovery Controller",
+      "Amazon VPC IP Address Manager (IPAM)"
+    ],
+    "Security, Identity, and Compliance": [
+      "AWS Certificate Manager (ACM)",
+      "AWS CloudHSM",
+      "Amazon Cognito",
+      "Amazon Detective",
+      "AWS Directory Service",
+      "AWS Firewall Manager",
+      "Amazon GuardDuty",
+      "AWS IAM Identity Center",
+      "AWS Payment Cryptography",
+      "AWS Private Certificate Authority",
+      "AWS Resource Access Manager (AWS RAM)",
+      "AWS Security Hub",
+      "Amazon Security Lake",
+      "AWS Shield",
+      "AWS Signer",
+      "Amazon Verified Permissions",
+      "AWS WAF"
+    ],
+    "Storage": [
+      "AWS Backup",
+      "AWS Elastic Disaster Recovery"
+    ]
+  }
+}

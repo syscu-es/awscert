@@ -1,0 +1,777 @@
+[
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.1",
+    "text": "Una empresa transmite eventos de telemetría a un flujo de Amazon Kinesis Data Streams. Tres aplicaciones de análisis independientes deben leer el 100% de los registros con una latencia menor a 200 ms cada una, sin competir entre sí por el rendimiento de lectura. ¿Qué solución cumple con estos requisitos?",
+    "options": [
+      "Registrar cada aplicación como consumidor de distribución mejorada (enhanced fan-out) del flujo de datos.",
+      "Duplicar la cantidad de particiones (shards) del flujo y asignar un rango de particiones a cada aplicación.",
+      "Enviar los registros a Amazon Data Firehose y que cada aplicación lea los archivos entregados en Amazon S3.",
+      "Configurar las tres aplicaciones para que usen la operación GetRecords del consumidor compartido con sondeo cada 100 ms."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "La distribución mejorada asigna a cada consumidor registrado un rendimiento dedicado de 2 MB/s por partición y entrega los registros por HTTP/2 con push, lo que reduce la latencia a unos 70 ms sin que los consumidores compitan por el rendimiento compartido.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.1",
+    "text": "Un pipeline de ingesta que consume de Amazon Kinesis Data Streams sufrió una falla de transformación que no se detectó durante cinco días. El equipo necesita volver a procesar todos los eventos de ese periodo directamente desde el flujo. ¿Qué acción garantiza la reproducibilidad (replayability) de la ingesta?",
+    "options": [
+      "Aumentar el periodo de retención de datos del flujo por encima de la ventana de recuperación y volver a leer con el tipo de iterador TRIM_HORIZON o AT_TIMESTAMP.",
+      "Habilitar la distribución mejorada en el flujo para poder recuperar los registros ya expirados.",
+      "Crear una aplicación de consumo con un nombre distinto para forzar la reentrega de todo el historial del flujo.",
+      "Activar Amazon DynamoDB Streams en la tabla de destino y reproducir los cambios desde ahí."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Los registros de Kinesis Data Streams solo se pueden volver a leer mientras estén dentro del periodo de retención configurado, por lo que hay que extenderlo y reposicionar el iterador en el punto deseado del flujo.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.1",
+    "text": "Un equipo de datos debe iniciar un job de AWS Glue cada vez que se carga un archivo nuevo en un prefijo específico de Amazon S3, con latencia de segundos y sin sondeo. ¿Cuáles DOS enfoques cumplen con el requisito? (Seleccione DOS respuestas).",
+    "options": [
+      "Crear una regla de Amazon EventBridge que coincida con el evento 'Object Created' de Amazon S3 y que tenga el job de AWS Glue como destino.",
+      "Configurar una notificación de eventos de Amazon S3 hacia una función de AWS Lambda que invoque la API StartJobRun de AWS Glue.",
+      "Configurar un desencadenador programado de AWS Glue que ejecute el job cada cinco minutos y verifique si hay archivos nuevos.",
+      "Programar un rastreador (crawler) de AWS Glue cada hora para que detecte los archivos nuevos e inicie el job.",
+      "Habilitar Amazon DynamoDB Streams en una tabla de control y suscribir el job de AWS Glue al flujo."
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "Tanto las reglas de EventBridge basadas en eventos de S3 como las notificaciones de eventos de S3 hacia Lambda son mecanismos push que reaccionan a la creación del objeto en segundos. Las opciones programadas introducen sondeo y latencia innecesaria.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.2",
+    "text": "Un equipo de analistas que solo domina SQL necesita convertir 2 TB de archivos .csv almacenados en Amazon S3 a Apache Parquet con compresión Snappy y particionado por fecha, minimizando la infraestructura por administrar. ¿Qué solución es la más adecuada?",
+    "options": [
+      "Ejecutar una sentencia CREATE TABLE AS SELECT (CTAS) en Amazon Athena especificando format = 'PARQUET' y partitioned_by.",
+      "Crear un clúster de Amazon EMR con Apache Spark y escribir un job en Scala que reescriba los datos.",
+      "Escribir una función de AWS Lambda que lea cada archivo .csv y lo convierta con una biblioteca de Parquet.",
+      "Usar AWS DMS con Amazon S3 como origen y destino y habilitar la conversión de formato."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Athena es un servicio sin servidor que permite convertir formatos y particionar la salida con CTAS usando solo SQL, sin clústeres ni código que administrar.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.2",
+    "text": "Una empresa ejecuta jobs por lotes de Apache Spark en Amazon EMR que toleran interrupciones y se pueden reintentar. El equipo quiere reducir al máximo el costo de cómputo sin poner en riesgo la estabilidad del clúster. ¿Qué configuración debe aplicar?",
+    "options": [
+      "Usar instancias on-demand para el nodo principal y los nodos core, e instancias Spot para los nodos de tareas (task nodes).",
+      "Usar instancias Spot para el nodo principal, los nodos core y los nodos de tareas.",
+      "Usar instancias reservadas de tres años para todo el clúster y mantenerlo siempre encendido.",
+      "Usar instancias on-demand para todo el clúster y habilitar el escalado administrado de EMR con un mínimo alto."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Los nodos de tareas no almacenan datos de HDFS, por lo que su interrupción no compromete el clúster y son el lugar ideal para instancias Spot; el nodo principal y los nodos core deben mantenerse en instancias on-demand para evitar la pérdida del clúster o de los datos.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.2",
+    "text": "Un job de AWS Glue con Apache Spark que lee millones de archivos JSON pequeños desde Amazon S3 es cada vez más lento y algunos ejecutores fallan por falta de memoria. ¿Cuáles DOS acciones ayudan a resolver el problema de rendimiento? (Seleccione DOS respuestas).",
+    "options": [
+      "Habilitar la agrupación de archivos de entrada con las opciones groupFiles y groupSize para reducir la cantidad de tareas de Spark.",
+      "Cambiar a un tipo de worker con más memoria (por ejemplo, G.2X) y habilitar las métricas de observabilidad del job para identificar el desequilibrio de particiones.",
+      "Convertir el job a un shell de Python de AWS Glue con 1 DPU para eliminar la sobrecarga de Spark.",
+      "Escribir la salida en formato .csv sin compresión para acelerar la escritura.",
+      "Deshabilitar los marcadores de job (job bookmarks) para que el job vuelva a procesar todos los datos en cada ejecución."
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "La agrupación de archivos reduce la enorme cantidad de tareas que generan los archivos pequeños, y un worker con más memoria junto con las métricas del job permiten dimensionar correctamente y detectar particiones desbalanceadas.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.3",
+    "text": "Una organización ya mantiene decenas de DAG de Apache Airflow con dependencias complejas, sensores y reintentos personalizados, y quiere ejecutarlos en AWS sin reescribir la lógica de orquestación ni administrar servidores. ¿Qué servicio debe elegir?",
+    "options": [
+      "Amazon Managed Workflows for Apache Airflow (Amazon MWAA)",
+      "AWS Step Functions con máquinas de estado de tipo estándar",
+      "Desencadenadores y flujos de trabajo de AWS Glue",
+      "Reglas programadas de Amazon EventBridge que invocan funciones de AWS Lambda"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Amazon MWAA ejecuta Apache Airflow administrado, por lo que los DAG existentes se pueden migrar prácticamente sin cambios y AWS se encarga del aprovisionamiento y el escalado del entorno.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.3",
+    "text": "Un pipeline debe ejecutar en paralelo un job de AWS Glue y un paso de Amazon EMR, esperar a que ambos terminen, reintentar los errores transitorios con retroceso exponencial y ejecutar una ruta de compensación si algún paso falla de forma definitiva. La solución debe ser sin servidor y no requerir código de orquestación propio. ¿Qué debe usar el equipo?",
+    "options": [
+      "Una máquina de estado de AWS Step Functions con un estado Parallel y campos Retry y Catch.",
+      "Una función de AWS Lambda con una espera activa que sondee el estado de cada job.",
+      "Una regla de Amazon EventBridge con varios destinos y una política de reintentos.",
+      "Un flujo de trabajo de AWS Glue con desencadenadores condicionales de tipo 'todos los eventos'."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Step Functions ofrece de forma nativa ejecución en paralelo, reintentos con retroceso exponencial y manejo de errores con Catch para rutas de compensación, integrándose directamente con AWS Glue y Amazon EMR sin código de orquestación.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.3",
+    "text": "Cuando un pipeline de datos falla, el equipo necesita notificar por correo electrónico al grupo de guardia y, con el mismo evento de origen, invocar una función de AWS Lambda que registre el incidente. ¿Qué servicio de notificación cumple con el requisito?",
+    "options": [
+      "Un tema de Amazon SNS con una suscripción de correo electrónico y una suscripción de AWS Lambda.",
+      "Una cola de Amazon SQS con dos consumidores que compiten por los mensajes.",
+      "Una cola FIFO de Amazon SQS con deduplicación de mensajes habilitada.",
+      "Un grupo de logs de Amazon CloudWatch Logs con un filtro de métricas."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Amazon SNS implementa el patrón de publicación y suscripción (fan-out), por lo que un solo mensaje se entrega simultáneamente a la suscripción de correo electrónico y a la función de Lambda; en SQS cada mensaje lo consume un solo receptor.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.4",
+    "text": "Una función de AWS Lambda procesa registros de un flujo y escribe en una base de datos de Amazon RDS que solo admite 50 conexiones simultáneas. En los picos de tráfico, Lambda escala y agota las conexiones disponibles. ¿Qué configuración de Lambda aborda el problema de forma directa?",
+    "options": [
+      "Configurar la concurrencia reservada de la función en un valor acorde al límite de conexiones de la base de datos.",
+      "Configurar la concurrencia aprovisionada de la función en 1000 para eliminar los arranques en frío.",
+      "Aumentar la memoria asignada a la función a 10 240 MB.",
+      "Aumentar el tiempo de espera (timeout) de la función a 15 minutos."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "La concurrencia reservada establece un límite máximo de ejecuciones simultáneas de la función, lo que evita que Lambda abra más conexiones de las que la base de datos puede aceptar; la concurrencia aprovisionada solo precalienta entornos y no limita el escalado.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.4",
+    "text": "Una función de AWS Lambda de un pipeline de transformación necesita acceso de lectura y escritura a un sistema de archivos compartido de 200 GB que debe persistir entre invocaciones y ser accesible también por otras funciones. ¿Qué opción de almacenamiento debe usar?",
+    "options": [
+      "Montar un punto de acceso de Amazon EFS en la función de Lambda.",
+      "Escribir los archivos en el directorio /tmp de la función y aumentar el almacenamiento efímero a 10 240 MB.",
+      "Adjuntar un volumen de Amazon EBS a la función de Lambda.",
+      "Guardar el contenido compartido en variables de entorno cifradas de la función."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Lambda puede montar sistemas de archivos de Amazon EFS mediante puntos de acceso, lo que proporciona almacenamiento compartido, persistente y de gran tamaño; /tmp es efímero y está limitado a 10 240 MB, y Lambda no admite volúmenes de EBS.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.4",
+    "text": "Un equipo de ingeniería de datos quiere aplicar buenas prácticas de ingeniería de software al despliegue de un pipeline sin servidor compuesto por funciones de AWS Lambda, máquinas de estado de AWS Step Functions y tablas de Amazon DynamoDB. ¿Cuáles DOS prácticas debe adoptar? (Seleccione DOS respuestas).",
+    "options": [
+      "Definir el pipeline con AWS SAM o AWS CDK y versionar las plantillas en el repositorio de código.",
+      "Ejecutar las pruebas unitarias y de integración en AWS CodeBuild dentro de una canalización de AWS CodePipeline antes de promover los cambios a producción.",
+      "Editar el código de las funciones de Lambda directamente en la consola de AWS y descargar el paquete al terminar.",
+      "Crear los recursos manualmente en cada cuenta y documentar los pasos en una hoja de cálculo.",
+      "Desplegar siempre con el alias $LATEST y omitir los entornos de preproducción para acelerar la entrega."
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "La infraestructura como código con AWS SAM o AWS CDK hace los despliegues repetibles y auditables, y una canalización de CI/CD con pruebas automatizadas evita promover cambios defectuosos a producción.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.1",
+    "text": "Una aplicación de detección de fraude requiere búsquedas de pares clave-valor con latencia de microsegundos, usa estructuras de datos de Redis (conjuntos ordenados y streams) y necesita que el almacén sea la fuente principal de verdad, con durabilidad y recuperación ante desastres. ¿Qué servicio cumple con estos requisitos?",
+    "options": [
+      "Amazon MemoryDB",
+      "Amazon ElastiCache (Redis OSS) en modo de clúster con réplicas de lectura",
+      "Amazon DynamoDB con DynamoDB Accelerator (DAX)",
+      "Amazon RDS for PostgreSQL con una réplica de lectura"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Amazon MemoryDB es una base de datos en memoria compatible con Redis que persiste las escrituras en un registro transaccional multi-AZ, por lo que puede actuar como almacén principal duradero; ElastiCache está diseñado como caché y DAX es una caché frente a DynamoDB.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.1",
+    "text": "Un equipo debe unir tablas de hechos de un almacén de datos de Amazon Redshift con datos operativos que cambian cada minuto en una base de datos de Amazon RDS for PostgreSQL, sin crear procesos de ETL ni copiar los datos al almacén. ¿Qué característica de Amazon Redshift debe usar?",
+    "options": [
+      "Consultas federadas de Amazon Redshift",
+      "Amazon Redshift Spectrum",
+      "Vistas materializadas de Amazon Redshift con actualización automática",
+      "El comando COPY con un archivo de manifiesto"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Las consultas federadas permiten a Redshift leer en vivo desde bases de datos de Amazon RDS y Aurora PostgreSQL o MySQL y unir esos datos con las tablas locales; Redshift Spectrum consulta datos en Amazon S3, no bases de datos operativas.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.1",
+    "text": "Una empresa migra las tablas de su lago de datos en Amazon S3 al formato de tabla abierta Apache Iceberg. ¿Cuáles DOS capacidades obtiene con Iceberg que no tenía con tablas Hive de solo anexado? (Seleccione DOS respuestas).",
+    "options": [
+      "Actualizaciones y eliminaciones a nivel de fila con transacciones ACID sobre los datos almacenados en Amazon S3.",
+      "Consultas de viaje en el tiempo (time travel) y reversión a instantáneas (snapshots) anteriores de la tabla.",
+      "Eliminación de la necesidad de un catálogo de metadatos como AWS Glue Data Catalog.",
+      "Transición automática de los archivos de datos a Amazon S3 Glacier Deep Archive.",
+      "Cifrado en tránsito de los datos sin necesidad de configurar TLS."
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "Apache Iceberg agrega semántica transaccional ACID con operaciones de actualización y eliminación a nivel de fila, y mantiene instantáneas que habilitan consultas de viaje en el tiempo y reversión; el catálogo, el ciclo de vida del almacenamiento y el cifrado siguen siendo responsabilidad de los servicios de AWS.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.2",
+    "text": "Cada día llegan datos nuevos a Amazon S3 con esquemas que evolucionan, y el equipo quiere que las tablas y las particiones del AWS Glue Data Catalog se mantengan actualizadas automáticamente para que Amazon Athena las consulte. ¿Cuál es la solución con menor esfuerzo operativo?",
+    "options": [
+      "Programar un rastreador (crawler) de AWS Glue sobre la ruta de Amazon S3 y configurar su política de cambios de esquema para actualizar las definiciones de tabla.",
+      "Crear las tablas manualmente con DDL en Athena y ejecutar ALTER TABLE cada vez que cambie el esquema.",
+      "Instalar un metastore de Apache Hive autoadministrado en Amazon EC2 y sincronizarlo con un script propio.",
+      "Usar AWS DMS para replicar los metadatos del esquema al AWS Glue Data Catalog."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Los rastreadores de AWS Glue infieren el esquema y las particiones de forma automática y, según la política de cambios configurada, actualizan las definiciones del Data Catalog sin intervención manual.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.2",
+    "text": "Una aplicación externa escribe archivos en Amazon S3 con una convención de rutas predecible del tipo s3://bucket/eventos/anio=YYYY/mes=MM/dia=DD/. Amazon Athena no devuelve los datos nuevos y el equipo quiere evitar tanto los rastreadores como los comandos de mantenimiento de particiones. ¿Qué debe configurar?",
+    "options": [
+      "Habilitar la proyección de particiones (partition projection) en las propiedades de la tabla de Athena.",
+      "Ejecutar MSCK REPAIR TABLE después de cada carga de archivos.",
+      "Crear un rastreador de AWS Glue con una programación cada cinco minutos.",
+      "Convertir la tabla a formato .csv sin particiones para que Athena escanee todo el bucket."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "La proyección de particiones calcula las particiones a partir de los rangos definidos en las propiedades de la tabla, por lo que Athena reconoce las rutas nuevas sin registrar particiones ni ejecutar rastreadores o MSCK REPAIR TABLE.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.2",
+    "text": "Una empresa necesita un catálogo de negocio donde los propietarios de los datos publiquen activos con un glosario de términos, metadatos de negocio y un flujo de solicitud y aprobación de suscripciones para los consumidores. ¿Qué servicio debe usar?",
+    "options": [
+      "Amazon SageMaker Catalog",
+      "AWS Glue Data Catalog",
+      "AWS Glue DataBrew",
+      "AWS Lake Formation con etiquetas LF"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Amazon SageMaker Catalog aporta las capacidades de catálogo de negocio: publicación de activos, glosario de términos, metadatos de negocio y flujos de suscripción con aprobación; el AWS Glue Data Catalog es un catálogo técnico de esquemas.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.3",
+    "text": "Un equipo debe exportar el resultado de una consulta de Amazon Redshift a Amazon S3 en formato Apache Parquet, particionado por país, para que Amazon Athena lo consulte. ¿Cuál es el método correcto?",
+    "options": [
+      "Ejecutar el comando UNLOAD con FORMAT AS PARQUET y la cláusula PARTITION BY.",
+      "Ejecutar el comando COPY con la opción FORMAT AS PARQUET.",
+      "Crear una vista materializada y exportarla con Amazon Redshift Spectrum.",
+      "Usar AWS DMS con Amazon Redshift como origen y Amazon S3 como destino en modo de carga completa."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "UNLOAD escribe el resultado de una consulta de Redshift en Amazon S3 y admite tanto el formato Parquet como el particionado con PARTITION BY; COPY se usa para la operación inversa, es decir, cargar datos en Redshift.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.3",
+    "text": "Una tabla de Amazon DynamoDB almacena sesiones que dejan de ser útiles a los 30 días. El equipo quiere eliminarlas automáticamente sin consumir capacidad de escritura. ¿Qué debe implementar?",
+    "options": [
+      "Habilitar el TTL de DynamoDB sobre un atributo numérico que contenga la marca de tiempo de expiración en segundos de época Unix.",
+      "Ejecutar un job diario de AWS Glue que analice la tabla y borre los elementos vencidos con BatchWriteItem.",
+      "Crear una regla de ciclo de vida de Amazon S3 que apunte a la tabla de DynamoDB.",
+      "Habilitar Amazon DynamoDB Streams y usar una función de AWS Lambda que elimine los elementos con más de 30 días."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "El TTL de DynamoDB elimina los elementos vencidos en segundo plano sin consumir capacidad de escritura, siempre que el atributo configurado sea numérico y contenga la expiración en segundos de época Unix.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.3",
+    "text": "Un bucket de Amazon S3 con versionado habilitado almacena datos sin procesar. Los datos se consultan con frecuencia durante 90 días y casi nunca después, deben conservarse siete años por requisitos legales, y las versiones anteriores solo son útiles 30 días. ¿Cuáles DOS acciones de ciclo de vida debe configurar el equipo? (Seleccione DOS respuestas).",
+    "options": [
+      "Una acción de transición que mueva las versiones actuales a S3 Glacier Flexible Retrieval a los 90 días.",
+      "Una acción de expiración de versiones no actuales que las elimine 30 días después de dejar de ser la versión actual.",
+      "Una acción de expiración que elimine las versiones actuales a los 90 días.",
+      "Suspender el versionado del bucket para que Amazon S3 sobrescriba los objetos antiguos automáticamente.",
+      "Habilitar la replicación entre regiones para archivar las versiones anteriores en otra región."
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "La transición a una clase de archivo a los 90 días reduce el costo conservando los datos durante los siete años exigidos, y la expiración de versiones no actuales a los 30 días limpia el historial de versiones sin afectar la versión vigente.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.4",
+    "text": "En Amazon Redshift, una tabla de hechos de 5 000 millones de filas se une constantemente con una tabla de dimensiones de 40 000 filas y casi todas las consultas filtran por la fecha del evento. ¿Qué diseño de tablas ofrece el mejor rendimiento?",
+    "options": [
+      "Definir DISTKEY en la columna de unión de la tabla de hechos, DISTSTYLE ALL en la dimensión pequeña y SORTKEY en la columna de fecha del evento.",
+      "Definir DISTSTYLE EVEN en ambas tablas y no definir claves de ordenamiento.",
+      "Definir DISTSTYLE ALL en la tabla de hechos y DISTKEY en la tabla de dimensiones.",
+      "Definir DISTKEY en la columna de fecha del evento en ambas tablas y SORTKEY en la columna de unión."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Replicar la dimensión pequeña con DISTSTYLE ALL y distribuir la tabla de hechos por la columna de unión elimina la redistribución de datos en el join, y la clave de ordenamiento por fecha permite descartar bloques en los filtros temporales.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.4",
+    "text": "Una tabla de Amazon DynamoDB usa 'id_pedido' como clave de partición. Un requisito nuevo obliga a consultar los pedidos por 'id_cliente' y ordenarlos por fecha, con latencia de milisegundos y sin escanear la tabla. ¿Qué debe hacer el equipo?",
+    "options": [
+      "Crear un índice secundario global con 'id_cliente' como clave de partición y la fecha del pedido como clave de ordenamiento.",
+      "Crear un índice secundario local con 'id_cliente' como clave de partición.",
+      "Ejecutar una operación Scan con una expresión de filtro sobre 'id_cliente'.",
+      "Volver a crear la tabla con una clave de partición compuesta que concatene 'id_pedido' e 'id_cliente'."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Un índice secundario global permite definir una clave de partición distinta a la de la tabla base y consultar con Query de forma eficiente; los índices secundarios locales deben compartir la clave de partición de la tabla y solo se crean al crearla.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.4",
+    "text": "Una empresa migra un almacén de datos Oracle local a Amazon Redshift. Necesita convertir el esquema, los tipos de datos y el código de los procedimientos almacenados, y luego replicar los datos con una interrupción mínima del servicio. ¿Qué combinación de herramientas debe usar?",
+    "options": [
+      "AWS Schema Conversion Tool (o la conversión de esquemas de AWS DMS) para el esquema, y AWS DMS con carga completa más captura de datos de cambios (CDC) para los datos.",
+      "Rastreadores de AWS Glue para convertir el esquema y el comando COPY para cargar los datos.",
+      "AWS DataSync para el esquema y AWS Snowball para los datos.",
+      "AWS Glue DataBrew para convertir el esquema y Amazon Redshift Spectrum para consultar los datos en el origen."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "AWS SCT y la conversión de esquemas de AWS DMS traducen objetos y código de Oracle al dialecto de Redshift, y AWS DMS con carga completa y CDC replica los datos y los cambios posteriores para reducir la ventana de interrupción.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.1",
+    "text": "Un analista sin experiencia en programación debe perfilar, limpiar y normalizar un conjunto de datos de Amazon S3 (quitar duplicados, corregir formatos de fecha y estandarizar el uso de mayúsculas) mediante una interfaz visual y con recetas reutilizables. ¿Qué servicio debe usar?",
+    "options": [
+      "AWS Glue DataBrew",
+      "AWS Glue con jobs de shell de Python",
+      "Amazon EMR con notebooks de Apache Spark",
+      "Amazon Athena con sentencias INSERT INTO"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "AWS Glue DataBrew ofrece preparación visual de datos sin código, con cientos de transformaciones predefinidas y recetas que se pueden reutilizar y versionar.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.1",
+    "text": "Un pipeline debe iniciarse todos los días a las 02:00 UTC e invocar una máquina de estado de AWS Step Functions. La solución debe ser administrada y no requerir servidores. ¿Cuál es el enfoque más adecuado?",
+    "options": [
+      "Crear una regla programada de Amazon EventBridge con una expresión cron y la máquina de estado como destino.",
+      "Ejecutar un trabajo de cron en una instancia de Amazon EC2 que llame a la API StartExecution.",
+      "Crear una función de AWS Lambda con un bucle de espera que verifique la hora cada minuto.",
+      "Configurar un desencadenador de eventos de AWS Glue que se active al cambiar la hora del sistema."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Las reglas programadas de Amazon EventBridge admiten expresiones cron y pueden invocar directamente una máquina de estado de Step Functions, sin infraestructura que administrar.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.1",
+    "text": "Los DAG de un entorno de Amazon MWAA empezaron a quedarse en estado 'queued' y algunas tareas no se ejecutan dentro de su ventana programada. ¿Cuáles DOS acciones son apropiadas para diagnosticar y resolver el problema? (Seleccione DOS respuestas).",
+    "options": [
+      "Revisar los logs del planificador (scheduler) y de las tareas del entorno en Amazon CloudWatch Logs para identificar errores y cuellos de botella.",
+      "Aumentar la clase del entorno de MWAA o la cantidad máxima de workers para incrementar la capacidad de ejecución de tareas.",
+      "Conectarse por SSH a las instancias de Amazon EC2 del entorno de MWAA y reiniciar el proceso del planificador.",
+      "Modificar directamente la base de datos de metadatos de Apache Airflow para marcar las tareas como completadas.",
+      "Sustituir los DAG por rastreadores de AWS Glue para que la orquestación no dependa de Apache Airflow."
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "MWAA publica los logs del planificador, los workers y las tareas en CloudWatch Logs, que es el punto de partida del diagnóstico, y las tareas en cola suelen indicar falta de capacidad, que se resuelve ajustando la clase del entorno o el número de workers. La infraestructura subyacente es administrada y no se debe manipular.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.2",
+    "text": "Un panel de Amazon QuickSight es consultado por 500 usuarios en horas pico sobre datos que se actualizan una vez al día en Amazon Redshift. El equipo quiere tiempos de respuesta rápidos y evitar la carga de consultas concurrentes sobre el clúster. ¿Qué debe configurar?",
+    "options": [
+      "Importar el conjunto de datos a SPICE y programar una actualización diaria posterior a la carga del ETL.",
+      "Usar consultas directas (direct query) a Amazon Redshift y aumentar el tiempo de espera de las visualizaciones.",
+      "Usar consultas directas y habilitar el escalado de concurrencia con una cola de WLM dedicada de una sola ranura.",
+      "Exportar cada visualización a PDF y distribuirla por correo electrónico."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "SPICE es el motor de cálculo en memoria de QuickSight: al importar los datos y actualizarlos una vez al día se obtienen respuestas rápidas y se elimina la carga de consultas concurrentes sobre el clúster de Redshift.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.2",
+    "text": "Un científico de datos quiere explorar de forma interactiva los datos del lago de datos con código de PySpark, sin aprovisionar ni administrar un clúster. ¿Qué opción cumple con el requisito?",
+    "options": [
+      "Usar los notebooks de Amazon Athena para Apache Spark.",
+      "Crear un clúster de Amazon EMR de larga duración y trabajar desde EMR Studio.",
+      "Usar Amazon Athena con consultas SQL federadas.",
+      "Ejecutar manualmente un job de shell de Python de AWS Glue."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Athena para Apache Spark proporciona notebooks administrados y sin servidor donde se ejecuta código PySpark sobre los datos del lago, sin aprovisionar clústeres.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.2",
+    "text": "Un informe debe mostrar, por cada tienda y día, el promedio móvil de ventas de los últimos siete días a partir de una tabla de hechos diaria en Amazon Redshift. ¿Qué construcción de SQL calcula ese valor?",
+    "options": [
+      "AVG(ventas) OVER (PARTITION BY id_tienda ORDER BY fecha ROWS BETWEEN 6 PRECEDING AND CURRENT ROW)",
+      "AVG(ventas) con GROUP BY id_tienda, fecha",
+      "SUM(ventas) / COUNT(*) con HAVING COUNT(*) = 7",
+      "Una operación PIVOT sobre la columna fecha aplicando la función AVG"
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Un promedio móvil requiere una función de ventana con marco de filas: la cláusula ROWS BETWEEN 6 PRECEDING AND CURRENT ROW promedia el día actual y los seis anteriores dentro de cada tienda.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.3",
+    "text": "El equipo debe encontrar, entre millones de líneas de logs de aplicación en Amazon CloudWatch Logs, todas las entradas con nivel ERROR de las últimas dos horas y contarlas por código de error, sin construir un pipeline nuevo. ¿Qué herramienta debe usar?",
+    "options": [
+      "Amazon CloudWatch Logs Insights con una consulta que filtre por nivel y agregue con stats count() by.",
+      "Un filtro de suscripción de CloudWatch Logs hacia Amazon Kinesis Data Streams y una aplicación de consumo propia.",
+      "AWS CloudTrail Lake con una consulta SQL sobre los eventos de la cuenta.",
+      "Amazon Macie con un trabajo de descubrimiento sobre el grupo de logs."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "CloudWatch Logs Insights permite consultar y agregar los logs ya almacenados de forma interactiva con su lenguaje de consulta, sin necesidad de exportarlos ni de crear infraestructura adicional.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.3",
+    "text": "Se eliminó un objeto crítico de un bucket de Amazon S3 y el equipo de seguridad necesita saber qué identidad de IAM realizó la llamada a la API y desde qué dirección IP. ¿Qué debe habilitarse y consultarse?",
+    "options": [
+      "Los eventos de datos de AWS CloudTrail para el bucket de Amazon S3, consultados después con Amazon Athena o AWS CloudTrail Lake.",
+      "Las métricas de solicitudes de Amazon CloudWatch para el bucket de Amazon S3.",
+      "Los registros de flujo de VPC (VPC Flow Logs) de la subred de la aplicación.",
+      "El inventario de Amazon S3 con el informe diario de objetos."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Las operaciones a nivel de objeto, como DeleteObject, se registran como eventos de datos de CloudTrail e incluyen la identidad que hizo la llamada y la dirección IP de origen; los eventos de administración y las métricas no aportan ese detalle.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.3",
+    "text": "Un equipo necesita detectar de forma proactiva cuándo falla un job de AWS Glue en producción y contar con métricas para diagnosticar el rendimiento de los ejecutores. ¿Cuáles DOS acciones debe implementar? (Seleccione DOS respuestas).",
+    "options": [
+      "Habilitar las métricas de observabilidad del job de AWS Glue en Amazon CloudWatch y crear alarmas sobre métricas como la cantidad de tareas fallidas y el uso de memoria de los ejecutores.",
+      "Crear una regla de Amazon EventBridge que coincida con el evento de cambio de estado de AWS Glue a FAILED y publique en un tema de Amazon SNS.",
+      "Consultar los registros de flujo de VPC para identificar los jobs que fallan.",
+      "Habilitar Amazon Macie sobre el bucket de salida para detectar ejecuciones incompletas.",
+      "Revisar manualmente la consola de AWS Glue cada mañana y anotar los jobs fallidos."
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "Las métricas de AWS Glue en CloudWatch permiten crear alarmas y diagnosticar el comportamiento de los ejecutores, y una regla de EventBridge sobre el cambio de estado a FAILED con destino SNS entrega la notificación proactiva sin revisión manual.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.4",
+    "text": "Un pipeline de AWS Glue debe rechazar los lotes en los que la columna 'id_cliente' contenga valores nulos o duplicados, y registrar el resultado de la evaluación antes de cargar los datos en Amazon Redshift. ¿Cuál es el enfoque más adecuado?",
+    "options": [
+      "Añadir un nodo de AWS Glue Data Quality con un conjunto de reglas en DQDL (por ejemplo, IsComplete y IsUnique sobre 'id_cliente') y bifurcar los registros que no cumplen.",
+      "Cargar todos los datos en Amazon Redshift y ejecutar después consultas SQL de verificación.",
+      "Habilitar los marcadores de job (job bookmarks) para que AWS Glue omita los registros no válidos.",
+      "Configurar una regla de ciclo de vida de Amazon S3 que elimine los archivos con valores nulos."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "AWS Glue Data Quality evalúa reglas declarativas en DQDL durante la ejecución del job, publica los resultados de la evaluación y permite separar los registros que no cumplen antes de que lleguen al destino.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.4",
+    "text": "Antes de diseñar las transformaciones, un ingeniero necesita entender la distribución de valores, el porcentaje de valores faltantes y las correlaciones de un conjunto de datos nuevo en Amazon S3, con un informe visual y sin escribir código. ¿Qué debe ejecutar?",
+    "options": [
+      "Un trabajo de perfilado (profile job) de AWS Glue DataBrew sobre el conjunto de datos.",
+      "Un rastreador de AWS Glue con clasificadores personalizados habilitados.",
+      "Una consulta SELECT * con LIMIT 100 en Amazon Athena.",
+      "Un trabajo de descubrimiento de datos sensibles de Amazon Macie."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Los trabajos de perfilado de DataBrew generan de forma visual estadísticas de cada columna, valores faltantes, cardinalidad y correlaciones, sin necesidad de escribir código.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.4",
+    "text": "Un job de Apache Spark en Amazon EMR se ralentiza porque una sola clave de unión concentra el 60% de los registros y una tarea tarda mucho más que las demás. Ambas tablas son demasiado grandes para caber en memoria. ¿Qué técnica mitiga el sesgo de datos (data skew)?",
+    "options": [
+      "Añadir un sufijo aleatorio a la clave sesgada (salting), reparticionar antes de la unión y agregar los resultados al final.",
+      "Usar una unión de difusión (broadcast join) para enviar la tabla más grande a todos los ejecutores.",
+      "Reducir la cantidad de particiones a uno para que una sola tarea procese todos los datos.",
+      "Aumentar el tamaño del clúster con más nodos de tareas sin cambiar la lógica del job."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "El salting distribuye los registros de la clave sesgada en varias particiones para que el trabajo se reparta entre los ejecutores; el broadcast join no aplica porque ninguna de las dos tablas es lo suficientemente pequeña, y agregar nodos no elimina la partición desbalanceada.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.1",
+    "text": "Una función de AWS Lambda debe conectarse a una base de datos de Amazon RDS con credenciales que roten automáticamente cada 30 días, sin cambios en el proceso de despliegue ni credenciales dentro del paquete. ¿Qué solución cumple con estos requisitos?",
+    "options": [
+      "Almacenar las credenciales en AWS Secrets Manager con la rotación administrada habilitada y conceder al rol de ejecución de Lambda el permiso secretsmanager:GetSecretValue.",
+      "Guardar las credenciales en variables de entorno de la función cifradas con AWS KMS y actualizarlas manualmente cada mes.",
+      "Guardar las credenciales en un parámetro de tipo String de AWS Systems Manager Parameter Store y rotarlas con un job de AWS Glue.",
+      "Incluir las credenciales en un archivo de configuración dentro del paquete de despliegue y cifrar el bucket de Amazon S3."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "AWS Secrets Manager ofrece rotación automática integrada para credenciales de bases de datos y la función las recupera en tiempo de ejecución mediante su rol de IAM, sin almacenar secretos en el código ni en la configuración.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.1",
+    "text": "Un job de AWS Glue se ejecuta en subredes privadas de una VPC sin puerta de enlace NAT y falla al intentar recuperar un secreto de AWS Secrets Manager. ¿Cuál es la solución más segura y adecuada?",
+    "options": [
+      "Crear un punto de enlace de VPC de tipo interfaz (AWS PrivateLink) para AWS Secrets Manager y permitir el tráfico en el grupo de seguridad.",
+      "Crear un punto de enlace de VPC de tipo puerta de enlace (gateway) para AWS Secrets Manager.",
+      "Adjuntar una puerta de enlace de internet a la subred privada y asignar direcciones IP públicas al job.",
+      "Copiar el valor del secreto a las variables de entorno del job de AWS Glue para no necesitar conectividad."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Los puntos de enlace de interfaz con AWS PrivateLink permiten que los recursos de subredes privadas alcancen las API de AWS Secrets Manager sin salir a internet; los puntos de enlace de tipo puerta de enlace solo existen para Amazon S3 y DynamoDB.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.1",
+    "text": "Un job de AWS Glue de la cuenta A debe leer objetos de un bucket de Amazon S3 de la cuenta B. La política de seguridad prohíbe el uso de credenciales de larga duración. ¿Cuáles DOS acciones debe realizar el equipo? (Seleccione DOS respuestas).",
+    "options": [
+      "Crear un rol de IAM en la cuenta B con una política de confianza que permita al rol de la cuenta A ejecutar sts:AssumeRole y conceder a ese rol acceso al bucket.",
+      "Asignar un rol de ejecución de IAM al job de AWS Glue y asumir el rol de la otra cuenta desde el script, en lugar de incrustar claves de acceso.",
+      "Crear un usuario de IAM en la cuenta B, generar claves de acceso y guardarlas en el script del job.",
+      "Guardar las claves de acceso de la cuenta B en las variables de entorno del job de AWS Glue.",
+      "Abrir el grupo de seguridad de la conexión de AWS Glue al rango 0.0.0.0/0 para permitir el tráfico entre cuentas."
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "El acceso entre cuentas sin credenciales estáticas se implementa con un rol en la cuenta destino que confía en el principal de la cuenta origen, y con un rol de ejecución en el job que asume ese rol para obtener credenciales temporales de AWS STS.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.2",
+    "text": "Los analistas consultan con Amazon Athena una tabla del lago de datos que contiene una columna con números de tarjeta. Solo el equipo de finanzas debe ver esa columna; los demás deben poder consultar el resto de las columnas de la misma tabla. ¿Cuál es la forma más eficiente de aplicar el control?",
+    "options": [
+      "Conceder permisos a nivel de columna en AWS Lake Formation excluyendo la columna sensible para los principales que no pertenecen a finanzas.",
+      "Crear una copia de la tabla sin la columna sensible y dar acceso a ese bucket a los analistas.",
+      "Adjuntar una política de bucket de Amazon S3 que deniegue el acceso a la columna sensible.",
+      "Crear una política de IAM con una condición sobre el nombre de la columna en las consultas de Athena."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "AWS Lake Formation aplica permisos de grano fino a nivel de columna, fila y celda que Athena respeta al consultar, sin duplicar datos; las políticas de bucket de S3 y las de IAM operan sobre objetos y acciones, no sobre columnas.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.2",
+    "text": "En un clúster de Amazon Redshift, 40 analistas nuevos necesitan acceso de solo lectura al esquema 'ventas', incluidas las tablas que se creen en el futuro, con la menor sobrecarga administrativa posible. ¿Qué debe hacer el administrador?",
+    "options": [
+      "Crear un grupo de base de datos, añadir a los usuarios, conceder USAGE sobre el esquema y SELECT sobre sus tablas, y definir ALTER DEFAULT PRIVILEGES para las tablas futuras.",
+      "Conceder SELECT tabla por tabla a cada usuario y repetir el proceso cada vez que se cree una tabla.",
+      "Convertir a los 40 analistas en superusuarios del clúster.",
+      "Otorgar a los analistas la política administrada de IAM AmazonRedshiftFullAccess."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Los grupos de base de datos permiten administrar los permisos de forma colectiva y ALTER DEFAULT PRIVILEGES extiende automáticamente el permiso SELECT a las tablas que se creen después, respetando el mínimo privilegio.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.2",
+    "text": "Un equipo debe construir una política de IAM personalizada de mínimo privilegio para que un job de procesamiento lea solo el prefijo 'entrada/' de un bucket y escriba solo en el prefijo 'salida/'. ¿Cuáles DOS prácticas debe aplicar? (Seleccione DOS respuestas).",
+    "options": [
+      "Especificar únicamente las acciones necesarias (por ejemplo, s3:GetObject y s3:PutObject) sobre los ARN de recursos de cada prefijo, en lugar de usar comodines.",
+      "Usar la clave de condición s3:prefix en la acción s3:ListBucket para restringir el listado al prefijo permitido.",
+      "Adjuntar la política administrada AmazonS3FullAccess y documentar la restricción en el manual de operaciones.",
+      "Usar el elemento NotAction con \"*\" para permitir todo excepto s3:DeleteBucket.",
+      "Definir el elemento Principal con \"*\" en la política basada en identidad para simplificar la administración."
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "El mínimo privilegio se logra enumerando solo las acciones requeridas sobre ARN específicos y acotando las operaciones a nivel de bucket, como s3:ListBucket, con claves de condición como s3:prefix.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.3",
+    "text": "Una empresa debe permitir que los analistas consulten una tabla de Amazon Redshift que contiene números de identificación fiscal viendo los valores ofuscados, mientras que el equipo de cumplimiento ve los valores completos, sin duplicar la tabla ni crear una vista por cada rol. ¿Qué característica debe usar?",
+    "options": [
+      "Políticas de enmascaramiento dinámico de datos (dynamic data masking) de Amazon Redshift asociadas a roles.",
+      "Cifrado a nivel de columna con AWS KMS en la tabla de Amazon Redshift.",
+      "Un job de AWS Glue DataBrew que aplique una receta de enmascaramiento antes de cada consulta.",
+      "Una política de bucket de Amazon S3 que deniegue el acceso a la columna sensible."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "El enmascaramiento dinámico de datos de Redshift aplica en tiempo de consulta una expresión de ofuscación distinta según el rol del usuario, sobre la misma tabla y sin copias ni vistas adicionales.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.3",
+    "text": "La cuenta A escribe objetos en un bucket de Amazon S3 cifrados con una clave administrada por el cliente (CMK) de AWS KMS que pertenece a la cuenta A. Un job de Amazon EMR de la cuenta B debe leer esos objetos. ¿Qué configuración es necesaria?",
+    "options": [
+      "Actualizar la política de la clave de KMS de la cuenta A para permitir kms:Decrypt al rol de la cuenta B, conceder ese permiso en la política de IAM de dicho rol y otorgarle acceso al bucket.",
+      "Copiar la CMK de la cuenta A a la cuenta B y volver a cifrar los objetos con la copia.",
+      "Cambiar el cifrado del bucket a SSE-S3 para que el acceso entre cuentas funcione sin configuración adicional.",
+      "Crear en la cuenta B un alias de KMS que apunte al ARN de la clave de la cuenta A."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "El acceso entre cuentas a datos cifrados con SSE-KMS requiere permisos en dos lugares: la política de la clave en la cuenta propietaria y la política de IAM del principal que descifra, además del acceso al bucket. Las claves de KMS no se pueden copiar entre cuentas.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.3",
+    "text": "Una política de seguridad exige que todas las conexiones de los clientes de BI a Amazon Redshift usen cifrado en tránsito y validen el certificado del servidor. ¿Qué debe configurar el equipo?",
+    "options": [
+      "Activar el parámetro require_SSL en el grupo de parámetros del clúster y configurar el controlador JDBC con sslmode=verify-full.",
+      "Habilitar el cifrado del clúster con AWS KMS y reiniciarlo.",
+      "Colocar el clúster en subredes privadas y restringir el grupo de seguridad a las direcciones IP de los clientes.",
+      "Habilitar el cifrado predeterminado con SSE-KMS en el bucket de Amazon S3 donde residen los datos."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "require_SSL obliga a que las conexiones al clúster usen TLS, y sslmode=verify-full en el cliente valida además la cadena de certificados y el nombre del host. El cifrado con KMS protege los datos en reposo, no en tránsito.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.4",
+    "text": "Un equipo de auditoría necesita ejecutar consultas SQL sobre los eventos de AWS CloudTrail de todas las cuentas de la organización de los últimos dos años, sin construir ni mantener un pipeline de ingesta ni tablas particionadas. ¿Qué solución debe elegir?",
+    "options": [
+      "Crear un almacén de datos de eventos de AWS CloudTrail Lake a nivel de organización con la retención requerida y consultarlo con SQL.",
+      "Entregar los registros de CloudTrail a Amazon S3 y crear manualmente tablas particionadas en Amazon Athena.",
+      "Enviar los registros de CloudTrail a Amazon CloudWatch Logs y usar filtros de métricas.",
+      "Replicar los registros de CloudTrail en Amazon DynamoDB y consultarlos con PartiQL."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "CloudTrail Lake agrega y normaliza los eventos de toda la organización en un almacén administrado con retención configurable y consultas SQL integradas, sin que el equipo tenga que construir ni mantener tablas ni particiones.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.4",
+    "text": "Los registros de AWS CloudTrail se entregan a Amazon S3 con la estructura de rutas estándar por región y fecha, y el equipo debe hacer consultas ad hoc con SQL sobre varios años de eventos al menor costo posible. ¿Cuál es el enfoque más eficiente?",
+    "options": [
+      "Crear una tabla en Amazon Athena sobre la ubicación de los registros y usar la proyección de particiones por región y fecha para limitar los datos escaneados.",
+      "Crear una tabla en Amazon Athena sin particiones y filtrar con la cláusula WHERE.",
+      "Cargar todos los registros en un clúster aprovisionado de Amazon Redshift y consultarlos allí.",
+      "Ingerir todos los registros en Amazon OpenSearch Service con retención indefinida en almacenamiento activo (hot)."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Athena cobra por datos escaneados, y la proyección de particiones sobre región y fecha permite que las consultas lean solo las rutas relevantes sin mantener particiones ni copiar los datos a otro almacén.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.4",
+    "text": "Una empresa debe centralizar los logs de aplicaciones de Amazon EMR y AWS Lambda para hacer búsquedas de texto completo casi en tiempo real y construir paneles de seguridad. ¿Qué arquitectura cumple con el requisito?",
+    "options": [
+      "Enviar los logs desde Amazon CloudWatch Logs con un filtro de suscripción hacia Amazon OpenSearch Service y crear paneles en OpenSearch Dashboards.",
+      "Descargar los archivos de logs a una instancia de Amazon EC2 y buscar con grep de forma programada.",
+      "Almacenar los logs en Amazon S3 Glacier Deep Archive y restaurarlos cuando se necesite buscar.",
+      "Crear un rastreador de AWS Glue sobre los logs y consultarlos con Amazon QuickSight en modo de consulta directa."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Los filtros de suscripción de CloudWatch Logs transmiten los eventos casi en tiempo real a Amazon OpenSearch Service, que proporciona búsqueda de texto completo y paneles interactivos sobre los logs.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.5",
+    "text": "Una unidad de negocio debe otorgar acceso de lectura a un conjunto de tablas de su almacén de datos de Amazon Redshift a otra cuenta de AWS, en vivo y sin copiar ni duplicar los datos. ¿Qué debe implementar?",
+    "options": [
+      "Crear un datashare de Amazon Redshift, añadir los objetos que se comparten y autorizar al consumidor de la otra cuenta.",
+      "Ejecutar UNLOAD hacia Amazon S3 y compartir el bucket con una política entre cuentas.",
+      "Crear una instantánea del clúster y compartirla con la otra cuenta para que la restaure.",
+      "Configurar consultas federadas de Amazon Redshift hacia el clúster de la otra cuenta."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "El uso compartido de datos (datashare) de Amazon Redshift expone objetos de un almacén productor a consumidores de la misma cuenta o de otras cuentas con acceso en vivo, sin mover ni copiar los datos.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.5",
+    "text": "Antes de abrir un lago de datos de Amazon S3 a más consumidores, el equipo de gobierno debe identificar automáticamente qué objetos contienen información de identificación personal (PII) y luego restringir su acceso. ¿Qué combinación cumple con el objetivo?",
+    "options": [
+      "Ejecutar trabajos de descubrimiento de datos sensibles de Amazon Macie y aplicar permisos con etiquetas LF en AWS Lake Formation según los hallazgos.",
+      "Ejecutar un rastreador de AWS Glue con clasificadores personalizados y aplicar políticas de bucket de Amazon S3 por objeto.",
+      "Habilitar AWS Config con reglas administradas para clasificar los datos y aplicar listas de control de acceso (ACL) de Amazon S3.",
+      "Usar Amazon GuardDuty para clasificar los datos y AWS KMS para cifrar los objetos con PII."
+    ],
+    "correct": [0],
+    "type": "single",
+    "explanation": "Amazon Macie usa aprendizaje automático y patrones para descubrir PII en Amazon S3, y AWS Lake Formation con etiquetas LF permite traducir esos hallazgos en permisos de grano fino sobre los datos catalogados.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.5",
+    "text": "Por requisitos de soberanía de datos, una empresa debe impedir que cualquier cuenta de su organización cree copias de seguridad o réplicas de datos en regiones no autorizadas y, además, debe poder auditar los cambios de configuración de los recursos. ¿Cuáles DOS acciones debe implementar? (Seleccione DOS respuestas).",
+    "options": [
+      "Aplicar una política de control de servicios (SCP) en AWS Organizations con una condición sobre la clave aws:RequestedRegion que deniegue las operaciones en las regiones no autorizadas.",
+      "Habilitar AWS Config con un agregador de varias cuentas y regiones para registrar y evaluar los cambios de configuración de los recursos.",
+      "Configurar listas de control de acceso a la red (NACL) que bloqueen el tráfico hacia las regiones no autorizadas.",
+      "Usar claves de KMS de varias regiones (multi-Region keys) para que los datos no se puedan replicar.",
+      "Habilitar las restricciones geográficas de Amazon CloudFront para las regiones no autorizadas."
+    ],
+    "correct": [0, 1],
+    "type": "multiple",
+    "explanation": "Las SCP con la condición aws:RequestedRegion bloquean de forma preventiva cualquier llamada a la API dirigida a regiones no permitidas en todas las cuentas de la organización, y AWS Config con un agregador multicuenta y multirregión proporciona el historial y la evaluación de los cambios de configuración para la auditoría.",
+    "source": "llm"
+  }
+]

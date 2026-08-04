@@ -1,0 +1,732 @@
+[
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.1",
+    "text": "Una empresa administra 40 cuentas de AWS con AWS Organizations. El equipo de seguridad exige que ninguna cuenta miembro pueda desactivar AWS CloudTrail, ni siquiera los usuarios con permisos de administrador en esa cuenta. ¿Qué solución cumple este requisito?",
+    "options": [
+      "Aplicar una política de control de servicios (SCP) en la unidad organizativa que deniegue las acciones cloudtrail:StopLogging y cloudtrail:DeleteTrail",
+      "Adjuntar una política administrada de solo lectura a todos los usuarios de IAM de cada cuenta miembro",
+      "Configurar una política de bucket de Amazon S3 que deniegue la eliminación de los archivos de registro de CloudTrail",
+      "Habilitar AWS Config con una regla administrada que revierta los cambios en la configuración de CloudTrail"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Las SCP establecen el límite máximo de permisos de las cuentas miembro, por lo que una denegación explícita en la SCP no puede ser eludida ni por el administrador de la cuenta. Las políticas de IAM, las políticas de bucket y AWS Config no impiden que un administrador local modifique la configuración del trail.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.1",
+    "text": "Una aplicación que se ejecuta en instancias de Amazon EC2 en la cuenta A debe leer objetos de un bucket de Amazon S3 que pertenece a la cuenta B. La empresa prohíbe el uso de credenciales de larga duración. ¿Qué diseño cumple el requisito con el menor privilegio posible?",
+    "options": [
+      "Crear un rol de IAM en la cuenta B con permisos sobre el bucket y una relación de confianza con el rol de instancia de la cuenta A; la aplicación asume el rol con AWS STS",
+      "Crear un usuario de IAM en la cuenta B y almacenar sus claves de acceso en el archivo de configuración de la aplicación en la cuenta A",
+      "Configurar el bucket con acceso público de lectura y restringirlo mediante una condición de dirección IP de origen",
+      "Compartir las credenciales del usuario raíz de la cuenta B con el equipo de operaciones de la cuenta A"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "El acceso entre cuentas basado en roles con AWS STS entrega credenciales temporales y evita almacenar secretos de larga duración. Las claves de acceso estáticas, el acceso público y las credenciales del usuario raíz violan las mejores prácticas de seguridad de AWS.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.1",
+    "text": "Una empresa está definiendo su estrategia de identidades en AWS y quiere aplicar las mejores prácticas de seguridad para el usuario raíz y para el acceso de los empleados, que ya se autentican en un directorio corporativo. ¿Cuáles DOS acciones debe implementar la empresa?",
+    "options": [
+      "Habilitar MFA en el usuario raíz y reservarlo únicamente para las tareas que lo requieren de forma obligatoria",
+      "Federar el directorio corporativo con AWS IAM Identity Center y asignar conjuntos de permisos según la función laboral",
+      "Generar claves de acceso para el usuario raíz y distribuirlas al equipo de operaciones para las tareas diarias",
+      "Crear un único usuario de IAM compartido por todo el equipo de desarrollo para simplificar la administración",
+      "Adjuntar la política administrada AdministratorAccess a todos los usuarios de IAM y auditar el uso mensualmente"
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "AWS recomienda proteger el usuario raíz con MFA y no utilizarlo para operaciones cotidianas, y federar las identidades corporativas con IAM Identity Center para otorgar acceso temporal basado en roles. Compartir credenciales o conceder permisos de administrador de forma generalizada incumple el principio de mínimo privilegio.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.2",
+    "text": "Una aplicación web pública se ejecuta detrás de un Application Load Balancer, con los servidores de aplicaciones en subredes privadas. El equipo de seguridad detecta intentos de inyección SQL y de scripting entre sitios en la capa de aplicación. ¿Qué solución mitiga estas amenazas con el menor esfuerzo operativo?",
+    "options": [
+      "Asociar un web ACL de AWS WAF al Application Load Balancer con los grupos de reglas administradas de AWS",
+      "Configurar listas de control de acceso a la red (ACL de red) para bloquear los rangos de direcciones IP de origen",
+      "Habilitar Amazon GuardDuty en la cuenta para que bloquee automáticamente las solicitudes maliciosas",
+      "Restringir el grupo de seguridad del balanceador de carga para que solo acepte tráfico en el puerto 443"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "AWS WAF inspecciona las solicitudes HTTP/HTTPS en la capa 7 y sus grupos de reglas administradas cubren inyección SQL y XSS sin desarrollo propio. Las ACL de red y los grupos de seguridad solo filtran por IP, puerto y protocolo, y GuardDuty detecta amenazas pero no bloquea el tráfico.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.2",
+    "text": "Instancias de Amazon EC2 ubicadas en subredes privadas deben leer y escribir objetos en Amazon S3. La empresa requiere que el tráfico no atraviese internet y quiere evitar costos por hora y por datos procesados en el componente de conectividad. ¿Qué solución cumple estos requisitos?",
+    "options": [
+      "Crear un endpoint de tipo gateway de VPC para Amazon S3 y agregar la ruta correspondiente en las tablas de enrutamiento de las subredes privadas",
+      "Desplegar una puerta de enlace NAT en una subred pública y enrutar el tráfico de salida de las subredes privadas hacia ella",
+      "Crear un endpoint de interfaz de AWS PrivateLink para Amazon S3 en cada subred privada",
+      "Establecer una conexión de AWS Direct Connect con una interfaz virtual pública hacia Amazon S3"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Los endpoints de tipo gateway para S3 y DynamoDB mantienen el tráfico dentro de la red de AWS y no generan cargos por hora ni por datos procesados. La puerta de enlace NAT y los endpoints de interfaz sí facturan por hora y por gigabyte procesado.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.2",
+    "text": "Una aplicación tiene las credenciales de la base de datos escritas directamente en el código fuente. La empresa exige que las credenciales se roten automáticamente cada 30 días, que estén cifradas y que la aplicación las recupere en tiempo de ejecución. ¿Cuáles DOS acciones cumplen estos requisitos?",
+    "options": [
+      "Almacenar las credenciales en AWS Secrets Manager y habilitar la rotación automática gestionada para el motor de base de datos",
+      "Asignar a la aplicación un rol de IAM con permiso para recuperar el secreto y cifrar el secreto con una clave de AWS KMS",
+      "Guardar las credenciales en variables de entorno del sistema operativo de cada instancia de Amazon EC2",
+      "Guardar las credenciales en un objeto de Amazon S3 con acceso de lectura restringido por dirección IP de origen",
+      "Incluir las credenciales en una AMI personalizada para que estén disponibles cuando arranquen las instancias nuevas"
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "AWS Secrets Manager admite rotación automática integrada para bases de datos y cifra los secretos con AWS KMS, mientras que un rol de IAM permite a la aplicación recuperar el secreto sin credenciales estáticas. Las variables de entorno, los objetos de S3 y las AMI no ofrecen rotación automática y amplían la superficie de exposición.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.3",
+    "text": "Una normativa interna exige que los datos en reposo se cifren con claves cuya política de acceso y rotación controle la propia empresa, y que cada uso de la clave quede registrado para auditoría. La empresa no desea administrar hardware criptográfico. ¿Qué solución cumple los requisitos?",
+    "options": [
+      "Usar una clave administrada por el cliente en AWS KMS con rotación automática habilitada y revisar los eventos en AWS CloudTrail",
+      "Usar el cifrado del lado del servidor con claves administradas por Amazon S3 (SSE-S3)",
+      "Desplegar un clúster de AWS CloudHSM y administrar el material de claves directamente en los dispositivos",
+      "Usar el cifrado del lado del servidor con claves proporcionadas por el cliente (SSE-C) enviadas en cada solicitud"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Una clave administrada por el cliente en AWS KMS permite definir la política de la clave, habilitar la rotación automática y registrar todas las llamadas criptográficas en CloudTrail sin administrar hardware. SSE-S3 no expone una política de clave, CloudHSM implica administrar el clúster y SSE-C traslada la gestión de claves al cliente.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.3",
+    "text": "Una empresa debe cifrar el tráfico en tránsito hacia su Application Load Balancer con un certificado TLS de confianza pública y quiere eliminar el riesgo de caducidad por olvido de renovación. ¿Qué solución cumple el requisito con el menor esfuerzo operativo?",
+    "options": [
+      "Solicitar un certificado público en AWS Certificate Manager con validación por DNS y asociarlo al listener HTTPS del balanceador",
+      "Generar un certificado autofirmado en cada instancia de Amazon EC2 y renovarlo mediante un trabajo programado",
+      "Comprar un certificado a una autoridad certificadora externa e importarlo cada año en AWS Certificate Manager",
+      "Almacenar el certificado y su clave privada en AWS Secrets Manager y habilitar la rotación automática cada 90 días"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Los certificados públicos emitidos por ACM son gratuitos y se renuevan automáticamente cuando la validación se realiza por DNS y el registro permanece publicado. Los certificados autofirmados no son de confianza pública y los importados deben renovarse de forma manual.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.3",
+    "text": "Un requisito de cumplimiento obliga a conservar registros financieros en Amazon S3 durante siete años, de forma que nadie —incluido el administrador de la cuenta— pueda eliminarlos ni sobrescribirlos antes de ese plazo. ¿Cuáles DOS acciones se necesitan?",
+    "options": [
+      "Habilitar el control de versiones en el bucket",
+      "Habilitar S3 Object Lock en modo de cumplimiento (compliance) con un periodo de retención de siete años",
+      "Configurar una regla de ciclo de vida que expire los objetos a los siete años",
+      "Habilitar la replicación en la misma Región hacia un segundo bucket de solo lectura",
+      "Cambiar la clase de almacenamiento de los objetos a S3 Glacier Deep Archive"
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "S3 Object Lock requiere que el control de versiones esté habilitado y, en modo de cumplimiento, impide que cualquier usuario elimine o sobrescriba la versión del objeto hasta que expire la retención. El ciclo de vida, la replicación y el cambio de clase de almacenamiento no aportan inmutabilidad.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.1",
+    "text": "Una aplicación monolítica en Amazon EC2 recibe imágenes desde un formulario web y las procesa de forma sincrónica. En horas pico las solicitudes se pierden por tiempos de espera agotados. ¿Qué rediseño mejora la escalabilidad y desacopla los componentes?",
+    "options": [
+      "Publicar los trabajos en una cola de Amazon SQS y procesarlos con un grupo de Auto Scaling que escale según la cantidad aproximada de mensajes visibles",
+      "Aumentar el tamaño de la instancia de EC2 a un tipo optimizado para computación y habilitar el almacenamiento en caché local",
+      "Suscribir directamente las instancias de EC2 a un tema de Amazon SNS para que reciban las imágenes por HTTP",
+      "Escribir las imágenes en un sistema de archivos de Amazon EFS compartido y procesarlas con una tarea cron cada cinco minutos"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Una cola de SQS absorbe los picos y permite escalar la flota de trabajadores de forma independiente de la capa web usando la profundidad de la cola como métrica de escalado. Aumentar el tamaño de la instancia es escalado vertical con un límite fijo, y las otras opciones mantienen el acoplamiento o introducen latencia por sondeo.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.1",
+    "text": "Cada vez que se carga un archivo en Amazon S3, tres sistemas descendentes independientes deben recibir la notificación y procesarla a su propio ritmo, sin que la falla de uno afecte a los demás. ¿Qué arquitectura cumple el requisito?",
+    "options": [
+      "Configurar la notificación de eventos de S3 hacia un tema de Amazon SNS con tres colas de Amazon SQS suscritas, una por sistema",
+      "Configurar la notificación de eventos de S3 hacia una única cola de Amazon SQS que los tres sistemas consulten en paralelo",
+      "Configurar la notificación de eventos de S3 hacia un flujo de Amazon Kinesis Data Streams con un consumidor compartido",
+      "Invocar una función de AWS Lambda que llame de forma sincrónica a las API de los tres sistemas descendentes"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "El patrón de distribución ramificada (fan-out) con SNS y una cola de SQS por consumidor entrega una copia del mensaje a cada sistema y aísla los fallos y los ritmos de procesamiento. Con una sola cola los consumidores compiten por los mismos mensajes y las llamadas sincrónicas acoplan los sistemas.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.1",
+    "text": "Una startup lanzará una API REST con tráfico impredecible y un sitio web de contenido estático con audiencia global. El equipo no quiere administrar servidores ni pagar capacidad inactiva. ¿Cuáles DOS componentes debe elegir el arquitecto?",
+    "options": [
+      "Amazon API Gateway con funciones de AWS Lambda como backend de la API",
+      "Amazon CloudFront con un bucket de Amazon S3 como origen del contenido estático",
+      "Un grupo de Auto Scaling de Amazon EC2 detrás de un Application Load Balancer para la API",
+      "Un clúster de Amazon ECS en instancias de EC2 con capacidad reservada para el contenido estático",
+      "Una instancia de Amazon EC2 con Instancias Reservadas de tres años dimensionada para el pico previsto"
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "API Gateway con Lambda ofrece una API sin servidor que escala con la demanda y se factura por solicitud, y CloudFront con origen en S3 distribuye el contenido estático desde ubicaciones de borde cercanas al usuario. Las opciones basadas en EC2 o ECS implican administrar capacidad y pagar recursos inactivos.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.2",
+    "text": "Una base de datos de producción en Amazon RDS for PostgreSQL debe seguir disponible si falla la zona de disponibilidad principal, con conmutación por error automática y prácticamente sin pérdida de datos. ¿Qué configuración cumple el requisito?",
+    "options": [
+      "Desplegar la instancia con implementación Multi-AZ, que replica de forma sincrónica a una instancia en espera en otra zona de disponibilidad",
+      "Crear una réplica de lectura en otra zona de disponibilidad y promoverla manualmente cuando se detecte la falla",
+      "Programar instantáneas automatizadas cada hora y restaurarlas en otra zona de disponibilidad si ocurre una falla",
+      "Habilitar la retención de registros de transacciones durante 35 días para permitir la recuperación a un momento específico"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Multi-AZ mantiene una instancia en espera con replicación sincrónica y realiza la conmutación por error automáticamente, lo que ofrece un RPO cercano a cero. Las réplicas de lectura requieren promoción manual y las instantáneas o la recuperación a un momento específico implican pérdida de datos y un RTO alto.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.2",
+    "text": "Una empresa necesita una estrategia de recuperación ante desastres en una segunda Región con un RTO de 15 minutos y un RPO de 5 minutos, pero no puede costear una infraestructura duplicada a plena capacidad. ¿Qué estrategia debe elegir?",
+    "options": [
+      "Warm standby: mantener una copia funcional del entorno a escala reducida en la Región secundaria y escalarla al conmutar",
+      "Backup and restore: copiar las instantáneas a la Región secundaria y restaurar la infraestructura cuando ocurra el desastre",
+      "Pilot light: mantener solo la replicación de datos y las AMI, sin ninguna capa de aplicación en ejecución",
+      "Active-active multirregional: distribuir el tráfico de producción entre ambas Regiones con Amazon Route 53"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Warm standby mantiene el entorno completo funcionando a escala reducida, lo que permite conmutar en minutos y escalar después, con un costo intermedio. Backup and restore y pilot light no alcanzan un RTO de 15 minutos, y active-active duplica el costo de producción.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.2",
+    "text": "Una aplicación heredada se ejecuta en una sola instancia de Amazon EC2, guarda archivos de sesión y de carga en el disco local y no puede modificarse porque el proveedor ya no la mantiene. ¿Cuáles DOS acciones mejoran su disponibilidad?",
+    "options": [
+      "Ejecutar la instancia en un grupo de Auto Scaling con capacidad mínima y máxima de 1 que abarque varias zonas de disponibilidad, para que se reemplace automáticamente",
+      "Trasladar los archivos de sesión y de carga a un sistema de archivos de Amazon EFS al que se conecte la instancia al iniciarse",
+      "Aumentar el tipo de instancia a uno con más vCPU y memoria para reducir la probabilidad de falla",
+      "Crear una AMI de forma manual cada mes y restaurarla cuando el equipo detecte una interrupción",
+      "Habilitar la protección contra terminación en la instancia para evitar que se apague"
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "Un grupo de Auto Scaling con capacidad fija distribuido en varias zonas de disponibilidad recupera automáticamente la instancia ante una falla de host o de zona, y almacenar el estado en EFS permite que la instancia de reemplazo acceda a los mismos datos. Cambiar el tamaño, crear AMI manualmente o proteger la terminación no eliminan el punto único de falla.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.1",
+    "text": "Cientos de instancias de Amazon EC2 con Linux, distribuidas en tres zonas de disponibilidad, deben leer y escribir de forma concurrente en el mismo conjunto de archivos con semántica POSIX, y la capacidad debe crecer sin intervención. ¿Qué servicio de almacenamiento cumple el requisito?",
+    "options": [
+      "Amazon EFS",
+      "Un volumen de Amazon EBS io2 con Multi-Attach",
+      "Amazon FSx for Windows File Server",
+      "Un bucket de Amazon S3 sincronizado periódicamente en cada instancia"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Amazon EFS es un sistema de archivos NFS totalmente administrado, compatible con POSIX, accesible simultáneamente desde miles de clientes en varias zonas de disponibilidad y con crecimiento elástico. EBS Multi-Attach se limita a pocas instancias en una sola zona, FSx for Windows usa SMB y S3 es almacenamiento de objetos sin semántica POSIX.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.1",
+    "text": "Una base de datos autoadministrada en Amazon EC2 necesita un volumen único capaz de sostener 200.000 IOPS con latencia de submilisegundos y consistente. ¿Qué tipo de volumen de Amazon EBS debe elegir el arquitecto?",
+    "options": [
+      "io2 Block Express",
+      "gp3 con IOPS aprovisionadas al máximo",
+      "st1 optimizado para rendimiento por throughput",
+      "sc1 en su configuración de mayor tamaño"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "io2 Block Express es el único tipo de volumen de EBS que alcanza hasta 256.000 IOPS por volumen con latencia de submilisegundos. gp3 se limita a 16.000 IOPS, y st1 y sc1 son volúmenes HDD orientados a throughput secuencial y a datos de acceso infrecuente.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.1",
+    "text": "Un equipo de investigación ejecuta simulaciones de computación de alto rendimiento que deben procesar un conjunto de datos alojado en Amazon S3 con un throughput agregado de cientos de gigabytes por segundo y latencia de submilisegundos. ¿Qué solución de almacenamiento cumple el requisito?",
+    "options": [
+      "Amazon FSx for Lustre con un repositorio de datos vinculado al bucket de Amazon S3",
+      "Amazon EFS en modo de rendimiento Max I/O montado en cada nodo de cómputo",
+      "Amazon FSx for Windows File Server con almacenamiento SSD y deduplicación habilitada",
+      "Amazon S3 con aceleración de transferencia habilitada y descargas en paralelo"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "FSx for Lustre está diseñado para cargas HPC y puede vincularse a un bucket de S3 para presentar los objetos como archivos con throughput de cientos de GB/s. EFS y FSx for Windows no alcanzan ese nivel de rendimiento y la aceleración de transferencia solo optimiza cargas a través de internet.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.2",
+    "text": "Una flota de trabajadores en un grupo de Auto Scaling consume mensajes de Amazon SQS. El equipo quiere mantener constante el tiempo de espera de los mensajes a medida que varía la carga, con la mínima configuración manual. ¿Qué política de escalado debe usar?",
+    "options": [
+      "Una política de escalado de seguimiento de destino (target tracking) basada en una métrica personalizada de mensajes pendientes por instancia",
+      "Una política de escalado simple que añada una instancia cuando el uso de CPU supere el 70 por ciento",
+      "Una acción de escalado programada que aumente la capacidad deseada en las horas de mayor tráfico históricas",
+      "Ajustar manualmente la capacidad deseada del grupo cuando el equipo de operaciones observe acumulación en la cola"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "El seguimiento de destino sobre la métrica de mensajes pendientes por instancia ajusta la capacidad para mantener un backlog constante, que es el indicador directo del tiempo de espera. La CPU no refleja la profundidad de la cola, y el escalado programado o manual no responde a variaciones impredecibles.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.2",
+    "text": "Una función de AWS Lambda realiza transformaciones intensivas de CPU sobre archivos y tarda 12 segundos en completarse, lo que supera el objetivo de latencia. La función está configurada con 256 MB de memoria. ¿Qué cambio reduce el tiempo de ejecución?",
+    "options": [
+      "Aumentar la memoria asignada a la función, ya que la CPU disponible se asigna de forma proporcional a la memoria",
+      "Aumentar el tiempo de espera máximo de la función para que disponga de más tiempo de procesamiento",
+      "Configurar concurrencia aprovisionada para eliminar los arranques en frío de la función",
+      "Reducir el tamaño del paquete de implementación para acelerar la carga del código"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "En Lambda la potencia de CPU escala de forma proporcional a la memoria configurada, por lo que aumentar la memoria acelera las cargas limitadas por CPU. Ampliar el tiempo de espera no mejora el rendimiento, y la concurrencia aprovisionada y el tamaño del paquete solo afectan la latencia de inicialización.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.2",
+    "text": "Una empresa ejecuta miles de trabajos de análisis genómico por lotes que pueden reiniciarse sin consecuencias si se interrumpen. La empresa quiere minimizar el costo de cómputo y no desea administrar la planificación de los trabajos ni un clúster. ¿Qué solución cumple el requisito?",
+    "options": [
+      "Usar AWS Batch con un entorno de cómputo administrado que utilice Instancias de Spot de Amazon EC2",
+      "Usar Amazon EMR con un clúster de larga duración de instancias On-Demand",
+      "Usar AWS Lambda para ejecutar cada trabajo con concurrencia reservada",
+      "Usar un grupo de Auto Scaling de Amazon EC2 con Instancias Reservadas de un año y un planificador propio"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "AWS Batch administra la cola, la planificación y el aprovisionamiento de los trabajos por lotes, y con Instancias de Spot reduce el costo de manera significativa para cargas tolerantes a interrupciones. EMR y las Instancias Reservadas implican capacidad de larga duración y Lambda tiene un límite de 15 minutos por invocación.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.3",
+    "text": "Una aplicación usa Amazon RDS for MySQL. Los informes que ejecuta el área de negocio saturan la instancia principal y degradan las transacciones de los clientes. El esquema no puede cambiar. ¿Qué solución mejora el rendimiento?",
+    "options": [
+      "Crear réplicas de lectura y dirigir las consultas de los informes al endpoint de lectura",
+      "Habilitar la implementación Multi-AZ y ejecutar los informes contra la instancia en espera",
+      "Aumentar las IOPS aprovisionadas del volumen de la instancia principal",
+      "Migrar la base de datos a Amazon DynamoDB y reescribir los informes con consultas de clave primaria"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Las réplicas de lectura descargan el tráfico de solo lectura de la instancia principal y escalan de forma horizontal la capacidad de lectura. La instancia en espera de Multi-AZ no acepta consultas, aumentar las IOPS no elimina la contención de CPU y migrar a DynamoDB exigiría rediseñar la aplicación.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.3",
+    "text": "Una aplicación sin servidor basada en AWS Lambda experimenta errores de \"too many connections\" al escalar a miles de invocaciones concurrentes contra un clúster de Amazon Aurora MySQL. ¿Qué solución resuelve el problema con el menor cambio en la aplicación?",
+    "options": [
+      "Colocar Amazon RDS Proxy entre las funciones de Lambda y el clúster de Aurora para agrupar y reutilizar las conexiones",
+      "Aumentar el parámetro max_connections en el grupo de parámetros del clúster hasta el valor máximo admitido",
+      "Añadir réplicas de lectura de Aurora y distribuir todas las escrituras entre ellas",
+      "Habilitar Amazon DynamoDB Accelerator (DAX) para reducir la cantidad de consultas a la base de datos"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "RDS Proxy mantiene un grupo de conexiones compartido y multiplexa las conexiones efímeras de Lambda, lo que evita el agotamiento de conexiones sin modificar la lógica de la aplicación. Elevar max_connections consume memoria de la instancia, las réplicas no aceptan escrituras y DAX solo aplica a DynamoDB.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.3",
+    "text": "Una aplicación de comercio electrónico lee de forma repetida los mismos elementos de una tabla de Amazon DynamoDB y necesita latencia de microsegundos en esas lecturas. Además, debe almacenar el estado de sesión de los usuarios de forma compartida entre varios servidores de aplicaciones. ¿Cuáles DOS servicios debe incorporar el arquitecto?",
+    "options": [
+      "Amazon DynamoDB Accelerator (DAX) delante de la tabla de DynamoDB",
+      "Amazon ElastiCache for Redis para almacenar el estado de sesión compartido",
+      "Aumentar las unidades de capacidad de lectura aprovisionadas de la tabla",
+      "Habilitar Amazon DynamoDB Streams para capturar los cambios en los elementos",
+      "Crear un índice secundario global sobre los atributos consultados con mayor frecuencia"
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "DAX es una caché en memoria específica de DynamoDB que reduce la latencia de lectura a microsegundos, y ElastiCache for Redis proporciona un almacén de sesiones en memoria compartido y persistente entre servidores. Aumentar la capacidad de lectura, habilitar Streams o crear un índice secundario global no reducen la latencia a ese nivel.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.4",
+    "text": "Una empresa expone una aplicación de juegos basada en UDP desde balanceadores de carga de red en tres Regiones. Necesita direcciones IP estáticas de entrada, enrutamiento por la red troncal de AWS y conmutación por error entre Regiones en segundos. ¿Qué servicio cumple el requisito?",
+    "options": [
+      "AWS Global Accelerator",
+      "Amazon CloudFront con un origen personalizado en cada Región",
+      "Amazon Route 53 con enrutamiento basado en latencia y comprobaciones de estado",
+      "Un Application Load Balancer con grupos de destino en varias Regiones"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Global Accelerator entrega dos direcciones IP anycast estáticas, admite TCP y UDP, enruta el tráfico por la red troncal de AWS y conmuta entre endpoints regionales en segundos. CloudFront está orientado a HTTP/HTTPS y el enrutamiento por DNS de Route 53 depende de los TTL de los resolutores.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.4",
+    "text": "Una organización tiene 30 VPC en la misma Región y dos centros de datos locales. Necesita conectividad transitiva entre todas las VPC y las redes locales, con administración centralizada del enrutamiento y capacidad de crecer a cientos de VPC. ¿Qué diseño debe implementar?",
+    "options": [
+      "Conectar todas las VPC y las conexiones locales a un AWS Transit Gateway y administrar el enrutamiento con tablas de rutas del transit gateway",
+      "Crear emparejamientos de VPC en malla completa entre las 30 VPC y una VPN por cada centro de datos",
+      "Publicar cada servicio mediante endpoints de AWS PrivateLink en todas las VPC que lo consuman",
+      "Designar una VPC central como tránsito con instancias de router y emparejamientos hacia las demás VPC"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Transit Gateway actúa como concentrador de red regional con enrutamiento transitivo y centralizado, y escala a miles de conexiones. El emparejamiento de VPC no es transitivo y crece de forma cuadrática, PrivateLink expone servicios puntuales y las instancias de router añaden esfuerzo operativo y puntos de falla.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.4",
+    "text": "Una aplicación de microservicios expone varias rutas HTTP (/api, /admin, /static) que deben dirigirse a grupos de destino distintos, con terminación TLS y autenticación integrada. ¿Qué opción de balanceo de carga cumple estos requisitos?",
+    "options": [
+      "Un Application Load Balancer con reglas del listener basadas en la ruta y en el encabezado de host",
+      "Un Network Load Balancer con un listener TLS por cada puerto de servicio",
+      "Un Gateway Load Balancer con grupos de destino apuntando a cada microservicio",
+      "Amazon Route 53 con registros con ponderación hacia la dirección IP de cada microservicio"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "El Application Load Balancer opera en la capa 7 y permite enrutar por ruta y por host, terminar TLS e integrar autenticación con OIDC o Amazon Cognito. El NLB trabaja en la capa 4 sin inspección de rutas, el GWLB se usa para dirigir tráfico a dispositivos de inspección y Route 53 resuelve nombres, no rutas HTTP.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.5",
+    "text": "Una plataforma de telemetría recibe millones de eventos por minuto desde dispositivos. Varios equipos deben consumir el mismo flujo de forma independiente y necesitan poder reprocesar los eventos de las últimas 24 horas. ¿Qué servicio de ingesta cumple el requisito?",
+    "options": [
+      "Amazon Kinesis Data Streams",
+      "Amazon Data Firehose con entrega directa a Amazon S3",
+      "Amazon SQS estándar con varios consumidores en paralelo",
+      "AWS DataSync con transferencias programadas cada cinco minutos"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Kinesis Data Streams conserva los registros durante un periodo de retención configurable y permite que varias aplicaciones consumidoras lean el mismo flujo de forma independiente y reprocesen desde un punto anterior. Firehose no admite reproducción, SQS elimina el mensaje tras consumirlo y DataSync transfiere archivos, no flujos de eventos.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.5",
+    "text": "Un equipo de analistas ejecuta consultas SQL ad hoc sobre 40 TB de archivos .csv almacenados en Amazon S3. Las consultas son lentas y costosas, y el equipo no quiere administrar servidores. ¿Qué solución mejora el rendimiento y reduce el costo por consulta?",
+    "options": [
+      "Convertir los datos a Parquet con particiones mediante AWS Glue y consultarlos con Amazon Athena",
+      "Cargar los archivos .csv en un clúster de Amazon Redshift dimensionado para el volumen total",
+      "Desplegar un clúster persistente de Amazon EMR con Apache Hive sobre los archivos .csv",
+      "Importar los archivos a Amazon RDS for PostgreSQL y crear índices sobre las columnas consultadas"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Athena factura por datos escaneados, por lo que convertir a Parquet columnar y particionar reduce drásticamente el volumen leído y el tiempo de consulta, sin infraestructura que administrar. Redshift, EMR y RDS requieren aprovisionar y operar clústeres o instancias.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.5",
+    "text": "Una empresa debe trasladar 500 TB de datos históricos desde un NAS local a Amazon S3. El enlace a internet es de 1 Gbps y se comparte con las operaciones del negocio, que no pueden degradarse. La migración debe completarse en pocas semanas. ¿Qué solución cumple el requisito?",
+    "options": [
+      "Solicitar dispositivos de AWS Snowball Edge, copiar los datos localmente y enviarlos a AWS para su carga en Amazon S3",
+      "Usar AWS DataSync sobre el enlace de internet existente con limitación de ancho de banda programada",
+      "Habilitar la aceleración de transferencia de Amazon S3 y cargar los datos con la AWS CLI en paralelo",
+      "Implementar AWS Storage Gateway en modo de archivo y sincronizar el NAS completo a través de internet"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Transferir 500 TB por un enlace compartido de 1 Gbps tomaría meses, por lo que el envío físico con Snow Family es la vía viable sin afectar la red corporativa. DataSync, la aceleración de transferencia y Storage Gateway siguen dependiendo del ancho de banda disponible.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.1",
+    "text": "Un bucket de Amazon S3 contiene 80 TB de objetos cuyos patrones de acceso son desconocidos y cambian con el tiempo. La empresa quiere reducir el costo de almacenamiento sin riesgo de cargos por recuperación ni esfuerzo operativo de análisis. ¿Qué solución debe elegir?",
+    "options": [
+      "Usar la clase de almacenamiento S3 Intelligent-Tiering para todos los objetos del bucket",
+      "Crear una regla de ciclo de vida que mueva todos los objetos a S3 Standard-IA a los 30 días",
+      "Crear una regla de ciclo de vida que mueva todos los objetos a S3 Glacier Deep Archive a los 7 días",
+      "Mover los objetos a S3 One Zone-IA para reducir el costo por gigabyte almacenado"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "S3 Intelligent-Tiering supervisa el acceso y mueve automáticamente cada objeto al nivel más económico sin cargos por recuperación, lo que lo hace ideal cuando los patrones son impredecibles. Las reglas de ciclo de vida fijas pueden generar cargos por recuperación y One Zone-IA reduce la durabilidad frente a la pérdida de una zona de disponibilidad.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.1",
+    "text": "Los registros de auditoría de una aplicación se consultan con frecuencia durante los primeros 30 días. Después casi nunca se leen, pero deben conservarse siete años y las recuperaciones excepcionales pueden tardar hasta 12 horas. ¿Qué configuración minimiza el costo?",
+    "options": [
+      "Una regla de ciclo de vida que pase los objetos a S3 Glacier Deep Archive a los 30 días y los expire a los siete años",
+      "Mantener los objetos en S3 Standard-IA de forma indefinida y eliminarlos manualmente a los siete años",
+      "Una regla de ciclo de vida que pase los objetos a S3 One Zone-IA a los 30 días y los conserve allí siete años",
+      "Copiar los registros a instantáneas de Amazon EBS mensuales y conservarlas durante siete años"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "S3 Glacier Deep Archive es la clase más económica y su tiempo de recuperación estándar de hasta 12 horas encaja con el requisito, mientras que la acción de expiración automatiza la eliminación al cumplirse el plazo. Standard-IA y One Zone-IA cuestan bastante más por gigabyte y las instantáneas de EBS no son un archivo de bajo costo.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.1",
+    "text": "Un bucket de Amazon S3 de 200 TB aloja conjuntos de datos científicos que investigadores externos descargan intensivamente, lo que genera cargos elevados de transferencia de datos. Una auditoría también revela numerosas cargas multiparte incompletas acumuladas durante años. ¿Cuáles DOS acciones reducen el costo?",
+    "options": [
+      "Habilitar la configuración Requester Pays en el bucket para que quien descarga asuma los cargos de solicitud y transferencia",
+      "Crear una regla de ciclo de vida que anule las cargas multiparte incompletas después de siete días",
+      "Habilitar la aceleración de transferencia de Amazon S3 para acortar la duración de las descargas",
+      "Configurar la replicación entre Regiones hacia un bucket cercano a los investigadores",
+      "Cambiar todos los objetos a la clase S3 One Zone-IA para abaratar el almacenamiento"
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "Requester Pays traslada los cargos de solicitud y de transferencia de datos a quien descarga, y una regla de ciclo de vida que anula las cargas multiparte incompletas elimina fragmentos que se facturan como almacenamiento. La aceleración de transferencia y la replicación entre Regiones añaden costo, y One Zone-IA no afecta los cargos de salida.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.2",
+    "text": "Una empresa mantiene una carga base estable durante todo el año que se ejecuta en Amazon EC2, y prevé migrar parte de ella a AWS Fargate y AWS Lambda en los próximos meses. Quiere comprometerse a tres años para reducir el costo, conservando flexibilidad de familia, tamaño, Región y servicio de cómputo. ¿Qué opción de compra debe elegir?",
+    "options": [
+      "Compute Savings Plans con un compromiso de gasto por hora a tres años",
+      "Instancias Reservadas estándar de tres años para los tipos de instancia actuales",
+      "Instancias de Spot con un grupo de Auto Scaling de tipos de instancia diversificados",
+      "Instancias On-Demand con escalado automático basado en el uso de CPU"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Compute Savings Plans aplica el descuento a EC2, Fargate y Lambda con independencia de la familia de instancia, el tamaño y la Región, lo que se ajusta al plan de migración. Las Instancias Reservadas estándar quedan atadas a una familia y Región, Spot no es adecuado para una carga base continua y On-Demand no ofrece descuento por compromiso.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.2",
+    "text": "Un entorno de desarrollo se compone de 60 instancias de Amazon EC2 que el equipo utiliza de lunes a viernes, de 8 de la mañana a 6 de la tarde. Actualmente permanecen encendidas todo el tiempo. ¿Qué acción reduce el costo con el menor impacto en los desarrolladores?",
+    "options": [
+      "Detener las instancias fuera del horario laboral mediante una programación automatizada con AWS Systems Manager o escalado programado",
+      "Comprar Instancias Reservadas de tres años con pago total por adelantado para las 60 instancias",
+      "Reemplazar las instancias por tipos de menor tamaño y mantenerlas encendidas de forma permanente",
+      "Migrar el entorno a Instancias de Spot y aceptar las interrupciones durante la jornada laboral"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Las instancias detenidas no generan cargos de cómputo, por lo que apagarlas fuera del horario laboral elimina cerca del 70 por ciento del costo sin afectar el trabajo diario. Las Instancias Reservadas facturan la capacidad de forma continua, reducir el tamaño degrada el rendimiento y Spot introduce interrupciones en horas de uso.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.2",
+    "text": "Una empresa debe inspeccionar todo el tráfico entrante y saliente de su VPC con dispositivos virtuales de seguridad de un tercero, distribuyendo el tráfico entre ellos y conservando el estado del flujo. ¿Qué opción de Elastic Load Balancing debe utilizar?",
+    "options": [
+      "Gateway Load Balancer",
+      "Network Load Balancer con conservación de la dirección IP de origen",
+      "Application Load Balancer con reglas de reenvío hacia los dispositivos",
+      "Amazon CloudFront con AWS WAF asociado a la distribución"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "El Gateway Load Balancer opera en la capa 3, usa el protocolo GENEVE para enviar el tráfico de forma transparente a una flota de dispositivos virtuales y mantiene la afinidad de flujo. El NLB y el ALB balancean tráfico hacia aplicaciones, y CloudFront con WAF solo inspecciona tráfico HTTP entrante.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.3",
+    "text": "Una aplicación interna usa una base de datos relacional compatible con MySQL. El tráfico es intermitente e impredecible: hay días sin actividad y ráfagas ocasionales. La empresa quiere pagar solo por la capacidad que consume. ¿Qué solución minimiza el costo?",
+    "options": [
+      "Amazon Aurora Serverless, que ajusta la capacidad automáticamente según la demanda",
+      "Amazon RDS for MySQL en una instancia r6g con una Instancia Reservada de un año",
+      "Amazon DynamoDB en modo de capacidad aprovisionada con escalado automático",
+      "Amazon Redshift con pausa y reanudación programadas del clúster"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Aurora Serverless escala la capacidad de cómputo según la carga y factura por el consumo real, lo que se ajusta a un patrón intermitente. Una Instancia Reservada obliga a pagar capacidad fija, DynamoDB no es compatible con MySQL y Redshift es un almacén de datos analítico.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.3",
+    "text": "Una tabla nueva de Amazon DynamoDB respaldará el lanzamiento de una campaña cuyo volumen de tráfico es imposible de estimar y puede variar de cero a decenas de miles de solicitudes por segundo. El equipo quiere evitar el estrangulamiento y no desea ajustar la capacidad. ¿Qué configuración debe elegir?",
+    "options": [
+      "Modo de capacidad bajo demanda (on-demand)",
+      "Capacidad aprovisionada con escalado automático y un mínimo alto",
+      "Capacidad aprovisionada con capacidad reservada comprada por un año",
+      "Capacidad aprovisionada acompañada de un clúster de DynamoDB Accelerator (DAX)"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "El modo bajo demanda factura por solicitud y absorbe cambios abruptos de tráfico sin planificación de capacidad, lo que evita el estrangulamiento en un lanzamiento impredecible. El escalado automático reacciona con retraso ante ráfagas, y la capacidad reservada y DAX suponen compromisos o infraestructura adicional.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.3",
+    "text": "Una empresa quiere migrar una base de datos Oracle local de 4 TB a Amazon Aurora PostgreSQL para eliminar los costos de licencia, minimizando el tiempo de inactividad. ¿Qué combinación de servicios debe utilizar?",
+    "options": [
+      "AWS Schema Conversion Tool para convertir el esquema y AWS DMS con replicación continua para migrar los datos",
+      "AWS DMS únicamente, ya que convierte automáticamente el esquema de Oracle a PostgreSQL",
+      "Una copia de seguridad nativa de Oracle restaurada directamente en el clúster de Aurora PostgreSQL",
+      "AWS DataSync para copiar los archivos de datos de Oracle a Amazon S3 e importarlos en Aurora"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "En una migración heterogénea, AWS SCT convierte el esquema y los objetos de código, y AWS DMS realiza la carga completa más la captura de datos de cambios para reducir el tiempo de inactividad. DMS no convierte el esquema por sí solo, y las copias nativas de Oracle y DataSync no son compatibles con Aurora PostgreSQL.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.4",
+    "text": "Un sitio web entrega grandes volúmenes de imágenes y videos desde Amazon S3 a usuarios de todo el mundo. La factura está dominada por la transferencia de datos de salida. ¿Qué solución reduce ese costo y mejora la experiencia del usuario?",
+    "options": [
+      "Distribuir el contenido con Amazon CloudFront, cuyas tarifas de salida son menores y cuya caché reduce las solicitudes al origen",
+      "Colocar AWS Global Accelerator delante del bucket de Amazon S3 para optimizar las rutas de red",
+      "Habilitar la aceleración de transferencia de Amazon S3 en el bucket de origen",
+      "Replicar el bucket en varias Regiones y resolver el más cercano con Amazon Route 53"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "CloudFront almacena en caché el contenido en ubicaciones de borde, por lo que las solicitudes repetidas no generan transferencia desde el origen y sus tarifas de salida son inferiores a las de S3. Global Accelerator y la aceleración de transferencia añaden cargos, y la replicación multirregional duplica el costo de almacenamiento.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.4",
+    "text": "Una VPC tiene subredes privadas en tres zonas de disponibilidad y una única puerta de enlace NAT en la zona A. La empresa observa cargos elevados de transferencia de datos entre zonas de disponibilidad generados por el tráfico de salida. ¿Qué cambio reduce esos cargos?",
+    "options": [
+      "Desplegar una puerta de enlace NAT en cada zona de disponibilidad y enrutar cada subred privada hacia la puerta de enlace de su propia zona",
+      "Reemplazar la puerta de enlace NAT por una instancia NAT de menor tamaño en la zona A",
+      "Adjuntar una puerta de enlace de internet a las subredes privadas para que el tráfico salga directamente",
+      "Crear un emparejamiento de VPC entre las subredes de cada zona de disponibilidad"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Con una sola puerta de enlace NAT, el tráfico de las subredes de otras zonas cruza los límites de zona y se factura como transferencia entre zonas de disponibilidad; una puerta de enlace por zona mantiene el tráfico local. Una instancia NAT no elimina el cruce entre zonas, una puerta de enlace de internet convertiría las subredes en públicas y el emparejamiento de VPC no aplica dentro de una misma VPC.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.4",
+    "text": "Instancias en subredes privadas envían un volumen alto de tráfico a Amazon S3 y Amazon DynamoDB a través de una puerta de enlace NAT, lo que genera cargos importantes por datos procesados. Además, la empresa transfiere de forma sostenida varios terabytes al mes desde su centro de datos hacia AWS mediante VPN sobre internet. ¿Cuáles DOS acciones reducen los costos de red?",
+    "options": [
+      "Crear endpoints de tipo gateway de VPC para Amazon S3 y Amazon DynamoDB para que el tráfico no pase por la puerta de enlace NAT",
+      "Establecer una conexión de AWS Direct Connect, que ofrece tarifas de transferencia de datos de salida menores para volúmenes sostenidos",
+      "Aumentar la cantidad de puertas de enlace NAT para distribuir el tráfico y reducir el cargo por gigabyte",
+      "Adjuntar un AWS Transit Gateway y enrutar el tráfico hacia Amazon S3 y Amazon DynamoDB a través de él",
+      "Habilitar AWS Global Accelerator para el tráfico entre el centro de datos y la VPC"
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "Los endpoints de tipo gateway para S3 y DynamoDB no tienen cargo por hora ni por datos procesados y eliminan ese tráfico de la puerta de enlace NAT, mientras que Direct Connect reduce las tarifas de transferencia de salida frente a internet en volúmenes sostenidos. Añadir puertas de enlace NAT o un Transit Gateway incrementa los cargos, y Global Accelerator optimiza el acceso de usuarios finales, no el tráfico híbrido.",
+    "source": "llm"
+  }
+]

@@ -1,0 +1,852 @@
+[
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "Una aplicación web necesita almacenar y rotar de forma segura las credenciales de la base de datos. ¿Qué servicio de AWS se debe utilizar?",
+    "options": [
+      "AWS IAM",
+      "AWS Secrets Manager",
+      "AWS KMS",
+      "AWS Certificate Manager"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Secrets Manager está diseñado para gestionar, rotar y recuperar secretos como credenciales de bases de datos, claves de API y otros tokens a lo largo de su ciclo de vida.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "Un arquitecto de soluciones está diseñando una nueva VPC y necesita denegar explícitamente todo el tráfico de una dirección IP maliciosa conocida. ¿Qué componente de la VPC se debe utilizar?",
+    "options": [
+      "Grupos de seguridad (Security Groups)",
+      "Listas de control de acceso a la red (Network ACLs)",
+      "Tablas de enrutamiento (Route Tables)",
+      "Gateway de Internet (Internet Gateway)"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Las Network ACLs actúan como un firewall para controlar el tráfico de entrada y salida de una o más subredes. A diferencia de los grupos de seguridad, pueden tener reglas de 'denegación' explícitas.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "Para cumplir con los requisitos de cumplimiento, todo el acceso a nivel de API a los recursos de AWS debe ser registrado para auditorías de seguridad. ¿Qué servicio se debe habilitar?",
+    "options": [
+      "Amazon CloudWatch",
+      "AWS Config",
+      "AWS CloudTrail",
+      "Amazon GuardDuty"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "AWS CloudTrail registra todas las llamadas a la API de AWS, lo que proporciona un historial de eventos para auditoría de seguridad y análisis de cumplimiento.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "Una empresa quiere implementar una solución de autenticación centralizada para múltiples aplicaciones web. ¿Qué servicio de AWS debería usar?",
+    "options": [
+      "AWS IAM",
+      "Amazon Cognito",
+      "AWS Single Sign-On",
+      "AWS Directory Service"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon Cognito proporciona autenticación, autorización y gestión de usuarios para aplicaciones web y móviles, permitiendo la autenticación centralizada.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué estrategia de cifrado es más adecuada para cumplir con los requisitos de cumplimiento de datos en reposo?",
+    "options": [
+      "Cifrado del lado del cliente",
+      "Cifrado del lado del servidor",
+      "Cifrado con claves gestionadas por AWS",
+      "Cifrado con claves gestionadas por el cliente"
+    ],
+    "correct": [
+      3
+    ],
+    "type": "single",
+    "explanation": "El cifrado con claves gestionadas por el cliente proporciona el mayor control sobre las claves de cifrado, lo cual es importante para cumplimiento de regulaciones estrictas.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS es más adecuado para monitorear continuamente la configuración de recursos y detectar cambios no autorizados?",
+    "options": [
+      "AWS Config",
+      "AWS CloudTrail",
+      "Amazon GuardDuty",
+      "AWS Trusted Advisor"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "AWS Config monitorea y registra continuamente las configuraciones de recursos de AWS y permite verificar el cumplimiento de las políticas de configuración.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS proporciona un firewall web gestionado para proteger aplicaciones web contra exploits comunes?",
+    "options": [
+      "AWS WAF",
+      "AWS Shield",
+      "Amazon Inspector",
+      "AWS Firewall Manager"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "AWS WAF (Web Application Firewall) permite crear reglas personalizadas para permitir, bloquear o contar solicitudes web basadas en condiciones específicas.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Cuál es la mejor práctica para gestionar credenciales de acceso a servicios de AWS en instancias EC2?",
+    "options": [
+      "Almacenar credenciales en variables de entorno",
+      "Utilizar roles de instancia EC2",
+      "Guardar credenciales en archivos de configuración",
+      "Usar credenciales de usuario IAM directamente"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Los roles de instancia EC2 proporcionan credenciales temporales a las instancias EC2 sin necesidad de almacenar credenciales permanentes.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS ayuda a descubrir y clasificar datos sensibles en S3?",
+    "options": [
+      "AWS Macie",
+      "Amazon Inspector",
+      "AWS Config",
+      "AWS CloudTrail"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "AWS Macie utiliza machine learning para descubrir, clasificar y proteger datos sensibles en Amazon S3.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS proporciona un almacén de claves gestionado para crear y controlar las claves de cifrado utilizadas para cifrar datos?",
+    "options": [
+      "AWS Certificate Manager",
+      "AWS Directory Service",
+      "AWS Key Management Service (KMS)",
+      "AWS Secrets Manager"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "AWS KMS es un servicio gestionado que facilita la creación y el control de claves de cifrado utilizadas para cifrar datos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "Una aplicación se ejecuta en instancias EC2 detrás de un Application Load Balancer. Para garantizar una alta disponibilidad, ¿cómo se deben distribuir las instancias EC2?",
+    "options": [
+      "En una única Zona de Disponibilidad (AZ)",
+      "En múltiples Regiones de AWS",
+      "En múltiples Zonas de Disponibilidad dentro de una Región",
+      "En una ubicación de borde (Edge Location)"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "Distribuir instancias EC2 en múltiples Zonas de Disponibilidad garantiza que la aplicación pueda soportar la falla de una única AZ, lo cual es una práctica recomendada para la alta disponibilidad.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "Una base de datos relacional crítica requiere una solución de recuperación ante desastres con un RPO (Recovery Point Objective) bajo. ¿Qué característica de Amazon RDS se debe utilizar?",
+    "options": [
+      "Réplicas de lectura (Read Replicas)",
+      "Despliegue Multi-AZ",
+      "Instantáneas (Snapshots) automatizadas",
+      "Exportaciones de S3"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "El despliegue Multi-AZ de RDS crea una réplica síncrona en espera en una AZ diferente. Proporciona conmutación por error automática y un RPO muy bajo, ideal para la recuperación ante desastres.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "Un sistema de procesamiento de datos desacoplado utiliza una cola de Amazon SQS. Si un mensaje no se puede procesar correctamente, debe ser aislado para un análisis posterior sin detener el flujo de mensajes. ¿Qué característica de SQS se debe implementar?",
+    "options": [
+      "Colas FIFO",
+      "Colas de cartas muertas (Dead-Letter Queues)",
+      "Sondeo largo (Long Polling)",
+      "Colas estándar"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Una cola de cartas muertas (DLQ) es una cola donde otros servicios pueden enviar mensajes que no se pudieron procesar correctamente, lo que permite el análisis y la depuración sin bloquear la cola principal.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS es más adecuado para implementar un sistema de mensajería pub/sub para una arquitectura de microservicios?",
+    "options": [
+      "Amazon SQS",
+      "Amazon SNS",
+      "Amazon Kinesis",
+      "AWS Step Functions"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon SNS es un servicio de mensajería pub/sub que permite a los emisores de mensajes separar de los consumidores de mensajes.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué característica de Amazon S3 proporciona redundancia de datos dentro de una región y protege contra pérdidas de datos?",
+    "options": [
+      "Replicación entre regiones",
+      "Versionado",
+      "Almacenamiento en múltiples AZs",
+      "Políticas de ciclo de vida"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "Amazon S3 almacena datos en múltiples Zonas de Disponibilidad dentro de una región para garantizar la durabilidad y disponibilidad de los datos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS permite crear una copia de una base de datos Amazon RDS en otra región para fines de recuperación ante desastres?",
+    "options": [
+      "Instantáneas manuales",
+      "Replicación Multi-AZ",
+      "Replicación entre regiones",
+      "Clonación de instancias"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "La replicación entre regiones de RDS crea réplicas de lectura en diferentes regiones para fines de recuperación ante desastres.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS es más adecuado para implementar un sistema de colas FIFO para garantizar el orden de procesamiento de mensajes?",
+    "options": [
+      "Amazon SQS Colas Estándar",
+      "Amazon SQS Colas FIFO",
+      "Amazon SNS",
+      "Amazon Kinesis"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon SQS Colas FIFO garantizan que los mensajes se entreguen exactamente una vez y en el orden exacto en que se enviaron.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué característica de Amazon DynamoDB proporciona alta disponibilidad y durabilidad de datos?",
+    "options": [
+      "Índices globales",
+      "Particionamiento automático",
+      "Replicación Multi-AZ",
+      "Almacenamiento SSD"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "DynamoDB replica automáticamente los datos en múltiples Zonas de Disponibilidad dentro de una región para garantizar la alta disponibilidad y durabilidad.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS permite implementar una arquitectura de microservicios resiliente con descubrimiento de servicios?",
+    "options": [
+      "AWS Cloud Map",
+      "AWS Service Catalog",
+      "AWS Systems Manager",
+      "AWS AppConfig"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "AWS Cloud Map es un servicio de descubrimiento de servicios que permite definir nombres para sus servicios y mantener información actualizada sobre las ubicaciones de sus recursos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": null,
+    "text": "¿Qué estrategia de despliegue es más segura para minimizar el tiempo de inactividad durante la actualización de una aplicación?",
+    "options": [
+      "Despliegue azul-verde",
+      "Despliegue en línea",
+      "Despliegue canario",
+      "Despliegue de arranque"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "El despliegue azul-verde mantiene dos entornos idénticos, lo que permite un corte limpio y rápido entre versiones y minimiza el tiempo de inactividad.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "Una aplicación web global experimenta una alta latencia para los usuarios en Asia. El contenido principal es estático y se sirve desde un bucket de S3 en EE. UU. ¿Qué servicio se puede utilizar para reducir la latencia?",
+    "options": [
+      "Amazon ElastiCache",
+      "AWS Global Accelerator",
+      "Amazon CloudFront",
+      "Elastic Load Balancing"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "Amazon CloudFront es una red de entrega de contenido (CDN) que almacena en caché el contenido en ubicaciones de borde de todo el mundo, lo que reduce la latencia para los usuarios al servir el contenido desde una ubicación más cercana a ellos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "Una aplicación lee los mismos datos repetidamente desde una base de datos Amazon DynamoDB, lo que genera altos costos de lectura. ¿Qué servicio se puede agregar para mejorar el rendimiento y reducir los costos?",
+    "options": [
+      "Amazon SQS",
+      "Amazon DynamoDB Accelerator (DAX)",
+      "Amazon Redshift",
+      "Amazon RDS"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "DAX es un servicio de almacenamiento en caché en memoria totalmente administrado y altamente disponible para DynamoDB. Proporciona un rendimiento de lectura de microsegundos al almacenar en caché los datos de lectura intensiva.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "Se necesita una solución de almacenamiento para un sistema de archivos compartido al que accederán simultáneamente cientos de instancias EC2. El sistema de archivos debe ser compatible con NFS. ¿Qué servicio de almacenamiento de AWS es el más adecuado?",
+    "options": [
+      "Amazon S3",
+      "Amazon EBS",
+      "Amazon EFS",
+      "AWS Storage Gateway"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "Amazon EFS (Elastic File System) es un sistema de almacenamiento de archivos NFS totalmente administrado, escalable y elástico que puede ser montado por múltiples instancias EC2 simultáneamente.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS es más adecuado para procesar flujos de datos en tiempo real con baja latencia?",
+    "options": [
+      "Amazon Kinesis Data Streams",
+      "Amazon SQS",
+      "Amazon SNS",
+      "AWS Data Pipeline"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Amazon Kinesis Data Streams captura, procesa y analiza flujos de datos en tiempo real, lo que permite reacciones en milisegundos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS proporciona un servicio de almacenamiento en caché en memoria para mejorar el rendimiento de aplicaciones web?",
+    "options": [
+      "Amazon EBS",
+      "Amazon ElastiCache",
+      "Amazon CloudFront",
+      "AWS Storage Gateway"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon ElastiCache es un servicio de almacenamiento en caché en memoria completamente administrado que admite Redis y Memcached.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué característica de Amazon RDS es más adecuada para escalar la capacidad de lectura de una base de datos?",
+    "options": [
+      "Despliegue Multi-AZ",
+      "Instantáneas",
+      "Réplicas de lectura",
+      "Clonación de instancias"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "Las réplicas de lectura de RDS permiten escalar la capacidad de lectura distribuyendo lecturas en réplicas separadas de la base de datos primaria.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS es más adecuado para enrutar el tráfico de usuarios a la instancia más cercana geográficamente para reducir la latencia?",
+    "options": [
+      "Amazon Route 53 con enrutamiento de latencia",
+      "Elastic Load Balancer",
+      "AWS Direct Connect",
+      "Amazon CloudFront"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Route 53 con enrutamiento de latencia dirige las solicitudes a la instancia que proporciona la latencia más baja para el usuario.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS permite escalar automáticamente las instancias EC2 basándose en métricas de rendimiento?",
+    "options": [
+      "AWS Auto Scaling",
+      "Elastic Load Balancing",
+      "Amazon CloudWatch",
+      "AWS Systems Manager"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "AWS Auto Scaling monitorea las aplicaciones y ajusta automáticamente la capacidad para mantener un rendimiento constante a un costo óptimo.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS es más adecuado para ejecutar contenedores sin gestionar servidores?",
+    "options": [
+      "Amazon ECS",
+      "AWS Fargate",
+      "Amazon EKS",
+      "AWS Lambda"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Fargate es un motor de computación sin servidor para contenedores que funciona con Amazon ECS y EKS, eliminando la necesidad de gestionar servidores.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS es más adecuado para ejecutar funciones sin servidor que responden a eventos?",
+    "options": [
+      "Amazon EC2",
+      "AWS Lambda",
+      "AWS Fargate",
+      "Amazon ECS"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Lambda permite ejecutar código sin aprovisionar o gestionar servidores, escalando automáticamente con base en la demanda.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "Una carga de trabajo de procesamiento por lotes se ejecuta todas las noches y puede tolerar interrupciones. ¿Qué modelo de precios de EC2 sería el más rentable para esta tarea?",
+    "options": [
+      "Instancias bajo demanda (On-Demand)",
+      "Instancias reservadas (Reserved Instances)",
+      "Planes de ahorro (Savings Plans)",
+      "Instancias spot (Spot Instances)"
+    ],
+    "correct": [
+      3
+    ],
+    "type": "single",
+    "explanation": "Las instancias spot ofrecen la capacidad de EC2 no utilizada con un gran descuento (hasta el 90%) sobre los precios bajo demanda. Son ideales para cargas de trabajo tolerantes a fallas e interrumpibles, como el procesamiento por lotes.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "Una empresa tiene un uso de cómputo predecible y constante durante un período de 1 año. Quieren el mayor descuento posible en sus instancias EC2. ¿Qué opción de compra deberían elegir?",
+    "options": [
+      "Instancias bajo demanda",
+      "Instancias reservadas estándar con pago por adelantado total",
+      "Instancias spot",
+      "Instancias reservadas convertibles"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Las instancias reservadas estándar con un compromiso de 1 o 3 años y pago por adelantado total ofrecen el mayor descuento en comparación con los precios bajo demanda para cargas de trabajo predecibles.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "Los datos se almacenan en un bucket de S3. Después de 90 días, los datos se acceden con poca frecuencia pero deben estar disponibles para su recuperación en minutos. Después de 1 año, se archivan y la recuperación puede tardar horas. ¿Qué característica de S3 se debe usar para automatizar esta transición?",
+    "options": [
+      "Políticas de ciclo de vida de S3 (S3 Lifecycle policies)",
+      "Replicación entre regiones de S3 (S3 Cross-Region Replication)",
+      "Versiones de S3 (S3 Versioning)",
+      "Clases de almacenamiento de S3 (S3 Storage Classes)"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Las políticas de ciclo de vida de S3 se pueden configurar para realizar la transición automática de objetos a clases de almacenamiento de menor costo (como S3 Standard-IA, S3 Glacier) o eliminarlos en función de su antigüedad.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué estrategia de almacenamiento es más rentable para datos que se acceden con frecuencia durante los primeros 30 días y luego raramente?",
+    "options": [
+      "S3 Standard",
+      "S3 Intelligent-Tiering",
+      "S3 Standard-IA",
+      "S3 One Zone-IA"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "S3 Intelligent-Tiering mueve automáticamente los objetos a la capa más económica basándose en el patrón de acceso, ahorrando costos sin intervención manual.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS ayuda a identificar oportunidades de optimización de costos y proporciona recomendaciones?",
+    "options": [
+      "AWS Budgets",
+      "AWS Cost Explorer",
+      "AWS Trusted Advisor",
+      "AWS Organizations"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "AWS Trusted Advisor proporciona recomendaciones en cinco categorías, incluyendo optimización de costos, para ayudar a reducir los gastos de AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué opción de compra de EC2 ofrece el mayor ahorro para cargas de trabajo que pueden ejecutarse en cualquier momento dentro de una ventana de tiempo flexible?",
+    "options": [
+      "Instancias bajo demanda",
+      "Instancias reservadas",
+      "Instancias spot",
+      "Savings Plans"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "Las instancias spot pueden ofrecer ahorros de hasta el 90% para cargas de trabajo que pueden tolerar interrupciones y tienen flexibilidad en cuanto a cuándo se ejecutan.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS permite establecer umbrales de gasto y recibir alertas cuando se superan ciertos límites de costo?",
+    "options": [
+      "AWS Cost Explorer",
+      "AWS Budgets",
+      "AWS Trusted Advisor",
+      "AWS CloudTrail"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Budgets permite establecer presupuestos personalizados que alertan cuando los costos o el uso superan los umbrales especificados.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué estrategia de compra es más adecuada para una carga de trabajo con uso variable pero predecible que requiere flexibilidad en la familia de instancias?",
+    "options": [
+      "Instancias bajo demanda",
+      "Instancias reservadas convertibles",
+      "Savings Plans",
+      "Instancias spot"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "Los Savings Plans ofrecen descuentos significativos con un compromiso de uso, pero permiten flexibilidad en la familia de instancias, región y sistema operativo.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué clase de almacenamiento de S3 es más rentable para datos que se archivan a largo plazo y rara vez se acceden?",
+    "options": [
+      "S3 Standard",
+      "S3 Standard-IA",
+      "S3 Glacier",
+      "S3 Glacier Deep Archive"
+    ],
+    "correct": [
+      3
+    ],
+    "type": "single",
+    "explanation": "S3 Glacier Deep Archive es la clase de almacenamiento más económica de AWS, diseñada para archivar datos a largo plazo que rara vez se acceden.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": null,
+    "text": "¿Qué herramienta de AWS permite comparar el costo de ejecutar infraestructura local versus en la nube?",
+    "options": [
+      "AWS Pricing Calculator",
+      "AWS Cost Explorer",
+      "AWS TCO Calculator",
+      "AWS Budgets"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "La calculadora TCO (Total Cost of Ownership) de AWS ayuda a comparar los costos de ejecutar infraestructura local frente a la nube de AWS.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 5,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS proporciona métricas detalladas sobre el rendimiento de los recursos de AWS?",
+    "options": [
+      "AWS CloudTrail",
+      "Amazon CloudWatch",
+      "AWS Config",
+      "Amazon GuardDuty"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Amazon CloudWatch recopila y rastrea métricas, recopila y monitoriza logs del sistema, y permite configurar alarmas basadas en métricas específicas.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 5,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS permite automatizar la configuración y el aprovisionamiento de recursos de AWS?",
+    "options": [
+      "AWS CloudFormation",
+      "AWS Systems Manager",
+      "Amazon EC2 Auto Scaling",
+      "AWS Config"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "AWS CloudFormation permite modelar y aprovisionar recursos de AWS mediante archivos de texto que definen los recursos necesarios para su aplicación.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 5,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS es más adecuado para automatizar la configuración y el mantenimiento de servidores?",
+    "options": [
+      "AWS OpsWorks",
+      "AWS Systems Manager",
+      "AWS CloudFormation",
+      "Amazon EC2 Image Builder"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Systems Manager proporciona visibilidad y control de la infraestructura de AWS para automatizar tareas de administración y configuración.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 5,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS permite rastrear y correlacionar solicitudes a través de microservicios distribuidos?",
+    "options": [
+      "AWS CloudTrail",
+      "Amazon CloudWatch",
+      "AWS X-Ray",
+      "Amazon EventBridge"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "AWS X-Ray ayuda a desarrollar, depurar y optimizar aplicaciones distribuidas al rastrear solicitudes y proporcionar una vista de extremo a extremo.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 5,
+    "taskStatementNumber": null,
+    "text": "¿Qué práctica de DevOps es más efectiva para garantizar la calidad del código antes de la implementación?",
+    "options": [
+      "Implementación manual",
+      "Pruebas manuales",
+      "Integración continua y entrega continua (CI/CD)",
+      "Implementación en caliente"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "La integración continua y entrega continua (CI/CD) automatiza la verificación y despliegue del código, lo que mejora la calidad y reduce errores humanos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 5,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS es parte del conjunto de herramientas para implementar pipelines de CI/CD?",
+    "options": [
+      "AWS CodeCommit, CodeBuild, CodeDeploy",
+      "Amazon S3, CloudFront, Route 53",
+      "Amazon RDS, DynamoDB, ElastiCache",
+      "AWS Lambda, EC2, ECS"
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "AWS CodeCommit, CodeBuild y CodeDeploy forman parte del conjunto de servicios de AWS para implementar pipelines de CI/CD completos.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 5,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS permite gestionar y ejecutar comandos en múltiples instancias EC2 de forma remota?",
+    "options": [
+      "AWS CLI",
+      "AWS Systems Manager Run Command",
+      "Amazon EC2 Console",
+      "AWS CloudShell"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "Systems Manager Run Command permite ejecutar comandos de administración y de diagnóstico en múltiples instancias EC2 de forma remota y segura.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 5,
+    "taskStatementNumber": null,
+    "text": "¿Qué práctica es más efectiva para garantizar la consistencia del entorno de despliegue?",
+    "options": [
+      "Configuración manual",
+      "Imágenes de máquina amigables",
+      "Infraestructura como código",
+      "Documentación detallada"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "La infraestructura como código (IaC) permite definir y aprovisionar infraestructura mediante código, garantizando entornos consistentes y reproducibles.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 5,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS permite automatizar la creación de imágenes de máquinas personalizadas?",
+    "options": [
+      "Amazon Machine Images (AMI)",
+      "AWS Image Builder",
+      "Amazon EC2 Launch Templates",
+      "AWS Systems Manager"
+    ],
+    "correct": [
+      1
+    ],
+    "type": "single",
+    "explanation": "AWS Image Builder permite automatizar la creación, mantenimiento, verificación y distribución de imágenes de máquina seguras y actualizadas.",
+    "source": "manual"
+  },
+  {
+    "domainNumber": 5,
+    "taskStatementNumber": null,
+    "text": "¿Qué servicio de AWS proporciona una interfaz de línea de comandos para interactuar con servicios de AWS?",
+    "options": [
+      "AWS Console",
+      "AWS SDK",
+      "AWS CLI",
+      "AWS CloudShell"
+    ],
+    "correct": [
+      2
+    ],
+    "type": "single",
+    "explanation": "AWS CLI es una herramienta de interfaz de línea de comandos que permite interactuar directamente con servicios de AWS desde la terminal.",
+    "source": "manual"
+  }
+]

@@ -1,0 +1,1046 @@
+[
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.1",
+    "text": "Una empresa opera 60 VPCs distribuidas en 12 cuentas de AWS y en tres Regiones. Los equipos requieren conectividad transitiva entre todas las VPCs, rutas centralizadas hacia un centro de datos on-premises conectado por AWS Direct Connect y la posibilidad de inspeccionar el tráfico este-oeste en una VPC de seguridad compartida. La solución debe minimizar la sobrecarga operativa de administración de rutas. ¿Qué diseño de red debe recomendar el arquitecto de soluciones?",
+    "options": [
+      "Desplegar un AWS Transit Gateway por Región, asociar las VPCs mediante AWS Resource Access Manager, interconectar los Transit Gateways con peering entre Regiones y asociar un Direct Connect gateway para la conectividad on-premises.",
+      "Crear conexiones de VPC peering en malla completa entre las 60 VPCs y publicar rutas estáticas hacia el Direct Connect gateway en cada tabla de rutas.",
+      "Publicar cada aplicación con AWS PrivateLink y crear un endpoint de interfaz en cada VPC consumidora, además de una VPN de sitio a sitio por VPC hacia el centro de datos.",
+      "Configurar una VPC de tránsito con instancias EC2 que ejecuten software de enrutamiento y establecer túneles VPN de sitio a sitio desde cada VPC hacia esa VPC de tránsito."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "AWS Transit Gateway ofrece enrutamiento transitivo administrado, se comparte entre cuentas con AWS RAM, admite peering entre Regiones y se integra con Direct Connect gateway. El VPC peering no es transitivo y las alternativas basadas en instancias o túneles por VPC añaden operación manual y no escalan a 60 VPCs.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.1",
+    "text": "Después de un cambio de red, las instancias de una subred privada dejaron de alcanzar un Network Load Balancer interno ubicado en otra subred de la misma VPC. El equipo necesita determinar exactamente qué elemento de configuración (tabla de rutas, grupo de seguridad o ACL de red) bloquea la ruta, sin enviar tráfico de prueba ni instalar agentes en las instancias. ¿Qué herramienta debe usar el arquitecto?",
+    "options": [
+      "VPC Reachability Analyzer, para analizar la ruta entre la interfaz de red de origen y el destino.",
+      "Registros de flujo de VPC (VPC Flow Logs) publicados en Amazon CloudWatch Logs y consultados con Logs Insights.",
+      "AWS X-Ray con el SDK instrumentado en la aplicación que realiza las conexiones.",
+      "Amazon CloudWatch Internet Monitor aplicado a la VPC afectada."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "VPC Reachability Analyzer realiza un análisis estático de la configuración de red y señala el componente que bloquea la ruta sin necesidad de tráfico real. Los registros de flujo solo muestran tráfico que ya ocurrió y X-Ray o Internet Monitor no evalúan la configuración de la ruta.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.1",
+    "text": "Una organización necesita que sus servidores DNS on-premises resuelvan los nombres de las zonas hospedadas privadas de Amazon Route 53 y que, al mismo tiempo, las instancias EC2 de sus VPCs resuelvan los dominios internos alojados en los servidores DNS del centro de datos. Ya existe conectividad mediante AWS Direct Connect. ¿Qué DOS acciones debe realizar el arquitecto?",
+    "options": [
+      "Crear un endpoint de entrada (inbound) de Route 53 Resolver en la VPC y apuntar los reenviadores de los servidores DNS on-premises a las direcciones IP de ese endpoint.",
+      "Crear un endpoint de salida (outbound) de Route 53 Resolver y asociar reglas de reenvío condicional de los dominios on-premises a las VPCs.",
+      "Habilitar la resolución de DNS y los nombres de host DNS en la VPC y asociar la zona hospedada privada directamente al centro de datos on-premises.",
+      "Crear una zona hospedada pública para los dominios internos y delegar los registros NS a los servidores DNS on-premises.",
+      "Desplegar instancias EC2 con BIND en cada subred pública y reemplazar el servidor DNS proporcionado por Amazon en el conjunto de opciones de DHCP."
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "El endpoint de entrada permite que las consultas originadas on-premises lleguen al Resolver de la VPC, y el endpoint de salida con reglas de reenvío condicional envía las consultas de los dominios internos hacia los servidores DNS del centro de datos. Las zonas hospedadas privadas no se asocian a redes on-premises y una zona pública expondría nombres internos.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.2",
+    "text": "Un proveedor SaaS externo debe leer objetos de varios buckets de Amazon S3 en la cuenta de la empresa. El equipo de seguridad exige que el acceso no dependa de credenciales de larga duración y que se mitigue el problema del suplente confundido (confused deputy). ¿Qué debe implementar el arquitecto?",
+    "options": [
+      "Un rol de IAM que confíe en la cuenta del proveedor, con una condición sts:ExternalId en la política de confianza y un identificador externo único acordado con el proveedor.",
+      "Un usuario de IAM dedicado para el proveedor con una política administrada de solo lectura y rotación de claves de acceso cada 30 días.",
+      "Una política de bucket que permita el acceso desde los rangos CIDR públicos del proveedor y credenciales temporales emitidas por un grupo de identidades de Amazon Cognito.",
+      "Un rol de IAM cuya política de confianza use el principal raíz del proveedor junto con una condición aws:PrincipalOrgID de la organización de la empresa."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "El acceso entre cuentas mediante un rol asumido entrega credenciales temporales, y la condición sts:ExternalId garantiza que el proveedor solo pueda asumir el rol en nombre de este cliente, que es la mitigación estándar del suplente confundido. La condición aws:PrincipalOrgID no aplica porque el proveedor está fuera de la organización.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.2",
+    "text": "Una organización con AWS Organizations y 150 cuentas necesita una vista única de los hallazgos de Amazon GuardDuty, Amazon Inspector y AWS Config, además de un registro inmutable de las llamadas a la API de todas las cuentas y Regiones para auditoría. ¿Qué combinación cumple el requisito con la menor sobrecarga operativa?",
+    "options": [
+      "Designar una cuenta de auditoría como administrador delegado de AWS Security Hub con agregación entre Regiones y crear un trail de organización de AWS CloudTrail que entregue los registros a un bucket de Amazon S3 centralizado con S3 Object Lock.",
+      "Habilitar Security Hub en cada cuenta miembro y exportar los hallazgos con scripts programados hacia un bucket de S3 en la cuenta de auditoría, además de un trail independiente por cuenta.",
+      "Crear reglas de Amazon EventBridge en cada cuenta que publiquen los hallazgos en un tema de Amazon SNS por Región y almacenar los registros de CloudTrail en Amazon CloudWatch Logs de cada cuenta.",
+      "Usar Amazon Detective como servicio administrador en la cuenta de auditoría y activar CloudTrail Insights en la cuenta de administración para consolidar los eventos de todas las cuentas."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Security Hub con administrador delegado y agregación entre Regiones centraliza automáticamente los hallazgos de los servicios integrados, y un trail de organización con Object Lock entrega un registro de auditoría inmutable de todas las cuentas. Las demás opciones requieren scripts, no consolidan hallazgos o no producen un registro inmutable.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.2",
+    "text": "Un equipo debe compartir snapshots cifrados de Amazon EBS con una cuenta de auditoría de la misma organización y debe conservar el control de la clave de cifrado en la cuenta propietaria. ¿Qué DOS acciones se requieren?",
+    "options": [
+      "Cifrar el snapshot con una clave administrada por el cliente de AWS KMS y modificar la política de la clave para permitir a la cuenta de auditoría las operaciones kms:Decrypt, kms:DescribeKey y kms:CreateGrant.",
+      "Modificar los permisos del snapshot para compartirlo explícitamente con el ID de la cuenta de auditoría.",
+      "Volver a cifrar el snapshot con la clave administrada por AWS aws/ebs antes de compartirlo con la cuenta de auditoría.",
+      "Hacer público el snapshot y restringir después el acceso mediante una política de control de servicios (SCP) en la organización.",
+      "Crear una copia del snapshot en la cuenta de auditoría con AWS Backup usando cifrado del lado del servidor con claves administradas por Amazon S3 (SSE-S3)."
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "Los snapshots cifrados con la clave administrada por AWS no se pueden compartir, por lo que se requiere una clave administrada por el cliente cuya política otorgue permisos de uso a la cuenta destino, además de compartir el snapshot con el ID de esa cuenta. Publicar el snapshot o cambiar a SSE-S3 no son opciones válidas para volúmenes de EBS.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.3",
+    "text": "Una empresa ejecuta 200 servidores heterogéneos (Windows y Linux) en un centro de datos y necesita una estrategia de recuperación ante desastres en AWS con un RTO de 30 minutos y un RPO de segundos, sin licenciar software de replicación por servidor ni mantener instancias EC2 de recuperación encendidas de forma permanente. ¿Qué solución debe recomendar el arquitecto?",
+    "options": [
+      "AWS Elastic Disaster Recovery, para replicar los servidores de forma continua en un área de ensayo de bajo costo y lanzar instancias de recuperación bajo demanda.",
+      "AWS Backup con copias diarias de los volúmenes y restauración de AMIs en la Región de recuperación.",
+      "Una arquitectura multisitio activo-activo con grupos de Auto Scaling a plena capacidad en dos Regiones.",
+      "AWS DataSync programado cada hora hacia Amazon S3 y AWS CloudFormation para reconstruir la infraestructura durante el desastre."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Elastic Disaster Recovery replica los bloques de forma continua hacia un área de ensayo económica, lo que permite un RPO de segundos y un lanzamiento de instancias en minutos. Las copias diarias no alcanzan el RPO y una arquitectura multisitio a plena capacidad excede el costo necesario.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.3",
+    "text": "Una aplicación financiera usa Amazon Aurora MySQL en una sola Región. El negocio ahora exige un RPO menor a 1 segundo y un RTO menor a 1 minuto ante la pérdida de la Región, además de lecturas locales de baja latencia para usuarios ubicados en otro continente. ¿Qué debe implementar el arquitecto?",
+    "options": [
+      "Amazon Aurora Global Database con un clúster secundario en la Región remota y conmutación por error administrada.",
+      "Réplicas de lectura entre Regiones de Amazon RDS for MySQL con promoción manual durante el evento.",
+      "Una configuración Multi-AZ con instancia en espera en dos zonas de disponibilidad y snapshots automáticos copiados entre Regiones.",
+      "Amazon Aurora Serverless v2 con clonación rápida programada hacia la Región remota."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Aurora Global Database replica con una latencia típica inferior a un segundo y permite promover el clúster secundario en menos de un minuto, además de ofrecer lecturas locales en la Región remota. Multi-AZ no protege ante la pérdida de una Región y las réplicas o clones no alcanzan esos objetivos.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.3",
+    "text": "El área de cumplimiento exige que las copias de respaldo de Amazon RDS, Amazon EFS y Amazon DynamoDB de 40 cuentas se conserven siete años, que no puedan eliminarse ni acortarse su retención (ni siquiera por un administrador) y que existan en una segunda Región. ¿Qué solución cumple estos requisitos?",
+    "options": [
+      "Usar AWS Backup con una cuenta de administrador delegado, planes de respaldo aplicados desde la organización, copia entre Regiones y AWS Backup Vault Lock en modo de cumplimiento.",
+      "Programar snapshots nativos de cada servicio con Amazon EventBridge y copiarlos a la segunda Región con funciones de AWS Lambda.",
+      "Exportar los respaldos a Amazon S3 Glacier Deep Archive con una política de ciclo de vida de siete años y versionado habilitado.",
+      "Habilitar los respaldos automáticos de cada servicio con retención de 35 días y replicar los buckets con replicación entre Regiones de S3."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "AWS Backup con políticas de respaldo de la organización centraliza los planes en las 40 cuentas, la copia entre Regiones cubre el requisito geográfico y Vault Lock en modo de cumplimiento hace que la retención sea inmutable incluso para la cuenta raíz. La retención máxima de los respaldos automáticos nativos es de 35 días.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.4",
+    "text": "La dirección exige garantizar que ninguna cuenta de la organización pueda detener AWS CloudTrail ni eliminar los trails, incluso si un usuario cuenta con permisos de administrador en su propia cuenta. ¿Cuál es la forma más efectiva de lograrlo?",
+    "options": [
+      "Aplicar una política de control de servicios (SCP) en la raíz de la organización que deniegue cloudtrail:StopLogging y cloudtrail:DeleteTrail, con excepción de un rol de administración específico.",
+      "Adjuntar una política administrada de IAM de solo lectura a todos los usuarios y roles de las cuentas miembro.",
+      "Habilitar AWS Config con la regla administrada cloudtrail-enabled y remediación automática en cada cuenta.",
+      "Usar límites de permisos (permissions boundaries) de IAM en las cuentas miembro para restringir las acciones de CloudTrail."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Una SCP define el máximo de permisos disponibles en las cuentas miembro y se aplica incluso a los administradores, por lo que impide la acción de forma preventiva. AWS Config solo detecta y corrige después del hecho, y los límites de permisos deben adjuntarse individualmente a cada entidad.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.4",
+    "text": "Un equipo de plataforma administra una VPC centralizada con subredes en cada zona de disponibilidad. Las unidades de negocio deben desplegar sus propias cargas de trabajo en esas subredes desde sus cuentas, sin que el equipo de plataforma administre los recursos de cómputo y sin duplicar rangos de direcciones IP. ¿Qué debe hacer el arquitecto?",
+    "options": [
+      "Habilitar el uso compartido con AWS Organizations y compartir las subredes con las cuentas de las unidades de negocio mediante AWS Resource Access Manager.",
+      "Crear una VPC por unidad de negocio y conectarlas con VPC peering a la VPC centralizada.",
+      "Crear roles cross-account en la cuenta de plataforma para que las unidades de negocio lancen instancias asumiendo ese rol.",
+      "Exponer los servicios de la VPC centralizada con AWS PrivateLink y crear endpoints de interfaz en cada cuenta consumidora."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "El uso compartido de VPC con AWS RAM permite que cada cuenta participante cree y administre sus propios recursos dentro de subredes compartidas, conservando un único espacio de direcciones. Las demás opciones duplican direccionamiento, trasladan la operación al equipo de plataforma o no permiten desplegar cómputo en la subred compartida.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.4",
+    "text": "Una organización necesita centralizar en una cuenta de registro los registros de aplicación de Amazon CloudWatch Logs de 80 cuentas y, además, recibir en una cuenta de operaciones los eventos de cambio de estado de instancias EC2 generados en cualquier cuenta miembro. ¿Qué DOS acciones debe realizar el arquitecto?",
+    "options": [
+      "Crear filtros de suscripción de CloudWatch Logs en las cuentas miembro que envíen los eventos a un destino de Amazon Data Firehose en la cuenta de registro, con entrega a Amazon S3.",
+      "Crear un bus de eventos personalizado en la cuenta de operaciones con una política basada en recursos que permita a la organización, y reglas en cada cuenta miembro que reenvíen los eventos de EC2 a ese bus.",
+      "Habilitar el acceso a los grupos de registros desde la consola de la cuenta de administración mediante una SCP que permita la acción logs:GetLogEvents.",
+      "Configurar un trail de organización de AWS CloudTrail para que capture los registros de aplicación de CloudWatch Logs y los eventos de estado de EC2.",
+      "Replicar los grupos de registros con AWS Backup hacia la cuenta de registro y suscribir un tema de Amazon SNS en cada cuenta."
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "Los filtros de suscripción con un destino entre cuentas son el mecanismo nativo para centralizar registros de CloudWatch Logs, y un bus de eventos personalizado con política basada en recursos recibe eventos reenviados desde toda la organización. Una SCP no concede permisos y CloudTrail no captura registros de aplicación.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.5",
+    "text": "Una empresa ejecuta cargas estables en instancias EC2 de distintas familias, servicios en AWS Fargate y funciones de AWS Lambda. Esa base de cómputo se mantendrá durante los próximos tres años, pero los equipos cambian con frecuencia de tipo de instancia, de sistema operativo y de Región. ¿Qué opción de compra ofrece el mayor descuento con la mayor flexibilidad?",
+    "options": [
+      "Compute Savings Plans con un compromiso de gasto por hora a tres años.",
+      "Instancias reservadas estandarizadas a tres años con pago total anticipado.",
+      "EC2 Instance Savings Plans a un año por cada familia de instancias utilizada.",
+      "Instancias reservadas convertibles a un año más instancias de spot para Fargate y Lambda."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Compute Savings Plans aplican el descuento a EC2 de cualquier familia, tamaño, sistema operativo y Región, y también a Fargate y Lambda, lo que se ajusta al patrón cambiante descrito. Las instancias reservadas estandarizadas y los planes por familia limitan la flexibilidad, y Fargate y Lambda no admiten instancias de spot compradas de esa forma.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.5",
+    "text": "El director financiero necesita reportes de costos por unidad de negocio y por proyecto en las 60 cuentas de la organización, y además exige que no puedan crearse recursos nuevos sin las etiquetas requeridas. ¿Qué combinación debe implementar el arquitecto?",
+    "options": [
+      "Definir las claves de etiqueta obligatorias, activarlas como etiquetas de asignación de costos definidas por el usuario en la cuenta de administración y aplicar políticas de etiquetas de AWS Organizations junto con una SCP que deniegue la creación de recursos sin esas claves.",
+      "Crear informes de AWS Cost Explorer agrupados por ID de cuenta y solicitar a cada equipo que documente sus recursos en una hoja de cálculo mensual.",
+      "Habilitar AWS Trusted Advisor en el nivel Business y usar su comprobación de etiquetado para bloquear los despliegues no conformes.",
+      "Activar las etiquetas generadas por AWS y crear una regla de AWS Config que elimine automáticamente los recursos sin etiquetas."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Las etiquetas de asignación de costos definidas por el usuario deben activarse en la cuenta de administración para aparecer en los informes de costos, y la combinación de políticas de etiquetas con una SCP de condición aws:RequestTag impide de forma preventiva la creación sin etiquetas. Trusted Advisor no bloquea despliegues y eliminar recursos automáticamente es destructivo.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 1,
+    "taskStatementNumber": "1.5",
+    "text": "Un arquitecto debe entregar recomendaciones de dimensionamiento de instancias EC2, funciones de AWS Lambda y volúmenes de Amazon EBS de todas las cuentas de la organización y, además, identificar patrones de acceso y clases de almacenamiento subóptimas en miles de buckets de Amazon S3. ¿Qué combinación de herramientas debe usar?",
+    "options": [
+      "AWS Compute Optimizer habilitado a nivel de organización desde la cuenta de administración y Amazon S3 Storage Lens con el panel de la organización y métricas avanzadas.",
+      "AWS Cost Explorer con recomendaciones de instancias reservadas y AWS Pricing Calculator para modelar el almacenamiento.",
+      "Amazon CloudWatch con métricas detalladas por instancia y AWS Config para inventariar los buckets.",
+      "AWS Trusted Advisor en la cuenta de administración y S3 Inventory con informes diarios en formato CSV."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Compute Optimizer genera recomendaciones de dimensionamiento para EC2, Auto Scaling, EBS y Lambda y puede activarse para toda la organización, mientras que S3 Storage Lens entrega visibilidad de patrones de acceso y recomendaciones de clases de almacenamiento a escala. Las otras herramientas informan costos o inventario, pero no recomiendan dimensionamiento.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.1",
+    "text": "Una empresa debe desplegar y mantener un conjunto base de recursos (roles de IAM, reglas de AWS Config y grupos de registros de CloudWatch) en todas las cuentas nuevas y existentes de tres unidades organizativas y en cuatro Regiones. Se crean cuentas nuevas cada semana. ¿Qué enfoque de infraestructura como código minimiza la sobrecarga operativa?",
+    "options": [
+      "AWS CloudFormation StackSets con permisos administrados por el servicio, dirigidos a las unidades organizativas y con implementación automática en las cuentas nuevas.",
+      "Una plantilla de CloudFormation con pilas anidadas ejecutada manualmente en cada cuenta y Región después de su creación.",
+      "Un pipeline de AWS CodePipeline que asuma un rol en cada cuenta y ejecute la plantilla con la AWS CLI en cada Región.",
+      "Un producto de AWS Service Catalog compartido con la organización que cada equipo debe aprovisionar en sus cuentas."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "StackSets con permisos administrados por el servicio se dirige a unidades organizativas completas y, con la implementación automática activada, aplica la línea base a las cuentas nuevas sin intervención. Las demás opciones requieren pasos manuales o dependen de que cada equipo aprovisione el producto.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.1",
+    "text": "Un equipo despliega una aplicación en Amazon ECS varias veces al día y necesita detectar automáticamente regresiones de latencia y errores durante el despliegue, revirtiendo el cambio sin intervención humana. Además, los cambios de infraestructura realizados con AWS CloudFormation deben revertirse si se degradan las métricas clave. ¿Qué DOS mecanismos debe implementar el arquitecto?",
+    "options": [
+      "Usar AWS CodeDeploy con el tipo de despliegue blue/green para ECS, desplazando el tráfico de forma canary y configurando alarmas de Amazon CloudWatch que activen la reversión automática.",
+      "Definir disparadores de reversión (rollback triggers) con alarmas de CloudWatch en las operaciones de actualización de las pilas de CloudFormation.",
+      "Configurar el despliegue de ECS en modo all-at-once y ejecutar después un script que compare los registros de acceso del balanceador.",
+      "Habilitar la protección de terminación de la pila de CloudFormation para impedir los cambios que degraden las métricas.",
+      "Publicar una definición de tarea nueva con una etiqueta distinta y usar enrutamiento ponderado de Amazon Route 53 con un TTL de 24 horas para volver atrás."
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "CodeDeploy blue/green para ECS admite desplazamiento canary con reversión automática asociada a alarmas de CloudWatch, y los disparadores de reversión de CloudFormation revierten una actualización de pila cuando una alarma entra en estado de alarma. La protección de terminación no evalúa métricas y un TTL de 24 horas impide una reversión rápida.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.1",
+    "text": "Una empresa opera Kubernetes autoadministrado en instancias EC2 y dedica un esfuerzo considerable a parchear el plano de control, actualizar los nodos y mantener el sistema operativo. Quiere conservar sus manifiestos y APIs de Kubernetes y eliminar por completo la administración de servidores para sus cargas sin estado. ¿Qué debe recomendar el arquitecto?",
+    "options": [
+      "Migrar a Amazon EKS y ejecutar los pods en AWS Fargate mediante perfiles de Fargate.",
+      "Migrar a Amazon ECS con el tipo de lanzamiento EC2 y usar AMIs optimizadas para ECS con AWS Systems Manager Patch Manager.",
+      "Reempaquetar las cargas de trabajo en AWS Elastic Beanstalk con la plataforma de Docker de contenedor único.",
+      "Mantener Kubernetes en EC2 y automatizar los parches con AWS Systems Manager Patch Manager y grupos de Auto Scaling."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Amazon EKS entrega un plano de control administrado y los perfiles de Fargate eliminan la administración de nodos, conservando las APIs y los manifiestos de Kubernetes. ECS y Elastic Beanstalk obligarían a reescribir las definiciones de carga de trabajo y la última opción mantiene la carga operativa.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.2",
+    "text": "Una aplicación crítica usa Amazon DynamoDB y contenedores en Amazon ECS detrás de un Application Load Balancer en una sola Región. El negocio requiere un RTO de 5 minutos y un RPO cercano a cero ante la pérdida de la Región, con un costo moderado. ¿Qué diseño debe implementar el arquitecto?",
+    "options": [
+      "Configurar tablas globales de DynamoDB en dos Regiones, mantener el servicio de ECS con capacidad reducida en la Región secundaria y usar registros de Amazon Route 53 con conmutación por error basada en comprobaciones de estado.",
+      "Programar exportaciones de DynamoDB a Amazon S3 cada 15 minutos, replicar el bucket a la Región secundaria y desplegar la infraestructura con AWS CloudFormation durante el desastre.",
+      "Habilitar la recuperación a un momento anterior (PITR) en DynamoDB y AWS Backup con copia entre Regiones cada hora, restaurando bajo demanda.",
+      "Crear una réplica de lectura entre Regiones de DynamoDB Accelerator (DAX) y usar enrutamiento ponderado de Route 53 con una distribución 90/10."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Es un patrón de warm standby: las tablas globales replican de forma continua (RPO cercano a cero) y un servicio de ECS reducido que escala tras la conmutación por error de Route 53 permite cumplir un RTO de 5 minutos con un costo moderado. Las opciones basadas en exportaciones o restauraciones tienen RPO y RTO muy superiores.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.2",
+    "text": "Una organización con una arquitectura activa-pasiva en dos Regiones necesita validar de forma continua que la Región de recuperación cuenta con la capacidad, las cuotas y la configuración necesarias para asumir el tráfico, y requiere un mecanismo de conmutación confiable que no dependa de las comprobaciones de estado de la aplicación durante el evento. ¿Qué debe usar el arquitecto?",
+    "options": [
+      "Amazon Route 53 Application Recovery Controller, con comprobaciones de preparación (readiness checks) y controles de enrutamiento respaldados por clústeres de seguridad.",
+      "Comprobaciones de estado de Amazon Route 53 con enrutamiento de conmutación por error y alarmas de CloudWatch en la Región primaria.",
+      "AWS Resilience Hub con evaluaciones semanales y AWS Backup para restaurar en la Región secundaria.",
+      "AWS Global Accelerator con dos grupos de endpoints y desplazamiento manual del tráfico mediante ponderaciones."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Application Recovery Controller ofrece comprobaciones de preparación que auditan capacidad, cuotas y configuración de la Región de recuperación, y controles de enrutamiento operados desde un clúster de alta disponibilidad que permiten conmutar de forma determinista, sin depender del estado de la aplicación.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.2",
+    "text": "Una empresa necesita respaldos automatizados y económicos de volúmenes de Amazon EBS, sistemas de archivos de Amazon EFS y bases de datos de Amazon RDS, con retención de 90 días en la Región primaria, copias en una segunda Región y traslado de las copias antiguas a un nivel de almacenamiento más económico. Los equipos crean recursos nuevos con frecuencia. ¿Qué DOS acciones debe realizar el arquitecto?",
+    "options": [
+      "Crear un plan de respaldo de AWS Backup con reglas de ciclo de vida que trasladen las copias al almacenamiento en frío y una acción de copia hacia una bóveda en la segunda Región.",
+      "Asignar los recursos al plan de respaldo mediante etiquetas, de modo que los recursos nuevos se incluyan automáticamente sin modificar el plan.",
+      "Usar Amazon Data Lifecycle Manager para EFS y RDS, y AWS Backup solo para EBS, coordinando ambos con Amazon EventBridge.",
+      "Habilitar la replicación entre Regiones de Amazon S3 sobre la bóveda de respaldo para copiar los respaldos a la segunda Región.",
+      "Crear una función de AWS Lambda programada que enumere los recursos cada noche y ejecute las APIs de snapshot nativas de cada servicio."
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "Un único plan de AWS Backup con reglas de ciclo de vida y copia entre Regiones cubre los tres servicios, y la asignación por etiquetas incorpora automáticamente los recursos nuevos. Data Lifecycle Manager solo administra snapshots de EBS y las bóvedas de respaldo no se replican con funciones de S3.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.3",
+    "text": "Una aplicación web pública de gran escala sufre ataques volumétricos de capa 3 y 4 e inundaciones HTTP dirigidas al endpoint de inicio de sesión. La empresa quiere respuesta ante DDoS con apoyo de expertos, protección financiera ante el escalado provocado por un ataque y aplicación centralizada de reglas de firewall web en las 30 cuentas de la organización. ¿Qué debe recomendar el arquitecto?",
+    "options": [
+      "Suscribirse a AWS Shield Advanced y usar AWS Firewall Manager para aplicar políticas de AWS WAF con grupos de reglas administradas y reglas basadas en tasa a todas las distribuciones y balanceadores de la organización.",
+      "Habilitar AWS Shield Standard en cada cuenta y crear listas de control de acceso a la red que bloqueen los rangos de direcciones IP atacantes.",
+      "Colocar Amazon CloudFront delante de la aplicación con un TTL alto y activar Amazon GuardDuty en modo de protección contra DDoS.",
+      "Usar AWS WAF con una ACL web por cuenta administrada manualmente y grupos de seguridad que limiten las conexiones entrantes por dirección IP."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Shield Advanced aporta el equipo de respuesta ante DDoS y la protección contra costos por escalado, y Firewall Manager aplica y mantiene de forma central las políticas de WAF, incluidas reglas basadas en tasa contra inundaciones HTTP, en todas las cuentas de la organización.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.3",
+    "text": "Un rol de IAM utilizado por una aplicación en producción tiene adjunta la política AdministratorAccess. El equipo de seguridad debe reemplazarla por una política de mínimo privilegio basada en lo que la aplicación realmente utilizó durante los últimos 90 días, con el menor esfuerzo manual posible. ¿Qué debe hacer el arquitecto?",
+    "options": [
+      "Usar la generación de políticas de AWS IAM Access Analyzer, que analiza los registros de AWS CloudTrail del periodo indicado y propone una política con los servicios y las acciones utilizados.",
+      "Revisar la información de último acceso a los servicios y adjuntar un límite de permisos que deniegue los servicios no utilizados.",
+      "Habilitar AWS Config con la regla iam-policy-no-statements-with-admin-access y aplicar remediación automática.",
+      "Consultar los eventos de CloudTrail con Amazon Athena y escribir manualmente una política que permita solo los servicios detectados."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "La generación de políticas de IAM Access Analyzer produce automáticamente una política de mínimo privilegio a partir de la actividad registrada en CloudTrail para el periodo indicado. Consultar CloudTrail con Athena logra un resultado similar, pero con un esfuerzo manual mucho mayor.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.3",
+    "text": "Las instancias EC2 de subredes privadas deben acceder únicamente a dos buckets específicos de Amazon S3, sin salida a internet y sin costos de procesamiento de datos de gateway NAT. El equipo de seguridad también exige que esos buckets solo sean accesibles desde la VPC. ¿Qué debe configurar el arquitecto?",
+    "options": [
+      "Un endpoint de gateway de VPC para Amazon S3 con una política de endpoint que limite el acceso a los dos buckets, y políticas de bucket que denieguen las solicitudes cuya condición aws:SourceVpce no coincida con ese endpoint.",
+      "Un endpoint de interfaz de VPC con AWS PrivateLink para Amazon S3 y grupos de seguridad que permitan tráfico HTTPS solo hacia los prefijos públicos de S3.",
+      "Un gateway NAT en cada zona de disponibilidad con listas de control de acceso a la red que permitan solo los rangos de la lista de prefijos administrada de Amazon S3.",
+      "Un rol de IAM en las instancias con permisos limitados a los dos buckets y cifrado del lado del servidor con AWS KMS."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "El endpoint de gateway enruta el tráfico a S3 sin salir a internet y sin cargos de procesamiento de NAT, su política de endpoint restringe los buckets alcanzables y la condición aws:SourceVpce en la política de bucket garantiza que solo se acceda a través de la VPC. Un rol de IAM controla permisos, pero no el camino de red.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.4",
+    "text": "Una API recibe picos impredecibles de solicitudes de escritura que saturan un servicio de procesamiento en Amazon EC2 y provocan errores 5xx y pérdida de solicitudes. Cada solicitud debe procesarse al menos una vez y el orden de procesamiento no es relevante. ¿Qué diseño debe implementar el arquitecto?",
+    "options": [
+      "Escribir las solicitudes en una cola estándar de Amazon SQS y escalar el grupo de Auto Scaling de los consumidores con una política de seguimiento de destino basada en el retraso de la cola por instancia.",
+      "Publicar las solicitudes en un tema de Amazon SNS con suscripciones HTTP hacia las instancias y aumentar el tiempo de espera de la API.",
+      "Aumentar el tamaño de las instancias del servicio de procesamiento y habilitar el escalado programado según el histórico de picos.",
+      "Usar una cola FIFO de Amazon SQS con grupos de mensajes por cliente y una política de escalado simple basada en el uso de CPU."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "La cola estándar de SQS amortigua los picos y desacopla al productor del consumidor, garantizando entrega al menos una vez, y escalar según el retraso de la cola por instancia dimensiona los consumidores en función del trabajo pendiente real. SNS no almacena mensajes en espera y el escalado programado no responde a picos impredecibles.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.4",
+    "text": "Una empresa despliega su aplicación de forma activa-activa en dos Regiones, detrás de Application Load Balancers. Los usuarios deben dirigirse al endpoint regional con menor latencia y, ante la degradación de una Región, el tráfico debe desviarse automáticamente. La empresa también necesita direcciones IP estáticas para que sus clientes empresariales las incluyan en listas de permitidos. ¿Qué DOS opciones cumplen los requisitos?",
+    "options": [
+      "Crear registros de Amazon Route 53 con política de enrutamiento basada en latencia y comprobaciones de estado asociadas a cada endpoint regional.",
+      "Usar AWS Global Accelerator con dos grupos de endpoints regionales, direcciones IP estáticas de anycast y comprobaciones de estado que retiren la Región degradada.",
+      "Usar enrutamiento ponderado de Route 53 con pesos iguales y un TTL de 3.600 segundos.",
+      "Usar enrutamiento simple de Route 53 con varios valores de dirección IP y sin comprobaciones de estado.",
+      "Colocar Amazon CloudFront con un único origen en la Región primaria y activar la conmutación de origen hacia una función de Lambda@Edge."
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "El enrutamiento basado en latencia con comprobaciones de estado envía a cada usuario a la Región más rápida y saludable, y Global Accelerator añade direcciones IP estáticas de anycast con retiro automático del endpoint degradado. El enrutamiento ponderado o simple no considera latencia ni salud, y un origen único no es activo-activo.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.4",
+    "text": "Antes de un evento de ventas, un equipo debe asegurarse de que las cuotas de servicio de todas las cuentas (por ejemplo, direcciones IP elásticas, instancias EC2 por familia y ejecuciones simultáneas de AWS Lambda) no bloqueen el escalado, y quiere recibir alertas cuando el uso se acerque a los límites. ¿Qué debe implementar el arquitecto?",
+    "options": [
+      "Usar Service Quotas con plantillas de solicitud de cuotas para la organización y crear alarmas de Amazon CloudWatch sobre las métricas de utilización de cuotas.",
+      "Crear alarmas de CloudWatch sobre las métricas de uso de cada servicio y solicitar aumentos manuales por ticket cuando se produzca la denegación.",
+      "Habilitar AWS Trusted Advisor y revisar manualmente la comprobación de límites de servicio cada día del evento.",
+      "Configurar AWS Config con reglas personalizadas que evalúen los límites de servicio y remedien automáticamente con AWS Systems Manager."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Service Quotas permite solicitar aumentos de forma proactiva y aplicar plantillas de cuotas a las cuentas nuevas de la organización, y sus métricas de utilización en CloudWatch permiten alertar antes de alcanzar el límite. Reaccionar tras la denegación o revisar manualmente no evita el bloqueo durante el evento.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.5",
+    "text": "Un juego en línea necesita una tabla de clasificación global que se actualice con cada partida y devuelva los 100 mejores puntajes con latencia de milisegundos de un dígito para millones de jugadores concurrentes. Disponer de estructuras de datos ordenadas nativas simplificaría notablemente la lógica. ¿Qué servicio de base de datos debe elegir el arquitecto?",
+    "options": [
+      "Amazon ElastiCache for Redis, usando conjuntos ordenados (sorted sets) con modo de clúster habilitado y réplicas de lectura.",
+      "Amazon DynamoDB con un índice secundario global sobre el puntaje y Amazon DynamoDB Accelerator (DAX).",
+      "Amazon Aurora MySQL con réplicas de lectura y consultas ORDER BY sobre un índice del puntaje.",
+      "Amazon Timestream con consultas de agregación por ventana de tiempo."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Los conjuntos ordenados de Redis mantienen el ranking ordenado en memoria y devuelven los primeros N elementos en microsegundos, lo que se ajusta al patrón de una tabla de clasificación. Un índice secundario global sobre el puntaje genera particiones calientes y una base relacional o de series de tiempo no resuelve el ordenamiento continuo con esa latencia.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.5",
+    "text": "Una carga de trabajo de simulación ejecuta cientos de instancias EC2 que requieren un sistema de archivos POSIX compartido con cientos de GB/s de rendimiento agregado y latencias inferiores al milisegundo. Los datos de entrada y de salida residen en Amazon S3. ¿Qué opción de almacenamiento debe elegir el arquitecto?",
+    "options": [
+      "Amazon FSx for Lustre con un repositorio de datos vinculado al bucket de Amazon S3.",
+      "Amazon EFS en modo de rendimiento de E/S máxima con rendimiento provisionado.",
+      "Volúmenes de Amazon EBS io2 Block Express con conexión múltiple (Multi-Attach) compartidos entre todas las instancias.",
+      "Amazon FSx for OpenZFS sincronizado desde S3 mediante tareas programadas de AWS DataSync."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "FSx for Lustre está diseñado para cargas de cómputo de alto rendimiento con latencias sub-milisegundo y se integra de forma nativa con S3 mediante repositorios de datos vinculados. EFS ofrece latencias mayores y EBS Multi-Attach está limitado a pocas instancias en una zona y no provee un sistema de archivos compartido con semántica POSIX distribuida.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.5",
+    "text": "Un portal de comercio electrónico usa Amazon RDS for PostgreSQL. Durante las campañas, el 90 % del tráfico corresponde a lecturas repetidas del catálogo y la base de datos alcanza el 100 % de CPU. La empresa quiere reducir la carga de lectura con cambios mínimos en el modelo de datos. ¿Qué DOS acciones debe realizar el arquitecto?",
+    "options": [
+      "Agregar réplicas de lectura de RDS y dirigir las consultas de catálogo al endpoint de solo lectura.",
+      "Introducir Amazon ElastiCache como caché de resultados de consultas con un patrón de carga diferida (lazy loading) y un TTL adecuado.",
+      "Habilitar Amazon DynamoDB Accelerator (DAX) delante de la instancia de RDS.",
+      "Convertir la instancia a Multi-AZ para que la instancia en espera atienda el tráfico de lectura.",
+      "Migrar el catálogo a Amazon Redshift y consultarlo desde la aplicación en cada solicitud."
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "Las réplicas de lectura distribuyen las consultas y una caché en ElastiCache elimina las lecturas repetidas antes de que lleguen a la base de datos, ambas sin rediseñar el modelo de datos. DAX solo funciona con DynamoDB, la instancia en espera de Multi-AZ no atiende lecturas y Redshift está orientado a analítica, no a consultas transaccionales de catálogo.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.6",
+    "text": "Una plataforma de video entrega 400 TB mensuales de contenido estático a usuarios globales directamente desde un Application Load Balancer y desde Amazon S3. La transferencia de datos hacia internet es el rubro más alto de la factura. ¿Qué cambio reduce más ese costo?",
+    "options": [
+      "Distribuir el contenido con Amazon CloudFront usando el ALB y el bucket de S3 como orígenes, aprovechando las tarifas de transferencia de datos de CloudFront y el almacenamiento en caché en el borde.",
+      "Habilitar S3 Transfer Acceleration en el bucket y activar la compresión de respuestas en el ALB.",
+      "Mover el contenido a S3 Intelligent-Tiering y habilitar la aceleración de transferencia entre Regiones.",
+      "Desplegar gateways NAT en cada zona de disponibilidad y enrutar todo el tráfico de salida a través de ellos."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "CloudFront aplica tarifas de salida más bajas que la transferencia directa, no cobra la transferencia entre los orígenes de AWS y la distribución, y el almacenamiento en caché reduce las solicitudes al origen. Transfer Acceleration optimiza cargas entrantes y las clases de almacenamiento o los gateways NAT no afectan el costo de salida a internet.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.6",
+    "text": "Un lago de datos de 3 PB en Amazon S3 contiene objetos con patrones de acceso impredecibles: algunos se consultan a diario durante semanas y luego quedan inactivos por meses. El equipo no quiere administrar reglas de ciclo de vida ni arriesgarse a pagar cargos de recuperación cuando un objeto vuelva a usarse. ¿Qué clase de almacenamiento debe elegir el arquitecto?",
+    "options": [
+      "S3 Intelligent-Tiering, que mueve los objetos automáticamente entre niveles de acceso según el uso y no cobra cargos de recuperación.",
+      "S3 Standard-IA con reglas de ciclo de vida que muevan los objetos a los 30 días y los devuelvan a S3 Standard cuando se accedan.",
+      "S3 Glacier Instant Retrieval con reglas de ciclo de vida a los 7 días.",
+      "S3 One Zone-IA con versionado y replicación entre Regiones para mantener la durabilidad."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "S3 Intelligent-Tiering está diseñado precisamente para patrones de acceso desconocidos o cambiantes: mueve los objetos entre niveles de forma automática sin cargos de recuperación ni reglas que administrar. Standard-IA y Glacier Instant Retrieval sí aplican cargos de recuperación y requieren gestionar el ciclo de vida.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 2,
+    "taskStatementNumber": "2.6",
+    "text": "Una empresa necesita detectar cuanto antes gastos inesperados por proyecto y detener automáticamente el aprovisionamiento adicional cuando un equipo supere su presupuesto mensual. ¿Qué debe implementar el arquitecto?",
+    "options": [
+      "AWS Budgets con presupuestos filtrados por etiqueta de asignación de costos y acciones de presupuesto que apliquen una política de IAM restrictiva, junto con AWS Cost Anomaly Detection para las alertas basadas en aprendizaje automático.",
+      "Informes mensuales de AWS Cost Explorer agrupados por etiqueta y revisión manual por parte del equipo financiero.",
+      "Alarmas de facturación de Amazon CloudWatch por cuenta con notificaciones a Amazon SNS y una SCP que deniegue todos los servicios al superarse el monto.",
+      "AWS Trusted Advisor con la comprobación de instancias EC2 de baja utilización y AWS Compute Optimizer para reducir el gasto."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Las acciones de AWS Budgets aplican automáticamente políticas de IAM o SCP cuando se cruza un umbral, y Cost Anomaly Detection identifica desviaciones inusuales de gasto sin esperar el cierre del mes. Los informes manuales y las herramientas de optimización no imponen controles automáticos.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.1",
+    "text": "Una organización detecta con frecuencia buckets de Amazon S3 con acceso público y grupos de seguridad con el puerto 22 abierto a 0.0.0.0/0. Quiere que estas desviaciones se corrijan automáticamente en todas las cuentas y que quede registro de cada corrección. ¿Qué solución debe implementar el arquitecto?",
+    "options": [
+      "Un agregador de AWS Config con reglas administradas desplegadas mediante paquetes de conformidad y remediación automática con documentos de automatización de AWS Systems Manager.",
+      "Amazon GuardDuty con hallazgos enviados a Amazon EventBridge y una función de AWS Lambda que notifique al propietario del recurso.",
+      "AWS Trusted Advisor con sus comprobaciones de seguridad y un informe semanal enviado por Amazon SNS al equipo de seguridad.",
+      "AWS CloudTrail con Insights habilitado y consultas programadas en Amazon Athena para identificar los cambios no conformes."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "AWS Config evalúa la configuración de los recursos frente a reglas y puede invocar documentos de automatización de Systems Manager para remediar automáticamente, mientras el agregador entrega visibilidad en todas las cuentas. GuardDuty, Trusted Advisor y CloudTrail detectan o notifican, pero no corrigen la configuración.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.1",
+    "text": "Un equipo de operaciones necesita crear paneles y consultas que abarquen métricas, registros y trazas de 25 cuentas de la organización sin copiar los datos manualmente, y además debe conservar de forma centralizada los registros de aplicación para análisis a largo plazo. ¿Qué DOS acciones debe realizar el arquitecto?",
+    "options": [
+      "Habilitar la observabilidad entre cuentas de Amazon CloudWatch, designando una cuenta de supervisión y vinculando las cuentas de origen para consultar métricas, registros y trazas.",
+      "Crear filtros de suscripción en los grupos de registros de las cuentas de origen que entreguen los eventos a un flujo de Amazon Data Firehose en la cuenta central, con destino en Amazon S3 para consultarlos con Amazon Athena.",
+      "Instalar el agente de CloudWatch en cada instancia con las claves de acceso de un usuario de IAM de la cuenta de supervisión para publicar las métricas directamente allí.",
+      "Configurar un trail de organización de AWS CloudTrail y usarlo como fuente de los paneles de métricas de la aplicación.",
+      "Exportar los grupos de registros a Amazon S3 con tareas de exportación manuales cada semana y consolidarlos con AWS Glue."
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "La observabilidad entre cuentas de CloudWatch permite consultar telemetría de las cuentas de origen desde una cuenta de supervisión sin duplicar datos, y los filtros de suscripción hacia Firehose entregan los registros a S3 para retención y análisis a largo plazo. Distribuir claves de acceso es una mala práctica y CloudTrail no contiene métricas de aplicación.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.1",
+    "text": "Una empresa administra 1.200 servidores: la mitad son instancias EC2 y la otra mitad está en su centro de datos. Necesita inventario de software, aplicación recurrente de configuraciones deseadas y ejecución de comandos remotos, sin abrir puertos entrantes ni usar SSH con llaves compartidas. ¿Qué debe recomendar el arquitecto?",
+    "options": [
+      "Registrar los servidores on-premises con activaciones híbridas de AWS Systems Manager y usar Inventory, State Manager y Run Command sobre todos los nodos administrados.",
+      "Instalar el agente de Amazon Inspector en todos los servidores y usar AWS Config para aplicar las configuraciones deseadas.",
+      "Usar AWS OpsWorks para los servidores on-premises y AWS Systems Manager solo para las instancias EC2.",
+      "Desplegar un host bastión con acceso SSH restringido por grupo de seguridad y automatizar los cambios con scripts ejecutados en AWS CodeBuild."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Las activaciones híbridas incorporan los servidores on-premises como nodos administrados de Systems Manager, que se comunican de forma saliente con el servicio, de modo que Inventory, State Manager y Run Command operan sobre toda la flota sin abrir puertos entrantes ni gestionar llaves SSH.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.2",
+    "text": "Una aplicación en AWS Lambda se conecta a Amazon RDS for MySQL con una contraseña almacenada en una variable de entorno. El equipo de seguridad exige rotación automática cada 30 días, cifrado con una clave administrada por el cliente y auditoría de cada recuperación de la credencial. ¿Qué debe implementar el arquitecto?",
+    "options": [
+      "Almacenar la credencial en AWS Secrets Manager con la rotación administrada para RDS, cifrarla con una clave de AWS KMS administrada por el cliente y otorgar a la función el permiso secretsmanager:GetSecretValue.",
+      "Usar Parameter Store de AWS Systems Manager con parámetros de tipo SecureString y una función de Lambda programada que genere una contraseña nueva cada 30 días.",
+      "Almacenar la credencial cifrada en un objeto de Amazon S3 con SSE-KMS y leerla durante el arranque en frío de la función.",
+      "Usar variables de entorno de Lambda cifradas con AWS KMS y rotar la contraseña manualmente en la ventana de mantenimiento mensual."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Secrets Manager ofrece rotación administrada nativa para RDS, cifrado con claves administradas por el cliente y registro en CloudTrail de cada llamada de recuperación, sin código de rotación propio. Parameter Store requiere implementar y mantener la lógica de rotación.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.2",
+    "text": "El equipo de seguridad debe identificar, en las 90 cuentas de la organización, los roles de IAM que no se han usado en 180 días, los permisos concedidos pero nunca ejercidos y los recursos compartidos con entidades externas a la organización. ¿Qué solución requiere el menor esfuerzo?",
+    "options": [
+      "Habilitar AWS IAM Access Analyzer desde una cuenta de administrador delegado, con analizadores de acceso externo y de acceso no utilizado para toda la organización.",
+      "Generar informes de credenciales de IAM en cada cuenta y consolidarlos con una función de AWS Lambda programada.",
+      "Consultar los registros de un trail de organización de AWS CloudTrail con Amazon Athena para detectar los roles sin actividad.",
+      "Habilitar AWS Security Hub con el estándar de mejores prácticas de seguridad fundamentales de AWS en todas las cuentas."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "IAM Access Analyzer, configurado con el alcance de la organización, genera hallazgos tanto de acceso externo como de roles, permisos y credenciales no utilizados, sin desarrollo propio. Los informes de credenciales no muestran permisos no ejercidos y las consultas en Athena implican construir y mantener el análisis.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.2",
+    "text": "Una empresa quiere priorizar las respuestas automáticas ante vulnerabilidades: cuando se detecte una CVE crítica en instancias EC2 o en imágenes de contenedor, debe iniciarse la corrección sin intervención manual, y los parches del sistema operativo deben aplicarse en ventanas de mantenimiento con informes de cumplimiento. ¿Qué DOS acciones debe realizar el arquitecto?",
+    "options": [
+      "Habilitar Amazon Inspector para EC2 y Amazon ECR, y enrutar con Amazon EventBridge los hallazgos de gravedad crítica hacia un documento de automatización de AWS Systems Manager que inicie la corrección.",
+      "Configurar líneas base de parches y ventanas de mantenimiento en AWS Systems Manager Patch Manager, con informes de cumplimiento de parches por grupo de destino.",
+      "Habilitar Amazon Macie para analizar las instancias EC2 en busca de vulnerabilidades del sistema operativo y de las bibliotecas.",
+      "Usar Amazon GuardDuty para escanear las imágenes de contenedor de Amazon ECR en cada envío y bloquear los despliegues no conformes.",
+      "Programar el reemplazo semanal de todas las instancias mediante un grupo de Auto Scaling para evitar aplicar parches."
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "Amazon Inspector analiza de forma continua instancias EC2 e imágenes de ECR y sus hallazgos pueden desencadenar automatizaciones mediante EventBridge, mientras Patch Manager aplica los parches en ventanas controladas y reporta el cumplimiento. Macie clasifica datos sensibles y GuardDuty detecta amenazas, no escanea imágenes en busca de CVE.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.3",
+    "text": "Un servicio multijugador usa UDP y TCP sobre Network Load Balancers en tres Regiones. Los jugadores reportan latencia y pérdida de paquetes variables, y los operadores de red de algunos clientes empresariales exigen un conjunto fijo de direcciones IP para permitir el tráfico. ¿Qué debe implementar el arquitecto?",
+    "options": [
+      "AWS Global Accelerator con grupos de endpoints en las tres Regiones, que entrega direcciones IP estáticas de anycast y enruta el tráfico por la red troncal de AWS hacia el endpoint más cercano y saludable.",
+      "Amazon CloudFront con orígenes en las tres Regiones y una política de caché que omita el almacenamiento en caché para el tráfico UDP.",
+      "Registros de Amazon Route 53 con enrutamiento por geoproximidad y direcciones IP elásticas asignadas a cada Network Load Balancer.",
+      "AWS Direct Connect desde los proveedores de los clientes hacia cada Región, con un Direct Connect gateway compartido."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Global Accelerator admite TCP y UDP, entrega dos direcciones IP estáticas de anycast válidas para listas de permitidos e ingresa el tráfico a la red troncal de AWS en el punto de presencia más cercano, reduciendo latencia y pérdida. CloudFront no admite UDP arbitrario y el DNS no mejora la ruta de red.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.3",
+    "text": "Una aplicación de microservicios en Amazon ECS presenta una latencia p99 alta e intermitente. Los equipos no logran determinar qué servicio o dependencia descendente introduce el retardo, porque cada uno solo observa sus propias métricas. ¿Qué debe implementar el arquitecto para localizar el cuello de botella?",
+    "options": [
+      "Instrumentar los servicios con AWS X-Ray para obtener trazas distribuidas y usar el mapa de servicios y el análisis de latencia para identificar el segmento que aporta el retardo.",
+      "Habilitar métricas detalladas de Amazon CloudWatch cada minuto en todos los servicios y crear un panel con los percentiles de CPU y memoria.",
+      "Activar los registros de acceso del Application Load Balancer y consultarlos con Amazon Athena para calcular la latencia por objetivo.",
+      "Habilitar CloudWatch Container Insights y crear alarmas de detección de anomalías sobre el uso de red de las tareas."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "X-Ray correlaciona los segmentos de una misma solicitud a través de todos los servicios, de modo que el mapa de servicios muestra dónde se concentra la latencia, incluidas las dependencias descendentes. Las métricas de recursos o los registros del balanceador no permiten seguir una solicitud extremo a extremo.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.3",
+    "text": "Un equipo de investigación ejecuta una aplicación MPI ajustada que requiere la mínima latencia y el máximo ancho de banda entre nodos dentro de una misma zona de disponibilidad. Actualmente las instancias están distribuidas y la comunicación entre nodos es el factor limitante. ¿Qué debe recomendar el arquitecto?",
+    "options": [
+      "Lanzar las instancias en un grupo de ubicación de clúster (cluster placement group) con adaptadores Elastic Fabric Adapter en tipos de instancia compatibles.",
+      "Usar un grupo de ubicación distribuido (spread placement group) entre varias zonas de disponibilidad y habilitar redes mejoradas con ENA.",
+      "Colocar las instancias detrás de un Network Load Balancer con destinos de tipo IP y activar el balanceo entre zonas.",
+      "Usar un grupo de ubicación de partición y montar Amazon EFS en modo de E/S máxima para el intercambio de datos entre nodos."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "El grupo de ubicación de clúster agrupa las instancias en la misma zona con interconexión de baja latencia y alto ancho de banda, y EFA permite el bypass del sistema operativo que necesitan las bibliotecas MPI. Los grupos distribuidos o de partición separan deliberadamente las instancias, lo que aumenta la latencia.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.4",
+    "text": "Una auditoría de resiliencia encuentra que una aplicación usa una instancia EC2 con NAT en una sola zona de disponibilidad para la salida a internet, una base de datos MySQL autoadministrada en una única instancia EC2 y un balanceador con destinos registrados en una sola zona. La empresa quiere eliminar los puntos únicos de falla con la menor sobrecarga operativa. ¿Qué conjunto de cambios debe recomendar el arquitecto?",
+    "options": [
+      "Reemplazar la instancia NAT por gateways NAT en cada zona de disponibilidad con rutas por subred, migrar la base de datos a Amazon RDS Multi-AZ y registrar destinos en al menos dos zonas detrás del balanceador.",
+      "Crear AMIs de la instancia NAT y de la base de datos y configurar la recuperación automática de EC2 con alarmas de Amazon CloudWatch en cada instancia.",
+      "Colocar la instancia NAT en un grupo de Auto Scaling de una sola instancia, programar copias de seguridad de la base de datos cada hora y activar el balanceo entre zonas en el balanceador.",
+      "Migrar la salida a internet a un gateway de internet de solo salida, replicar la base de datos con réplicas de lectura en la misma zona y agregar comprobaciones de estado de Amazon Route 53."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Los gateways NAT por zona, RDS Multi-AZ y destinos en varias zonas eliminan los tres puntos únicos de falla con servicios administrados. La recuperación automática o un grupo de Auto Scaling de una instancia siguen dependiendo de una sola zona, y el gateway de solo salida aplica únicamente a IPv6.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.4",
+    "text": "Una flota de instancias EC2 detrás de un Application Load Balancer continúa recibiendo tráfico cuando el proceso de la aplicación falla pero el sistema operativo sigue activo. Además, algunas instancias quedan inutilizables por fallas del hardware subyacente. ¿Qué DOS acciones debe realizar el arquitecto para lograr recuperación automática?",
+    "options": [
+      "Configurar el grupo de Auto Scaling para usar las comprobaciones de estado del balanceador (ELB), de modo que las instancias que no superen la comprobación de la aplicación se reemplacen automáticamente.",
+      "Crear una alarma de Amazon CloudWatch sobre la métrica StatusCheckFailed_System con la acción de recuperación de la instancia EC2.",
+      "Aumentar el periodo de gracia de las comprobaciones de estado del grupo de Auto Scaling a 3.600 segundos para evitar reemplazos innecesarios.",
+      "Cambiar el algoritmo de enrutamiento del balanceador a solicitudes pendientes mínimas para dejar de enviar tráfico a las instancias con fallas.",
+      "Habilitar un retraso de desregistro (deregistration delay) de 0 segundos en el grupo de destino."
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "Al usar las comprobaciones de estado del balanceador, el grupo de Auto Scaling reemplaza las instancias cuya aplicación no responde aunque el sistema operativo esté activo, y la acción de recuperación asociada a StatusCheckFailed_System atiende las fallas del host subyacente. El algoritmo de enrutamiento y el retraso de desregistro no reemplazan instancias defectuosas.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.4",
+    "text": "Una empresa debe replicar los objetos nuevos de un bucket de Amazon S3 hacia otra Región y demostrar ante los auditores que el 99,99 % de los objetos se replica en 15 minutos, con métricas y notificaciones cuando ese umbral no se cumpla. ¿Qué debe configurar el arquitecto?",
+    "options": [
+      "Replicación entre Regiones de S3 con S3 Replication Time Control habilitado, métricas de replicación en Amazon CloudWatch y notificaciones de eventos.",
+      "Replicación entre Regiones de S3 estándar con versionado y un informe diario de S3 Inventory para verificar las diferencias.",
+      "AWS DataSync programado cada 15 minutos entre los buckets de origen y destino, con verificación de integridad de los datos.",
+      "Puntos de acceso multirregión de S3 con conmutación por error activo-activo y aceleración de transferencia."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "S3 Replication Time Control incorpora un acuerdo de nivel de servicio de replicación de 15 minutos para el 99,99 % de los objetos, junto con métricas y eventos de OperationFailedReplication que permiten notificar los incumplimientos. La replicación estándar no ofrece ese compromiso medible.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.5",
+    "text": "El área financiera solicita identificar recursos inactivos (volúmenes de Amazon EBS sin conectar, direcciones IP elásticas sin asociar, balanceadores sin destinos e instancias con muy baja utilización) en las 200 cuentas de la organización, con una vista consolidada y sin desarrollar herramientas propias. ¿Qué debe usar el arquitecto?",
+    "options": [
+      "La vista organizacional de AWS Trusted Advisor desde la cuenta de administración, con las comprobaciones de optimización de costos y la descarga del informe consolidado.",
+      "AWS Cost Explorer con el informe de recomendaciones de Savings Plans filtrado por cuenta vinculada.",
+      "AWS Config con un agregador de la organización y reglas administradas de etiquetado obligatorio.",
+      "Amazon CloudWatch con métricas entre cuentas y alarmas de baja utilización de CPU en cada instancia."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "La vista organizacional de Trusted Advisor consolida las comprobaciones de optimización de costos de todas las cuentas, incluidas las de recursos inactivos y subutilizados, en un informe descargable. Cost Explorer recomienda modelos de compra y Config inventaría configuración, pero ninguno identifica recursos inactivos de esa forma.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.5",
+    "text": "Un arquitecto debe investigar el gasto a nivel de recurso individual, con granularidad horaria y con las etiquetas de asignación de costos, durante los últimos 12 meses, y crear visualizaciones por unidad de negocio. ¿Qué enfoque debe usar?",
+    "options": [
+      "Habilitar el Informe de costos y uso de AWS con IDs de recurso y granularidad horaria en formato Parquet en Amazon S3, consultarlo con Amazon Athena y visualizarlo con Amazon QuickSight.",
+      "Exportar mensualmente los informes de AWS Cost Explorer a CSV y consolidarlos en una hoja de cálculo por unidad de negocio.",
+      "Usar AWS Budgets con presupuestos por etiqueta y revisar los informes de variación en la consola de facturación.",
+      "Consultar los eventos de facturación de AWS CloudTrail con Amazon Athena y unirlos con el inventario de AWS Config."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "El Informe de costos y uso de AWS es la fuente más granular disponible (línea por recurso, por hora, con etiquetas) y su integración con Athena y QuickSight permite análisis y paneles por unidad de negocio. Cost Explorer y Budgets no ofrecen ese nivel de detalle histórico y CloudTrail no contiene datos de facturación por recurso.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 3,
+    "taskStatementNumber": "3.5",
+    "text": "Una empresa ejecuta miles de trabajos de procesamiento de imágenes por lotes que toleran interrupciones, pueden reiniciarse y no tienen un plazo estricto de finalización. Hoy se ejecutan en instancias bajo demanda encendidas de forma permanente. ¿Qué cambio reduce más el costo?",
+    "options": [
+      "Migrar los trabajos a AWS Batch con entornos de cómputo de instancias de spot, usando la estrategia de asignación optimizada por capacidad y varios tipos de instancia.",
+      "Comprar instancias reservadas estandarizadas a tres años para la capacidad máxima observada de la flota actual.",
+      "Mantener las instancias bajo demanda y habilitar el escalado programado para apagar la flota durante la noche.",
+      "Migrar los trabajos a AWS Lambda con la memoria máxima configurada y simultaneidad reservada."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Las cargas por lotes tolerantes a interrupciones son el caso de uso ideal de las instancias de spot, y AWS Batch administra las colas, los reintentos y la diversificación de tipos de instancia para minimizar las interrupciones. Reservar la capacidad máxima paga capacidad ociosa y Lambda impone límites de tiempo de ejecución poco adecuados para estos trabajos.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.1",
+    "text": "Durante la evaluación del portafolio, una empresa identifica una aplicación comercial de gestión de recursos humanos, muy personalizada, costosa de mantener y sin ventaja competitiva, para la que el proveedor ofrece una versión SaaS equivalente. ¿Qué estrategia de las 7R debe aplicar el arquitecto?",
+    "options": [
+      "Repurchase (recomprar), sustituyendo la aplicación por la oferta SaaS del proveedor.",
+      "Replatform (replataformar), moviendo la aplicación a AWS Elastic Beanstalk con Amazon RDS.",
+      "Rehost (rehospedar), migrando los servidores tal cual con AWS Application Migration Service.",
+      "Refactor (refactorizar), reescribiendo la aplicación con microservicios en AWS Lambda y Amazon DynamoDB."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Cuando existe una oferta SaaS equivalente y la aplicación no aporta diferenciación competitiva, recomprar elimina el mantenimiento sin invertir en migración ni en reescritura. Rehospedar o replataformar conservarían la carga operativa y refactorizar sería una inversión injustificada.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.1",
+    "text": "Antes de planificar las oleadas de migración, una empresa necesita inventariar 900 servidores en tres centros de datos, medir su utilización y descubrir las dependencias de red entre aplicaciones. La política de seguridad prohíbe instalar agentes en los servidores de producción críticos, que se ejecutan sobre VMware. ¿Qué debe recomendar el arquitecto?",
+    "options": [
+      "Desplegar el recopilador sin agente de AWS Application Discovery Service en el entorno de VMware y usar AWS Migration Hub para agrupar los servidores en aplicaciones y planificar las oleadas.",
+      "Instalar el agente de AWS Application Discovery Service en todos los servidores y exportar los datos a Amazon S3 para analizarlos con Amazon Athena.",
+      "Habilitar registros de flujo de VPC y AWS Config en la cuenta de destino para inferir las dependencias antes de migrar.",
+      "Usar AWS Application Migration Service en modo de prueba para replicar todos los servidores y observar el tráfico resultante."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "El recopilador sin agente de Application Discovery Service se despliega como un dispositivo virtual en VMware y recopila inventario y métricas de utilización sin tocar los servidores, mientras Migration Hub agrupa los servidores en aplicaciones para planificar las oleadas. Los registros de flujo de VPC solo verían tráfico ya migrado a AWS.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.1",
+    "text": "El comité directivo pide una evaluación del costo total de propiedad que compare el estado actual on-premises con el estado final en AWS antes de aprobar la migración. ¿Qué DOS acciones aportan la base más sólida para ese análisis?",
+    "options": [
+      "Usar los datos de utilización recopilados por AWS Application Discovery Service para dimensionar correctamente el destino, en lugar de replicar las especificaciones actuales del hardware.",
+      "Modelar el estado final en AWS Pricing Calculator, incluyendo cómputo, almacenamiento, transferencia de datos y opciones de compra como Savings Plans.",
+      "Ejecutar AWS Compute Optimizer sobre los servidores del centro de datos para obtener recomendaciones de dimensionamiento antes de migrar.",
+      "Basar la estimación en el Informe de costos y uso de AWS de un entorno de pruebas existente y extrapolarlo de forma lineal.",
+      "Solicitar la comprobación de límites de servicio de AWS Trusted Advisor para estimar la capacidad requerida en la Región de destino."
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "El dimensionamiento correcto debe partir de la utilización real descubierta, no de las especificaciones del hardware existente, y el estado final se cuantifica modelando todos los componentes de costo en AWS Pricing Calculator, incluidas las opciones de compra. Compute Optimizer solo analiza recursos que ya están en AWS y los límites de servicio no son un insumo de costos.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.2",
+    "text": "Una empresa debe migrar 600 TB de archivos desde un NAS on-premises hacia Amazon S3. El enlace disponible es de 500 Mbps y también se usa para producción. Los usuarios seguirán modificando los archivos hasta el momento del cambio, que debe implicar la menor interrupción posible. ¿Qué enfoque debe recomendar el arquitecto?",
+    "options": [
+      "Transferir la copia inicial con dispositivos de AWS Snowball Edge y, después de la importación, sincronizar los cambios incrementales con AWS DataSync antes del cambio final.",
+      "Copiar todos los datos con AWS DataSync a través del enlace existente, limitando el ancho de banda al 50 % para no afectar la producción.",
+      "Habilitar S3 Transfer Acceleration y subir los archivos con cargas multiparte en paralelo mediante la AWS CLI.",
+      "Usar AWS Transfer Family con SFTP y un cliente programado que suba los archivos por lotes cada noche."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Transferir 600 TB por un enlace compartido de 500 Mbps tomaría meses, por lo que la copia masiva debe hacerse con Snow Family y solo el delta posterior por la red con DataSync, que sincroniza cambios de forma incremental y verifica la integridad. Las demás opciones dependen por completo del enlace saturado.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.2",
+    "text": "Una base de datos Oracle de 8 TB con procedimientos almacenados y desencadenadores debe migrar a Amazon Aurora PostgreSQL con una ventana de inactividad máxima de 15 minutos. ¿Qué combinación debe usar el arquitecto?",
+    "options": [
+      "Convertir el esquema y el código con AWS Schema Conversion Tool y migrar los datos con AWS DMS usando carga completa más captura de datos de cambios (CDC).",
+      "Exportar con Oracle Data Pump hacia Amazon S3 e importar con utilidades nativas durante la ventana de inactividad.",
+      "Usar AWS DMS con carga completa únicamente y ejecutar la conversión del código directamente en Aurora después del cambio.",
+      "Crear una réplica de lectura de Amazon RDS for Oracle y promoverla como clúster de Aurora PostgreSQL."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Al ser una migración heterogénea, AWS SCT convierte el esquema y el código PL/SQL, y AWS DMS con carga completa más CDC mantiene el destino sincronizado hasta el cambio, lo que permite una ventana de minutos. Una exportación e importación de 8 TB excedería la ventana y no existen réplicas de Oracle promovibles a Aurora PostgreSQL.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.2",
+    "text": "Como parte de la migración, la empresa creará decenas de cuentas de AWS y necesita una zona de aterrizaje con unidades organizativas, registro centralizado, controles preventivos y detectivos, y aprovisionamiento estandarizado de las cuentas nuevas. ¿Qué modelo de gobernanza debe recomendar el arquitecto?",
+    "options": [
+      "Implementar AWS Control Tower para desplegar la zona de aterrizaje con Account Factory y los controles obligatorios, y complementarla con políticas de control de servicios de AWS Organizations para las restricciones adicionales.",
+      "Crear las cuentas manualmente con AWS Organizations y aplicar plantillas de AWS CloudFormation por cuenta con roles de administrador compartidos.",
+      "Usar una sola cuenta con separación lógica basada en etiquetas y límites de permisos de IAM por equipo.",
+      "Usar AWS Service Catalog como mecanismo principal de gobernanza y AWS Config como único control preventivo."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Control Tower automatiza la creación de la zona de aterrizaje con unidades organizativas, registro centralizado, controles preventivos y detectivos y aprovisionamiento de cuentas mediante Account Factory, y las SCP añaden restricciones específicas. AWS Config es un control detectivo, no preventivo, y una sola cuenta no ofrece aislamiento.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.3",
+    "text": "Al rediseñar una aplicación .NET que se migrará a AWS, el equipo debe reemplazar un clúster de archivos de Windows que usa el protocolo SMB, listas de control de acceso de Windows y autenticación con Active Directory, con alta disponibilidad entre zonas de disponibilidad. ¿Qué servicio de almacenamiento debe elegir el arquitecto?",
+    "options": [
+      "Amazon FSx for Windows File Server en configuración Multi-AZ, integrado con AWS Directory Service.",
+      "Amazon EFS con puntos de acceso y montaje mediante un cliente NFS en Windows.",
+      "Amazon S3 File Gateway con recursos compartidos SMB expuestos desde una instancia EC2 con Windows.",
+      "Volúmenes de Amazon EBS io2 con conexión múltiple compartidos entre dos instancias EC2 con Windows en distintas zonas de disponibilidad."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "FSx for Windows File Server ofrece SMB nativo, ACLs de Windows e integración con Active Directory, y su modo Multi-AZ replica de forma sincrónica entre zonas con conmutación automática. EFS usa NFS, el File Gateway está pensado para acceso híbrido a S3 y EBS Multi-Attach no funciona entre zonas.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.3",
+    "text": "Una empresa migra una plataforma que ya usa gráficos de Helm, definiciones de recursos personalizadas y operadores de Kubernetes. Quiere seguir usando esas herramientas en AWS sin administrar el plano de control ni los nodos de trabajo para la mayoría de sus cargas sin estado. ¿Qué plataforma de contenedores debe elegir el arquitecto?",
+    "options": [
+      "Amazon EKS con perfiles de AWS Fargate para las cargas sin estado.",
+      "Amazon ECS con AWS Fargate y definiciones de tareas convertidas desde los manifiestos de Kubernetes.",
+      "AWS App Runner con imágenes de contenedor almacenadas en Amazon ECR.",
+      "Amazon EKS Anywhere ejecutado sobre instancias EC2 con nodos autoadministrados."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Amazon EKS conserva la compatibilidad con Helm, las CRDs y los operadores existentes, y los perfiles de Fargate ejecutan los pods sin administrar nodos. ECS y App Runner obligarían a abandonar el ecosistema de Kubernetes y EKS Anywhere está orientado a entornos propios con nodos administrados por el cliente.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.3",
+    "text": "Una aplicación de detección de fraude debe recorrer relaciones de varios niveles entre cuentas, dispositivos y transacciones (por ejemplo, encontrar todas las cuentas conectadas indirectamente con un dispositivo señalado) con consultas de baja latencia. Las uniones recursivas en la base de datos relacional actual son demasiado lentas. ¿Qué plataforma de base de datos debe elegir el arquitecto?",
+    "options": [
+      "Amazon Neptune, con consultas de grafo mediante Gremlin u openCypher.",
+      "Amazon DynamoDB con un índice secundario global por dispositivo y recursión implementada en la aplicación.",
+      "Amazon OpenSearch Service con documentos anidados y agregaciones por término.",
+      "Amazon Redshift con vistas materializadas y expresiones de tabla comunes recursivas."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Neptune es una base de datos de grafos diseñada para recorrer relaciones de múltiples saltos con baja latencia, que es exactamente el patrón de acceso descrito. Las alternativas requieren emular el recorrido con recursión en la aplicación o consultas analíticas, con latencias mucho mayores.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.4",
+    "text": "Un monolito de procesamiento de pedidos debe desacoplarse: cada evento de pedido tiene que enrutarse a distintos consumidores según su contenido (por ejemplo, tipo de pedido y país), incluidos destinos SaaS de terceros y funciones internas, y se deben poder agregar consumidores nuevos sin modificar el productor. ¿Qué servicio de integración debe elegir el arquitecto?",
+    "options": [
+      "Amazon EventBridge con un bus de eventos personalizado y reglas de coincidencia de patrones de contenido hacia varios destinos.",
+      "Amazon SQS con una cola por consumidor y una función de AWS Lambda que lea cada pedido y decida en qué cola escribirlo.",
+      "Amazon SNS con un tema por tipo de pedido y suscripciones HTTPS administradas por el equipo del productor.",
+      "AWS Step Functions con un flujo de trabajo estándar que invoque a cada consumidor en secuencia mediante estados Choice."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "EventBridge filtra por el contenido del evento mediante patrones de reglas y admite destinos internos y socios SaaS, de modo que agregar un consumidor solo requiere una regla nueva sin tocar al productor. Las demás opciones concentran la lógica de enrutamiento en el productor o en código propio.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.4",
+    "text": "Una empresa moderniza una aplicación web con tráfico muy variable (picos de 100 veces la carga base durante pocas horas al día) que hoy corre en instancias EC2 de capacidad fija y usa Amazon RDS for MySQL sobredimensionado para soportar esos picos. Quiere reducir el costo en los periodos de baja actividad y eliminar la administración de servidores. ¿Qué DOS cambios debe recomendar el arquitecto?",
+    "options": [
+      "Reemplazar la capa web y de API por Amazon API Gateway con funciones de AWS Lambda, aprovechando el escalado por solicitud.",
+      "Migrar la base de datos a Amazon Aurora Serverless v2, que ajusta la capacidad de forma granular según la demanda.",
+      "Mantener las instancias EC2 y comprar instancias reservadas a tres años para la capacidad del pico.",
+      "Migrar la base de datos a Amazon RDS Multi-AZ con una clase de instancia mayor y una réplica de lectura permanente.",
+      "Trasladar todas las tablas a Amazon ElastiCache para eliminar la necesidad de una base de datos administrada."
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "type": "multiple",
+    "explanation": "API Gateway con Lambda escala por solicitud y solo se paga por el uso real, y Aurora Serverless v2 ajusta la capacidad de la base de datos de forma granular, reduciendo el costo en las horas de baja actividad sin administrar servidores. Reservar la capacidad del pico o aumentar la instancia mantiene el sobredimensionamiento, y una caché no reemplaza la persistencia.",
+    "source": "llm"
+  },
+  {
+    "domainNumber": 4,
+    "taskStatementNumber": "4.4",
+    "text": "Un proceso de incorporación de clientes consta de 12 pasos que incluyen llamadas a servicios externos, esperas de aprobación humana de hasta tres días, reintentos con retroceso exponencial y compensación en caso de error. Hoy está implementado como una cadena de funciones de AWS Lambda que se invocan entre sí y resulta difícil de depurar. ¿Qué debe recomendar el arquitecto?",
+    "options": [
+      "Orquestar el proceso con un flujo de trabajo estándar de AWS Step Functions, usando tareas con token de devolución de llamada para las aprobaciones humanas y políticas de reintento y captura para el manejo de errores.",
+      "Encadenar las funciones de Lambda mediante colas de Amazon SQS con tiempos de espera de visibilidad de tres días y una cola de mensajes fallidos.",
+      "Usar un flujo de trabajo exprés de AWS Step Functions para reducir el costo y almacenar el estado de la aprobación en Amazon DynamoDB.",
+      "Implementar una máquina de estados propia dentro de un contenedor de Amazon ECS con el estado almacenado en Amazon EFS."
+    ],
+    "correct": [
+      0
+    ],
+    "type": "single",
+    "explanation": "Los flujos de trabajo estándar de Step Functions duran hasta un año, admiten el patrón de token de devolución de llamada para esperar aprobaciones humanas y ofrecen reintentos, capturas e historial de ejecución visual para depurar. Los flujos exprés están limitados a cinco minutos y el tiempo de espera de visibilidad de SQS no llega a tres días.",
+    "source": "llm"
+  }
+]
