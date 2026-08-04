@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import {
   BookOpen, ShieldCheck, Cloud, Trophy, Info, Loader, Moon, Sun,
-  Sparkles, Boxes, Code2, Server, Database, BrainCircuit, Layers, Settings2, Network,
+  Sparkles, Boxes, Code2, Server, Database, BrainCircuit, Layers, Settings2, Network, ArrowLeft,
+  Building2, Handshake, ExternalLink,
 } from 'lucide-react';
 import Footer from './Footer';
+import Countdown from './Countdown';
 import { ThemeContext } from '../context/ThemeContext';
 import { translations } from '../translations/es';
 
@@ -152,6 +154,7 @@ const Menu = ({ certifications: CERTIFICATIONS, startQuiz, lastPerformance, sele
             })}
           </main>
         </div>
+        <Countdown />
         <Footer onTabChange={handleTabChange} />
       </div>
     );
@@ -173,8 +176,16 @@ const Menu = ({ certifications: CERTIFICATIONS, startQuiz, lastPerformance, sele
       <div className="flex-1 p-6 md:p-12 font-sans">
         <header className="max-w-6xl mx-auto mb-12">
           <div className="text-center mb-12">
-            <button onClick={() => setSelectedCertification(null)} className={`text-sm font-bold mb-4 ${isDarkMode ? 'text-orange-400' : 'text-orange-600'}`}>
-              &larr; {translations.menu.backToCertifications}
+            <button
+              onClick={() => setSelectedCertification(null)}
+              className={`inline-flex items-center gap-2 mb-4 px-4 py-2.5 rounded-full font-bold text-sm transition-colors ${
+                isDarkMode
+                  ? 'text-orange-400 hover:bg-white/5 hover:text-orange-300'
+                  : 'text-orange-600 hover:bg-orange-50 hover:text-orange-700'
+              }`}
+            >
+              <ArrowLeft className="w-4 h-4" />
+              {translations.menu.backToCertifications}
             </button>
             <div className="flex justify-center mb-4">
               <div className="bg-gradient-to-br from-[#FF9900] to-[#FF6B2C] p-4 rounded-2xl shadow-lg shadow-orange-500/30">
@@ -385,11 +396,44 @@ const Menu = ({ certifications: CERTIFICATIONS, startQuiz, lastPerformance, sele
                     {translations.menu.importantText2}
                   </p>
                 </div>
+
+                <div className={`md:col-span-2 p-8 rounded-2xl border shadow-sm ${isDarkMode ? 'glass border-slate-700' : 'bg-white border-slate-200'}`}>
+                  <div className="flex flex-wrap items-center gap-3 mb-4">
+                    <h3 className={`font-display text-2xl font-bold flex items-center gap-2 ${isDarkMode ? 'text-white' : ''}`}>
+                      <div className="bg-[#146EB4] p-2 rounded-lg">
+                        <Building2 className="w-6 h-6 text-white" />
+                      </div>
+                      {translations.menu.aboutSyscuTitle}
+                    </h3>
+                    <span className={`inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full ${
+                      isDarkMode ? 'bg-white/5 text-[#00C9DB] border border-[#00C9DB]/30' : 'bg-cyan-50 text-cyan-700 border border-cyan-200'
+                    }`}>
+                      <Handshake className="w-3.5 h-3.5" />
+                      {translations.menu.aboutSyscuBadge}
+                    </span>
+                  </div>
+                  <p className={`mb-4 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+                    {translations.menu.aboutSyscuDescription}
+                  </p>
+                  <p className={`mb-6 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+                    {translations.menu.aboutSyscuDescription2}
+                  </p>
+                  <a
+                    href="https://www.syscu.es"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-gradient-to-r from-[#146EB4] to-[#00C9DB] hover:shadow-[0_0_30px_rgba(0,201,219,0.35)] text-white px-5 py-2.5 rounded-lg transition-shadow text-sm font-bold"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    {translations.menu.aboutSyscuCta}
+                  </a>
+                </div>
               </div>
             </div>
           )}
         </main>
       </div>
+      <Countdown />
       <Footer onTabChange={handleTabChange} />
     </div>
   );

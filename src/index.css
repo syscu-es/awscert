@@ -190,4 +190,74 @@ h1, h2, h3, h4 {
 	box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
+/* ---------- Countdown (comic-box card style, own palette) ---------- */
+.cq-countdown-section {
+	padding: 3rem 1.5rem;
+}
+.cq-cq-card {
+	background: #fff;
+	border: 3px solid #fff;
+	border-radius: 22px;
+	overflow: hidden;
+	box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.08), 10px 10px 0 rgba(15, 23, 42, 0.12);
+}
+.cq-cq-card-dark {
+	background: var(--surface-strong, rgba(26, 39, 56, 0.78));
+	border-color: rgba(255, 255, 255, 0.06);
+	box-shadow: 0 0 0 1px var(--border-glow-strong, rgba(122, 167, 255, 0.28)), 10px 10px 0 rgba(0, 0, 0, 0.35);
+}
+.cq-cq-hero {
+	width: 100%;
+	height: auto;
+	max-height: 360px;
+	object-fit: cover;
+	display: block;
+}
+.cq-countdown {
+	display: flex;
+	gap: 0.9rem;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+.cq-cd {
+	background: #fff;
+	border: 3px solid #fff;
+	border-radius: 14px;
+	padding: 0.9rem 1.3rem;
+	min-width: 76px;
+	box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.08), 5px 5px 0 rgba(15, 23, 42, 0.12);
+	animation: cdpop 0.4s ease;
+}
+.cq-cd span {
+	display: block;
+	font-size: 2rem;
+	font-weight: 900;
+	line-height: 1;
+	color: #0f172a;
+	font-variant-numeric: tabular-nums;
+}
+.cq-cd small {
+	display: block;
+	margin-top: 0.4rem;
+	font-size: 0.65rem;
+	font-weight: 800;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	color: var(--aws-orange);
+}
+.cq-cd-dark {
+	background: var(--surface-strong, rgba(26, 39, 56, 0.78));
+	border-color: rgba(255, 255, 255, 0.06);
+	box-shadow: 0 0 0 1px var(--border-glow-strong, rgba(122, 167, 255, 0.28)), 5px 5px 0 rgba(0, 0, 0, 0.35);
+}
+.cq-cd-dark span { color: #fff; }
+.cq-cd-dark small { color: var(--aws-cyan); }
+@keyframes cdpop {
+	from { transform: translateY(4px); opacity: 0; }
+	to { transform: none; opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.cq-cd { animation: none; }
+}
+
 

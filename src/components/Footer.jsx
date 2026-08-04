@@ -12,8 +12,8 @@ const Footer = ({ onTabChange }) => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* About */}
           <div>
-            <h3 className="font-display font-bold text-lg mb-3">AWS Practitioner Test</h3>
-            <p className="text-slate-400 text-sm">Un simulador integral de exámenes de práctica para las certificaciones de AWS.</p>
+            <h3 className="font-display font-bold text-lg mb-3">AWS Certification Practice Exams</h3>
+            <p className="text-slate-400 text-sm">Simulador gratuito de exámenes de práctica para las 12 certificaciones vigentes de AWS, sin registro.</p>
           </div>
 
           {/* Quick Links */}
@@ -52,14 +52,19 @@ const Footer = ({ onTabChange }) => {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-white/10 pt-8">
-          {/* Copyright */}
-          <p className="text-slate-400 text-center text-sm flex items-center justify-center gap-1">
-            © {currentYear} {translations.footer.madeWith} <Heart className="w-4 h-4 text-red-500" /> {translations.footer.by}
+        <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-center gap-3 text-center">
+          <p className="text-slate-400 text-sm flex flex-wrap items-center justify-center gap-x-1.5 gap-y-1">
+            <span>© {currentYear} {translations.footer.madeWith}</span>
+            <Heart className="w-4 h-4 text-red-500 flex-shrink-0" />
+            <span>{translations.footer.by}</span>
             <a href="https://www.syscu.es" target="_blank" rel="noopener noreferrer" className="text-[#FF9900] hover:text-[#FFB74D] font-bold transition-colors">
               syscu
             </a>
           </p>
+          <span className="hidden sm:inline text-slate-700">•</span>
+          <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-white/5 border border-[#00C9DB]/30 text-[#00C9DB]">
+            AWS Partner Network
+          </span>
         </div>
       </div>
     </footer>
